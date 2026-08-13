@@ -1,0 +1,38 @@
+{
+  "product": {
+    "id": 6752266715276,
+    "title": "Bluetti AC200L Portable Power Station",
+    "handle": "bluetti-ac200l-collision",
+    "vendor": "Bluetti",
+    "product_type": "Portable Power Station",
+    "tags": [],
+    "variants": [
+      {
+        "id": 46535814578412,
+        "title": "AC200L + 200W Solar Panel",
+        "option1": "AC200L + 200W Solar Panel",
+        "sku": "WOT-AC200L-200",
+        "requires_shipping": true,
+        "taxable": true,
+        "price": "1899.00",
+        "compare_at_price": null,
+        "grams": 28300,
+        "position": 1,
+        "product_id": 6752266715276
+      },
+      {
+        "id": 46535814578499,
+        "title": "AC200L + 200W  Solar Panel!",
+        "option1": "AC200L + 200W  Solar Panel!",
+        "sku": "WOT-AC200L-200B",
+        "requires_shipping": true,
+        "taxable": true,
+        "price": "1949.00",
+        "compare_at_price": null,
+        "grams": 28300,
+        "position": 2,
+        "product_id": 6752266715276
+      }
+    ]
+  }
+}

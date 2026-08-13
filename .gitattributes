@@ -1,0 +1,7 @@
+# Normalize everything git recognizes as text; a machine-global
+# core.autocrlf must never decide what bytes land in the repo.
+* text=auto
+# The price store is append-only JSONL committed from both Windows (local
+# runs) and Linux (CI). CRLF must never enter it: a single CRLF row makes
+# `git diff` show the whole file as changed and breaks byte-level dedupe.
+*.jsonl text eol=lf

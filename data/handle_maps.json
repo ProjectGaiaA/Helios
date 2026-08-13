@@ -1,0 +1,14 @@
+{
+  "shop-solar-kits": {
+    "ecoflow-delta-max": "ecoflow-delta-max",
+    "ecoflow-river-2-pro": "ecoflow-river-2-pro",
+    "anker-solix-f2600": "anker-solix-f2600",
+    "eg4-lifepower4": "eg4-lifepower4-lithium-battery"
+  },
+  "wild-oak-trail": {
+    "ecoflow-delta-max": "ecoflow-delta-max-portable-power-station",
+    "ecoflow-river-2-pro": "ecoflow-river-2-pro-portable-power-station",
+    "bluetti-ac180": "bluetti-ac180-bluetti-ac180p",
+    "bluetti-ac200l": "bluetti-ac200l"
+  }
+}

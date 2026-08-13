@@ -1,0 +1,11 @@
+# Pinned deliberately. CI installs these fresh on every run, so an unpinned
+# dependency means the pipeline's behaviour can change without a commit.
+# Bump these on purpose during a maintenance session, never by surprise.
+
+jinja2==3.1.6
+requests==2.32.5
+
+# Dev / CI
+pytest==9.1.1
+responses==0.25.8
+ruff==0.14.5

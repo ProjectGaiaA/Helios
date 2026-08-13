@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }} prices — Helios{% endblock %}
+{% block content %}
+<h1>{{ product.name }}</h1>
+<p class="muted">
+  {{ product.brand }}{% if product.specs.capacity_wh %} · {{ product.specs.capacity_wh }} Wh{% endif %}
+  {%- if product.specs.output_w %} · {{ product.specs.output_w }} W output{% endif %}
+  {%- if product.specs.chemistry %} · {{ product.specs.chemistry }}{% endif %}
+</p>
+{% if not product.specs.capacity_wh %}
+<p class="muted">$/Wh withheld: capacity unknown or ambiguous for this listing.</p>
+{% endif %}
+
+{% for section in retailer_sections %}
+<h2>{{ section.retailer_name }}
+  {% if section.in_stock is sameas false %}<span class="soldout">Sold out</span>
+  {% elif section.in_stock is sameas true %}<span class="instock">In stock</span>
+  {% else %}<span class="unknown">Stock unknown</span>{% endif %}
+</h2>
+<p class="muted">Scraped {{ section.timestamp }}</p>
+{% if section.variants %}
+<table>
+  <thead>
+    <tr><th>Variant</th><th>Price</th><th>$/Wh</th><th>Availability</th><th></th></tr>
+  </thead>
+  <tbody>
+    {% for v in section.variants %}
+    <tr>
+      <td>{{ v.raw_variant or "Standard" }}
+          {% if v.classification == "bundle" %}<span class="badge">bundle</span>{% endif %}</td>
+      <td>{{ v.price_display }}
+          {% if v.was_price_display %}<span class="was">{{ v.was_price_display }}</span>{% endif %}</td>
+      <td>{% if v.dollars_per_wh_display %}<span class="wh">{{ v.dollars_per_wh_display }}</span>
+          {% else %}<span class="muted">—</span>{% endif %}</td>
+      <td>{% if v.available is sameas true %}<span class="instock">In stock</span>
+          {% elif v.available is sameas false %}<span class="soldout">Sold out</span>
+          {% else %}<span class="unknown">Check site</span>{% endif %}</td>
+      <td><a href="{{ v.buy_url }}" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="muted">No priced variants could be read on the last scrape.</p>
+{% endif %}
+{% else %}
+<p class="muted">No price data collected yet for this product.</p>
+{% endfor %}
+{% endblock %}

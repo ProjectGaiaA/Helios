@@ -1,0 +1,31 @@
+{
+  "product": {
+    "id": 7138504278156,
+    "title": "EG4 LifePower4 V2 Lithium Battery | 48V 100Ah | 5.12kWh Server Rack | UL1973, UL9540A | Auto-Addressing | 10-Year Warranty",
+    "handle": "eg4-lifepower4-lithium-battery",
+    "vendor": "EG4",
+    "product_type": "Batteries",
+    "tags": [
+      "48 volt",
+      "Deep Cycle Batteries",
+      "EG4",
+      "Feed",
+      "hpkupgrades"
+    ],
+    "variants": [
+      {
+        "id": 43287020535948,
+        "title": "Default Title",
+        "option1": "Default Title",
+        "sku": "1511105",
+        "requires_shipping": true,
+        "taxable": true,
+        "price": "1470.99",
+        "compare_at_price": "1899.00",
+        "grams": 40823,
+        "position": 1,
+        "product_id": 7138504278156
+      }
+    ]
+  }
+}

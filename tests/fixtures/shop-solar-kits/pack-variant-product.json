@@ -1,0 +1,66 @@
+{
+  "product": {
+    "id": 5261408272524,
+    "title": "LiON 20K - 20,000mAh / 74Wh Portable Power Bank | Wireless Charging + 2 x USB Outputs | Built in Flashlight | TSA Approved - 5-Year Warranty",
+    "handle": "lion-20k-pbx",
+    "vendor": "ShopSolar.com",
+    "product_type": "Accessories",
+    "tags": [
+      "Accessories"
+    ],
+    "variants": [
+      {
+        "id": 42143904366732,
+        "title": "Single Charger",
+        "option1": "Single Charger",
+        "sku": "LI20K-PBX",
+        "requires_shipping": true,
+        "taxable": true,
+        "price": "49.00",
+        "compare_at_price": "109.00",
+        "grams": 499,
+        "position": 2,
+        "product_id": 5261408272524
+      },
+      {
+        "id": 42143904399500,
+        "title": "2-Pack",
+        "option1": "2-Pack",
+        "sku": "LI20K-PBX-2",
+        "requires_shipping": true,
+        "taxable": true,
+        "price": "89.00",
+        "compare_at_price": "209.00",
+        "grams": 499,
+        "position": 3,
+        "product_id": 5261408272524
+      },
+      {
+        "id": 42143904432268,
+        "title": "3-Pack",
+        "option1": "3-Pack",
+        "sku": "LI20K-PBX-3",
+        "requires_shipping": true,
+        "taxable": true,
+        "price": "129.00",
+        "compare_at_price": "309.00",
+        "grams": 499,
+        "position": 4,
+        "product_id": 5261408272524
+      },
+      {
+        "id": 42143904465036,
+        "title": "4-Pack",
+        "option1": "4-Pack",
+        "sku": "LI20K-PBX-4",
+        "requires_shipping": true,
+        "taxable": true,
+        "price": "169.00",
+        "compare_at_price": "409.00",
+        "grams": 499,
+        "position": 5,
+        "product_id": 5261408272524
+      }
+    ]
+  }
+}

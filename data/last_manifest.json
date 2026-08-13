@@ -1,0 +1,40 @@
+{
+  "timestamp": "2026-08-13T18:35:29.550858+00:00",
+  "retailers": [
+    {
+      "retailer_id": "shop-solar-kits",
+      "status": "completed",
+      "products_expected": 2,
+      "products_found": 2,
+      "products_no_sizes": 0,
+      "products_priced": 2,
+      "products_error": 0,
+      "prices_collected": 3,
+      "anomalies": [],
+      "price_records": {
+        "ecoflow-river-2-pro:shop-solar-kits": {
+          "ecoflow-river-2-pro-160w-solar-panel": 899.0,
+          "ecoflow-river-2-pro-main-unit-only": 569.0
+        },
+        "eg4-lifepower4:shop-solar-kits": {
+          "default": 1470.99
+        }
+      },
+      "health": "healthy"
+    }
+  ],
+  "total_prices_collected": 3,
+  "total_anomalies": 0,
+  "anomalies": [],
+  "prices": {
+    "ecoflow-river-2-pro:shop-solar-kits": {
+      "ecoflow-river-2-pro-160w-solar-panel": 899.0,
+      "ecoflow-river-2-pro-main-unit-only": 569.0
+    },
+    "eg4-lifepower4:shop-solar-kits": {
+      "default": 1470.99
+    }
+  },
+  "degraded_retailers": [],
+  "pipeline_status": "healthy"
+}

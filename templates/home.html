@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Helios — Solar Power Price Tracker{% endblock %}
+{% block content %}
+<h1>Portable power &amp; battery prices</h1>
+<p class="muted">Lowest current price per retailer. $/Wh appears only where a
+standalone unit's capacity is known.</p>
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      {% for r in retailers %}<th>{{ r.name }}</th>{% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in rows %}
+    <tr>
+      <td><a href="products/{{ row.product.id }}.html">{{ row.product.name }}</a>
+          {% if row.product.specs.capacity_wh %}<span class="muted">{{ row.product.specs.capacity_wh }} Wh</span>{% endif %}
+      </td>
+      {% for cell in row.cells %}
+      <td>
+        {% if cell %}
+          {{ cell.price_display }}
+          {# price and $/Wh describe the SAME variant; a cheapest-bundle
+             cell is badged instead of wearing the unit's $/Wh #}
+          {% if cell.is_bundle %}<span class="badge">bundle</span>{% endif %}
+          {% if cell.dollars_per_wh_display %}<div class="wh">{{ cell.dollars_per_wh_display }}</div>{% endif %}
+          {% if cell.in_stock is sameas false %}<div class="soldout">Sold out</div>
+          {% elif cell.in_stock is none %}<div class="unknown">Stock unknown</div>{% endif %}
+        {% else %}
+          <span class="muted">—</span>
+        {% endif %}
+      </td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

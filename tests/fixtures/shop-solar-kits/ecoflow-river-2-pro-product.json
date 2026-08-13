@@ -1,0 +1,42 @@
+{
+  "product": {
+    "id": 7296500433036,
+    "title": "EcoFlow RIVER 2 [PRO] 768Wh / 800W Portable Power Station + Choose Your Custom Bundle | Complete Solar Kit",
+    "handle": "ecoflow-river-2-pro",
+    "vendor": "EcoFlow",
+    "product_type": "Solar Generator",
+    "tags": [
+      "EcoFlow",
+      "Solar Generator",
+      "Solar Generator Kits"
+    ],
+    "variants": [
+      {
+        "id": 41737132769420,
+        "title": "EcoFlow River 2 Pro + 160W Solar Panel",
+        "option1": "EcoFlow River 2 Pro + 160W Solar Panel",
+        "sku": "RIVER2PRO-160-1-US",
+        "requires_shipping": true,
+        "taxable": true,
+        "price": "899.00",
+        "compare_at_price": "999.00",
+        "grams": 45,
+        "position": 1,
+        "product_id": 7296500433036
+      },
+      {
+        "id": 41679254454412,
+        "title": "EcoFlow River 2 Pro [Main Unit Only]",
+        "option1": "EcoFlow River 2 Pro [Main Unit Only]",
+        "sku": "ZMR620-B-US",
+        "requires_shipping": true,
+        "taxable": true,
+        "price": "569.00",
+        "compare_at_price": "748.00",
+        "grams": 45,
+        "position": 2,
+        "product_id": 7296500433036
+      }
+    ]
+  }
+}

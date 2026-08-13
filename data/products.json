@@ -1,0 +1,86 @@
+[
+  {
+    "id": "ecoflow-delta-max",
+    "name": "EcoFlow DELTA Max 2000",
+    "brand": "EcoFlow",
+    "category": "portable-power-station",
+    "specs": {
+      "capacity_wh": 2016,
+      "output_w": 2400,
+      "chemistry": "NCM",
+      "weight_lb": 48.0
+    },
+    "active": true,
+    "notes": "Every variant sold out at both retailers on 2026-08-13 (C9) — good sold-out edge case, disqualified as acceptance-scrape product."
+  },
+  {
+    "id": "ecoflow-river-2-pro",
+    "name": "EcoFlow RIVER 2 Pro",
+    "brand": "EcoFlow",
+    "category": "portable-power-station",
+    "specs": {
+      "capacity_wh": 768,
+      "output_w": 800,
+      "chemistry": "LiFePO4",
+      "weight_lb": 17.2
+    },
+    "active": true,
+    "notes": "Confirmed in stock at shop-solar-kits on 2026-08-13; acceptance-scrape product."
+  },
+  {
+    "id": "anker-solix-f2600",
+    "name": "Anker SOLIX F2600",
+    "brand": "Anker",
+    "category": "portable-power-station",
+    "specs": {
+      "capacity_wh": 2560,
+      "output_w": 2400,
+      "chemistry": "LiFePO4",
+      "weight_lb": 67.2
+    },
+    "active": true,
+    "notes": null
+  },
+  {
+    "id": "eg4-lifepower4",
+    "name": "EG4 LifePower4 V2 48V 100Ah",
+    "brand": "EG4",
+    "category": "server-rack-battery",
+    "specs": {
+      "capacity_wh": 5120,
+      "output_w": 5120,
+      "chemistry": "LiFePO4",
+      "weight_lb": null
+    },
+    "active": true,
+    "notes": "Server-rack battery, not a power station. output_w is 100A continuous discharge at 51.2V nominal."
+  },
+  {
+    "id": "bluetti-ac180",
+    "name": "Bluetti AC180",
+    "brand": "Bluetti",
+    "category": "portable-power-station",
+    "specs": {
+      "capacity_wh": null,
+      "output_w": 1800,
+      "chemistry": "LiFePO4",
+      "weight_lb": 35.3
+    },
+    "active": true,
+    "notes": "capacity_wh deliberately null: the only carrying retailer (wild-oak-trail) lists AC180 (1152Wh) and AC180P (1440Wh) variants under ONE product, so a per-product capacity would compute a wrong $/Wh for half the rows. Withhold-when-unknown (PLAN 2b)."
+  },
+  {
+    "id": "bluetti-ac200l",
+    "name": "Bluetti AC200L",
+    "brand": "Bluetti",
+    "category": "portable-power-station",
+    "specs": {
+      "capacity_wh": 2048,
+      "output_w": 2400,
+      "chemistry": "LiFePO4",
+      "weight_lb": 62.4
+    },
+    "active": true,
+    "notes": null
+  }
+]

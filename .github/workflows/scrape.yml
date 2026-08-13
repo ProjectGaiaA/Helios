@@ -1,0 +1,100 @@
+name: Scrape
+
+# Manual trigger ONLY for the skeleton phase. No cron until the project
+# deploys — an unattended schedule scraping retailers for a site nobody
+# can see is discourteous traffic (PLAN section 2).
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Two dispatches would race the same branch on push. Queue instead of
+# colliding; never cancel a run mid-scrape.
+concurrency:
+  group: scrape-main
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    # ~8 mapped products x 2 requests x 15s worst-case delay is well under
+    # 10 minutes; 30 leaves honest headroom without masking a hang.
+    # Keep in step with CI_TIMEOUT_SECONDS in scrapers/runner.py.
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # --- Each retailer runs as its own step with continue-on-error ---
+      - name: Scrape shop-solar-kits
+        continue-on-error: true
+        id: shop_solar_kits
+        run: python -X utf8 -m scrapers.runner --retailer shop-solar-kits --skip-promos
+
+      - name: Scrape wild-oak-trail
+        continue-on-error: true
+        id: wild_oak_trail
+        run: python -X utf8 -m scrapers.runner --retailer wild-oak-trail --skip-promos
+
+      # Tests are fixture-based: they validate CODE, not this run's data,
+      # so a failure is an alarm, not a publish block.
+      - name: Run tests
+        run: |
+          set +e
+          python -X utf8 -m pytest -q > pytest_out.txt 2>&1
+          code=$?
+          set -e
+          tail -40 pytest_out.txt
+          if [ "$code" != "0" ]; then
+            echo "TESTS_FAILED=1" >> "$GITHUB_ENV"
+            echo "::error::pytest failed (exit $code) — see log above"
+          fi
+
+      - name: Build site
+        run: python -X utf8 build.py
+
+      - name: Commit updated price data
+        id: commit
+        run: |
+          git config user.name "HeliosPriceBot"
+          git config user.email "brandon.william.hall@gmail.com"
+          git add data/prices/ data/last_manifest.json data/promos.json data/handle_maps.json site/
+          git diff --staged --quiet || git commit -m "Price update $(date +%Y-%m-%d_%H:%M)"
+          git pull --rebase origin main && git push
+
+      # Single alarm point, always last, so publishing has already happened
+      # (or been deliberately skipped) before anything turns red.
+      - name: Raise alarms
+        if: always()
+        run: |
+          PROBLEMS=""
+          if [ "${{ steps.shop_solar_kits.outcome }}" = "failure" ]; then
+            echo "::error::shop-solar-kits scrape failed — dead retailer or crash."
+            PROBLEMS="$PROBLEMS shop-solar-kits"
+          fi
+          if [ "${{ steps.wild_oak_trail.outcome }}" = "failure" ]; then
+            echo "::error::wild-oak-trail scrape failed — dead retailer or crash."
+            PROBLEMS="$PROBLEMS wild-oak-trail"
+          fi
+          if [ "${TESTS_FAILED:-0}" = "1" ]; then
+            echo "::error::Test suite failed — code defect."
+            PROBLEMS="$PROBLEMS tests"
+          fi
+          if [ "${{ steps.commit.outcome }}" != "success" ]; then
+            echo "::error::Nothing was published this run (commit step: ${{ steps.commit.outcome }})."
+            PROBLEMS="$PROBLEMS publish"
+          fi
+          if [ -n "$PROBLEMS" ]; then
+            echo "Problems:$PROBLEMS"
+            exit 1
+          fi
+          echo "All healthy: 2/2 scrapers, tests green, published."

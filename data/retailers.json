@@ -1,0 +1,158 @@
+[
+  {
+    "id": "shop-solar-kits",
+    "name": "Shop Solar Kits",
+    "url": "https://shopsolarkits.com",
+    "scraper_type": "shopify",
+    "affiliate": {
+      "network": "unknown",
+      "commission": "unknown",
+      "cookie_days": null,
+      "link_template": "",
+      "notes": "Program terms unverified — apply before wiring links."
+    },
+    "active": true,
+    "priority": 1,
+    "notes": "robots.txt states checkout is for humans — Helios links out only, never automates checkout (standing constraint, PLAN section 0)."
+  },
+  {
+    "id": "wild-oak-trail",
+    "name": "Wild Oak Trail",
+    "url": "https://www.wildoaktrail.com",
+    "scraper_type": "shopify",
+    "affiliate": {
+      "network": "unknown",
+      "commission": "unknown",
+      "cookie_days": null,
+      "link_template": "",
+      "notes": "Program terms unverified — apply before wiring links."
+    },
+    "active": true,
+    "priority": 2,
+    "notes": "robots.txt states checkout is for humans — same standing constraint as shop-solar-kits."
+  },
+  {
+    "id": "rich-solar",
+    "name": "Rich Solar",
+    "url": "https://richsolar.com",
+    "scraper_type": "shopify",
+    "affiliate": {
+      "network": "unknown",
+      "commission": "6%",
+      "cookie_days": null,
+      "link_template": "",
+      "notes": "6% per 2026-08-13 research; network unverified."
+    },
+    "active": false,
+    "priority": 3,
+    "inactive_reason": "Phase B — open /products.json verified (C8), no handle mappings yet"
+  },
+  {
+    "id": "alte-store",
+    "name": "altE Store",
+    "url": "https://www.altestore.com",
+    "scraper_type": "shopify",
+    "affiliate": null,
+    "trust_builder": true,
+    "active": false,
+    "priority": 4,
+    "inactive_reason": "Phase B — open /products.json verified (C8), no handle mappings yet",
+    "notes": "No affiliate program found. Include later for honest price comparison."
+  },
+  {
+    "id": "ecoflow",
+    "name": "EcoFlow (Direct)",
+    "url": "https://us.ecoflow.com",
+    "scraper_type": "shopify",
+    "affiliate": {
+      "network": "unknown",
+      "commission": "~5%",
+      "cookie_days": null,
+      "link_template": "",
+      "notes": "~5% per 2026-08-13 research; network unverified."
+    },
+    "active": false,
+    "priority": 5,
+    "inactive_reason": "O1 resolved 2026-08-13: robots permits /products.json and endpoint is open JSON. Kept inactive for Phase B (brand-direct pricing needs its own comparison rules)."
+  },
+  {
+    "id": "bluetti",
+    "name": "Bluetti (Direct)",
+    "url": "https://www.bluettipower.com",
+    "scraper_type": "shopify",
+    "affiliate": {
+      "network": "unknown",
+      "commission": "5-10%",
+      "cookie_days": null,
+      "link_template": "",
+      "notes": "5-10% per 2026-08-13 research; network unverified."
+    },
+    "active": false,
+    "priority": 6,
+    "inactive_reason": "O1 resolved 2026-08-13: robots permits /products.json but the endpoint returns 200 with a non-JSON body — effectively closed. Needs custom handling; Phase B."
+  },
+  {
+    "id": "signature-solar",
+    "name": "Signature Solar",
+    "url": "https://signaturesolar.com",
+    "scraper_type": "custom",
+    "affiliate": {
+      "network": "direct",
+      "commission": "<=9%",
+      "cookie_days": null,
+      "link_template": "",
+      "notes": "Up to 9%, partner-verified 2026-08-13."
+    },
+    "active": false,
+    "priority": 7,
+    "inactive_reason": "BigCommerce, not Shopify — custom scraper needed (explicit non-goal, PLAN section 5)"
+  },
+  {
+    "id": "jackery",
+    "name": "Jackery (Direct)",
+    "url": "https://www.jackery.com",
+    "scraper_type": "shopify",
+    "affiliate": {
+      "network": "unknown",
+      "commission": "5-8%",
+      "cookie_days": null,
+      "link_template": "",
+      "notes": "5-8% per 2026-08-13 research; network unverified."
+    },
+    "active": false,
+    "priority": 8,
+    "inactive_reason": "Affiliate research seed only — endpoint not probed, no handle mappings"
+  },
+  {
+    "id": "renogy",
+    "name": "Renogy (Direct)",
+    "url": "https://www.renogy.com",
+    "scraper_type": "shopify",
+    "affiliate": {
+      "network": "unknown",
+      "commission": "6%",
+      "cookie_days": null,
+      "link_template": "",
+      "notes": "6% per 2026-08-13 research; network unverified."
+    },
+    "active": false,
+    "priority": 9,
+    "inactive_reason": "Affiliate research seed only — endpoint not probed, no handle mappings"
+  },
+  {
+    "id": "anker",
+    "name": "Anker (Direct)",
+    "url": "https://www.anker.com",
+    "scraper_type": "custom",
+    "affiliate": {
+      "network": "unknown",
+      "commission": "5%",
+      "cookie_days": null,
+      "link_template": "",
+      "notes": "5% per 2026-08-13 research; network unverified."
+    },
+    "active": false,
+    "priority": 10,
+    "inactive_reason": "Affiliate research seed only — not a Shopify storefront, custom scraper needed"
+  }
+]

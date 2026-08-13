@@ -1,0 +1,83 @@
+{
+  "product": {
+    "id": 7400513699980,
+    "title": "Anker Solix F2600 - 2,560Wh / 2,400W Portable Power Station + Choose Your Custom Bundle | Complete Solar Kit",
+    "handle": "anker-solix-f2600",
+    "vendor": "Anker",
+    "product_type": "Solar Generator Kit",
+    "tags": [
+      "Anker",
+      "Anker Kits",
+      "New Arrivals",
+      "off grid",
+      "Portable Power Station"
+    ],
+    "variants": [
+      {
+        "id": 41837963411596,
+        "title": "Double Kit [2 x 200W Rigid Panels]",
+        "option1": "Double Kit [2 x 200W Rigid Panels]",
+        "sku": "ANKER-F2600-DOUBLE-KIT",
+        "requires_shipping": true,
+        "taxable": true,
+        "price": "1618.49",
+        "compare_at_price": "2343.00",
+        "grams": 45,
+        "position": 1,
+        "product_id": 7400513699980
+      },
+      {
+        "id": 41837963444364,
+        "title": "Nomad Kit [2 x 200W Folding Panels]",
+        "option1": "Nomad Kit [2 x 200W Folding Panels]",
+        "sku": "ANKER-F2600-NOMAD-KIT",
+        "requires_shipping": true,
+        "taxable": true,
+        "price": "1853.65",
+        "compare_at_price": "2567.00",
+        "grams": 45,
+        "position": 2,
+        "product_id": 7400513699980
+      },
+      {
+        "id": 41837963509900,
+        "title": "Basecamp Kit [1 x 200W Folding Panel + EMP Bag]",
+        "option1": "Basecamp Kit [1 x 200W Folding Panel + EMP Bag]",
+        "sku": "ANKER-F2600-BASECAMP-KIT",
+        "requires_shipping": true,
+        "taxable": true,
+        "price": "1889.99",
+        "compare_at_price": "2577.00",
+        "grams": 45,
+        "position": 3,
+        "product_id": 7400513699980
+      },
+      {
+        "id": 43775623004300,
+        "title": "Anker Solix F2600 + Expansion Battery",
+        "option1": "Anker Solix F2600 + Expansion Battery",
+        "sku": "B178111L",
+        "requires_shipping": true,
+        "taxable": true,
+        "price": "2749.00",
+        "compare_at_price": "4129.00",
+        "grams": 45,
+        "position": 4,
+        "product_id": 7400513699980
+      },
+      {
+        "id": 41836471582860,
+        "title": "Anker Solix F2600 [Main Unit Only]",
+        "option1": "Anker Solix F2600 [Main Unit Only]",
+        "sku": "A1781111",
+        "requires_shipping": true,
+        "taxable": true,
+        "price": "1254.00",
+        "compare_at_price": "2499.00",
+        "grams": 45,
+        "position": 5,
+        "product_id": 7400513699980
+      }
+    ]
+  }
+}
