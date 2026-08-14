@@ -1,0 +1,19 @@
+{
+  "ucp": {
+    "version": "2026-04-08",
+    "services": {
+      "dev.ucp.shopping": [
+        {
+          "version": "2026-04-08"
+        }
+      ]
+    },
+    "capabilities": {
+      "dev.ucp.shopping.catalog.search": [{"version": "2026-04-08"}],
+      "dev.ucp.shopping.catalog.lookup": [{"version": "2026-04-08"}]
+    }
+  },
+  "name": "Helios Price Tracker",
+  "description": "A read-only price tracker for solar and home-energy equipment. Reads catalog price and availability for a small set of tracked products twice daily, plus small sample-based verification audits, and displays them side by side with links back to the merchant. Does not resell, transact, or check out.",
+  "contact": "brandon.william.hall@gmail.com"
+}
