@@ -85,12 +85,19 @@ jobs:
       # continue-on-error so a defect never blocks publishing GOOD data;
       # the exit code is surfaced in the alarm step (0 clean, 3 render
       # defect, 4 incomplete/unverified).
+      #
+      # SAMPLED, not --all: PLAN 4c.2's design for scheduled runs. CI run #1
+      # proved the collision: --all attempts 183 checks, the 25-request
+      # politeness budget reaches ~12 pairs, and "a truncated run must never
+      # report clean" correctly exited 4 on a healthy site. Sampling rotates
+      # coverage across runs and always re-checks quarantined variants;
+      # --all stays available for operator runs with an explicit budget.
       - name: Audit site vs sources
         id: audit
         continue-on-error: true
         run: |
           set +e
-          python -X utf8 audit.py --all
+          python -X utf8 audit.py
           code=$?
           set -e
           echo "AUDIT_EXIT=$code" >> "$GITHUB_ENV"
