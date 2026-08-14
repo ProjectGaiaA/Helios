@@ -1,9 +1,13 @@
 name: Scrape
 
-# Manual trigger ONLY for the skeleton phase. No cron until the project
-# deploys — an unattended schedule scraping retailers for a site nobody
-# can see is discourteous traffic (PLAN section 2).
+# The site is deployed (Vercel, auto-deploys on push to main), so the
+# 2x-daily cron the pipeline was built for is now on. Times mirror
+# gaia's proven cadence: morning + evening ET, catching the 48-72h
+# flash-sale windows this vertical runs on. Audit gates every publish.
 on:
+  schedule:
+    - cron: '0 11 * * *'
+    - cron: '30 21 * * *'
   workflow_dispatch:
 
 permissions:
