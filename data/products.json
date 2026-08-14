@@ -391,7 +391,10 @@
       "capacity_source": null
     },
     "active": true,
-    "notes": "Panel: capacity_wh null by nature. Pallet-only variants (RS-M410-8/-10/-12) at all three. DATA-QUALITY WARNING (red team #5, 2026-08-13): wild-oak-trail's pack SKUs are shifted one step against their own labels - it lists RS-M410-9 labelled '10 Solar Panels' at $3,399.99 and RS-M410-10 labelled '12 Solar Panels' at $2,719.99, while shop-solar-kits and rich-solar both put RS-M410-10 on a 10-panel pack. A SKU-keyed cross-retailer comparison will therefore pair a wild-oak-trail 12-panel price against a 10-panel price elsewhere. Helios displays each retailer's OWN published label and price, which is truthful, and capacity_wh is null so no $/Wh is derived from the mismatch - but do not trust RS-M410-* as an identity key across retailers until wild-oak-trail is asked."
+    "notes": "Panel: capacity_wh null by nature. Pallet-only variants (RS-M410-8/-10/-12) at all three. DATA-QUALITY WARNING (red team #5, 2026-08-13): wild-oak-trail's pack SKUs are shifted one step against their own labels - it lists RS-M410-9 labelled '10 Solar Panels' at $3,399.99 and RS-M410-10 labelled '12 Solar Panels' at $2,719.99, while shop-solar-kits and rich-solar both put RS-M410-10 on a 10-panel pack. A SKU-keyed cross-retailer comparison will therefore pair a wild-oak-trail 12-panel price against a 10-panel price elsewhere. Helios displays each retailer's OWN published label and price, which is truthful, and capacity_wh is null so no $/Wh is derived from the mismatch - but do not trust RS-M410-* as an identity key across retailers until wild-oak-trail is asked.",
+    "notes_by_retailer": {
+      "wild-oak-trail": "This retailer's MEGA 410 pack SKUs are shifted one step against its own labels: it lists RS-M410-9 as \"10 Solar Panels\" at $3,399.99 and RS-M410-10 as \"12 Solar Panels\" at $2,719.99, while shop-solar-kits and rich-solar both put RS-M410-10 on a 10-panel pack. Treat this retailer's RS-M410-* codes as unreliable for cross-retailer identity until it is asked. Recorded by red team #5, 2026-08-13."
+    }
   },
   {
     "id": "rich-solar-mega-200-briefcase",

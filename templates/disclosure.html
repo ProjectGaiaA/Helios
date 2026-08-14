@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block content %}
+{#
+  facts.affiliate_live is computed, not asserted: it is true only when at
+  least one tracked retailer has a non-empty affiliate link_template to
+  rewrite outbound links with. Every template is empty today, so this page
+  states that nothing is earned yet — and it will start saying the opposite
+  by itself on the build after a program is actually wired up.
+#}
+<div class="prose">
+<h1>Affiliate disclosure</h1>
+<p class="muted">Generated from the current data on {{ facts.generated_on }}.</p>
+
+<h2>The short version</h2>
+{% if facts.affiliate_live %}
+<p>Helios earns a commission when a reader follows one of its outbound retailer
+links and buys something. The retailer pays it out of their marketing budget;
+it does not change the price you pay. Commissions have no effect on what is
+tracked or how anything is ranked.</p>
+{% else %}
+<p><strong>Helios earns nothing today.</strong> It is not enrolled in any
+retailer's affiliate programme, no outbound link on this site carries a tracking
+parameter, and no commission is being paid on anything you click. The intention
+is to join programmes later, and this page is written so it describes the
+arrangement accurately once that happens.</p>
+<p>Outbound links are nevertheless already marked
+<code>rel="nofollow sponsored"</code> in the HTML. That is deliberate: marking a
+link as commercial before it becomes commercial is harmless, whereas forgetting
+to mark it afterwards is the failure that matters. Treat every retailer link
+here as one Helios may eventually earn from.</p>
+{% endif %}
+
+<h2>Retailers tracked, and what our records actually hold</h2>
+<p>All {{ facts.retailer_count }} tracked retailers are listed below, whether or
+not there is any commercial relationship with them. No retailer is excluded for
+lacking a programme, and none is included because it has one.</p>
+<p>The middle column says what Helios can <strong>evidence from its own
+records</strong>, which is not the same as what is true in the world. This page
+applies the rule the price pages apply: state what the data supports, and say
+so plainly where it supports nothing.</p>
+<table>
+  <thead><tr><th>Retailer</th><th>What our records hold</th><th>Commission status</th></tr></thead>
+  <tbody>
+    {% for p in facts.affiliate_programs %}
+    <tr>
+      <td>{{ p.name }}</td>
+      <td>{% if p.verified %}Affiliate terms recorded and verified.
+          {% else %}<span class="muted">Affiliate terms recorded but
+          <strong>unverified</strong> — noted from research and never confirmed
+          with the retailer, so this is not evidence that a programme
+          exists.</span>{% endif %}</td>
+      <td>{% if p.live %}<span class="instock">Active — Helios may earn a commission</span>
+          {% else %}<span class="muted">Not joined — no commission earned</span>{% endif %}</td>
+    </tr>
+    {% endfor %}
+    {% for name in facts.no_record_retailers %}
+    <tr>
+      <td>{{ name }}</td>
+      <td><span class="muted">We hold no information about this retailer's
+          affiliate arrangements.</span></td>
+      <td><span class="muted">Not joined — no commission earned</span></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% if facts.no_record_retailers %}
+<p>For {% for name in facts.no_record_retailers %}{{ name }}{% if not loop.last %}, {% endif %}{% endfor %}
+our records are simply empty. That is an <em>absence of information</em>, not
+evidence that no programme exists — we may not have looked, or looked and
+recorded nothing. What is certain is that no arrangement is in place today, and
+that {{ "their" if facts.no_record_retailers|length > 1 else "its" }} prices are
+collected, displayed and ranked on exactly the same terms as everyone else's.</p>
+{% endif %}
+<p>Commission rates are not published here. Every rate our records hold was
+gathered by research and flagged unverified, and printing an unverified number
+on the page that exists to be trustworthy would be a poor place to start. Once
+a programme is joined, its actual terms will be stated here.</p>
+
+<h2>Why the ranking cannot be bought</h2>
+<ul>
+  <li><strong>Rankings are computed, not curated.</strong> Every ranked list on
+    this site is sorted by a number derived from scraped prices at build time.
+    There is no editorial ordering step and no priority field a retailer could
+    pay into.</li>
+  <li><strong>The cheapest price wins even when it earns nothing.</strong>
+    Because commission is not an input to any calculation, a retailer with no
+    programme outranks one with a programme whenever its price is lower.</li>
+  <li><strong>The comparison is the product.</strong> A tracker that steers
+    readers toward a worse price for a better commission is worth nothing to a
+    reader, and a tracker worth nothing to readers earns nothing either. The
+    incentive only points one way over any useful time horizon.</li>
+  <li><strong>You can check.</strong> The code that ranks these pages and the
+    price history it ranks from are both public at
+    <a href="{{ facts.contact_repo }}" rel="nofollow">{{ facts.contact_repo }}</a>.</li>
+</ul>
+
+<h2>What the prices do and do not include</h2>
+<p>Displayed prices are the retailer's own listed price for their own listed
+variant at the moment it was last read, shown with that timestamp. They exclude
+shipping, tax, installation, and any rebate or incentive. Prices older than
+{{ facts.stale_max_hours }} hours are withheld rather than displayed. A retailer
+can change a price at any time after a check, so the price on their site at
+checkout is the only one that binds.</p>
+
+<h2>Questions or corrections</h2>
+<p>Email <a href="mailto:{{ facts.contact_email }}">{{ facts.contact_email }}</a>.
+More on what Helios tracks and how it decides what not to publish is on the
+<a href="{{ root_prefix }}about.html">about page</a>.</p>
+</div>
+{% endblock %}

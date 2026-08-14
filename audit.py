@@ -101,6 +101,11 @@ class _ProvenanceParser(HTMLParser):
         # id is not an identity, and letting it key `records` collapses
         # every id-less variant onto one slot (red team #4, MAJOR-7).
         self.unidentified: list[dict] = []
+        # EVERY identified record in document order, duplicates included.
+        # `records` keeps only the last occurrence per id, which is right
+        # for product/home pages and wrong for guides (see
+        # parse_provenance_list).
+        self.all_records: list[dict] = []
         self._stack: list[dict] = []  # {tag, container, field}
 
     def handle_starttag(self, tag, attrs):
@@ -118,7 +123,9 @@ class _ProvenanceParser(HTMLParser):
                 "fields": {},
             }
             if vid:
+                record["_vid"] = vid
                 self.records[vid] = record
+                self.all_records.append(record)
             else:
                 self.unidentified.append(record)
             frame["container"] = record
@@ -151,14 +158,35 @@ class _ProvenanceParser(HTMLParser):
         return None
 
 
+def _finalize(parser: _ProvenanceParser) -> None:
+    for record in parser.all_records + parser.unidentified:
+        for field in record["fields"].values():
+            if isinstance(field["text"], list):
+                field["text"] = "".join(field["text"]).strip()
+
+
 def parse_provenance_full(html_text: str) -> tuple[dict[str, dict], list[dict]]:
     """(identified records, unidentified records) — see _ProvenanceParser."""
     parser = _ProvenanceParser()
     parser.feed(html_text)
-    for record in list(parser.records.values()) + parser.unidentified:
-        for field in record["fields"].values():
-            field["text"] = "".join(field["text"]).strip()
+    _finalize(parser)
     return parser.records, parser.unidentified
+
+
+def parse_provenance_list(html_text: str) -> list[dict]:
+    """EVERY identified record on a page, duplicates included.
+
+    parse_provenance() keys by variant_id, so a variant rendered more than
+    once keeps only its LAST occurrence. That is correct for product and
+    home pages, where a variant appears once, and WRONG for guides, where
+    one variant legitimately appears up to three times on a page: the
+    headline span, its row in the product's own table, and its row in a
+    spreads table.
+    """
+    parser = _ProvenanceParser()
+    parser.feed(html_text)
+    _finalize(parser)
+    return parser.all_records
 
 
 def parse_provenance(html_text: str) -> dict[str, dict]:
@@ -299,6 +327,14 @@ def check_render(vid: str, variant_data: dict, product: dict,
     if rec is None:
         bad("product-page", "row", "absent", "rendered variant row")
         return mismatches
+    if rec.get("withheld") == "price_unreadable":
+        # The page says the stored price is not a usable number. That is a
+        # legitimate withhold, but only if it is TRUE — otherwise the
+        # marker becomes a way to hide a real price behind a fake excuse.
+        if site_build._usable_number(variant_data.get("price")):
+            bad("product-page", "withheld", "price_unreadable",
+                "a displayable price")
+        return mismatches
     if rec.get("withheld") == "stale":
         # Withheld-by-age is a policy render, not a number to compare.
         return mismatches
@@ -311,11 +347,15 @@ def check_render(vid: str, variant_data: dict, product: dict,
     if row_scraped_at and rec.get("scraped_at") != row_scraped_at:
         bad("product-page", "scraped-at-attr", rec.get("scraped_at"), row_scraped_at)
 
+    # A stored price that is not finite and positive has no displayable
+    # form, so the page correctly shows nothing; treating it as "expected
+    # cents" would make that correct withhold read as a defect.
     row_price_cents = None
-    try:
-        row_price_cents = dollars_to_cents(variant_data.get("price"))
-    except ValueError:
-        pass
+    if site_build._usable_number(variant_data.get("price")):
+        try:
+            row_price_cents = dollars_to_cents(variant_data.get("price"))
+        except ValueError:
+            pass
     shown = (rec["fields"].get("price") or {}).get("text", "")
     if display_price_to_cents(shown) != row_price_cents:
         bad("product-page", "price", shown or "absent",
@@ -357,6 +397,164 @@ def check_render(vid: str, variant_data: dict, product: dict,
             bad("home", "wh", shown_home_wh or "absent", expected_wh or "absent")
         if row_scraped_at and hrec.get("scraped_at") != row_scraped_at:
             bad("home", "scraped-at-attr", hrec.get("scraped_at"), row_scraped_at)
+    return mismatches
+
+
+_MERGED_ATTRS = ("tier", "sku", "scraped_at", "withheld")
+
+
+def merge_guide_records(vid: str, records: list[dict], page: str) -> dict:
+    """Fold a variant's several appearances on ONE guide page into one.
+
+    A guide renders the same variant up to three times — the headline
+    span, its row in the product's table, and its row in a spreads table
+    — and the tables carry different columns: the spreads table has no
+    rating column at all, by design.
+
+    Keying by variant_id alone made the LAST occurrence win, so the
+    ratingless spreads row overwrote the rated one and the audit read the
+    rating as "absent". On the clean tree that produced four RENDER_DEFECTs
+    and quarantined two of the four ranked power stations — the withhold
+    mechanism firing on correct pages, which is worse than not checking at
+    all. My original docstring reasoned about duplication ACROSS guides and
+    never considered duplication WITHIN one.
+
+    Fold rule: a field present anywhere on the page counts as present, so
+    an absent rating in a context that has no rating column is not a
+    defect. Where two appearances disagree about the SAME field or
+    attribute, that is an internal contradiction on one page and IS
+    reported — stricter than either occurrence alone.
+    """
+    merged = {"fields": {}, "guide": page, "internal_conflicts": []}
+    for attr in _MERGED_ATTRS:
+        merged[attr] = None
+    for record in records:
+        for attr in _MERGED_ATTRS:
+            value = record.get(attr)
+            if value is None:
+                continue
+            if merged[attr] is None:
+                merged[attr] = value
+            elif merged[attr] != value:
+                merged["internal_conflicts"].append(
+                    f"{attr}: {merged[attr]!r} vs {value!r}")
+        for name, field in record["fields"].items():
+            if name not in merged["fields"]:
+                merged["fields"][name] = field
+            elif merged["fields"][name].get("text") != field.get("text"):
+                merged["internal_conflicts"].append(
+                    f"{name}: {merged['fields'][name].get('text')!r} vs "
+                    f"{field.get('text')!r}")
+    merged["_vid"] = vid
+    return merged
+
+
+def parse_guide_provenance(site_dir: Path) -> dict[str, dict]:
+    """{variant_id: merged record} across every rendered guide page.
+
+    The guides were an UNAUDITED surface: the render hop opened
+    index.html and products/*.html only, so a wrong figure on a ranked
+    buying guide — the pages most likely to be acted on — could not
+    produce a RENDER_DEFECT. Guides share their freshness with the rows
+    behind them, so verifying them costs ZERO extra live requests.
+
+    Within a page, a variant's appearances are merged (see
+    merge_guide_records). Across pages they are not: every product belongs
+    to exactly one guide category today, so a variant on two guides means
+    the scoping rules overlapped and the first record wins with the
+    duplicate reported rather than silently dropped.
+    """
+    merged: dict[str, dict] = {}
+    guides_dir = site_dir / "guides"
+    if not guides_dir.is_dir():
+        return merged
+    for path in sorted(guides_dir.glob("*.html")):
+        by_vid: dict[str, list[dict]] = {}
+        for record in parse_provenance_list(path.read_text(encoding="utf-8")):
+            by_vid.setdefault(record["_vid"], []).append(record)
+        for vid, records in by_vid.items():
+            folded = merge_guide_records(vid, records, path.name)
+            if vid in merged:
+                merged[vid].setdefault("duplicate_in", []).append(path.name)
+                continue
+            merged[vid] = folded
+    return merged
+
+
+def check_guide_render(vid: str, variant_data: dict, product: dict,
+                       guide_prov: dict, row_scraped_at: str = "") -> list[dict]:
+    """Mismatches between a guide's displayed numbers and the JSONL row.
+
+    Same comparisons check_render makes on the product page, against the
+    same store: price, the rated figure, availability, and the provenance
+    attributes themselves. A variant absent from every guide is NOT a
+    defect — most variants legitimately never appear on one (wrong
+    category, or the product is unranked and its table omitted).
+    """
+    mismatches = []
+    rec = guide_prov.get(vid)
+    if rec is None:
+        return mismatches
+
+    def bad(field, observed, expected):
+        mismatches.append({"where": f"guide:{rec.get('guide', '?')}",
+                           "field": field, "observed": observed,
+                           "expected": expected})
+
+    if rec.get("duplicate_in"):
+        bad("duplicate", ",".join(rec["duplicate_in"]), "one guide per variant")
+    for conflict in rec.get("internal_conflicts") or []:
+        bad("internal-conflict", conflict, "one value per variant per page")
+
+    if rec.get("withheld") == "price_unreadable":
+        if site_build._usable_number(variant_data.get("price")):
+            bad("withheld", "price_unreadable", "a displayable price")
+        return mismatches
+    if rec.get("withheld"):
+        # Withheld by age or quarantine is a policy render, not a number.
+        return mismatches
+
+    stored_sku = variant_data.get("sku") or None
+    if (rec.get("sku") or None) != stored_sku:
+        bad("sku-attr", rec.get("sku"), stored_sku)
+    if row_scraped_at and rec.get("scraped_at") != row_scraped_at:
+        bad("scraped-at-attr", rec.get("scraped_at"), row_scraped_at)
+
+    expected_price = site_build.price_display(variant_data.get("price"))
+    shown = (rec["fields"].get("price") or {}).get("text", "")
+    if (shown or "") != expected_price:
+        bad("price", shown or "absent", expected_price or "no displayable price")
+
+    expected_avail = site_build._avail_value(variant_data.get("available"))
+    avail_field = rec["fields"].get("availability") or {}
+    if avail_field.get("value") != expected_avail:
+        bad("availability", avail_field.get("value"), expected_avail)
+
+    # The rated figure, under the data-field name THIS product's guide
+    # uses: "wh" for $/Wh (the same name the product page uses, so it is
+    # the identical comparison) and "watt" for $/W. Which one applies is
+    # decided by the product's guide, not by which specs happen to be
+    # non-null: a power station has an output_w but is ranked on $/Wh,
+    # and expecting a $/W from it would manufacture a mismatch per row.
+    spec = site_build.guide_for_product(product)
+    if spec is None:
+        return mismatches
+    metric = site_build._METRICS[spec["metric"]]
+    expected_rating = site_build.expected_rating_display(
+        variant_data, product, spec["metric"])
+    shown_rating = (rec["fields"].get(metric["field"]) or {}).get("text") or None
+    if shown_rating != expected_rating:
+        bad(metric["field"], shown_rating or "absent", expected_rating or "absent")
+
+    # The other metric's field must not appear at all — a $/W printed on a
+    # $/Wh guide would be an unrated number nobody checks.
+    for other_key, other in site_build._METRICS.items():
+        if other_key == spec["metric"]:
+            continue
+        stray = (rec["fields"].get(other["field"]) or {}).get("text")
+        if stray:
+            bad(other["field"], stray, "absent on a "
+                f"{metric['label']} guide")
     return mismatches
 
 
@@ -634,6 +832,7 @@ def run_audit(data_dir: Path = DEFAULT_DATA_DIR, site_dir: Path = DEFAULT_SITE_D
     index_path = site_dir / "index.html"
     if index_path.exists():
         home_prov = parse_provenance(index_path.read_text(encoding="utf-8"))
+    guide_prov = parse_guide_provenance(site_dir)
     page_prov_cache: dict[str, dict] = {}
 
     def page_prov_for(product_id: str) -> dict:
@@ -664,6 +863,9 @@ def run_audit(data_dir: Path = DEFAULT_DATA_DIR, site_dir: Path = DEFAULT_SITE_D
             shadow_state["home"] = (
                 parse_provenance(idx.read_text(encoding="utf-8"))
                 if idx.exists() else {})
+            # The shadow build's guides too: an entry must not clear while
+            # a rebuild without it would render the guide wrong.
+            shadow_state["guides"] = parse_guide_provenance(sdir)
             shadow_state["pages"] = {}
         pages = shadow_state["pages"]
         if product_id not in pages:
@@ -778,6 +980,10 @@ def run_audit(data_dir: Path = DEFAULT_DATA_DIR, site_dir: Path = DEFAULT_SITE_D
                 triple["variant_id"], triple["variant_data"], triple["product"],
                 shadow_page, shadow_home,
                 row_scraped_at=triple["row"].get("timestamp") or "")
+            shadow_mismatches += check_guide_render(
+                triple["variant_id"], triple["variant_data"], triple["product"],
+                shadow_state.get("guides") or {},
+                row_scraped_at=triple["row"].get("timestamp") or "")
             if shadow_mismatches:
                 entry["verdict"] = RENDER_DEFECT
                 entry["mismatches"] = shadow_mismatches
@@ -795,6 +1001,12 @@ def run_audit(data_dir: Path = DEFAULT_DATA_DIR, site_dir: Path = DEFAULT_SITE_D
                 triple["variant_id"], triple["variant_data"], triple["product"],
                 page_prov_for(triple["product_id"]), home_prov,
                 row_scraped_at=triple["row"].get("timestamp") or "")
+            # Guides are a third render surface over the same store. They
+            # share their freshness with the row behind them, so checking
+            # them costs no live requests (LOW-9 / weakness-1).
+            mismatches += check_guide_render(
+                triple["variant_id"], triple["variant_data"], triple["product"],
+                guide_prov, row_scraped_at=triple["row"].get("timestamp") or "")
             if mismatches:
                 entry["verdict"] = RENDER_DEFECT
                 entry["mismatches"] = mismatches

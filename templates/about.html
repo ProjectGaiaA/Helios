@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% block content %}
+{#
+  Every count and name on this page comes from build.site_facts(), which
+  reads the live catalog and price store. There is no hand-typed number
+  here, so this page cannot go stale against the data it describes.
+#}
+<div class="prose">
+<h1>About Helios</h1>
+<p class="muted">Generated from the current data on {{ facts.generated_on }}.</p>
+
+<h2>What this is</h2>
+<p>Helios is a price tracker for solar and home-energy equipment: portable power
+stations, server-rack and wall-mount batteries, deep-cycle batteries, solar
+panels, inverters and balance-of-system parts. It reads what retailers publish,
+records it, and shows the numbers side by side with the date they were read.</p>
+<p>It currently tracks <strong>{{ facts.product_count }} products</strong> across
+<strong>{{ facts.retailer_count }} retailers</strong>
+({% for name in facts.retailer_names %}{{ name }}{% if not loop.last %}, {% endif %}{% endfor %}),
+covering {{ facts.rendered_pairs }} product-retailer pairs. That is the entire
+catalog, not a selection from a larger one — if a product is tracked, it is on
+the site, including the ones where the comparison turns out to be unflattering
+or where no comparison is possible at all.</p>
+<p>Helios is an independent project run by one person. It is not affiliated with
+any manufacturer or retailer, and no retailer has any input into what is tracked
+or how it is ranked.</p>
+
+<h2>Where the numbers come from</h2>
+<p>Prices are read directly from each retailer's own product data endpoints — the
+same structured feed their storefront uses — rather than by scraping rendered
+pages. Availability is read from a separate per-variant endpoint, because the
+price feed does not carry it and guessing stock is how a tracker ends up
+confidently wrong.</p>
+<p>Collection is deliberately slow and identifiable. Helios checks
+<code>robots.txt</code> before it fetches, identifies itself with a real contact
+address in its user agent, and waits between five and fifteen seconds between
+requests. It reads catalog data only: it never adds to a cart, never starts a
+checkout, and never places an order. Both of the retailers Helios started with
+state in their own <code>robots.txt</code> that checkout is for humans, and that
+is treated here as a standing rule rather than a preference.</p>
+
+<h2>How often prices are checked</h2>
+<p><strong>Scrapes are run on demand, not on a fixed schedule.</strong> There is
+no nightly cron job; the collection workflow is triggered manually. Claiming a
+daily refresh that does not exist would be the easiest lie on the site to tell
+and the hardest for a reader to check, so the cadence is stated plainly
+instead.</p>
+{% if facts.newest_scrape %}
+<p>As of this build, the freshest price on the site was read
+{{ facts.newest_scrape.replace("as of ", "") }} and the oldest
+{{ facts.oldest_scrape.replace("as of ", "") }}. Every price displayed anywhere
+on this site shows its own age next to it.</p>
+{% endif %}
+<p>Any price older than {{ facts.stale_max_hours }} hours
+({{ facts.stale_max_days }} days) is <em>removed</em> from the page rather than
+shown with a warning label. A price nobody has verified for a week is not
+information, and dressing it up with a caveat still leaves a wrong number on
+the screen.</p>
+
+<h2>Withhold when unknown</h2>
+<p>This is the rule the whole site is built around: <strong>when Helios does not
+know something, it shows nothing rather than an estimate.</strong> A missing
+number is a gap the reader can see and work around. A wrong number looks exactly
+like a right one.</p>
+<p>In practice:</p>
+<ul>
+  <li><strong>Cost per watt-hour is only computed for standalone units.</strong>
+    Most listings sell kits — a battery plus panels, or a pack of several
+    batteries — under one price. Dividing a kit's price by one component's
+    capacity produces a precise-looking number that is wrong by construction.
+    Those variants get their price shown and a "bundle" badge, and no $/Wh.</li>
+  <li><strong>Capacity is only used when a retailer actually states it.</strong>
+    Of {{ facts.product_count }} tracked products,
+    {{ facts.capacity_known }} carry a capacity figure and
+    {{ facts.capacity_withheld }} do not. Where a figure is recorded, it is
+    backed by a verbatim quote extracted from the merchant's own listing text —
+    {{ facts.capacity_quoted }} of the {{ facts.capacity_known }} have that
+    evidence stored and re-checked against the live listing on later audits.</li>
+  <li><strong>Conflicting sources withhold.</strong> Where two retailers state
+    capacities for the same battery that differ by an order of magnitude, the
+    honest state is "unknown", so no $/Wh is published for that product at any
+    retailer — even though picking one of the two figures would have filled the
+    column in.</li>
+  <li><strong>Panels are rated in watts, not watt-hours</strong>, so their
+    capacity field is empty by nature. Their $/W comes from the nameplate output
+    recorded in the catalog, which does not yet carry the same verbatim-quote
+    evidence that capacity does. That weaker provenance is marked on the page
+    wherever a $/W is shown.</li>
+</ul>
+
+<h2>Checking the site against itself</h2>
+<p>A tracker's real failure mode is not a bad match — it is that every check is
+self-referential, so an error introduced at one step is invisible at the next.
+Helios runs an audit that samples product-retailer-variant combinations and
+compares them along two independent hops: what the built page actually displays
+against the stored price row, and that stored row against the retailer's live
+data.</p>
+<p>The two hops are treated differently on purpose. A page disagreeing with its
+own stored data is a defect: that variant is quarantined and withheld from the
+site until it verifies clean. A stored row disagreeing with the live retailer is
+normal — prices move between checks — so it prompts a re-scrape and never
+removes anything.</p>
+<p>To make this checkable rather than a claim, every displayed number carries
+machine-readable provenance in the HTML: the variant id, the retailer's SKU, the
+price tier, and the timestamp it was scraped. View the source of any comparison
+table on this site and each number can be traced to the exact record it came
+from.</p>
+
+<h2>What Helios does not do</h2>
+<ul>
+  <li>No hands-on testing, teardowns, or product reviews. Helios compares
+    published prices and published specifications. Nothing here is an opinion
+    about whether a product is good.</li>
+  <li>No paid placement. Rankings are computed from price data; there is no
+    field in the system a retailer could pay to change.</li>
+  <li>No shipping, tax, installation, or rebate modelling. The prices are the
+    retailers' listed prices, which is often not what you finally pay.</li>
+  <li>No checkout, cart, or order automation, ever.</li>
+  <li>No claims about how many people use this site, how long it has run, or who
+    endorses it.</li>
+</ul>
+
+<h2>Corrections</h2>
+<p>If a number here is wrong, that is worth more to know than anything else on
+the page. Report it to
+<a href="mailto:{{ facts.contact_email }}">{{ facts.contact_email }}</a> — the
+same address Helios publishes in its scraper's user agent, so retailers reading
+their own logs can reach the project too. The code and data that produced every
+page on this site are public at
+<a href="{{ facts.contact_repo }}" rel="nofollow">{{ facts.contact_repo }}</a>.</p>
+<p>How Helios is funded, and which links are commercial, is set out in the
+<a href="{{ root_prefix }}disclosure.html">affiliate disclosure</a>.</p>
+</div>
+{% endblock %}

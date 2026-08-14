@@ -1,9 +1,11 @@
 {% extends "base.html" %}
-{% block title %}Helios — Solar Power Price Tracker{% endblock %}
 {% block content %}
 <h1>Portable power &amp; battery prices</h1>
 <p class="muted">Lowest current price per retailer. $/Wh appears only where a
 standalone unit's capacity is known.</p>
+<p class="muted">Ranked buying guides:
+  {% for g in nav_guides %}<a href="{{ root_prefix }}guides/{{ g.slug }}.html">{{ g.h1 }}</a>{% if not loop.last %} · {% endif %}{% endfor %}
+</p>
 <table>
   <thead>
     <tr>
@@ -14,8 +16,9 @@ standalone unit's capacity is known.</p>
   <tbody>
     {% for row in rows %}
     <tr>
-      <td><a href="products/{{ row.product.id }}.html">{{ row.product.name }}</a>
-          {% if row.product.specs.capacity_wh %}<span class="muted">{{ row.product.specs.capacity_wh }} Wh</span>{% endif %}
+      <td><a href="{{ root_prefix }}products/{{ row.product.id }}.html">{{ row.product.name }}</a>
+          {# guarded in build.py: a bool/NaN capacity rendered "True Wh" #}
+          {% if row.capacity_display %}<span class="muted">{{ row.capacity_display }}</span>{% endif %}
       </td>
       {% for cell in row.cells %}
       {% if cell %}

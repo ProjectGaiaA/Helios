@@ -18,10 +18,17 @@ concurrency:
 jobs:
   scrape:
     runs-on: ubuntu-latest
-    # ~8 mapped products x 2 requests x 15s worst-case delay is well under
-    # 10 minutes; 30 leaves honest headroom without masking a hang.
+    # Real arithmetic, recomputed after the catalog expansion took this
+    # from 8 mapped pairs at two retailers to 64 pairs at four, and after
+    # the scrape step was consolidated to cover all active retailers:
+    #   64 mapped pairs x 2 requests (.json + .js) x 15s worst-case
+    #   randomized delay = 1,920s = 32 minutes, before any request time.
+    # The old comment claimed "well under 10 minutes" and the old 30-minute
+    # cap sat BELOW that worst case, so a slow-but-healthy run would have
+    # been killed mid-scrape and reported as a crash.
+    # 60 leaves honest headroom without masking a hang.
     # Keep in step with CI_TIMEOUT_SECONDS in scrapers/runner.py.
-    timeout-minutes: 30
+    timeout-minutes: 60
 
     steps:
       - uses: actions/checkout@v4
@@ -34,16 +41,24 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      # --- Each retailer runs as its own step with continue-on-error ---
-      - name: Scrape shop-solar-kits
+      # --- Scrape every ACTIVE retailer, derived from the catalog ---
+      # This was one hardcoded step per retailer, naming only
+      # shop-solar-kits and wild-oak-trail. rich-solar and alte-store were
+      # activated during the catalog expansion and were NEVER refreshed by
+      # automation, so guide headlines sourced from them (the MidNite
+      # MNPowerFlo16 at altE Store, every Rich Solar panel price) would sit
+      # unrefreshed until they crossed the 168h staleness threshold and
+      # vanished from the site — with nothing reporting why.
+      #
+      # `scrapers.runner` with no --retailer scrapes all active retailers,
+      # so data/retailers.json is now the single source of truth:
+      # activating a retailer enrolls it in automation and this file needs
+      # no edit. The runner's own per-retailer health reporting and the
+      # dead-retailer alarm (exit 2) still distinguish which one failed.
+      - name: Scrape all active retailers
         continue-on-error: true
-        id: shop_solar_kits
-        run: python -X utf8 -m scrapers.runner --retailer shop-solar-kits --skip-promos
-
-      - name: Scrape wild-oak-trail
-        continue-on-error: true
-        id: wild_oak_trail
-        run: python -X utf8 -m scrapers.runner --retailer wild-oak-trail --skip-promos
+        id: scrape_all
+        run: python -X utf8 -m scrapers.runner --skip-promos
 
       # Tests are fixture-based: they validate CODE, not this run's data,
       # so a failure is an alarm, not a publish block.
@@ -105,13 +120,19 @@ jobs:
         if: always()
         run: |
           PROBLEMS=""
-          if [ "${{ steps.shop_solar_kits.outcome }}" = "failure" ]; then
-            echo "::error::shop-solar-kits scrape failed — dead retailer or crash."
-            PROBLEMS="$PROBLEMS shop-solar-kits"
+          if [ "${{ steps.scrape_all.outcome }}" = "failure" ]; then
+            echo "::error::Scrape run failed — dead retailer or crash. See the runner's per-retailer health summary above."
+            PROBLEMS="$PROBLEMS scrape"
           fi
-          if [ "${{ steps.wild_oak_trail.outcome }}" = "failure" ]; then
-            echo "::error::wild-oak-trail scrape failed — dead retailer or crash."
-            PROBLEMS="$PROBLEMS wild-oak-trail"
+          # Per-retailer degradation does not fail the runner, so read it
+          # out of the manifest the run just wrote. A retailer silently
+          # returning zero products is the failure mode this catches.
+          if [ -f data/last_manifest.json ]; then
+            DEGRADED=$(python -X utf8 -c "import json; m=json.load(open('data/last_manifest.json', encoding='utf-8')); print(' '.join(m.get('degraded_retailers') or []))")
+            if [ -n "$DEGRADED" ]; then
+              echo "::error::Degraded retailers this run: $DEGRADED"
+              PROBLEMS="$PROBLEMS degraded:$DEGRADED"
+            fi
           fi
           if [ "${TESTS_FAILED:-0}" = "1" ]; then
             echo "::error::Test suite failed — code defect."
@@ -145,4 +166,4 @@ jobs:
             echo "Problems:$PROBLEMS"
             exit 1
           fi
-          echo "All healthy: 2/2 scrapers, tests green, published."
+          echo "All healthy: every active retailer scraped, tests green, published."

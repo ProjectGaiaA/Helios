@@ -1,0 +1,333 @@
+{% extends "base.html" %}
+
+{#
+  Every number on this page is rendered from a scraped price row and
+  carries provenance attributes identifying the exact variant it came
+  from: data-retailer-id, data-product-id, data-variant-id, data-tier,
+  data-sku and data-scraped-at on the row, data-field on the value, and
+  data-spec-* on the divisor behind a rating. audit.py joins on those
+  attributes to verify guide figures against the price store, so they are
+  load-bearing, not decoration.
+
+  Withheld offers show neither a price nor a rating — the same rule the
+  product pages apply, so a guide can never republish what a product page
+  is holding back.
+#}
+
+{%- macro annotations(offer) -%}
+{%- if offer.sku_conflict == "quantity" %}
+  <div class="withheld">Retailers disagree on the quantity behind SKU
+    <code>{{ offer.sku }}</code>. This row may not hold the same number of
+    items as another row with the same label — check the retailer's page.</div>
+{%- elif offer.sku_conflict == "kind" %}
+  <div class="withheld">Retailers disagree on whether SKU
+    <code>{{ offer.sku }}</code> is a standalone unit or a bundle.</div>
+{%- endif %}
+{%- if offer.sku_only_here %}
+  <div class="prov">SKU <code>{{ offer.sku }}</code> — carried only by
+    {{ offer.retailer_name }} among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div>
+{%- endif %}
+{%- if offer.note_warning %}
+  <div class="withheld">Data-quality note recorded against
+    {{ offer.retailer_name }} for this product:
+    {{ offer.note_warning | truncate(260, true, "...") }}</div>
+{%- endif %}
+{%- endmacro -%}
+
+{%- macro availability(offer) -%}
+{%- if offer.available is sameas true %}<span class="instock" data-field="availability" data-value="true">In stock</span>
+{%- elif offer.available is sameas false %}<span class="soldout" data-field="availability" data-value="false">Sold out</span>
+{%- else %}<span class="unknown" data-field="availability" data-value="unknown">Check site</span>{% endif %}
+{%- endmacro -%}
+
+{%- macro rowattrs(offer) -%}
+data-retailer-id="{{ offer.retailer_id }}" data-product-id="{{ offer.product_id }}"{% if offer.variant_id is not none %} data-variant-id="{{ offer.variant_id }}"{% endif %} data-tier="{{ offer.tier }}" data-sku="{{ offer.sku or '' }}" data-scraped-at="{{ offer.scraped_at }}"{% if offer.withheld %} data-withheld="{{ offer.withheld }}"{% endif %}
+{%- endmacro -%}
+
+{% block content %}
+<h1>{{ guide.h1 }}</h1>
+<p class="prose">{{ guide.lede }}</p>
+<p class="muted">
+  {{ stats.products_ranked }} of {{ stats.products_in_scope }} tracked
+  {{ guide.subject }} could be ranked;
+  {{ stats.offers_shown }} retailer prices shown{% if stats.newest %}, the
+  freshest {{ stats.newest.replace("as of ", "") }}{% endif %}.
+  Only offers that are actually in stock set a rank.
+  <a href="#methodology">How this is put together</a>.
+</p>
+
+{% if ranked %}
+{% for entry in ranked %}
+<article data-product-id="{{ entry.product.id }}">
+  <h2><span class="rank">{{ loop.index }}.</span>
+    <a href="{{ root_prefix }}products/{{ entry.product.id }}.html">{{ entry.product.name }}</a>
+    {%- if entry.tied %} <span class="badge">tie</span>{% endif %}
+  </h2>
+  <p class="muted">
+    {{ entry.product.brand }}{% if entry.spec_display %} ·
+    <span data-field="spec" data-spec-key="{{ metric.spec_key }}" data-spec-value="{{ entry.spec_value }}" data-spec-provenance="{{ entry.spec_provenance }}">{{ entry.spec_display }}</span>
+    {{ metric.spec_label }}{% endif %} ·
+    {# data-variant-id only when the id is REAL: a literal "None" in a
+       provenance attribute is a lie about identity (red team #4, MAJOR-7) #}
+    best <span class="headline" data-field="best-rating"{% if entry.best.variant_id is not none %} data-variant-id="{{ entry.best.variant_id }}"{% endif %} data-scraped-at="{{ entry.best.scraped_at }}">{{ entry.best.rating_display }}</span>
+    at {{ entry.best.retailer_name }}
+    <span data-field="best-price">{{ entry.best.price_display }}</span>
+    — {{ availability(entry.best) }}
+    ({{ entry.best.asof }})
+  </p>
+  {% if entry.tied %}
+  <p class="prov">This figure rounds to the same displayed value as an
+    adjacent rank. The ordering uses the unrounded numbers; treat the two as
+    level.</p>
+  {% endif %}
+  {% if entry.spec_provenance == "cross-retailer" %}
+  <p class="prov">The {{ metric.spec_label }} used here is quoted verbatim from a
+    tracked listing, but not from {{ entry.best.retailer_name }}'s own listing.</p>
+  {% elif entry.spec_provenance == "unquoted" %}
+  <p class="prov">The {{ metric.spec_label }} used here is taken from the product's
+    nameplate rating and is not backed by a verbatim quote from a retailer
+    listing, unlike the capacity figures elsewhere on this site.</p>
+  {% endif %}
+  <table>
+    <thead>
+      <tr><th>Retailer</th><th>Variant</th><th>Price</th><th>{{ metric.label }}</th>
+          <th>Availability</th><th></th></tr>
+    </thead>
+    <tbody>
+      {% for offer in entry.offers %}
+      <tr {{ rowattrs(offer) }}>
+        <td>{{ offer.retailer_name }}</td>
+        <td>{{ offer.raw_variant or "Standard" }}
+            {% if offer.classification == "bundle" %}<span class="badge">bundle</span>{% endif %}
+            {{ annotations(offer) }}</td>
+        {% if offer.withheld %}
+        <td colspan="3"><span class="muted">price withheld ({{ offer.withheld_reason }})</span></td>
+        {% else %}
+        <td><span data-field="price">{{ offer.price_display }}</span>
+            {% if offer.was_price_display %}<span class="was" data-field="was-price">{{ offer.was_price_display }}</span>{% endif %}
+            <div class="muted" data-field="asof">{{ offer.asof }}</div></td>
+        <td>{% if offer.rating_display %}<span class="wh" data-field="{{ metric.field }}" data-spec-key="{{ metric.spec_key }}" data-spec-value="{{ entry.spec_value }}" data-spec-provenance="{{ offer.spec_provenance }}">{{ offer.rating_display }}</span>
+            {% if offer.available is sameas false %}<div class="prov">not ranked: sold out</div>{% endif %}
+            {% else %}<span class="withheld">{{ offer.rating_withheld_reason }}</span>{% endif %}</td>
+        <td>{{ availability(offer) }}</td>
+        {% endif %}
+        <td><a href="{{ offer.buy_url }}" rel="nofollow sponsored">View at retailer</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</article>
+{% endfor %}
+{% else %}
+<p class="muted">Nothing in scope could be ranked from the current data. Every
+product in this category is listed below with the reason.</p>
+{% endif %}
+
+{% if spreads %}
+<h2 id="spreads">Same SKU at more than one retailer</h2>
+<p class="prose">These are variants that two or more tracked retailers publish
+under the <em>same</em> SKU string, where every side is in stock — whether or
+not the prices differ. The SKU is
+the retailer's own, and Helios does not independently verify that two retailers
+mean the same physical item by it — where they disagree about quantity or kind,
+that is flagged.</p>
+{% for item in spreads %}
+<div class="spread" data-product-id="{{ item.entry.product.id }}" data-sku="{{ item.spread.sku }}">
+  <strong>{{ item.entry.product.name }}</strong>
+  <span class="muted">SKU <code>{{ item.spread.sku }}</code></span>
+  <div>
+    {% if item.spread.same_price %}
+    Identical price at every tracked retailer that carries it in stock.
+    {% else %}
+    <span data-field="spread-gap">{{ item.spread.gap_display }}</span>
+    (<span data-field="spread-pct">{{ item.spread.gap_pct_display }}</span>)
+    more at {{ item.spread.high.retailer_name }} than at
+    {{ item.spread.low.retailer_name }}.
+    {% endif %}
+  </div>
+  <table>
+    <thead><tr><th>Retailer</th><th>Its label for this SKU</th><th>Price</th>
+               <th>Availability</th><th></th></tr></thead>
+    <tbody>
+      {% for offer in item.spread.offers %}
+      <tr {{ rowattrs(offer) }}>
+        <td>{{ offer.retailer_name }}</td>
+        <td>{{ offer.raw_variant or "Standard" }}
+            {% if offer.classification == "bundle" %}<span class="badge">bundle</span>{% endif %}</td>
+        <td><span data-field="price">{{ offer.price_display }}</span>
+            <div class="muted" data-field="asof">{{ offer.asof }}</div></td>
+        <td>{{ availability(offer) }}</td>
+        <td><a href="{{ offer.buy_url }}" rel="nofollow sponsored">View at retailer</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if item.spread.identity_conflict == "quantity" %}
+  <p class="withheld">These retailers put <em>different quantities</em> on this
+  same SKU, so at least one of them has it attached to the wrong pack. This is
+  not a like-for-like price comparison — read each retailer's own label above
+  and confirm on their site before treating the gap as a saving.</p>
+  {% elif item.spread.identity_conflict == "kind" %}
+  <p class="withheld">One retailer lists this SKU as a standalone unit and the
+  other as a bundle, so the two prices may not cover the same contents. Read
+  each retailer's own label above.</p>
+  {% endif %}
+</div>
+{% endfor %}
+{% endif %}
+
+{% if unranked %}
+<h2 id="unranked">Tracked, but not ranked</h2>
+<p class="prose">These products are in scope and their prices are collected, but
+no {{ metric.label }} is published for them. Each reason is the actual rule that
+withheld the number, not a placeholder.</p>
+{% for entry in unranked %}
+<article data-product-id="{{ entry.product.id }}">
+  <h2><a href="{{ root_prefix }}products/{{ entry.product.id }}.html">{{ entry.product.name }}</a></h2>
+  <p class="withheld">No {{ metric.label }}: {{ entry.unranked_reason }}.</p>
+  {% if entry.offers %}
+  <table>
+    <thead><tr><th>Retailer</th><th>Variant</th><th>Price</th><th>{{ metric.label }}</th>
+               <th>Availability</th><th></th></tr></thead>
+    <tbody>
+      {% for offer in entry.offers %}
+      <tr {{ rowattrs(offer) }}>
+        <td>{{ offer.retailer_name }}</td>
+        <td>{{ offer.raw_variant or "Standard" }}
+            {% if offer.classification == "bundle" %}<span class="badge">bundle</span>{% endif %}
+            {{ annotations(offer) }}</td>
+        {% if offer.withheld %}
+        <td colspan="3"><span class="muted">price withheld ({{ offer.withheld_reason }})</span></td>
+        {% else %}
+        <td><span data-field="price">{{ offer.price_display }}</span>
+            <div class="muted" data-field="asof">{{ offer.asof }}</div></td>
+        <td>{% if offer.rating_display %}<span class="wh" data-field="{{ metric.field }}" data-spec-key="{{ metric.spec_key }}" data-spec-value="{{ entry.spec_value }}" data-spec-provenance="{{ offer.spec_provenance }}">{{ offer.rating_display }}</span>
+            {% if offer.available is sameas false %}<div class="prov">not ranked: sold out</div>{% endif %}
+            {% else %}<span class="withheld">{{ offer.rating_withheld_reason }}</span>{% endif %}</td>
+        <td>{{ availability(offer) }}</td>
+        {% endif %}
+        <td><a href="{{ offer.buy_url }}" rel="nofollow sponsored">View at retailer</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</article>
+{% endfor %}
+{% endif %}
+
+<div class="method" id="methodology">
+<h2>Methodology, and what this page will not tell you</h2>
+
+<h3>What is compared</h3>
+<ul>
+  <li>Scope is a query over the catalog's own <code>category</code> field:
+    {% for c in guide.categories %}<code>{{ c }}</code>{% if not loop.last %}, {% endif %}{% endfor %}.
+    {{ stats.products_in_scope }} tracked product{{ "s" if stats.products_in_scope != 1 }}
+    fall into it today.</li>
+  <li>Ranking is by <strong>{{ metric.label }}</strong> — the retailer's price
+    for a single standalone unit divided by that product's
+    {{ metric.spec_label }} in {{ metric.spec_unit }}. A product's rank is set
+    by the cheapest {{ metric.label }} available at any tracked retailer; the
+    price and the rating in every row always describe the <em>same</em>
+    variant.</li>
+  <li><strong>Only in-stock offers set a rank.</strong> A ranking is a buying
+    recommendation, so an offer whose variant was sold out at the last check
+    cannot claim a position, however cheap it is.
+    {{ stats.offers_sold_out }} of the {{ stats.offers_shown }} prices on this
+    page are sold out; they stay in the tables, marked, because the price is
+    still real information.
+    {% if stats.products_sold_out_only %}{{ stats.products_sold_out_only }}
+    product{{ "s" if stats.products_sold_out_only != 1 }} on this page
+    {{ "are" if stats.products_sold_out_only != 1 else "is" }} unranked purely
+    because every offer we can rate is sold out.{% endif %}</li>
+  <li>Prices come from
+    {% if stats.retailers %}{% for r in stats.retailers %}{{ r }}{% if not loop.last %}, {% endif %}{% endfor %}{% else %}no retailer, on this build{% endif %}.
+    Each is that retailer's own published price for its own listed variant, as
+    scraped. Nothing is converted, adjusted, or estimated, and shipping and tax
+    are not included.</li>
+</ul>
+
+<h3>What is withheld, and why</h3>
+<ul>
+  <li><strong>Bundles and multi-unit packs get no {{ metric.label }}.</strong>
+    {{ stats.offers_bundle }} of the {{ stats.offers_shown }} prices on this
+    page are kits or packs. Dividing a kit's price by one component's
+    {{ metric.spec_label }} produces a number that looks precise and is wrong,
+    so it is not printed. The prices themselves are still shown.</li>
+  <li><strong>Unknown {{ metric.spec_label }} withholds the rating.</strong>
+    {{ stats.products_unranked }} product{{ "s" if stats.products_unranked != 1 }}
+    in scope publish{{ "" if stats.products_unranked != 1 else "es" }} no
+    {{ metric.label }} at all; each is listed above with its reason. A missing
+    number here is a gap Helios is admitting to, not a product being hidden.</li>
+  <li><strong>Old data comes off the page.</strong> Any price older than
+    {{ stats.stale_max_hours }} hours is withheld and marked
+    <code>data-withheld="stale"</code> rather than shown with a caveat.
+    {{ stats.withheld_stale }} price{{ "s" if stats.withheld_stale != 1 }}
+    on this page {{ "are" if stats.withheld_stale != 1 else "is" }} currently
+    withheld for age.</li>
+  <li><strong>Anything under verification comes off the page.</strong> When an
+    automated audit finds a displayed number disagreeing with its own stored
+    source, that variant is quarantined and withheld until it is re-verified.
+    {{ stats.withheld_quarantine }} price{{ "s" if stats.withheld_quarantine != 1 }}
+    on this page {{ "are" if stats.withheld_quarantine != 1 else "is" }}
+    currently quarantined.</li>
+  {% if stats.withheld_unreadable %}
+  <li><strong>Corrupt prices come off the page.</strong>
+    {{ stats.withheld_unreadable }} stored price{{ "s" if stats.withheld_unreadable != 1 }}
+    on this page {{ "are" if stats.withheld_unreadable != 1 else "is" }} not a
+    usable number and {{ "are" if stats.withheld_unreadable != 1 else "is" }}
+    withheld rather than printed.</li>
+  {% endif %}
+  {% if stats.products_with_conflicts %}
+  <li><strong>Same SKU, different item.</strong>
+    {{ stats.products_with_conflicts }} product{{ "s" if stats.products_with_conflicts != 1 }}
+    on this page {{ "have" if stats.products_with_conflicts != 1 else "has" }} a
+    SKU that two retailers describe differently — a different pack quantity, or
+    a unit at one and a bundle at the other. Those rows carry a warning, because
+    two rows with the same label are not necessarily the same purchase.</li>
+  {% endif %}
+  {% if stats.provenance_cross_retailer or stats.provenance_unquoted %}
+  <li><strong>Provenance of the divisor.</strong>
+    {% if stats.provenance_cross_retailer %}{{ stats.provenance_cross_retailer }}
+    rating{{ "s" if stats.provenance_cross_retailer != 1 }} on this page
+    divide{{ "" if stats.provenance_cross_retailer != 1 else "s" }} by a figure
+    quoted verbatim from a <em>different</em> tracked retailer's listing than
+    the one being priced.{% endif %}
+    {% if stats.provenance_unquoted %}{{ stats.provenance_unquoted }}
+    rating{{ "s" if stats.provenance_unquoted != 1 }} divide by a
+    {{ metric.spec_label }} figure that carries no verbatim quote from any
+    retailer listing — it is the manufacturer's nameplate rating as recorded in
+    the catalog. Capacity figures elsewhere on this site are quote-backed;
+    {{ metric.spec_label }} is not, yet.{% endif %}
+    Every rating carries a <code>data-spec-provenance</code> attribute saying
+    which case applies.</li>
+  {% endif %}
+</ul>
+
+<h3>Data freshness</h3>
+<ul>
+  <li>{% if stats.newest %}The freshest price on this page was read
+    {{ stats.newest.replace("as of ", "") }}; the oldest
+    {{ stats.oldest.replace("as of ", "") }}. Every price shows its own age.
+    {% else %}No priced data is currently displayed on this page.{% endif %}</li>
+  <li>Scrapes are run on demand rather than on a fixed schedule, so an age of a
+    few days is normal. A retailer can change a price at any moment after a
+    scrape; the age beside each price is how far behind the number could be.
+    Stock can change faster than price, so confirm availability on the
+    retailer's own page before buying.</li>
+  <li>Rankings recompute from scratch on every build. Nothing on this page is
+    hand-written or carried over from a previous version.</li>
+</ul>
+
+<h3>Commercial disclosure</h3>
+<ul>
+  <li>Every outbound retailer link on this page carries
+    <code>rel="nofollow sponsored"</code>. Ranking is computed from price data
+    alone; no retailer can pay for a position, and retailers with no commercial
+    relationship to Helios are ranked alongside the rest. Full terms are in the
+    <a href="{{ root_prefix }}disclosure.html">affiliate disclosure</a>.</li>
+</ul>
+</div>
+{% endblock %}

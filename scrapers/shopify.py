@@ -28,6 +28,7 @@ Usage:
 
 import json
 import logging
+import math
 import re
 import time
 from datetime import datetime, timezone
@@ -265,7 +266,13 @@ class ShopifyScraper:
             except (ValueError, TypeError):
                 continue
 
-            if price <= 0:
+            # `price <= 0` does NOT stop NaN or Infinity: `nan <= 0` is
+            # False and `inf > 0` is True, so a JSON `NaN`/`Infinity` in a
+            # price field walked straight into the price store and rendered
+            # as "$nan"/"$inf" on the site. Same class as E9, which fixed
+            # only the $/Wh end. Rejected at the door here so the store
+            # never holds a price that cannot be printed or divided.
+            if not math.isfinite(price) or price <= 0:
                 continue
 
             # Real per-variant stock, fetched from /products/{handle}.js because
@@ -279,7 +286,10 @@ class ShopifyScraper:
             if compare_price_str:
                 try:
                     was_price = float(compare_price_str)
-                    if was_price <= price:
+                    # Non-finite guard for the same reason as the price
+                    # above: `nan <= price` is False, so a NaN compare-at
+                    # would survive as a struck-through "$nan".
+                    if not math.isfinite(was_price) or was_price <= price:
                         was_price = None  # Not actually a discount
                 except (ValueError, TypeError):
                     pass

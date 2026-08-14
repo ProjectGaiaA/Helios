@@ -1,13 +1,14 @@
 {% extends "base.html" %}
-{% block title %}{{ product.name }} prices — Helios{% endblock %}
 {% block content %}
 <h1>{{ product.name }}</h1>
 <p class="muted">
-  {{ product.brand }}{% if product.specs.capacity_wh %} · {{ product.specs.capacity_wh }} Wh{% endif %}
-  {%- if product.specs.output_w %} · {{ product.specs.output_w }} W output{% endif %}
+  {# specs are guarded in build.py: an unusable value (bool, NaN) renders
+     nothing rather than "True Wh", and suppresses no $/Wh notice #}
+  {{ product.brand }}{% if capacity_display %} · {{ capacity_display }}{% endif %}
+  {%- if output_display %} · {{ output_display }} output{% endif %}
   {%- if product.specs.chemistry %} · {{ product.specs.chemistry }}{% endif %}
 </p>
-{% if not product.specs.capacity_wh %}
+{% if not capacity_display %}
 <p class="muted">$/Wh withheld: capacity unknown or ambiguous for this listing.</p>
 {% endif %}
 

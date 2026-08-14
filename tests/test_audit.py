@@ -8,6 +8,7 @@ quarantine) — a run that quarantines 3b has the taxonomy bug.
 """
 
 import json
+import re
 
 import responses
 
@@ -813,3 +814,248 @@ def test_minor14_infinity_price_is_unresolved(tmp_path, no_sleep):
     assert "finite money" in bad["detail"]
     good = next(e for e in report["results"] if e["variant_id"] == str(UNIT_VID))
     assert good["verdict"] == CLEAN
+
+
+# ---------------------------------------------------------------------------
+# LOW-9: guides are a render surface and must be audited like the others
+# ---------------------------------------------------------------------------
+# Before this, audit.py opened index.html and products/*.html only. A wrong
+# figure on a ranked buying guide — the page a reader is most likely to act
+# on — could not produce a RENDER_DEFECT. Guides share their freshness with
+# the rows behind them, so verifying them costs zero extra live requests.
+
+
+def _guide_path(site_dir):
+    """The guide page the seeded product (a power station) lands on."""
+    return (site_dir / "guides"
+            / "portable-power-stations-compared-by-real-prices.html")
+
+
+@responses.activate
+def test_tampered_guide_price_is_render_defect(tmp_path, no_sleep):
+    data_dir = _seed_audit(tmp_path)
+    site_dir = _rebuild(tmp_path, data_dir)
+    guide = _guide_path(site_dir)
+    assert guide.exists(), "guide page was not built"
+    original = guide.read_text(encoding="utf-8")
+    assert "$509.00" in original, "guide does not show the price under test"
+    guide.write_text(original.replace("$509.00", "$444.00"),
+                     encoding="utf-8", newline="\n")
+    _add_live()
+    report, exit_code = _run(tmp_path, data_dir, site_dir)
+
+    assert exit_code == 3
+    assert report["verdict_counts"][RENDER_DEFECT] == 1
+    defect = next(e for e in report["results"] if e["verdict"] == RENDER_DEFECT)
+    assert defect["variant_id"] == str(BUNDLE_VID)
+    assert any(m["where"].startswith("guide:") and m["field"] == "price"
+               for m in defect["mismatches"]), defect["mismatches"]
+    assert list(_quarantine_out(tmp_path)) == [QKEY]
+
+
+@responses.activate
+def test_tampered_guide_rating_is_render_defect(tmp_path, no_sleep):
+    """The rated figure is the whole point of a guide, so a falsified one
+    must be caught by the same string comparison the product page gets."""
+    data_dir = _seed_audit(tmp_path)
+    site_dir = _rebuild(tmp_path, data_dir)
+    guide = _guide_path(site_dir)
+    text = guide.read_text(encoding="utf-8")
+    assert "$0.74/Wh" in text, "guide does not show a rating under test"
+    guide.write_text(text.replace("$0.74/Wh", "$0.11/Wh"),
+                     encoding="utf-8", newline="\n")
+    _add_live()
+    report, exit_code = _run(tmp_path, data_dir, site_dir)
+
+    assert exit_code == 3
+    defect = next(e for e in report["results"] if e["verdict"] == RENDER_DEFECT)
+    assert any(m["where"].startswith("guide:") and m["field"] == "wh"
+               for m in defect["mismatches"]), defect["mismatches"]
+
+
+@responses.activate
+def test_tampered_guide_availability_is_render_defect(tmp_path, no_sleep):
+    """HIGH-1 made availability part of a ranking claim, so the audit has
+    to police it on guides too."""
+    data_dir = _seed_audit(tmp_path)
+    site_dir = _rebuild(tmp_path, data_dir)
+    guide = _guide_path(site_dir)
+    text = guide.read_text(encoding="utf-8")
+    tampered = text.replace(
+        '<span class="soldout" data-field="availability" data-value="false">Sold out</span>',
+        '<span class="instock" data-field="availability" data-value="true">In stock</span>')
+    if tampered == text:
+        tampered = text.replace(
+            '<span class="instock" data-field="availability" data-value="true">In stock</span>',
+            '<span class="soldout" data-field="availability" data-value="false">Sold out</span>')
+    assert tampered != text, "no availability field to tamper"
+    guide.write_text(tampered, encoding="utf-8", newline="\n")
+    _add_live()
+    report, exit_code = _run(tmp_path, data_dir, site_dir)
+
+    assert exit_code == 3
+    defect = next(e for e in report["results"] if e["verdict"] == RENDER_DEFECT)
+    assert any(m["where"].startswith("guide:") and m["field"] == "availability"
+               for m in defect["mismatches"]), defect["mismatches"]
+
+
+@responses.activate
+def test_untampered_guides_stay_clean(tmp_path, no_sleep):
+    """The counter-case: guide checking must not manufacture defects on a
+    healthy build, or it would be worthless as a signal."""
+    data_dir = _seed_audit(tmp_path)
+    site_dir = _rebuild(tmp_path, data_dir)
+    assert _guide_path(site_dir).exists()
+    _add_live()
+    report, exit_code = _run(tmp_path, data_dir, site_dir)
+    assert exit_code == 0
+    assert report["verdict_counts"] == {CLEAN: 2}
+
+
+@responses.activate
+def test_guide_check_costs_no_extra_live_requests(tmp_path, no_sleep):
+    """Guides are verified against the STORE, not against the retailer."""
+    data_dir = _seed_audit(tmp_path)
+    site_dir = _rebuild(tmp_path, data_dir)
+    _add_live()
+    report, _ = _run(tmp_path, data_dir, site_dir)
+    assert report["live_requests_used"] == 2
+
+
+def test_guide_provenance_parser_reads_every_guide(tmp_path):
+    """Offline: the parser must actually find rows, or every guide
+    assertion above would pass vacuously."""
+    from audit import parse_guide_provenance
+    data_dir = _seed_audit(tmp_path)
+    site_dir = _rebuild(tmp_path, data_dir)
+    prov = parse_guide_provenance(site_dir)
+    assert str(BUNDLE_VID) in prov
+    record = prov[str(BUNDLE_VID)]
+    assert record["guide"].endswith(".html")
+    assert record["fields"]["price"]["text"] == "$509.00"
+
+
+def test_guide_provenance_parser_tolerates_a_missing_guides_dir(tmp_path):
+    from audit import parse_guide_provenance
+    assert parse_guide_provenance(tmp_path / "nope") == {}
+
+
+# ---------------------------------------------------------------------------
+# BLOCKER-1 regression: one variant, several appearances on one guide page
+# ---------------------------------------------------------------------------
+# A guide renders the same variant up to three times — headline span,
+# the product's own table, and a spreads table — and the spreads table has
+# no rating column by design. Keying provenance by variant_id alone let the
+# ratingless spread row overwrite the rated one, so the audit read the
+# rating as "absent" and raised RENDER_DEFECT on a CORRECT page. On the
+# clean tree that quarantined two of the four ranked power stations: the
+# withhold mechanism firing on healthy data, which is worse than not
+# checking at all.
+
+
+def _spread_variant(site_dir):
+    """A variant that appears in BOTH a ranked table and a spreads table."""
+    from audit import parse_provenance_list
+    guide = (site_dir / "guides"
+             / "portable-power-stations-compared-by-real-prices.html")
+    counts = {}
+    for record in parse_provenance_list(guide.read_text(encoding="utf-8")):
+        counts.setdefault(record["_vid"], []).append(record)
+    return {vid: recs for vid, recs in counts.items() if len(recs) > 1}
+
+
+def test_variant_rendered_more_than_once_on_a_guide_is_merged(tmp_path):
+    from audit import parse_guide_provenance
+    data_dir = _seed_audit(tmp_path)
+    site_dir = _rebuild(tmp_path, data_dir)
+
+    multi = _spread_variant(site_dir)
+    assert multi, "fixture no longer renders any variant twice on a guide"
+
+    prov = parse_guide_provenance(site_dir)
+    for vid, records in multi.items():
+        # at least one appearance lacks the rating cell (the spreads row)
+        assert any("wh" not in r["fields"] for r in records), vid
+        # ...and at least one has it (the ranked row)
+        assert any("wh" in r["fields"] for r in records), vid
+        # the merged view keeps the rating: absence in a table that has no
+        # rating column is not evidence of a missing rating
+        assert "wh" in prov[vid]["fields"], vid
+        assert prov[vid]["fields"]["wh"]["text"].endswith("/Wh"), vid
+        assert not prov[vid]["internal_conflicts"], prov[vid]["internal_conflicts"]
+
+
+@responses.activate
+def test_clean_tree_with_spreads_raises_no_render_defect(tmp_path, no_sleep):
+    """The acceptance case: an untampered build whose guide renders a
+    variant in both a ranked and a spreads table must stay CLEAN."""
+    data_dir = _seed_audit(tmp_path)
+    site_dir = _rebuild(tmp_path, data_dir)
+    assert _spread_variant(site_dir), "no duplicated variant to regress on"
+    _add_live()
+    report, exit_code = _run(tmp_path, data_dir, site_dir)
+    assert report["verdict_counts"].get(RENDER_DEFECT, 0) == 0
+    assert exit_code == 0
+    assert _quarantine_out(tmp_path) == {}
+
+
+@responses.activate
+def test_merging_still_catches_a_tamper_in_the_ranked_table(tmp_path, no_sleep):
+    """Merging must not become a way to launder a defect: a wrong rating
+    in the ranked table is still a defect even though the spreads row has
+    no rating cell to contradict it."""
+    data_dir = _seed_audit(tmp_path)
+    site_dir = _rebuild(tmp_path, data_dir)
+    guide = (site_dir / "guides"
+             / "portable-power-stations-compared-by-real-prices.html")
+    text = guide.read_text(encoding="utf-8")
+    assert "$0.74/Wh" in text
+    guide.write_text(text.replace("$0.74/Wh", "$0.09/Wh"),
+                     encoding="utf-8", newline="\n")
+    _add_live()
+    report, exit_code = _run(tmp_path, data_dir, site_dir)
+    assert exit_code == 3
+    defect = next(e for e in report["results"] if e["verdict"] == RENDER_DEFECT)
+    assert any(m["where"].startswith("guide:") and m["field"] == "wh"
+               for m in defect["mismatches"]), defect["mismatches"]
+
+
+@responses.activate
+def test_disagreeing_copies_of_one_variant_on_a_page_are_a_defect(tmp_path,
+                                                                  no_sleep):
+    """Stricter than either occurrence alone: if the ranked table and the
+    spreads table print DIFFERENT prices for the same variant, the page
+    contradicts itself and that is reported even though one of the two
+    still matches the store."""
+    data_dir = _seed_audit(tmp_path)
+    site_dir = _rebuild(tmp_path, data_dir)
+    guide = (site_dir / "guides"
+             / "portable-power-stations-compared-by-real-prices.html")
+    text = guide.read_text(encoding="utf-8")
+    # This fixture has ONE retailer, so no spreads table; the duplicate
+    # appearance is the headline span beside the ranked row. They share no
+    # field NAMES but they do share data-scraped-at, so desynchronise that.
+    # Find a variant that really is rendered twice, and desynchronise the
+    # SECOND copy specifically — rpartition would hit the document's last
+    # occurrence, which usually belongs to some other, singly-rendered row.
+    from audit import parse_provenance_list
+    per_vid = {}
+    for record in parse_provenance_list(text):
+        per_vid.setdefault(record["_vid"], []).append(record)
+    vid = next((v for v, recs in per_vid.items() if len(recs) >= 2), None)
+    assert vid, "no variant renders twice on the guide"
+
+    marker = f'data-variant-id="{vid}"'
+    first = text.index(marker)
+    second = text.index(marker, first + 1)
+    stamp = re.search(r'data-scraped-at="([^"]+)"', text[second:])
+    at = second + stamp.start(1)
+    tampered = text[:at] + "2020-01-01T00:00:00+00:00" + text[at + len(stamp.group(1)):]
+    assert tampered != text
+    guide.write_text(tampered, encoding="utf-8", newline="\n")
+    _add_live()
+    report, exit_code = _run(tmp_path, data_dir, site_dir)
+    assert exit_code == 3
+    defect = next(e for e in report["results"] if e["verdict"] == RENDER_DEFECT)
+    assert any(m["field"] == "internal-conflict" for m in defect["mismatches"]), \
+        defect["mismatches"]

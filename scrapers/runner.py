@@ -50,7 +50,9 @@ PROMOS_PATH = DATA_DIR / "promos.json"
 # .github/workflows/scrape.yml. Not consumed by code since the recovery
 # time-budget block was deleted (Phase B), but kept so the invariant has a
 # named home on this side of the boundary when recovery returns.
-CI_TIMEOUT_SECONDS = 30 * 60
+# Raised 30 -> 60 with the workflow: 64 mapped pairs x 2 requests x 15s
+# worst-case delay is 32 minutes, which the old 30-minute cap sat below.
+CI_TIMEOUT_SECONDS = 60 * 60
 
 # Patterns that indicate a discount banner or promo code on a retail page.
 # Checked against the full page HTML (case-insensitive).
