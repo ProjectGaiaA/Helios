@@ -11,21 +11,47 @@ comments here as constraints.
 
 **Run this at the start of every session before doing anything else.**
 
-1. Read `data/last_manifest.json` — check:
+1. **Heartbeat first**: `python -X utf8 heartbeat.py --no-api`. One command,
+   one question — has the pipeline published inside the 30h window? Exit 0
+   healthy, 1 alarm, and it prints the age of the last commit touching
+   `data/prices/`, the manifest's own timestamp, and whether the two agree.
+   Locally use `--no-api` (there is no `GITHUB_TOKEN`, so the Scrape-run
+   check cannot be made and downgrades to a warning); CI runs it without
+   that flag. **Read its verdict before the manifest**: the manifest is the
+   pipeline's account of itself and can be fresh while nothing was
+   published. Ask this one first because a dead pipeline makes every answer
+   below stale rather than wrong, which is harder to notice.
+2. Read `data/last_manifest.json` — check:
    - `pipeline_status`: should be `"healthy"`. If `"degraded"`, report which retailers and why.
    - `degraded_retailers`: should be empty. If not, list them with context.
-   - `timestamp`: skeleton phase has no schedule, so just report how old it is.
-2. Check price freshness — read the last line of each JSONL in `data/prices/`,
+   - `timestamp`: the scrape runs 11:00 and 21:30 UTC, so anything past ~24h
+     is one missed cycle and past 30h is the heartbeat's alarm window.
+3. Check price freshness — read the last line of each JSONL in `data/prices/`,
    report the newest timestamp per product.
-3. If ANY issues found, report them **before** doing anything else the user asked for:
+4. If ANY issues found, report them **before** doing anything else the user asked for:
 
 ```
 HEALTH CHECK:
+- [OK/WARN/FAIL] Heartbeat: exit <0|1> (<findings, e.g. DATA_STALE 41.5h>)
 - [OK/WARN/FAIL] Pipeline status: healthy|degraded
 - [OK/WARN/FAIL] Last scrape: <timestamp> (<N> hours ago)
 - [OK/WARN/FAIL] Price freshness: <details>
 - [OK/WARN/FAIL] Degraded retailers: none|<list>
 ```
+
+The same check runs unattended twice a day in
+`.github/workflows/heartbeat.yml` (13:00 and 23:30 UTC, offset 2h after each
+scrape). It fails the job with `::error::` annotations, which is how GitHub
+tells Brandon; there are no alert secrets to configure, and no SMTP —
+see the workflow's comments for the reasoning and for how to add Slack or
+email later. Windows and failure codes are documented in
+`docs/HEARTBEAT_LOG.md`.
+
+**Known open item (2026-08-14):** the GitHub API reports **zero** completed
+runs of `scrape.yml` — the 2x-daily cron has never actually fired in CI, and
+every price commit so far was made locally. Expect `NO_COMPLETED_SCRAPE_RUN`
+to go red once this repo is older than the window; that is the check working,
+not a bug. See `docs/HEARTBEAT_LOG.md` §8.
 
 ## Key Commands
 
@@ -37,6 +63,8 @@ python -X utf8 -m scrapers.runner --products ecoflow-river-2-pro --retailer shop
 python -X utf8 build.py
 python -X utf8 audit.py            # sample of 10 triples
 python -X utf8 audit.py --all      # every triple (still budget-capped)
+python -X utf8 heartbeat.py --no-api          # is the pipeline still alive?
+python -X utf8 heartbeat.py --no-api --now 2026-09-01T00:00:00Z   # time travel
 python -X utf8 -m pytest
 python -X utf8 -m ruff check .
 ```
@@ -94,6 +122,15 @@ retailer `.json`+`.js` (UCP once O5 resolves).
   integer minor units; compare in cents, never float ==.
 - `audit.py` — the end-to-end correctness loop (see taxonomy above).
   Outputs data/audit_report.json + data/quarantine.json.
+- `heartbeat.py` — the dead-man's switch. Every other guard runs as part of
+  a scrape, so a scrape that never happens trips none of them; this asks
+  whether the pipeline published at all. Reads git (age of the last commit
+  touching `data/prices/`), the manifest (its own timestamp +
+  `pipeline_status`, cross-examined against git — fresh manifest with no
+  data commit is a half-run), and the Scrape workflow's latest run
+  conclusion via the GitHub API. **Stdlib only and imports nothing from this
+  repo** — a monitor that shares code or dependencies with the thing it
+  watches inherits its failures. Exit 0/1/2.
 - `build.py` staleness: rows older than 168h render withheld
   (`data-withheld="stale"`); every price shows "as of Nh/Nd ago"; the
   clock is injected (`build_site(now=...)`) — never sprinkle

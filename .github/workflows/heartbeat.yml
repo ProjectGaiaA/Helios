@@ -1,0 +1,196 @@
+name: Pipeline Heartbeat
+
+# DEAD-MAN'S SWITCH. The site has to be able to notice its own silence.
+#
+# Every other guard in this repo runs as part of a scrape: the runner's
+# dead-retailer alarm, the data gate, audit.py, the "Raise alarms" step in
+# scrape.yml. A scrape that never happens trips none of them. The published
+# site keeps serving the last good build with prices ageing behind it, and
+# every check reports green because no check ran.
+#
+# This workflow asks ONE question, independently of the scrape pipeline:
+# has the pipeline published recently? All of the logic lives in
+# ../../heartbeat.py so it can be unit-tested offline (tests/test_heartbeat.py
+# -- gaia's equivalent is 290 lines of inline bash that no test can reach).
+#
+# ---------------------------------------------------------------------------
+# WHAT THE JOB DOES, in order (the trace tests/test_heartbeat.py pins):
+#   1. checkout with fetch-depth: 0 -- FULL history. NOT a nicety. A shallow
+#      clone breaks the measurement in the dangerous direction: at the graft
+#      boundary git reports that commit as touching every path, so
+#      `git log -1 -- data/prices/` silently becomes "age of the last commit
+#      of any kind" and a docs push masks a dead scraper. Measured on a real
+#      --depth 1 clone of this repo: 9.1h of false freshness. heartbeat.py
+#      detects shallowness and refuses to answer (HISTORY_INCOMPLETE, red)
+#      rather than answer wrongly. Full history also gives the young-repo
+#      grace the true first-commit date. The repo is ~2 MB; gaia's
+#      fetch-depth 100 was a cost optimisation that buys both defects.
+#   2. set up Python 3.11. NO pip install: heartbeat.py is stdlib-only on
+#      purpose, because a broken requirements.txt install is one of the
+#      failures this job exists to survive. A test pins that coupling.
+#   3. run heartbeat.py. It emits ::error:: annotations and exits non-zero
+#      when the pipeline is silent or the scrape is failing. That exit code
+#      IS the alarm -- there is no continue-on-error anywhere in this file,
+#      deliberately, and a crash in the script also fails the job (an
+#      unverified heartbeat must never read as a healthy one).
+#
+# WHAT MAKES IT RED (windows in heartbeat.py, one constant, WINDOW_HOURS):
+#   DATA_STALE           last commit touching data/prices/ is >= the window
+#   NO_DATA_COMMIT       no commit has ever touched data/prices/ (mature repo)
+#   MANIFEST_STALE       data/last_manifest.json's own timestamp >= the window
+#   MANIFEST_UNREADABLE  the manifest is missing or corrupt (mature repo)
+#   MANIFEST_NO_TIMESTAMP  the manifest has no readable `timestamp` field, so
+#                        the pipeline's own record of itself is unreadable
+#   MANIFEST_DISAGREES   manifest fresh but no price data committed -- the
+#                        half-run: the runner ran and published nothing
+#   SCRAPE_RUN_FAILED    the newest COMPLETED run of scrape.yml failed
+#   SCRAPE_WORKFLOW_MISSING  the API has no scrape.yml (HTTP 404): it was
+#                        renamed or deleted, so either nothing is scraping or
+#                        this check has been measuring a file that is not there
+#   NO_COMPLETED_SCRAPE_RUN  the API answered and reported ZERO completed
+#                        runs. Not an outage: GitHub stating that the
+#                        scheduled pipeline has produced nothing, so any data
+#                        in the repo came from somewhere else. Graced while
+#                        the repository is younger than the window
+#   HISTORY_INCOMPLETE   the clone is shallow, so freshness was not measured
+#                        at all (see fetch-depth below). Red because the
+#                        broken reading fails FRESH -- i.e. silently
+#   CLOCK_SKEW           a timestamp sits more than 5 minutes in the future.
+#                        Freshness cannot be measured against a clock that
+#                        disagrees, and unmeasurable must not read as healthy
+#   FORCED_ALERT         workflow_dispatch with force_alert (a drill)
+#
+# The manifest is checked BOTH ways round on purpose. It is the pipeline's
+# own account of itself and it can lie: fresh manifest + no data commit is a
+# half-run, stale manifest + fresh data commit means something other than
+# the runner wrote prices. git history is the primary witness; the manifest
+# is a claim that gets cross-examined.
+#
+# NOT red, on purpose (each is a decision, not an oversight):
+#   pipeline_status=degraded   -> warning. The scrape run that wrote a
+#     degraded manifest already failed its own job, and this heartbeat
+#     re-reports that as SCRAPE_RUN_FAILED. A second red light that nothing
+#     scheduled can clear turns the owner's only signal into noise.
+#   GitHub API unreachable     -> warning. The git-side checks answer the
+#     primary question without the API; a transient api.github.com 5xx that
+#     pages the owner trains the owner to ignore the page. Note the line
+#     this draws: "could not ask" is a warning, but every ANSWER the API
+#     gives is taken at face value -- a 404 and an empty run list are both
+#     red, because both are GitHub telling us something definite.
+#
+# ---------------------------------------------------------------------------
+# HOW THE ALERT REACHES BRANDON, and how to add more later.
+#
+# TODAY, with zero configuration: the job fails, and GitHub emails the repo
+# owner about failed runs of scheduled workflows. That is the whole channel.
+# It needs no secrets, so there is nothing to misconfigure and nothing that
+# can silently stop working. Confirm it once, on purpose:
+#   Actions -> Pipeline Heartbeat -> Run workflow -> force_alert = true
+# then check the mail arrives, and check GitHub Settings -> Notifications ->
+# Actions is set to notify on failure. An alert channel is not proven until
+# a deliberately failed run has been seen arriving.
+#
+# NO SMTP HERE, deliberately. The plant tracker's heartbeat carries an SMTP
+# email step; its own notes record that those secrets were never set and
+# that the path has plausibly never delivered a message in the repo's
+# history. Copying it would add code that reads as coverage while sending
+# nothing -- worse than no mail path at all, because it gets counted.
+#
+# To add Slack later (5 minutes, one secret):
+#   1. Slack -> create an Incoming Webhook for the target channel.
+#   2. Repo Settings -> Secrets and variables -> Actions -> new repository
+#      secret SLACK_WEBHOOK_URL.
+#   3. Append a step to this job:
+#        - name: Notify Slack
+#          if: failure()
+#          continue-on-error: true          # must never swallow the alarm
+#          env:
+#            HOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+#          run: |
+#            [ -n "$HOOK" ] || { echo "::warning::SLACK_WEBHOOK_URL unset"; exit 0; }
+#            curl -sS -X POST -H 'Content-type: application/json' \
+#              --data "{\"text\":\"Helios heartbeat FAILED: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
+#              "$HOOK"
+#      continue-on-error and the empty-secret guard are the point: the
+#      failed job stays the alarm of record, and Slack is an addition to it,
+#      never a replacement for it.
+#   4. Prove it with force_alert, then write down the date it was proven.
+# Email via a marketplace SMTP action follows the same shape, with the same
+# rule: gate on the secrets being present, continue-on-error, and prove
+# delivery before counting it as coverage.
+#
+# ---------------------------------------------------------------------------
+# THE HONEST LIMIT. This runs inside the thing it monitors, so it shares
+# fate with it. If Actions is down, if billing lapses, if the repo is
+# disabled, or if scheduled workflows stop firing, this reports nothing at
+# exactly the moment it is needed. Specifically: GitHub disables scheduled
+# workflows in a repository with no commit activity for 60 days -- a
+# pipeline that dies goes quiet, and quiet is what triggers that. Scheduled
+# runs are also best-effort and get dropped under load, so a missed
+# heartbeat is not itself evidence of anything.
+#
+# An EXTERNAL cron monitor (healthchecks.io or equivalent) is the strictly
+# stronger design: the scrape pings a URL on success and the monitor alerts
+# on silence, from outside GitHub, so it fires precisely when GitHub is the
+# thing that failed. This file exists because it needs no account and can
+# ship today. It is not a substitute for that.
+
+on:
+  schedule:
+    # Offset from the scrape crons (11:00 and 21:30 UTC in scrape.yml) by two
+    # hours, which is a full hour past that job's 60-minute timeout cap, so a
+    # heartbeat never reads the repository while a healthy scrape is still
+    # running or mid-commit. A test asserts these stay disjoint from -- and
+    # at least 2h after -- the scrape crons.
+    - cron: '0 13 * * *'
+    - cron: '30 23 * * *'
+  workflow_dispatch:
+    inputs:
+      force_alert:
+        description: 'Fail on purpose, to prove the alert path works'
+        type: boolean
+        default: false
+
+# Read-only. This job never commits, never pushes, never touches the site.
+# actions: read is what lets it query the Scrape workflow's run history with
+# the run's own GITHUB_TOKEN -- no secret to configure.
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  heartbeat:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Check the pipeline is still publishing
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          FORCE_ALERT: ${{ inputs.force_alert }}
+        run: |
+          set -euo pipefail
+          ARGS=""
+          if [ "${FORCE_ALERT:-false}" = "true" ]; then
+            ARGS="--force-alert"
+          fi
+          python -X utf8 heartbeat.py $ARGS
+
+      # Detection latency, stated so nobody has to derive it from the cron.
+      # The window is 30h; this job runs twice a day (10.5h and 13.5h apart).
+      # Worst case, a pipeline that dies right after a publish is reported
+      # 30h + 13.5h = 43.5h later -- three missed scrapes. Gaia's every-6h
+      # cadence detects the same failure in about 36h. Two more offsets here
+      # (05:00 and 17:00) would close most of that gap; the schedule above is
+      # the deliberate choice, not an accident, and this is the cost of it.
+      #
+      # SCRAPE_RUN_FAILED is not subject to that latency: a crash-looping
+      # scrape is caught on the very next heartbeat, within ~13.5h, because
+      # it reads the run conclusion rather than waiting for data to age out.
