@@ -843,12 +843,22 @@ def test_about_page_counts_come_from_the_catalog(built):
 
 
 def test_about_page_states_the_real_cadence(built):
+    """Pins the cadence claim to reality. Reality as of 2026-08-14: the
+    scrape cron is enabled (11:00 + 21:30 UTC in scrape.yml), so the page
+    states the twice-daily schedule. If the cron is ever removed, this
+    test must fail until the page tells the truth again."""
     _, site_dir, _ = built
     html = (site_dir / "about.html").read_text(encoding="utf-8")
-    assert "on demand, not on a fixed schedule" in html
-    # no invented refresh promise
+    assert "collected on a schedule, twice daily" in html
+    # the reader-verifiable check stays advertised
+    assert "displays its own age" in html
+    # no invented refresh promise beyond the real schedule
     assert "updated daily" not in html.lower()
     assert "hourly" not in html.lower()
+    # the schedule this pins must actually exist where CI reads it
+    workflow = (REPO_ROOT / ".github" / "workflows" / "scrape.yml").read_text(
+        encoding="utf-8")
+    assert "schedule:" in workflow and "cron:" in workflow
 
 
 def test_pages_make_no_unverifiable_popularity_claims(built):
