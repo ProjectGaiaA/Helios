@@ -889,3 +889,226 @@ Ranked top-3 unchanged from the round-1 errata tables.
 - `offline_audit.py`'s handle-collision bug is in the red team's harness,
   not the repo, so it is not fixed here — but it means any future run of
   that driver will keep reporting 7 UNRESOLVED and exit 4 on a healthy site.
+
+
+## 10. The editorial layer — article system + first eight articles (2026-08-14)
+
+Built on `35c0df6` (rebased clean; the guides work landed at `13a4019`, and
+the site has since gone live on Vercel with a 2x-daily cron, so cadence
+prose says "twice daily" and not "on demand").
+
+### 10.1 The design: prose wrapped around live data
+
+An article is **evergreen prose around live data blocks**. Prose is authored
+once in `build.py` and says only things that stay true; every number is
+resolved at build time through the *same* `guide_entry()` machinery the
+guides use — same classifier, same rating function, same quarantine / stale
+/ unreadable withholding, same SKU annotations, same provenance attributes.
+
+Block kinds: `prose`, `h2`, `callout`, `products` (live per-retailer offer
+tables), `ranking` (scoped by category / chemistry / price ceiling, with an
+optional `compact` headline-only mode), `specs` (stored specs only),
+`retailer_report`, `history`, `citations`.
+
+Two structural rules make the split enforceable rather than aspirational:
+
+- **No data is ever interpolated into prose.** Prose blocks are static
+  strings rendered with `|safe`; there is nothing for scraped retailer text
+  to escape into, and no number in a sentence that nothing recomputes. A
+  test bans currency figures in prose outright — it caught an illustrative
+  "$1,500" I had written into the under-$2,000 article.
+- **One copy of the table markup.** `templates/_macros.html` now holds
+  `annotations`, `availability`, `rowattrs`, `offer_table` and `headline`;
+  `guide.html` and `article.html` both import them. The extraction was
+  verified byte-identical against the previously built guides before
+  anything else changed. A second copy is how an article ends up publishing
+  a number a guide withholds.
+
+### 10.2 Author identity
+
+`AUTHOR` in build.py, rendered as a byline and an author block on every
+article, plus a new "Who runs this" section on the About page.
+
+The bio says exactly one thing: Brandon Hall builds and runs this tracker —
+the scrapers, the audit, the withhold rules. No credentials, no years, no
+test history. A test asserts the bio contains none of
+`engineer / certified / expert / veteran / decade / phd / degree /
+installer / electrician / consultant`, none of the hands-on phrases, and
+that it does say "builds and runs Helios". Inventing a credential is the
+same defect class as a fabricated capacity quote (E1) and harder to catch,
+because nothing recomputes prose.
+
+### 10.3 The honesty rails, enforced
+
+- **`hands-on` is banned OUTRIGHT**, not merely in affirmative form. Our own
+  disclaimers were rewritten to say "physically tested" so the rule needs no
+  exceptions — a rule with exceptions rots. The sweep also bans
+  `we tested / in our testing / our testing / we tried / we reviewed /
+  after testing / we measured the / our review unit / we unboxed /
+  on our test bench`, and runs over **every page of the site**, not just
+  articles. It caught three real hits on the first pass (About, the articles
+  index, and the articles-index meta description).
+- **Every article must also STATE the position**, not merely avoid the
+  claim: a test requires each one to carry an explicit "not physically
+  tested" sentence.
+- **Numbers are live or dated.** Every article carries at least one live
+  figure with full provenance. The one worked example with assumed inputs
+  (the fridge arithmetic) labels its input as an assumption in the sentence
+  that introduces it.
+- **Retailer claims are observation-only.** The Shop Solar Kits article
+  renders a computed `retailer_report` — catalog breadth, head-to-head
+  cheapest/dearest tallies, audit verdicts for that retailer — and disclaims
+  everything else in a callout at the top.
+
+### 10.4 The eight
+
+| slug | words | live blocks |
+|---|---|---|
+| `ecoflow-delta-pro-3-vs-bluetti-ac200l` | 1,444 | specs table + 2 product tables |
+| `best-home-backup-battery-under-2000` | 1,462 | ranking, `max_price=2000` |
+| `best-power-station-for-camping` | 4,035 | ranking + weight spec table |
+| `how-many-watt-hours-to-run-a-refrigerator` | 1,699 | 3 product tables |
+| `lifepo4-vs-ncm-plain-english` | 2,614 | 2 chemistry rankings (compact) |
+| `what-dollars-per-wh-tells-you` | 885 | 1 product table (the rule, visible) |
+| `when-do-power-stations-go-on-sale` | 1,067 | citations + history + ranking |
+| `is-shop-solar-kits-legit` | 2,855 | retailer report + 3 product tables |
+
+Word counts are of rendered body text, so the larger numbers are mostly live
+table content rather than prose.
+
+**Deviations from the brief, both deliberate:**
+
+1. **No shipping/threshold facts in article 8.** The brief said to source
+   them "from retailers.json". `retailers.json` has **no shipping field at
+   all** — verified, and a test now asserts it, so if shipping data is ever
+   added the test fails and points at the article. Rather than source a
+   shipping claim from somewhere unverifiable, the page says "We hold no
+   data. Not tracked, not estimated, not repeated from elsewhere."
+2. **Article 7's own history section is nearly empty**, and says so in a
+   callout. The store holds 2 distinct scrape dates. The cadence claim rests
+   entirely on four dated external reports, and the page distinguishes what
+   those reports evidence (windows exist, roughly when) from what they do
+   not (that any given product bottoms out in them). Alerts are labelled
+   **"planned and does not exist today"** in their own paragraph.
+
+Citations were verified live before use (the only HTTP this task issued):
+9to5Toys 2026-04-11 (Earth Day + 72-hour Anker flash sale), Electrek
+2026-05-25 (Memorial Day, 48-hour EcoFlow flash sale through May 26),
+Electrek 2026-06-08 (Early Prime Day, 48-hour flash sale), Electrek
+2026-07-03 (July 4th). Citation links render `rel="nofollow"` and
+deliberately **not** `sponsored` — a cited news article is not a commercial
+link, and mislabelling in either direction is a lie. A test pins that.
+
+### 10.5 Defects found and fixed during this build
+
+1. **`block.items` collided with dict `.items()`** in Jinja — the citations
+   block raised `'builtin_function_or_method' object is not iterable`.
+   Renamed to `sources`.
+2. **`_NO_HANDS_ON` was a bare string** where a block dict was required, and
+   the `history` block had no resolver. Both would have crashed the build.
+3. **A grammar bug in a live lede**: `.capitalize()` lowercased the rest of
+   the brand, rendering "The ac200l is the smaller cheque".
+4. **An article referencing an unknown product id rendered silently
+   empty.** The head-to-head produced a page with no live data at all under
+   a catalog lacking those ids. Now the template says so explicitly, and a
+   test asserts every product id named by every article exists in the real
+   catalog — a renamed product fails a test instead of quietly emptying a
+   section of the site.
+5. **The compact headline was a half-record — a repeat of BLOCKER-1.**
+   `headline` carried `data-variant-id` with only a `best-rating` field: no
+   `data-sku`, no price, no availability. Where an article rendered a
+   product *only* as a headline (a compact ranking with no table beneath),
+   the audit read that as a row missing its sku, price and availability and
+   raised **3 RENDER_DEFECTs against three correct articles**. Exactly the
+   earlier shape: a legitimate rendering context with fewer fields mistaken
+   for a defective one. Fixed by making the headline a complete provenance
+   container using `rowattrs()` and the *same* `data-field` names a table
+   row uses, so merging a headline with a row compares like with like and a
+   standalone headline is a complete, checkable record. `guide.html` now
+   uses the shared macro too, so there is one headline implementation.
+
+### 10.6 Articles are audited
+
+`audit.parse_guide_provenance` became **`parse_content_provenance`** and
+scans `site/guides/` *and* `site/articles/`.
+
+Records are now merged **across pages** as well as within one. The previous
+version merged within a page and reported cross-page duplication as a
+defect, on the assumption that a variant belonged to exactly one guide.
+Articles break that by design — the DELTA Pro 3 legitimately appears on its
+guide, on the head-to-head, in the fridge-sizing article and in a chemistry
+ranking — so cross-page duplication is ordinary and only a genuine
+*contradiction* between two renderings is reported. Same rule as within a
+page, applied consistently instead of stopping at a directory boundary.
+Mismatch labels changed `guide:` -> `content:`.
+
+This closes weakness 7.1 from section 7 and its restatement in section 9:
+a wrong number on an article is now a RENDER_DEFECT that quarantines the
+variant and fails the run, at zero extra live requests.
+
+### 10.7 Verification
+
+```
+python -X utf8 -m ruff check .   -> All checks passed!             exit 0
+python -X utf8 -m pytest -q      -> 416 passed                     exit 0
+python -X utf8 build.py          -> 34 pages + 3 guides + 8 articles
+                                    + articles index + 2 info
+                                    sitemap 48 URLs                exit 0
+```
+
+289 tests before this round, **416 after: 127 added** (40 in
+`tests/test_articles.py` plus the article-fixture suite), none weakened.
+Three existing tests were updated for changed contracts, each recorded
+above: `info_pages` 2 -> 3, the four audit tamper assertions'
+`guide:` -> `content:` prefix, and the merge test whose assertion described
+the half-record headline that no longer exists.
+
+Independent sweep against the built site:
+
+```
+pages 48 | broken internal links: none | root-absolute links: none
+sitemap 48 URLs, 48 unique, set == files on disk, 9 article URLs
+content rows checked 394 | rated figures 72 | failures 0
+banned-phrase sweep over all 48 pages: 0 hits
+structural checks (Direct answer, author box, byline, disclosure link,
+  live price block) on all 8 articles: pass
+offline audit, clean tree, articles included:
+  verdicts {NO_BASELINE: 30, CLEAN: 153}  183/183  alarms 0  exit 0
+```
+
+### 10.8 For the red team
+
+1. **Prose is unverifiable by construction.** Every number is checked; not
+   one sentence is. The tests can prove an article does not *say* "we
+   tested" and does not hardcode a price, but nothing checks that the
+   chemistry explainer's technical claims are true. Those claims are
+   general-knowledge statements about LFP vs NCM, unsourced, and they are
+   the softest thing on the site.
+2. **`compact` rankings drop the per-retailer detail.** The chemistry
+   article shows one headline per product. The headline is fully audited
+   now, but a reader sees only the best offer, and the "cheapest" framing
+   hides how thin some products' retailer coverage is.
+3. **The camping article's #1 is a 4 kWh unit with no published weight.**
+   The ranking is by $/Wh and the prose says the ranking is half the
+   question, but the headline recommendation for *camping* is a unit we
+   cannot tell you the weight of. Arguably the ranking metric is wrong for
+   that article and a weight-aware score would be right; that would be a new
+   metric, and inventing one during a content build seemed worse.
+4. **The fridge article's worked example uses an assumed input.**
+   "365 kWh/year" is labelled as an assumption, but a skimming reader may
+   take 1,000 Wh/day as our claim about fridges generally.
+5. **`_retailer_report` head-to-head tallies are a snapshot of a small
+   sample** (17 comparable products today) taken at one moment. The article
+   says so; the number still looks more authoritative than it is.
+6. **The articles index has no dates.** Articles carry the price-record span
+   in the byline but no published/updated date, so a reader cannot tell how
+   old the *prose* is.
+7. **Nothing validates citation links stay alive.** The four external URLs
+   were fetched once during this build. A dead link will not fail any test,
+   and re-checking them would need live HTTP on a schedule.
+8. **`spec_display` renders stored specs verbatim.** `weight_lb` is
+   hand-authored with no quote provenance, exactly like `output_w`
+   (section 8's still-open item), and the camping article now leans on it.
+9. Everything still open from sections 7, 8 and 9 remains open — in
+   particular currency is unverified across four retailers, and `output_w`
+   still drives $/W with no provenance.

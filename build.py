@@ -1241,6 +1241,1364 @@ def build_guide(spec: dict, products: list[dict], latest: dict,
 
 
 # ---------------------------------------------------------------------------
+# Articles (the editorial layer)
+# ---------------------------------------------------------------------------
+# An article is EVERGREEN PROSE wrapped around LIVE DATA BLOCKS. The prose
+# is authored once and says only things that stay true; every number comes
+# out of the price store at build time through the same guide_entry()
+# machinery the guides use, with the same provenance attributes, the same
+# withhold rules and the same "as of" ages. Nothing here re-implements a
+# rule, and no number is typed into prose.
+#
+# That split is the lesson the guides taught: prose ages badly and numbers
+# age fast, so the only maintainable article is one where the numbers
+# refresh themselves on every build and the words never claim a number.
+
+AUTHOR = {
+    "name": "Brandon Hall",
+    # STRICT: this bio states only what is verifiable from this repository.
+    # Brandon built the tracker and runs it; the code and the price history
+    # behind every page are public. No credentials, no years of experience,
+    # no hands-on testing — inventing any of that would be the same defect
+    # class as a fabricated capacity quote (EXPANSION_LOG E1), just harder
+    # to catch because nothing recomputes prose.
+    "bio": (
+        "Brandon Hall builds and runs Helios. He writes the scrapers that "
+        "collect these prices, the audit that checks the site against its "
+        "own price store, and the rules that decide when a number is too "
+        "uncertain to publish."
+    ),
+    "disclaimer": (
+        "Helios does not physically test equipment. Everything here comes "
+        "from tracked prices, published specifications and the site's own "
+        "scrape history."
+    ),
+}
+
+
+def _article_entry(product_id: str, products_by_id: dict, latest: dict,
+                   retailers_by_id: dict, metric_key: str,
+                   quarantine: dict, now) -> dict | None:
+    """One product's live offer table for an article.
+
+    Straight through guide_entry(), so an article renders exactly what a
+    guide would for the same product: same classifier, same rating, same
+    quarantine/stale/unreadable withholding, same SKU annotations.
+    """
+    product = products_by_id.get(product_id)
+    if product is None:
+        return None
+    return guide_entry(product, latest.get(product_id, {}), retailers_by_id,
+                       metric_key, quarantine=quarantine, now=now,
+                       with_spreads=True)
+
+
+def _min_buyable_price(entry: dict):
+    """Cheapest price a reader could actually act on, or None.
+
+    Withheld offers and sold-out variants do not count: a price filter that
+    admitted them would put a product in a "under $X" list on the strength
+    of an offer nobody can buy — HIGH-1's mistake in a different costume.
+    """
+    prices = [o["price"] for o in entry["offers"]
+              if not o["withheld"] and _usable_number(o["price"])
+              and o["available"] is not False]
+    return min(prices) if prices else None
+
+
+def _article_ranking(block: dict, products: list[dict], latest: dict,
+                     retailers_by_id: dict, quarantine: dict, now) -> dict:
+    """A live ranking scoped by category / chemistry / price ceiling."""
+    metric_key = block.get("metric", "wh")
+    metric = _METRICS[metric_key]
+    categories = set(block.get("categories") or ())
+    chemistry = block.get("chemistry")
+    max_price = block.get("max_price")
+
+    in_scope = []
+    for product in products:
+        if categories and product.get("category") not in categories:
+            continue
+        if chemistry and (product.get("specs") or {}).get("chemistry") != chemistry:
+            continue
+        in_scope.append(product)
+
+    entries, priced_out = [], 0
+    for product in in_scope:
+        entry = guide_entry(product, latest.get(product["id"], {}),
+                            retailers_by_id, metric_key,
+                            quarantine=quarantine, now=now)
+        if max_price is not None:
+            cheapest = _min_buyable_price(entry)
+            if cheapest is None or cheapest > max_price:
+                priced_out += 1
+                continue
+        entries.append(entry)
+
+    ranked = sorted((e for e in entries if e["rated"]),
+                    key=lambda e: (e["best"]["rating"],
+                                   e["product"].get("name", "")))
+    unranked = sorted((e for e in entries if not e["rated"]),
+                      key=lambda e: e["product"].get("name", ""))
+    for index, entry in enumerate(ranked):
+        shown = entry["best"]["rating_display"]
+        neighbours = []
+        if index:
+            neighbours.append(ranked[index - 1]["best"]["rating_display"])
+        if index + 1 < len(ranked):
+            neighbours.append(ranked[index + 1]["best"]["rating_display"])
+        entry["tied"] = shown in neighbours
+    return {
+        "metric": metric,
+        "ranked": ranked,
+        "unranked": unranked,
+        "in_scope": len(in_scope),
+        "listed": len(entries),
+        "priced_out": priced_out,
+        "max_price": max_price,
+        "max_price_display": money(max_price) if max_price else None,
+        "categories": sorted(categories),
+        "chemistry": chemistry,
+        # Compact rankings render the headline row only. The headline still
+        # carries variant id, scraped-at and the rated figure, so it stays
+        # auditable; the per-retailer detail lives on the product page.
+        "compact": bool(block.get("compact")),
+    }
+
+
+_SPEC_FIELDS = {
+    "capacity_wh": ("Usable capacity", "Wh"),
+    "output_w": ("Rated output", "W"),
+    "weight_lb": ("Weight", "lb"),
+    "chemistry": ("Cell chemistry", None),
+}
+
+
+def _article_specs(block: dict, products_by_id: dict) -> dict:
+    """A spec comparison built ONLY from stored specs.
+
+    A missing spec renders "not published" rather than a guess or a blank.
+    The catalog stores a weight for only a minority of products (the exact
+    count is whatever data/products.json holds today, which is why it is not
+    written down here); a spec table that quietly omitted the empty rows
+    would imply we checked and found nothing remarkable, when in fact we
+    never recorded it.
+    """
+    fields = block.get("fields") or ["capacity_wh", "output_w", "chemistry",
+                                     "weight_lb"]
+    columns = [products_by_id[pid] for pid in block["ids"]
+               if pid in products_by_id]
+    rows = []
+    for key in fields:
+        label, unit = _SPEC_FIELDS.get(key, (key, None))
+        cells = []
+        for product in columns:
+            value = (product.get("specs") or {}).get(key)
+            if unit:
+                cells.append(spec_display(value, unit))
+            else:
+                cells.append(value if isinstance(value, str) and value else None)
+        rows.append({"label": label, "key": key, "cells": cells})
+    return {"products": columns, "rows": rows}
+
+
+# A verdict is EVIDENCE only where the audit actually re-read the pair.
+# NOT_AUDITED means the sampler did not reach it inside its request budget
+# this run, NO_ROW that nothing was ever scraped: neither says anything
+# about a retailer's accuracy, and prose that reads them as a pass asserts
+# a result the page's own panel does not show (red team HIGH-1).
+#
+# Mirrors audit._VERIFIED_VERDICTS, which cannot be imported here because
+# audit.py imports THIS module. A test asserts the two stay identical.
+EVIDENCE_VERDICTS = ("RENDER_DEFECT", "STALE", "CLEAN", "NO_BASELINE")
+
+
+def _retailer_report(retailer_id: str, products: list[dict], latest: dict,
+                     retailers_by_id: dict, handle_maps: dict | None,
+                     quarantine: dict, now, data_dir: Path) -> dict:
+    """Everything Helios can say about a retailer FROM ITS OWN OBSERVATIONS.
+
+    Deliberately narrow. This is price-and-catalog telemetry, not a review:
+    nothing here touches service, support, shipping speed, returns or
+    warranty handling, because the project has never bought anything and
+    has no data on any of it. BLOCKER-2's lesson applies double in prose —
+    a claim about a named business must be traceable to a stored
+    observation or it does not get made.
+    """
+    mapped = (handle_maps or {}).get(retailer_id) or {}
+    products_by_id = {p["id"]: p for p in products}
+
+    # Cross-retailer position, split strictly-vs-tied.
+    #
+    # The first version of this counted `mine == high` as "most expensive"
+    # and only `mine == low == high` as a tie, which called a retailer
+    # dearest on products where it merely SHARED the top price with someone
+    # else (red team HIGH-2). It also had no else branch, so products that
+    # sat between the low and the high fell into no bucket at all and the
+    # rendered sentence did not add up to its own denominator (HIGH-3).
+    #
+    # The buckets below are mutually exclusive and exhaustive over
+    # `compared`: every counted product lands in exactly one, so the numbers
+    # on the page sum to the number of products the same sentence claims to
+    # have compared. A test recomputes that independently.
+    buckets = {"strictly_cheapest": 0, "tied_low": 0, "mid_pack": 0,
+               "tied_top": 0, "strictly_dearest": 0, "same_everywhere": 0}
+    compared = 0
+    for product_id, by_retailer in latest.items():
+        if retailer_id not in by_retailer or len(by_retailer) < 2:
+            continue
+        product = products_by_id.get(product_id)
+        if product is None:
+            continue
+        entry = guide_entry(product, by_retailer, retailers_by_id, "wh",
+                            quarantine=quarantine, now=now)
+        per_retailer = {}
+        for offer in entry["offers"]:
+            if offer["withheld"] or not _usable_number(offer["price"]):
+                continue
+            if offer["available"] is False:
+                continue
+            current = per_retailer.get(offer["retailer_id"])
+            if current is None or offer["price"] < current:
+                per_retailer[offer["retailer_id"]] = offer["price"]
+        if len(per_retailer) < 2 or retailer_id not in per_retailer:
+            continue
+        compared += 1
+        mine = per_retailer[retailer_id]
+        values = list(per_retailer.values())
+        low, high = min(values), max(values)
+        if low == high:
+            # Nobody is cheaper or dearer than anybody. Calling this a low
+            # or a high would be picking an end of a range with one point.
+            buckets["same_everywhere"] += 1
+        elif mine == low:
+            buckets["strictly_cheapest" if values.count(low) == 1
+                    else "tied_low"] += 1
+        elif mine == high:
+            buckets["strictly_dearest" if values.count(high) == 1
+                    else "tied_top"] += 1
+        else:
+            buckets["mid_pack"] += 1
+
+    # Audit observations for this retailer, if a report has been written.
+    verdicts: dict[str, int] = {}
+    audit_generated = None
+    audit_path = data_dir / "audit_report.json"
+    if audit_path.exists():
+        try:
+            report = load_json(audit_path)
+        except (ValueError, OSError):
+            report = {}
+        # audit.py writes the run time as "timestamp"; "generated_at" is
+        # accepted too so an older report still dates itself rather than
+        # rendering an undated tally.
+        stamp = report.get("timestamp") or report.get("generated_at") or ""
+        audit_generated = stamp[:10] or None
+        for result in report.get("results") or []:
+            if result.get("retailer_id") == retailer_id:
+                verdicts[result.get("verdict", "?")] = verdicts.get(
+                    result.get("verdict", "?"), 0) + 1
+
+    retailer = retailers_by_id.get(retailer_id) or {}
+    return {
+        "retailer_id": retailer_id,
+        "name": retailer.get("name") or retailer_id,
+        "url": retailer.get("url"),
+        "mapped_products": len(mapped),
+        "catalog_total": len(products),
+        "compared": compared,
+        **buckets,
+        # Ordered for rendering: the panel prints every bucket including the
+        # empty ones, the lede prints the non-empty ones, and both read the
+        # SAME list, so the two surfaces cannot label a bucket differently.
+        "position_parts": [
+            {"key": key, "field": f"position-{key.replace('_', '-')}",
+             "label": label, "count": buckets[key]}
+            for key, label in (
+                ("strictly_cheapest", "strictly cheapest"),
+                ("tied_low", "tied for the lowest price"),
+                ("mid_pack", "mid-pack"),
+                ("tied_top", "tied for the highest price"),
+                ("strictly_dearest", "strictly most expensive"),
+                ("same_everywhere", "level with every other tracked retailer"),
+            )
+        ],
+        "bucket_total": sum(buckets.values()),
+        "verdicts": dict(sorted(verdicts.items())),
+        "clean_verdicts": verdicts.get("CLEAN", 0),
+        "defect_verdicts": verdicts.get("RENDER_DEFECT", 0),
+        "verified_verdicts": sum(verdicts.get(v, 0)
+                                 for v in EVIDENCE_VERDICTS),
+        "audit_generated": audit_generated,
+        "affiliate_record": bool(retailer.get("affiliate")),
+        "affiliate_live": bool((retailer.get("affiliate") or {}).get("link_template")),
+        # Nothing in retailers.json records shipping, thresholds, returns or
+        # support. That is an absence of data, and the page says so rather
+        # than sourcing it from anywhere else.
+        "has_shipping_data": "shipping" in retailer,
+    }
+
+
+def _citation_span(sources: list[dict]) -> dict | None:
+    """The dated spread of a citation list, measured from the dates.
+
+    A cadence claim ("a window every six to eight weeks") is an arithmetic
+    claim about the sources under it, and this article's own four dates
+    disagreed with the one that used to be typed there. So the intervals
+    are computed and printed, and the prose points at them rather than
+    naming a number nothing recomputes.
+
+    Returns None for fewer than two parseable YYYY-MM-DD dates: with one
+    date there is no interval to report.
+    """
+    dates = []
+    for source in sources or ():
+        try:
+            dates.append(datetime.strptime(source.get("date") or "",
+                                           "%Y-%m-%d").date())
+        except ValueError:
+            continue
+    if len(dates) < 2:
+        return None
+    dates.sort()
+    gaps = [(later - earlier).days
+            for earlier, later in zip(dates, dates[1:])]
+    return {
+        "count": len(dates),
+        "first": dates[0].isoformat(),
+        "last": dates[-1].isoformat(),
+        "min_gap": min(gaps),
+        "max_gap": max(gaps),
+        "total_days": (dates[-1] - dates[0]).days,
+    }
+
+
+def _history_facts(data_dir: Path, products: list[dict]) -> dict:
+    """How much price history actually exists. Usually the honest answer
+    is 'not much yet', and the articles have to be able to say that."""
+    dates, rows = set(), 0
+    prices_dir = data_dir / "prices"
+    if prices_dir.is_dir():
+        for product in products:
+            path = prices_dir / f"{product['id']}.jsonl"
+            if not path.exists():
+                continue
+            for line in path.read_text(encoding="utf-8").splitlines():
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    row = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                rows += 1
+                stamp = (row.get("timestamp") or "")[:10]
+                if stamp:
+                    dates.add(stamp)
+    ordered = sorted(dates)
+    return {
+        "rows": rows,
+        "days": len(ordered),
+        "first_date": ordered[0] if ordered else None,
+        "last_date": ordered[-1] if ordered else None,
+    }
+
+
+class ArticleContext:
+    """What an article's Direct-answer lede is allowed to read.
+
+    Answer ledes are the one place prose and live data meet, so they are
+    written as functions over resolved blocks rather than format strings
+    with numbers pasted in. Every accessor returns None when the data is
+    not there, and every lede has to handle that — withhold-when-unknown
+    in sentence form.
+    """
+
+    def __init__(self, facts: dict, history: dict):
+        self.entries: dict[str, dict] = {}
+        self.rankings: list[dict] = []
+        self.reports: dict[str, dict] = {}
+        self.facts = facts
+        self.history = history
+
+    def entry(self, product_id: str):
+        return self.entries.get(product_id)
+
+    def best(self, product_id: str):
+        """The best RANKABLE offer for a product, or None."""
+        entry = self.entries.get(product_id)
+        return entry["best"] if entry and entry.get("best") else None
+
+    def rating(self, product_id: str):
+        best = self.best(product_id)
+        return best["rating_display"] if best else None
+
+    def price(self, product_id: str):
+        best = self.best(product_id)
+        return best["price_display"] if best else None
+
+    def retailer(self, product_id: str):
+        best = self.best(product_id)
+        return best["retailer_name"] if best else None
+
+    def cheapest_priced(self, product_id: str):
+        """Cheapest buyable price for a product regardless of rating."""
+        entry = self.entries.get(product_id)
+        if not entry:
+            return None
+        value = _min_buyable_price(entry)
+        return money(value) if value is not None else None
+
+    def top(self, index: int = 0, ranking: int = 0):
+        try:
+            return self.rankings[ranking]["ranked"][index]
+        except (IndexError, KeyError):
+            return None
+
+
+def resolve_article(spec: dict, products: list[dict], latest: dict,
+                    retailers_by_id: dict, handle_maps: dict | None,
+                    quarantine: dict, facts: dict, history: dict,
+                    data_dir: Path, now) -> dict:
+    """Turn one article definition into a renderable view model."""
+    products_by_id = {p["id"]: p for p in products}
+    ctx = ArticleContext(facts, history)
+    blocks = []
+
+    for block in spec["blocks"]:
+        kind = block["kind"]
+        if kind in ("prose", "h2", "callout"):
+            blocks.append(dict(block))
+            continue
+
+        if kind == "citations":
+            # The spacing of the sources, computed from their own dates, so
+            # prose can point at the intervals instead of characterising
+            # them from memory (red team MEDIUM-8).
+            blocks.append({**block, "span": _citation_span(block["sources"])})
+            continue
+
+        if kind == "history":
+            # How thin the record actually is, computed rather than claimed.
+            blocks.append({**block, "history": history})
+            continue
+
+        if kind == "products":
+            metric_key = block.get("metric", "wh")
+            resolved = []
+            for product_id in block["ids"]:
+                entry = _article_entry(product_id, products_by_id, latest,
+                                       retailers_by_id, metric_key,
+                                       quarantine, now)
+                if entry is None:
+                    continue
+                ctx.entries[product_id] = entry
+                resolved.append(entry)
+            blocks.append({**block, "entries": resolved,
+                           "metric": _METRICS[metric_key]})
+            continue
+
+        if kind == "ranking":
+            view = _article_ranking(block, products, latest, retailers_by_id,
+                                    quarantine, now)
+            for entry in view["ranked"] + view["unranked"]:
+                ctx.entries.setdefault(entry["product"]["id"], entry)
+            ctx.rankings.append(view)
+            blocks.append({**block, "ranking": view})
+            continue
+
+        if kind == "specs":
+            blocks.append({**block, "table": _article_specs(block, products_by_id)})
+            continue
+
+        if kind == "retailer_report":
+            report = _retailer_report(block["retailer_id"], products, latest,
+                                      retailers_by_id, handle_maps,
+                                      quarantine, now, data_dir)
+            ctx.reports[block["retailer_id"]] = report
+            blocks.append({**block, "report": report})
+            continue
+
+        raise ValueError(f"unknown article block kind: {kind!r}")
+
+    answer = spec["answer"]
+    if callable(answer):
+        answer = answer(ctx)
+    return {
+        "article": spec,
+        "blocks": blocks,
+        "answer": answer,
+        "author": AUTHOR,
+        "history": history,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Direct-answer ledes (AI-retrieval pattern)
+# ---------------------------------------------------------------------------
+# Each returns ONE paragraph that answers the title question up front. Where
+# a number appears it is read live out of the resolved blocks, and every
+# accessor can return None, so each lede degrades to an honest sentence
+# instead of an empty slot or a stale figure.
+
+def _capacity_clause(ctx, a_id: str, b_id: str) -> str:
+    """How the two capacities compare, from the stored specs.
+
+    "stores twice the energy of" was typed into this lede. It happens to be
+    true of today's catalog and would go on being asserted if a capacity
+    were corrected tomorrow, which is the same defect class as a hardcoded
+    price.
+    """
+    def capacity(pid):
+        entry = ctx.entry(pid)
+        value = ((entry or {}).get("product", {}).get("specs") or {}).get("capacity_wh")
+        return value if _usable_number(value) else None
+
+    a, b = capacity(a_id), capacity(b_id)
+    if a is None or b is None:
+        return "is compared here against"
+    ratio = a / b
+    if 0.95 <= ratio <= 1.05:
+        return "stores about the same energy as"
+    if ratio < 0.95:
+        return "stores less energy than"
+    if 1.9 <= ratio <= 2.1:
+        return "stores roughly twice the energy of"
+    return f"stores about {ratio:.1f} times the energy of"
+
+
+def _answer_head_to_head(ctx):
+    a_id, b_id = "ecoflow-delta-pro-3", "bluetti-ac200l"
+    a_rate, a_price = ctx.rating(a_id), ctx.price(a_id)
+    b_rate, b_price = ctx.rating(b_id), ctx.price(b_id)
+    if a_rate and b_rate:
+        # EVERY comparative below is read off the computed figures. The
+        # direction used to be typed into the sentence ("currently costs
+        # less per watt-hour", "the DELTA Pro 3 is the cheaper energy"), so
+        # repricing the AC200L made the lede contradict the two numbers it
+        # was quoting in the same breath (red team HIGH-4).
+        a_rating = (ctx.best(a_id) or {}).get("rating")
+        b_rating = (ctx.best(b_id) or {}).get("rating")
+        a_paid, b_paid = _money_value(a_price), _money_value(b_price)
+        if a_rating < b_rating:
+            direction = "costs less per watt-hour"
+            energy = "the DELTA Pro 3 is the cheaper energy"
+        elif a_rating > b_rating:
+            direction = "costs more per watt-hour"
+            energy = "the AC200L is the cheaper energy"
+        else:
+            direction = "matches it on cost per watt-hour"
+            energy = "neither is the cheaper energy today"
+        if b_paid < a_paid:
+            cheque = "The AC200L is the smaller cheque"
+        elif a_paid < b_paid:
+            cheque = "The DELTA Pro 3 is the smaller cheque"
+        else:
+            cheque = "The two carry the same entry price"
+        return (
+            f"The EcoFlow DELTA Pro 3 {_capacity_clause(ctx, a_id, b_id)} the "
+            f"Bluetti AC200L and currently {direction}: {a_rate} against "
+            f"{b_rate} at the cheapest in-stock offer we track "
+            f"({a_price} and {b_price} respectively). {cheque}; {energy}. "
+            f"Which matters depends on whether you are buying capacity or "
+            f"buying an entry price."
+        )
+    if a_rate or b_rate:
+        known = a_rate or b_rate
+        return (
+            f"Only one side of this comparison currently has a rateable "
+            f"in-stock price ({known}), so Helios is not publishing a "
+            f"per-watt-hour verdict today. Both live tables are below."
+        )
+    return ("Neither unit currently has an in-stock, rateable price at a "
+            "tracked retailer, so there is no honest per-watt-hour verdict "
+            "to give today. The live tables below show what we do have.")
+
+
+def _money_value(display: str):
+    try:
+        return float(display.replace("$", "").replace(",", ""))
+    except (AttributeError, ValueError):
+        return float("inf")
+
+
+def _answer_under_2000(ctx):
+    top = ctx.top()
+    ranking = ctx.rankings[0] if ctx.rankings else None
+    if top:
+        return (
+            f"{top['product']['name']} is the cheapest stored energy under "
+            f"$2,000 that we can currently price and rate: "
+            f"{top['best']['rating_display']} at "
+            f"{top['best']['price_display']} from "
+            f"{top['best']['retailer_name']}. That is the answer on cost per "
+            f"watt-hour alone — it is a bare rack battery, not a system, and "
+            f"the section below sets out what else you still have to buy."
+        )
+    if ranking and ranking["listed"]:
+        return ("Nothing under $2,000 currently has both a published capacity "
+                "and an in-stock price, so Helios is not naming a winner "
+                "today. Everything in scope is listed below with the reason "
+                "it could not be rated.")
+    return ("No tracked battery currently has an in-stock offer under $2,000. "
+            "The list below is empty on purpose rather than padded.")
+
+
+def _answer_camping(ctx):
+    top = ctx.top()
+    if not top:
+        return ("No portable power station currently has both a published "
+                "capacity and an in-stock price, so there is no ranked answer "
+                "today. The full list and the reasons are below.")
+    weight = spec_display((top["product"].get("specs") or {}).get("weight_lb"), "lb")
+    tail = (f" It weighs {weight}." if weight else
+            " Its weight is not published in our catalog, which is itself "
+            "worth knowing before you carry it anywhere.")
+    return (
+        f"On cost per watt-hour, {top['product']['name']} leads the portable "
+        f"power stations we track at {top['best']['rating_display']} "
+        f"({top['best']['price_display']} from {top['best']['retailer_name']})."
+        f"{tail} For camping the ranking is only half the question: the other "
+        f"half is what you are willing to lift, and that trade-off is set out "
+        f"below."
+    )
+
+
+def _answer_fridge(ctx):
+    return (
+        "Take the kWh-per-year figure off your fridge's energy label, multiply "
+        "by 1,000 and divide by 365. That is the watt-hours it needs per day, "
+        "already averaged across the compressor's on/off cycling. Multiply by "
+        "the number of days you want to cover, then add headroom for inverter "
+        "losses. A label reading 365 kWh/year works out to about 1,000 Wh a "
+        "day, so a single day of fridge-only backup needs a battery in the "
+        "1,000-1,500 Wh class once losses are allowed for. The worked "
+        "arithmetic and live prices for tracked units in that range are below."
+    )
+
+
+def _answer_chemistry(ctx):
+    lfp = ctx.rankings[0]["listed"] if ctx.rankings else 0
+    ncm = ctx.rankings[1]["listed"] if len(ctx.rankings) > 1 else 0
+    return (
+        f"LiFePO4 (lithium iron phosphate) trades energy density for cycle "
+        f"life and thermal stability; NCM (nickel-cobalt-manganese) trades the "
+        f"opposite way, packing more watt-hours into less weight. For home "
+        f"backup and most portable power stations the industry has settled on "
+        f"LiFePO4, and our catalog reflects that: of the products where a "
+        f"chemistry is recorded, {lfp} are LiFePO4 and {ncm} "
+        f"{'is' if ncm == 1 else 'are'} NCM. Live examples of each are below, "
+        f"with the caveat that we read chemistry off spec sheets rather than "
+        f"cells."
+    )
+
+
+def _answer_dollars_per_wh(ctx):
+    return (
+        "Cost per watt-hour is a purchase price divided by a published "
+        "capacity, and it is only meaningful when both halves describe the "
+        "same standalone thing. It tells you which battery stores energy most "
+        "cheaply. It hides cycle life, usable depth of discharge, inverter "
+        "capability, warranty, and everything a kit bundles in. Helios "
+        "computes it for one variant at a time and withholds it entirely for "
+        "bundles and multi-packs, because a kit price over a battery's "
+        "capacity produces a precise-looking number that is wrong by "
+        "construction. This page is the full rule set."
+    )
+
+
+def _answer_sales(ctx):
+    history = ctx.history
+    days = history.get("days") or 0
+    span = ""
+    if history.get("first_date"):
+        span = (f" Our own record currently spans {days} "
+                f"day{'s' if days != 1 else ''} of scrapes "
+                f"({history['first_date']} to {history['last_date']}), which "
+                f"is nowhere near enough to call a cadence ourselves.")
+    return (
+        "Published deal coverage puts the big power-station discounts on the "
+        "US retail-holiday calendar — Earth Day, Memorial Day, Amazon's Prime "
+        "Day window, and the Fourth of July — with 48- and 72-hour "
+        "manufacturer flash sales running inside those windows. That is the "
+        "pattern to plan around, and it is sourced below to dated reporting "
+        "rather than to us." + span +
+        " What we can offer is the measurement going forward, twice a day, "
+        "with every observation dated."
+    )
+
+
+def _audit_sentence(report: dict) -> str:
+    """What this build's audit tallies actually license us to say.
+
+    The sentence this replaced asserted that the retailer's published prices
+    "match what our audit re-reads from its own product endpoints" — a
+    favourable factual claim about a named business, hardcoded, while the
+    evidence panel three inches below it showed NOT_AUDITED for every check
+    (red team HIGH-1). The audit samples a rotation, so most builds carry no
+    verdict for any given retailer, and on those builds the honest sentence
+    is that we have nothing to report.
+    """
+    name = report["name"]
+    when = (f" in the audit run of {report['audit_generated']}"
+            if report.get("audit_generated") else " in the current audit report")
+    if report["defect_verdicts"]:
+        count = report["defect_verdicts"]
+        return (
+            f"{name} is a real Shopify storefront, and our audit currently "
+            f"records {count} disagreement"
+            f"{'s' if count != 1 else ''} between a figure this site "
+            f"rendered and our own stored price for it{when}; those numbers "
+            f"are pulled off the site until they verify clean."
+        )
+    if report["clean_verdicts"]:
+        return (
+            f"{name} is a real Shopify storefront. Our audit re-read "
+            f"{report['clean_verdicts']} of its tracked listings directly "
+            f"from the store's own product endpoints{when} and found the "
+            f"published price agreeing with both what we stored and what "
+            f"this page renders."
+        )
+    if report["verified_verdicts"]:
+        return (
+            f"{name} is a real Shopify storefront. Our audit re-read "
+            f"{report['verified_verdicts']} of its tracked listings{when}, "
+            f"but none of those checks produced a clean price comparison, so "
+            f"we are not claiming a price-accuracy result for this retailer "
+            f"today."
+        )
+    return (
+        f"{name} is a real Shopify storefront. Our audit re-reads a rotating "
+        f"sample of tracked listings rather than all of them on every run, "
+        f"and it carries no verdict for this retailer{when} — so this build "
+        f"has nothing to say about their price accuracy either way, and the "
+        f"tally below says exactly that."
+    )
+
+
+def _position_sentence(report: dict) -> str:
+    """The cross-retailer tally, in words, with the buckets that exist.
+
+    Every non-empty bucket is named with the label the panel uses, so the
+    numbers in the sentence sum to the number of products the same sentence
+    says were compared.
+    """
+    parts = [f"{p['label']} on {p['count']}" for p in report["position_parts"]
+             if p["count"]]
+    if not parts:
+        return ""
+    if len(parts) > 1:
+        listed = ", ".join(parts[:-1]) + f", and {parts[-1]}"
+    else:
+        listed = parts[0]
+    noun = "product" if report["compared"] == 1 else "products"
+    return (f" On the {report['compared']} {noun} where we can compare it "
+            f"against another tracked retailer on an in-stock price, it was "
+            f"{listed}.")
+
+
+def _answer_ssk(ctx):
+    report = ctx.reports.get("shop-solar-kits")
+    if not report:
+        return ("This page reports only what our tracker observes about Shop "
+                "Solar Kits. No observations are available in this build.")
+    line = (f" It is the broadest catalog we track: {report['mapped_products']} "
+            f"of our {report['catalog_total']} products are mapped to it.")
+    return (
+        _audit_sentence(report) + line + _position_sentence(report) +
+        " That is the whole of what we can attest to. We have never bought "
+        "from them, so this page says nothing about shipping, support, "
+        "returns or warranty handling."
+    )
+
+
+# ---------------------------------------------------------------------------
+# The articles
+# ---------------------------------------------------------------------------
+# Prose blocks are authored HTML and are rendered with |safe. They are
+# static strings in this file — no data is ever interpolated into prose, so
+# there is nothing for a scraped value to escape into. Numbers live in data
+# blocks only.
+
+_NO_HANDS_ON = {
+    "kind": "prose",
+    "html": (
+        '<p class="prov">Helios has not physically tested any product on this '
+        'page. Our authority is price data, published specifications and our '
+        'own scrape history — that is a narrower claim than a review site '
+        'makes, and it is the one we can actually support.</p>'
+    ),
+}
+
+ARTICLES = [
+    {
+        "slug": "ecoflow-delta-pro-3-vs-bluetti-ac200l",
+        "h1": "EcoFlow DELTA Pro 3 vs Bluetti AC200L",
+        "subject": "a head-to-head on tracked prices and published specs",
+        "answer": _answer_head_to_head,
+        "blocks": [
+            {"kind": "prose", "html":
+                "<p>These two land in the same shopping list surprisingly "
+                "often, and they are not really the same class of machine. "
+                "One is a 4 kWh home-backup-scale unit; the other is a 2 kWh "
+                "portable. Comparing them is still useful, because the "
+                "question most people are actually asking is <em>how much "
+                "battery should I buy at this price point</em>.</p>"},
+            _NO_HANDS_ON,
+            {"kind": "h2", "text": "Published specifications, side by side"},
+            {"kind": "prose", "html":
+                "<p>Every figure in this table is the value stored in our "
+                "catalog, taken from the retailer listings we track. Where a "
+                "cell says the spec is not published, it means we have not "
+                "recorded one — not that the number is zero.</p>"},
+            {"kind": "specs", "ids": ["ecoflow-delta-pro-3", "bluetti-ac200l"]},
+            {"kind": "h2", "text": "Live prices: EcoFlow DELTA Pro 3"},
+            {"kind": "products", "ids": ["ecoflow-delta-pro-3"], "metric": "wh"},
+            {"kind": "h2", "text": "Live prices: Bluetti AC200L"},
+            {"kind": "products", "ids": ["bluetti-ac200l"], "metric": "wh"},
+            {"kind": "h2", "text": "Reading the two tables together"},
+            {"kind": "prose", "html":
+                "<p>The comparison that survives scrutiny is cost per "
+                "watt-hour on the main unit at each retailer, which is the "
+                "figure in the $/Wh column above. Kit variants carry a bundle "
+                "badge and no rating, because dividing a bundle price by the "
+                "battery's capacity credits the panels and cables to the "
+                "battery and produces a number that is wrong by "
+                "construction.</p>"
+                "<p>Capacity is the honest headline difference. The DELTA Pro "
+                "3 stores roughly twice what the AC200L does, and the spec "
+                "table above records a substantially higher <em>continuous</em> "
+                "output for it, so it can hold up continuous loads the AC200L "
+                "cannot. Whether it will <em>start</em> a load the AC200L "
+                "cannot is a different question and we are not answering it: "
+                "starting surge is a separate rating, our catalog does not "
+                "store it, and inferring it from continuous output would be a "
+                "guess dressed as a spec. If your constraint is the size of "
+                "the cheque rather than the size of the load, that extra "
+                "capability is money spent on headroom you may never "
+                "use.</p>"},
+            {"kind": "h2", "text": "What we cannot compare"},
+            {"kind": "prose", "html":
+                "<p>This is the part most head-to-heads skip, so here it is "
+                "explicitly. We cannot tell you:</p>"
+                "<ul>"
+                "<li><strong>Real runtime under a real load.</strong> We have "
+                "not run either unit. Rated capacity is a nameplate figure; "
+                "what you get depends on the load, the temperature and the "
+                "inverter's efficiency at that draw.</li>"
+                "<li><strong>Cycle life in practice.</strong> Both are "
+                "LiFePO4 and both manufacturers publish cycle ratings. We "
+                "have not verified either, and we have not owned either long "
+                "enough to have an opinion.</li>"
+                "<li><strong>Noise, app quality, firmware, or support.</strong> "
+                "No data. Not measured, not inferred.</li>"
+                "<li><strong>Warranty handling.</strong> We have never filed "
+                "a claim with either company.</li>"
+                "</ul>"
+                "<p>Retailer coverage is also uneven between these two, and "
+                "the tables above show it: a product carried by one tracked "
+                "retailer has no cross-retailer price check at all, so its "
+                "price is a single observation rather than a corroborated "
+                "one.</p>"},
+        ],
+    },
+    {
+        "slug": "best-home-backup-battery-under-2000",
+        "h1": "Best home backup battery under $2,000",
+        "subject": "tracked home-backup batteries with an in-stock price under $2,000",
+        "answer": _answer_under_2000,
+        "blocks": [
+            {"kind": "prose", "html":
+                "<p>Under $2,000 you are shopping for a battery, not a "
+                "system. That distinction drives everything below: the "
+                "cheapest stored energy at this budget comes from bare "
+                "server-rack modules that assume you already own — or are "
+                "about to buy — an inverter, a rack and the wiring to "
+                "connect them.</p>"},
+            _NO_HANDS_ON,
+            {"kind": "h2", "text": "The ranking, live"},
+            {"kind": "prose", "html":
+                "<p>Scope is every tracked product in the rack, wall-mount "
+                "and expansion-battery categories whose cheapest "
+                "<em>in-stock</em> offer is at or under $2,000. Sold-out "
+                "bargains do not qualify — a price you cannot act on is not "
+                "a price.</p>"},
+            {"kind": "ranking",
+             "categories": ("server-rack-battery", "home-battery",
+                            "expansion-battery"),
+             "metric": "wh", "max_price": 2000},
+            {"kind": "h2", "text": "What the ranking does not include"},
+            {"kind": "prose", "html":
+                "<p>A rack battery is a component. Budget for an inverter or "
+                "hybrid charger, a rack or wall bracket, cabling of the right "
+                "gauge, and in most jurisdictions an electrician and a "
+                "permit. None of that is in the prices above, so the total "
+                "installed cost of any battery here is meaningfully more "
+                "than its sticker price.</p>"
+                "<p>Expansion batteries are cheaper per watt-hour than the "
+                "stations they attach to, and they are useless on their own. "
+                "Where one appears above, it is priced as the accessory it "
+                "is.</p>"
+                "<p>Anything listed without a $/Wh figure is there because we "
+                "could not honestly compute one — the reason is printed "
+                "against each entry rather than hidden.</p>"},
+        ],
+    },
+    {
+        "slug": "best-power-station-for-camping",
+        "h1": "Best power station for camping",
+        "subject": "tracked portable power stations ranked on price per watt-hour",
+        "answer": _answer_camping,
+        "blocks": [
+            {"kind": "prose", "html":
+                "<p>Camping is the use case where the cheapest watt-hour is "
+                "most often the wrong answer. Every extra watt-hour is extra "
+                "mass, and mass is the constraint that actually bites when "
+                "the thing has to come out of a car and go somewhere.</p>"},
+            _NO_HANDS_ON,
+            {"kind": "h2", "text": "Ranked on cost per watt-hour"},
+            {"kind": "ranking", "categories": ("portable-power-station",),
+             "metric": "wh"},
+            {"kind": "h2", "text": "The weight trade-off"},
+            {"kind": "prose", "html":
+                "<p>Below is every weight our catalog actually stores for "
+                "these products. It is not a complete set, and the gaps are "
+                "shown as gaps: we record a weight when a tracked listing "
+                "states one, and we do not estimate the rest.</p>"},
+            {"kind": "specs",
+             "ids": ["ecoflow-river-3", "ecoflow-river-2-pro", "bluetti-ac180",
+                     "ecoflow-delta-max", "bluetti-ac200l", "anker-solix-f2600"],
+             "fields": ["capacity_wh", "weight_lb", "output_w"]},
+            {"kind": "prose", "html":
+                "<p>Read that table against the ranking above and the shape "
+                "of the decision appears: the cheapest energy per watt-hour "
+                "generally sits in the larger, heavier units, because the "
+                "fixed cost of the inverter, case and electronics is spread "
+                "over more cells. A small station is nearly always worse "
+                "value per watt-hour and better value per kilogram carried.</p>"
+                "<p>What we cannot tell you is how any of these behave in a "
+                "tent at 2&nbsp;a.m. — fan noise, cold-weather charge "
+                "behaviour, how the app copes without signal, whether the "
+                "handle is comfortable after two hundred metres. We have not "
+                "used them. Where a review site would give you an opinion, we "
+                "give you the price history and the published numbers, and "
+                "you should read an owner's account for the rest.</p>"},
+        ],
+    },
+    {
+        "slug": "how-many-watt-hours-to-run-a-refrigerator",
+        "h1": "How many watt-hours do you need to run a fridge?",
+        "subject": "sizing a battery for refrigerator backup, with worked arithmetic",
+        "answer": _answer_fridge,
+        "blocks": [
+            {"kind": "h2", "text": "Start with the label, not a rule of thumb"},
+            {"kind": "prose", "html":
+                "<p>A fridge does not draw its rated wattage continuously. "
+                "The compressor cycles on and off, so the number that matters "
+                "is energy over time, not power at an instant. Every fridge "
+                "sold with an energy label carries that figure already: "
+                "kilowatt-hours per year, measured over a standardised test "
+                "cycle.</p>"
+                "<p>That single number does the work. You do not need to "
+                "guess a duty cycle, and you should be sceptical of any guide "
+                "that hands you an average wattage for &ldquo;a "
+                "fridge&rdquo; — the range across sizes and ages is enormous, "
+                "and your own label is authoritative for your own "
+                "appliance.</p>"},
+            {"kind": "h2", "text": "The arithmetic"},
+            {"kind": "prose", "html":
+                "<p>Suppose the label reads <strong>365 kWh per year</strong>. "
+                "That is an assumed example input, not a claim about your "
+                "fridge:</p>"
+                "<ol>"
+                "<li>365 kWh/year &times; 1,000 = 365,000 Wh per year.</li>"
+                "<li>365,000 &divide; 365 days = <strong>1,000 Wh per "
+                "day</strong>.</li>"
+                "<li>Two days of cover = 2,000 Wh of <em>delivered</em> "
+                "energy.</li>"
+                "<li>Inverter and conversion losses are real and vary by unit "
+                "and load; add headroom rather than assuming a figure. Losses "
+                "divide, they do not add: if you assume 20% of what the "
+                "battery holds is lost on the way to the appliance, the "
+                "nameplate capacity you need is 2,000 &divide; 0.8 = "
+                "<strong>2,500 Wh</strong>, not 2,000 &times; 1.2.</li>"
+                "</ol>"
+                "<p>Run the same three lines with your own label figure and "
+                "you have your answer. The reason this article does not "
+                "publish a tidy &ldquo;fridges need X&rdquo; number is that "
+                "the honest version of that number is a range so wide it "
+                "would not help you.</p>"},
+            {"kind": "h2", "text": "Two more things the arithmetic misses"},
+            {"kind": "prose", "html":
+                "<p><strong>Starting surge.</strong> A compressor draws far "
+                "more at the moment it starts than while it runs. Energy "
+                "capacity does not help here; the inverter's rated and surge "
+                "output does. Check your appliance's requirement against the "
+                "rated output figures in the table below.</p>"
+                "<p><strong>Usable versus nameplate.</strong> Published "
+                "capacity is not always the energy you can draw. We publish "
+                "the capacity the retailer's listing states, which is the "
+                "same figure the manufacturer markets.</p>"},
+            _NO_HANDS_ON,
+            {"kind": "h2", "text": "Tracked units in the relevant range"},
+            {"kind": "prose", "html":
+                "<p>Live prices, refreshed on every build. The smallest units "
+                "here cover well under a day of the worked example above; the "
+                "largest cover several.</p>"},
+            {"kind": "products",
+             "ids": ["ecoflow-river-2-pro", "bluetti-ac200l",
+                     "ecoflow-delta-pro-3"],
+             "metric": "wh"},
+        ],
+    },
+    {
+        "slug": "lifepo4-vs-ncm-plain-english",
+        "h1": "LiFePO4 vs NCM, in plain English",
+        "subject": "what the two cell chemistries trade against each other",
+        "answer": _answer_chemistry,
+        "blocks": [
+            {"kind": "h2", "text": "The trade, in one paragraph"},
+            {"kind": "prose", "html":
+                "<p>Both are lithium-ion. The difference is what the cathode "
+                "is made of, and that choice sets everything else. "
+                "<strong>LiFePO4</strong> — lithium iron phosphate, sometimes "
+                "written LFP — uses iron and phosphate: cheap, abundant, "
+                "chemically stable, and comparatively heavy for the energy it "
+                "stores. <strong>NCM</strong> — nickel, cobalt, manganese, "
+                "sometimes NMC — packs more energy into less mass and volume, "
+                "which is why it dominated the first generation of portable "
+                "power stations and why it remains common in electric "
+                "vehicles where range and pack density set the design, "
+                "particularly in Europe and in premium long-range models. It "
+                "is no longer the majority chemistry in EVs globally, though: "
+                "the IEA puts LFP at more than half of all EV batteries "
+                "deployed worldwide in 2025, overtaking the nickel-based "
+                "chemistries.</p>"},
+            {"kind": "citations", "sources": [
+                {"title": "Electric vehicle batteries — Global EV Outlook 2026",
+                 "publisher": "International Energy Agency", "date": "2026-05-20",
+                 "url": "https://www.iea.org/reports/global-ev-outlook-2026/"
+                        "electric-vehicle-batteries",
+                 "note": "LFP accounted for over 55% of EV batteries deployed "
+                         "globally in 2025, up from nearly 50% in 2024, "
+                         "passing the nickel-based chemistries. We have not "
+                         "independently verified these figures; we are citing "
+                         "them."},
+            ]},
+            {"kind": "h2", "text": "What each one is better at"},
+            {"kind": "prose", "html":
+                "<ul>"
+                "<li><strong>Cycle life</strong> favours LiFePO4, usually by a "
+                "wide margin. Manufacturers typically rate LFP packs for "
+                "several thousand cycles to 80% capacity, and NCM packs for "
+                "something in the 800 to 2,000 range. Those are published "
+                "ratings, not our measurements.</li>"
+                "<li><strong>Energy density</strong> favours NCM. For the same "
+                "watt-hours, an NCM pack is lighter and smaller.</li>"
+                "<li><strong>Thermal behaviour</strong> favours LiFePO4, which "
+                "is the main reason it has taken over stationary storage: it "
+                "is the more forgiving chemistry when something goes "
+                "wrong.</li>"
+                "<li><strong>Cost per watt-hour</strong> currently favours "
+                "LiFePO4 on the products we track, which is visible directly "
+                "in the tables below rather than asserted here.</li>"
+                "</ul>"
+                "<p>For a battery that lives in a garage and cycles daily for "
+                "a decade, the density penalty costs you floor space and the "
+                "cycle life pays you back every day. For something you carry, "
+                "the trade is genuinely closer.</p>"},
+            _NO_HANDS_ON,
+            {"kind": "h2", "text": "LiFePO4 in our catalog, live"},
+            {"kind": "prose", "html":
+                "<p>Every tracked product whose listing states LiFePO4 cells, "
+                "ranked on cost per watt-hour.</p>"},
+            {"kind": "ranking", "chemistry": "LiFePO4", "metric": "wh",
+             "compact": True},
+            {"kind": "h2", "text": "NCM in our catalog, live"},
+            {"kind": "prose", "html":
+                "<p>The other side of the comparison is thin, and that is "
+                "itself the finding: the market has moved. Here is every "
+                "tracked product recorded as NCM.</p>"},
+            {"kind": "ranking", "chemistry": "NCM", "metric": "wh"},
+            {"kind": "h2", "text": "How we know the chemistry"},
+            {"kind": "prose", "html":
+                "<p>From the retailer's own listing text, recorded in our "
+                "catalog when the listing states it. We have not opened a "
+                "pack or tested a cell, and where a listing does not state a "
+                "chemistry we leave the field empty rather than infer one "
+                "from the brand or the price. Products with no recorded "
+                "chemistry appear in neither table above.</p>"},
+        ],
+    },
+    {
+        "slug": "what-dollars-per-wh-tells-you",
+        "h1": "What $/Wh tells you, and what it hides",
+        "subject": "the full rule set behind every cost-per-watt-hour figure on this site",
+        "answer": _answer_dollars_per_wh,
+        "blocks": [
+            {"kind": "prose", "html":
+                "<p>Cost per watt-hour is the most useful single number in "
+                "battery shopping and the easiest one to compute wrongly. "
+                "This page is both an explainer and our public specification: "
+                "the rules below are the rules the site enforces in code, not "
+                "aspirations.</p>"},
+            {"kind": "h2", "text": "What it is"},
+            {"kind": "prose", "html":
+                "<p>A retailer's price for one standalone product, divided by "
+                "that product's published capacity in watt-hours. Nothing "
+                "else. It answers exactly one question — which battery stores "
+                "energy most cheaply — and answers it well.</p>"},
+            {"kind": "h2", "text": "The four rules we enforce"},
+            {"kind": "prose", "html":
+                "<ol>"
+                "<li><strong>One variant at a time.</strong> The price and the "
+                "rating in any row always describe the same variant. Pairing "
+                "a discounted bundle's price with a bare unit's rating is a "
+                "defect we have shipped once and now test against.</li>"
+                "<li><strong>Bundles get no rating.</strong> If the listing "
+                "sells a kit, a multi-pack or a battery-plus-panels bundle, "
+                "we show the price and withhold the $/Wh. A kit price over a "
+                "battery's capacity is wrong by construction, and the wrongness "
+                "scales with how good the kit is.</li>"
+                "<li><strong>Unknown capacity withholds.</strong> Capacity is "
+                "used only where a tracked listing states it, backed by a "
+                "verbatim quote from that listing. Where two retailers "
+                "disagree about a capacity, we publish no rating for that "
+                "product at any retailer.</li>"
+                "<li><strong>Stale and disputed numbers come off the "
+                "page.</strong> Prices older than our staleness threshold are "
+                "withheld rather than shown with a caveat, and any figure our "
+                "audit finds disagreeing with its own source is quarantined "
+                "until it verifies clean.</li>"
+                "</ol>"},
+            {"kind": "h2", "text": "The rule, visible"},
+            {"kind": "prose", "html":
+                "<p>Here is the discipline working on a real product. The "
+                "single-battery variant carries a rating; the multi-battery "
+                "variants of the <em>same</em> product carry prices and a "
+                "bundle badge, and no rating at all — because we do not know "
+                "from the listing alone that a &ldquo;2 Batteries&rdquo; "
+                "variant is exactly twice the capacity.</p>"},
+            {"kind": "products", "ids": ["eg4-ll-s-48v-100ah"], "metric": "wh"},
+            {"kind": "h2", "text": "What it hides"},
+            {"kind": "prose", "html":
+                "<ul>"
+                "<li><strong>Cycle life.</strong> Two batteries at the same "
+                "$/Wh are not the same purchase if one lasts three times as "
+                "long. Divide by rated cycles and the ranking can invert.</li>"
+                "<li><strong>Usable depth of discharge.</strong> Nameplate "
+                "capacity is not always drawable capacity.</li>"
+                "<li><strong>Everything that is not the battery.</strong> "
+                "Inverter capability, outlets, solar input, app, warranty, and "
+                "whether the thing needs an electrician.</li>"
+                "<li><strong>Total installed cost.</strong> Especially for "
+                "rack batteries, where the battery is a component of a system "
+                "you have to finish buying.</li>"
+                "<li><strong>Shipping and tax.</strong> Not in any price on "
+                "this site.</li>"
+                "</ul>"
+                "<p>Use $/Wh to shortlist and to catch a bad price. Do not use "
+                "it to pick a winner on its own.</p>"},
+            {"kind": "h2", "text": "Why we would rather show nothing"},
+            {"kind": "prose", "html":
+                "<p>A missing number is a gap a reader can see and work "
+                "around. A wrong number looks exactly like a right one. Every "
+                "withheld rating on this site prints the rule that withheld "
+                "it, so you can judge whether the gap matters to you rather "
+                "than wondering whether we simply failed to look.</p>"},
+        ],
+    },
+    {
+        "slug": "when-do-power-stations-go-on-sale",
+        "h1": "When do power stations actually go on sale?",
+        "subject": "the discount calendar, from dated external reporting plus our own measurements",
+        "answer": _answer_sales,
+        "blocks": [
+            {"kind": "h2", "text": "The pattern, from published coverage"},
+            {"kind": "prose", "html":
+                "<p>Power-station pricing is not a smooth market. It runs on "
+                "manufacturer-led promotional windows anchored to the US "
+                "retail calendar, with short flash sales inside them. The "
+                "deal-coverage record is the best public evidence of that "
+                "cadence, so here it is, dated and linked rather than "
+                "summarised from memory.</p>"},
+            {"kind": "citations", "sources": [
+                {"title": "Electrified Weekly — Earth Day power station sales "
+                          "from EcoFlow + Bluetti, 72-hour Anker SOLIX flash sale",
+                 "publisher": "9to5Toys", "date": "2026-04-11",
+                 "url": "https://9to5toys.com/2026/04/11/electrified-weekly-earth-day-power-station-sales-ecoflow-bluetti-anker-solix-exclusive-new-lows-more/",
+                 "note": "Earth Day promotions from two manufacturers running "
+                         "alongside a 72-hour Anker SOLIX weekend flash sale."},
+                {"title": "Bluetti exclusive Memorial Day power station lows, "
+                          "EcoFlow 48-hour flash sale",
+                 "publisher": "Electrek", "date": "2026-05-25",
+                 "url": "https://electrek.co/2026/05/25/bluetti-exclusive-memorial-day-power-station-lows-ecoflow-48-hour-flash-sale-power-stations-more/",
+                 "note": "A 48-hour EcoFlow flash sale running through May 26, "
+                         "nested inside a longer seasonal sale."},
+                {"title": "EcoFlow Early Prime Day power station deals up to "
+                          "62% off",
+                 "publisher": "Electrek", "date": "2026-06-08",
+                 "url": "https://electrek.co/2026/06/08/ecoflow-early-prime-day-sale-48-hour-flash-sale-power-station-from-149-more/",
+                 "note": "A 48-hour flash sale inside an 'early Prime Day' "
+                         "window, weeks ahead of Amazon's own event."},
+                {"title": "July 4th Green Deals: Bluetti Summer Power Sale, "
+                          "EcoFlow flash sale",
+                 "publisher": "Electrek", "date": "2026-07-03",
+                 "url": "https://electrek.co/2026/07/03/july-4th-bluetti-summer-power-sale-hiboy-ex11-full-suspension-e-bike-ecoflow-more/",
+                 "note": "Independence Day promotions, with one manufacturer "
+                         "running a season-long sale in place of a holiday "
+                         "event."},
+            ]},
+            {"kind": "prose", "html":
+                "<p>Read together, those reports describe anchors rather than "
+                "a cadence. The promotional windows they cover sit on the US "
+                "retail calendar — Earth Day, Memorial Day, the Prime Day "
+                "period and the Fourth of July — with 48- to 72-hour flash "
+                "sales used as the sharpest price point inside each window, "
+                "and with off-cycle events (an &ldquo;early Prime Day&rdquo; "
+                "weeks ahead of Amazon's own) sitting between them. The "
+                "intervals between the dated reports above are uneven, as "
+                "the line under them shows, so what this evidence supports "
+                "is several promotional windows inside any given quarter, "
+                "not a clock you can set. The flash sales are where the "
+                "genuine lows appear, and they are short enough that you "
+                "have to already be watching.</p>"
+                "<p>Note what those citations are and are not. They are "
+                "evidence that promotional windows exist and roughly when. "
+                "They are not evidence that any particular product hits its "
+                "lowest price in them, and we have not verified the "
+                "individual prices quoted in that coverage.</p>"},
+            {"kind": "h2", "text": "What our own tracker has seen so far"},
+            {"kind": "callout", "html":
+                "<p><strong>Our price history is very short.</strong> Helios "
+                "began recording on 2026-08-13. A discount calendar needs "
+                "months of observations to say anything defensible, and we do "
+                "not have them yet. Rather than dress up a few days of data "
+                "as a trend, or quietly reprint someone else's history as "
+                "though it were ours, we are stating the gap.</p>"},
+            {"kind": "history"},
+            {"kind": "prose", "html":
+                "<p>What that record <em>can</em> already do is catch a price "
+                "move between two scrapes and show it with a timestamp. What "
+                "it cannot yet do is tell you whether today's price is high "
+                "or low by this product's own standards, because it has no "
+                "standard to compare against.</p>"},
+            {"kind": "h2", "text": "What the tracked stations cost right now"},
+            {"kind": "prose", "html":
+                "<p>Live prices, re-read on every build. If a promotional "
+                "window is open as you read this, it shows up here first — "
+                "and if these prices look ordinary, that is the honest "
+                "answer to whether there is a sale on today.</p>"},
+            {"kind": "ranking", "categories": ("portable-power-station",),
+             "metric": "wh", "compact": True},
+            {"kind": "h2", "text": "How to actually catch a flash sale"},
+            {"kind": "prose", "html":
+                "<ul>"
+                "<li>Decide your target price before the window opens. A 48-hour "
+                "sale is designed to prevent deliberation.</li>"
+                "<li>Watch the manufacturer's own store as well as the "
+                "retailers — several of the sales in the coverage above were "
+                "manufacturer-direct.</li>"
+                "<li>Check the compare-at price against a real history, not "
+                "against the retailer's own struck-through figure.</li>"
+                "<li>Remember that the sharpest discounts in that coverage "
+                "attach to specific SKUs, not to whole ranges.</li>"
+                "</ul>"},
+            {"kind": "h2", "text": "Price alerts: planned, not built"},
+            {"kind": "prose", "html":
+                "<p>The obvious thing to build on a twice-daily price record "
+                "is an alert when a tracked product drops below a threshold "
+                "you set. That is <strong>planned and does not exist "
+                "today</strong> — there is no signup, no notification, and no "
+                "waiting list, and this paragraph exists so nobody reads the "
+                "rest of the page as implying otherwise. When it ships it "
+                "will be announced on this site.</p>"},
+        ],
+    },
+    {
+        "slug": "is-shop-solar-kits-legit",
+        "h1": "Is Shop Solar Kits legit? What our tracker observes",
+        "subject": "observed price-accuracy, catalog breadth and cross-retailer position",
+        "answer": _answer_ssk,
+        "blocks": [
+            {"kind": "callout", "html":
+                "<p><strong>Scope of this page.</strong> This is not a review. "
+                "Helios has never bought anything from Shop Solar Kits, "
+                "contacted their support, returned an item or filed a warranty "
+                "claim. Everything below is an observation our own tracker "
+                "made about their published data. If you want to know whether "
+                "their service is good, this page cannot tell you, and any "
+                "page that answers that question from price data alone is "
+                "guessing.</p>"},
+            {"kind": "h2", "text": "What we observe"},
+            {"kind": "retailer_report", "retailer_id": "shop-solar-kits"},
+            {"kind": "h2", "text": "Price accuracy"},
+            {"kind": "prose", "html":
+                "<p>The strongest thing we can say about a retailer is "
+                "boring: the prices they publish are the prices they publish "
+                "consistently. Our audit re-reads a sample of tracked "
+                "products directly from the store's own product endpoints on "
+                "a schedule and compares them against both the price we "
+                "stored and the figure rendered on this site. A disagreement "
+                "between the live store and our record is expected and "
+                "harmless — prices move. A disagreement between our record "
+                "and our own page is a defect, and it pulls the number off "
+                "the site until it verifies clean.</p>"
+                "<p>The verdict tallies above are that check, restricted to "
+                "this retailer. They speak to whether the storefront's "
+                "published data is stable and machine-readable. They say "
+                "nothing about what happens after you press buy.</p>"},
+            {"kind": "h2", "text": "Cross-retailer position"},
+            {"kind": "prose", "html":
+                "<p>Where two or more tracked retailers carry the same "
+                "product and both have it in stock, we can say which was "
+                "cheaper at the moment we looked. That tally is above. It is "
+                "a snapshot of a small sample, not a claim that any retailer "
+                "is generally cheapest — with a catalog this size and a price "
+                "history this short, anyone claiming otherwise from this data "
+                "is overreaching.</p>"},
+            {"kind": "h2", "text": "Where the same product diverges"},
+            {"kind": "prose", "html":
+                "<p>These are variants that more than one tracked retailer "
+                "publishes under the same SKU, with both sides in stock. Same "
+                "SKU, different price, shown with each retailer's own "
+                "label.</p>"},
+            {"kind": "products",
+             "ids": ["ecoflow-delta-pro-3", "ecoflow-river-3",
+                     "ecoflow-delta-max"],
+             "metric": "wh"},
+            {"kind": "h2", "text": "What we deliberately do not know"},
+            {"kind": "prose", "html":
+                "<ul>"
+                "<li><strong>Shipping cost, free-shipping thresholds and "
+                "delivery times.</strong> Our retailer records contain no "
+                "shipping data at all. We are not going to source it from "
+                "somewhere unverifiable and present it as tracked.</li>"
+                "<li><strong>Support, returns and warranty handling.</strong> "
+                "Never used. No data.</li>"
+                "<li><strong>Order accuracy or fulfilment reliability.</strong> "
+                "Never ordered. No data.</li>"
+                "<li><strong>Whether the discount framing is fair.</strong> We "
+                "record a retailer's struck-through compare-at price when "
+                "there is one, but we have not tracked long enough to say "
+                "whether those reference prices are real.</li>"
+                "</ul>"
+                "<p>Our commercial position is disclosed in full on the "
+                "affiliate disclosure page, and it currently amounts to: we "
+                "earn nothing from this retailer or any other.</p>"},
+        ],
+    },
+]
+
+
+def article_by_slug(slug: str) -> dict | None:
+    for spec in ARTICLES:
+        if spec["slug"] == slug:
+            return spec
+    return None
+
+
+# ---------------------------------------------------------------------------
 # Site-wide facts (About / disclosure / meta descriptions)
 # ---------------------------------------------------------------------------
 # Every claim on the About and disclosure pages that involves a number or a
@@ -1399,10 +2757,8 @@ def build_site(data_dir: Path = DATA_DIR, site_dir: Path = SITE_DIR,
 
     latest = load_latest_prices(data_dir / "prices", [p["id"] for p in products])
     handle_maps_path = data_dir / "handle_maps.json"
-    latest = filter_to_mapped_pairs(
-        latest,
-        load_json(handle_maps_path) if handle_maps_path.exists() else None,
-    )
+    handle_maps = load_json(handle_maps_path) if handle_maps_path.exists() else None
+    latest = filter_to_mapped_pairs(latest, handle_maps)
 
     env = Environment(
         loader=FileSystemLoader(templates_dir),
@@ -1412,6 +2768,7 @@ def build_site(data_dir: Path = DATA_DIR, site_dir: Path = SITE_DIR,
     site_dir.mkdir(parents=True, exist_ok=True)
     (site_dir / "products").mkdir(parents=True, exist_ok=True)
     (site_dir / "guides").mkdir(parents=True, exist_ok=True)
+    (site_dir / "articles").mkdir(parents=True, exist_ok=True)
 
     facts = site_facts(products, retailers, latest, now=now)
     base_url = resolve_site_base_url(data_dir)
@@ -1508,6 +2865,30 @@ def build_site(data_dir: Path = DATA_DIR, site_dir: Path = SITE_DIR,
             facts=facts, **view,
         )
 
+    # --- articles ----------------------------------------------------------
+    history = _history_facts(data_dir, products)
+    for spec in ARTICLES:
+        view = resolve_article(spec, products, latest, retailers_by_id,
+                               handle_maps, quarantine, facts, history,
+                               data_dir, now)
+        # Meta description leads with the article's own live answer, so a
+        # search result carries a current number rather than a slogan.
+        write_page(
+            f"articles/{spec['slug']}.html", "article.html",
+            f"{spec['h1']} — {SITE_NAME}",
+            view["answer"],
+            facts=facts, **view,
+        )
+
+    write_page(
+        "articles/index.html", "articles_index.html",
+        f"Articles — {SITE_NAME}",
+        f"{len(ARTICLES)} explainers and comparisons on solar and home-energy "
+        f"gear, with live prices from {facts['retailer_count']} tracked "
+        f"retailers re-rendered on every build. No physical product reviews.",
+        articles=ARTICLES, author=AUTHOR, facts=facts,
+    )
+
     # --- about / disclosure ----------------------------------------------
     write_page(
         "about.html", "about.html",
@@ -1548,7 +2929,9 @@ def build_site(data_dir: Path = DATA_DIR, site_dir: Path = SITE_DIR,
         # build lines recorded in docs/.
         "pages_written": 1 + product_pages,
         "guide_pages": len(GUIDES),
-        "info_pages": 2,
+        "article_pages": len(ARTICLES),
+        # articles index + about + disclosure
+        "info_pages": 3,
         "total_pages_written": len(rendered),
         "sitemap_urls": sitemap_urls,
         "site_base_url": base_url,

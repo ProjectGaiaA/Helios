@@ -449,36 +449,46 @@ def merge_guide_records(vid: str, records: list[dict], page: str) -> dict:
     return merged
 
 
-def parse_guide_provenance(site_dir: Path) -> dict[str, dict]:
-    """{variant_id: merged record} across every rendered guide page.
+CONTENT_DIRS = ("guides", "articles")
 
-    The guides were an UNAUDITED surface: the render hop opened
+
+def parse_content_provenance(site_dir: Path) -> dict[str, dict]:
+    """{variant_id: merged record} across every guide AND article page.
+
+    The content layer was an UNAUDITED surface: the render hop opened
     index.html and products/*.html only, so a wrong figure on a ranked
-    buying guide — the pages most likely to be acted on — could not
-    produce a RENDER_DEFECT. Guides share their freshness with the rows
-    behind them, so verifying them costs ZERO extra live requests.
+    buying guide or an article — the pages a reader is most likely to act
+    on — could not produce a RENDER_DEFECT. Content pages share their
+    freshness with the rows behind them, so verifying them costs ZERO
+    extra live requests.
 
-    Within a page, a variant's appearances are merged (see
-    merge_guide_records). Across pages they are not: every product belongs
-    to exactly one guide category today, so a variant on two guides means
-    the scoping rules overlapped and the first record wins with the
-    duplicate reported rather than silently dropped.
+    Appearances are merged ACROSS pages as well as within one. The earlier
+    version merged only within a page and reported cross-page duplication
+    as a defect, on the assumption that a variant belonged to exactly one
+    guide. Articles break that assumption BY DESIGN — the DELTA Pro 3
+    legitimately appears on its guide, on a head-to-head, in a sizing
+    article and in a chemistry ranking — so cross-page duplication is
+    ordinary and only a genuine CONTRADICTION between two renderings is
+    reported. Same rule as within a page, applied consistently instead of
+    stopping at a directory boundary.
     """
-    merged: dict[str, dict] = {}
-    guides_dir = site_dir / "guides"
-    if not guides_dir.is_dir():
-        return merged
-    for path in sorted(guides_dir.glob("*.html")):
-        by_vid: dict[str, list[dict]] = {}
-        for record in parse_provenance_list(path.read_text(encoding="utf-8")):
-            by_vid.setdefault(record["_vid"], []).append(record)
-        for vid, records in by_vid.items():
-            folded = merge_guide_records(vid, records, path.name)
-            if vid in merged:
-                merged[vid].setdefault("duplicate_in", []).append(path.name)
-                continue
-            merged[vid] = folded
-    return merged
+    per_vid: dict[str, list[dict]] = {}
+    pages: dict[str, list[str]] = {}
+    for name in CONTENT_DIRS:
+        directory = site_dir / name
+        if not directory.is_dir():
+            continue
+        for path in sorted(directory.glob("*.html")):
+            label = f"{name}/{path.name}"
+            for record in parse_provenance_list(
+                    path.read_text(encoding="utf-8")):
+                vid = record["_vid"]
+                per_vid.setdefault(vid, []).append(record)
+                seen = pages.setdefault(vid, [])
+                if label not in seen:
+                    seen.append(label)
+    return {vid: merge_guide_records(vid, records, ", ".join(pages[vid]))
+            for vid, records in per_vid.items()}
 
 
 def check_guide_render(vid: str, variant_data: dict, product: dict,
@@ -497,12 +507,10 @@ def check_guide_render(vid: str, variant_data: dict, product: dict,
         return mismatches
 
     def bad(field, observed, expected):
-        mismatches.append({"where": f"guide:{rec.get('guide', '?')}",
+        mismatches.append({"where": f"content:{rec.get('guide', '?')}",
                            "field": field, "observed": observed,
                            "expected": expected})
 
-    if rec.get("duplicate_in"):
-        bad("duplicate", ",".join(rec["duplicate_in"]), "one guide per variant")
     for conflict in rec.get("internal_conflicts") or []:
         bad("internal-conflict", conflict, "one value per variant per page")
 
@@ -832,7 +840,7 @@ def run_audit(data_dir: Path = DEFAULT_DATA_DIR, site_dir: Path = DEFAULT_SITE_D
     index_path = site_dir / "index.html"
     if index_path.exists():
         home_prov = parse_provenance(index_path.read_text(encoding="utf-8"))
-    guide_prov = parse_guide_provenance(site_dir)
+    guide_prov = parse_content_provenance(site_dir)
     page_prov_cache: dict[str, dict] = {}
 
     def page_prov_for(product_id: str) -> dict:
@@ -865,7 +873,7 @@ def run_audit(data_dir: Path = DEFAULT_DATA_DIR, site_dir: Path = DEFAULT_SITE_D
                 if idx.exists() else {})
             # The shadow build's guides too: an entry must not clear while
             # a rebuild without it would render the guide wrong.
-            shadow_state["guides"] = parse_guide_provenance(sdir)
+            shadow_state["guides"] = parse_content_provenance(sdir)
             shadow_state["pages"] = {}
         pages = shadow_state["pages"]
         if product_id not in pages:

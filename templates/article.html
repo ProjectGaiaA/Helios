@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+{% from "_macros.html" import offer_table, headline, availability with context %}
+
+{#
+  Evergreen prose + live data blocks. Prose is authored HTML held in
+  build.py and rendered with |safe; NO scraped value is ever interpolated
+  into a prose string, so there is nothing for retailer text to escape
+  into. Every number on the page comes from a data block, rendered through
+  the same macros the guides use, with the same provenance attributes.
+#}
+
+{% block content %}
+<article class="post">
+<h1>{{ article.h1 }}</h1>
+
+<p class="answer"><strong>Direct answer:</strong> {{ answer }}</p>
+
+<p class="muted byline">
+  By <span class="author-name">{{ author.name }}</span> ·
+  Prices on this page refreshed when the site was last built
+  {%- if history.last_date %}; price record runs from {{ history.first_date }}
+  to {{ history.last_date }}{% endif %}.
+</p>
+
+{% for block in blocks %}
+  {% if block.kind == "h2" %}
+<h2>{{ block.text }}</h2>
+
+  {% elif block.kind == "prose" %}
+{{ block.html | safe }}
+
+  {% elif block.kind == "callout" %}
+<div class="callout">{{ block.html | safe }}</div>
+
+  {% elif block.kind == "products" %}
+    {% if not block.entries %}
+<p class="withheld">None of the products this section compares are currently
+in our catalog, so there is nothing live to show here.</p>
+    {% endif %}
+    {% for entry in block.entries %}
+<section class="live" data-product-id="{{ entry.product.id }}">
+  <h3><a href="{{ root_prefix }}products/{{ entry.product.id }}.html">{{ entry.product.name }}</a></h3>
+  {% if entry.rated %}{{ headline(entry, block.metric, root_prefix) }}
+  {% else %}<p class="withheld">No {{ block.metric.label }}: {{ entry.unranked_reason }}.</p>
+  {% endif %}
+  {{ offer_table(entry, block.metric) }}
+  {% if entry.spreads %}
+    {% for spread in entry.spreads %}
+  <p class="muted">Same SKU <code>{{ spread.sku }}</code> at
+    {{ spread.offers | length }} tracked retailers:
+    {% if spread.same_price %}identical price.
+    {% else %}<span data-field="spread-gap">{{ spread.gap_display }}</span>
+      (<span data-field="spread-pct">{{ spread.gap_pct_display }}</span>) more
+      at {{ spread.high.retailer_name }} than at {{ spread.low.retailer_name }}.
+    {% endif %}
+  </p>
+    {% endfor %}
+  {% endif %}
+</section>
+    {% endfor %}
+
+  {% elif block.kind == "ranking" %}
+<div class="live">
+  <p class="muted">
+    {{ block.ranking.ranked | length }} of {{ block.ranking.listed }} listed
+    product{{ "s" if block.ranking.listed != 1 }} could be ranked
+    {%- if block.ranking.max_price_display %}; scope is an in-stock offer at or
+    under {{ block.ranking.max_price_display }}, which excluded
+    {{ block.ranking.priced_out }} tracked
+    product{{ "s" if block.ranking.priced_out != 1 }}{% endif %}.
+    Only in-stock offers set a rank.
+  </p>
+  {% for entry in block.ranking.ranked %}
+  <section data-product-id="{{ entry.product.id }}">
+    <h3><span class="rank">{{ loop.index }}.</span>
+      <a href="{{ root_prefix }}products/{{ entry.product.id }}.html">{{ entry.product.name }}</a>
+      {%- if entry.tied %} <span class="badge">tie</span>{% endif %}
+    </h3>
+    {{ headline(entry, block.ranking.metric, root_prefix) }}
+    {% if not block.ranking.compact %}{{ offer_table(entry, block.ranking.metric) }}{% endif %}
+  </section>
+  {% endfor %}
+  {% if block.ranking.unranked %}
+  <h3>Listed, but not ranked</h3>
+  <p class="muted">Each reason below is the actual rule that withheld the
+    number, not a placeholder.</p>
+  {% for entry in block.ranking.unranked %}
+  <section data-product-id="{{ entry.product.id }}">
+    <h4><a href="{{ root_prefix }}products/{{ entry.product.id }}.html">{{ entry.product.name }}</a></h4>
+    <p class="withheld">No {{ block.ranking.metric.label }}:
+      {{ entry.unranked_reason }}.</p>
+    {% if not block.ranking.compact %}{{ offer_table(entry, block.ranking.metric) }}{% endif %}
+  </section>
+  {% endfor %}
+  {% endif %}
+  {% if not block.ranking.ranked and not block.ranking.unranked %}
+  <p class="withheld">Nothing in scope has a usable price right now. This
+    section is empty rather than padded.</p>
+  {% endif %}
+</div>
+
+  {% elif block.kind == "specs" %}
+<table class="specs">
+  <thead>
+    <tr><th>Specification</th>
+      {% for product in block.table.products %}<th>{{ product.name }}</th>{% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in block.table.rows %}
+    <tr>
+      <th scope="row">{{ row.label }}</th>
+      {% for cell in row.cells %}
+      <td data-spec-key="{{ row.key }}">
+        {%- if cell %}{{ cell }}{% else %}<span class="muted">not published</span>{% endif -%}
+      </td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+  {% elif block.kind == "retailer_report" %}
+<div class="live" data-retailer-id="{{ block.report.retailer_id }}">
+  <table>
+    <tbody>
+      <tr><th scope="row">Products we track there</th>
+        <td><span data-field="mapped-products">{{ block.report.mapped_products }}</span>
+          of our {{ block.report.catalog_total }}-product catalog — the
+          broadest coverage of any retailer we track.</td></tr>
+      <tr><th scope="row">Head-to-head price checks</th>
+        <td>{% if block.report.compared %}On
+          <span data-field="compared">{{ block.report.compared }}</span>
+          products another tracked retailer also had in stock, its position
+          was:
+          <ul class="buckets">
+            {% for part in block.report.position_parts %}
+            <li>{{ part.label }}:
+              <span data-field="{{ part.field }}">{{ part.count }}</span></li>
+            {% endfor %}
+          </ul>
+          <div class="muted">Those six are mutually exclusive — each compared
+            product is counted once — so they add up to the
+            {{ block.report.bucket_total }} products above. A tie is reported
+            as a tie rather than folded into cheapest or dearest.</div>
+          {% else %}<span class="muted">No product currently has an in-stock
+          price at this retailer and another at the same time, so there is
+          nothing to compare.</span>{% endif %}</td></tr>
+      <tr><th scope="row">Audit verdicts for this retailer</th>
+        <td>{% if block.report.verdicts %}
+          {% for verdict, count in block.report.verdicts.items() %}{{ verdict }}: {{ count }}{% if not loop.last %} · {% endif %}{% endfor %}
+          {% if block.report.audit_generated %}<div class="muted">from the audit
+            run on {{ block.report.audit_generated }}</div>{% endif %}
+          {% if not block.report.verified_verdicts %}<div class="muted">Nothing
+            here is a pass or a fail: the audit re-reads a rotating sample
+            within a request budget, and NOT_AUDITED means this retailer's
+            pairs were not drawn in that run.</div>{% endif %}
+          {% else %}<span class="muted">No audit results recorded for this
+          retailer in the current report.</span>{% endif %}</td></tr>
+      <tr><th scope="row">Our commercial relationship</th>
+        <td>{% if block.report.affiliate_live %}Affiliate programme active — we
+          may earn a commission on outbound links.
+          {% else %}None. No affiliate programme joined, no commission earned
+          on any link to this retailer.{% endif %}</td></tr>
+      <tr><th scope="row">Shipping, returns, support</th>
+        <td><span class="muted">We hold no data. Not tracked, not estimated,
+          not repeated from elsewhere.</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+  {% elif block.kind == "history" %}
+<div class="live">
+  <table>
+    <tbody>
+      <tr><th scope="row">First recorded scrape</th>
+        <td><span data-field="history-first">{{ history.first_date or "none yet" }}</span></td></tr>
+      <tr><th scope="row">Most recent scrape</th>
+        <td><span data-field="history-last">{{ history.last_date or "none yet" }}</span></td></tr>
+      <tr><th scope="row">Distinct days with observations</th>
+        <td><span data-field="history-days">{{ history.days }}</span></td></tr>
+      <tr><th scope="row">Stored price rows</th>
+        <td><span data-field="history-rows">{{ history.rows }}</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+  {% elif block.kind == "citations" %}
+<ul class="citations">
+  {% for item in block.sources %}
+  <li>
+    <a href="{{ item.url }}" rel="nofollow">{{ item.title }}</a> —
+    {{ item.publisher }}, {{ item.date }}.
+    {% if item.note %}<span class="muted">{{ item.note }}</span>{% endif %}
+  </li>
+  {% endfor %}
+</ul>
+    {% if block.span %}
+<p class="muted">{{ block.span.count }} dated sources spanning
+  {{ block.span.first }} to {{ block.span.last }}
+  ({{ block.span.total_days }} days). The gaps between consecutive
+  sources run from {{ block.span.min_gap }} to {{ block.span.max_gap }}
+  days — measured from the dates above, not characterised from memory.</p>
+    {% endif %}
+
+  {% endif %}
+{% endfor %}
+
+<div class="authorbox">
+  <h2>About the author</h2>
+  <p><strong class="author-name">{{ author.name }}</strong> — {{ author.bio }}</p>
+  <p class="muted">{{ author.disclaimer }} How the data is collected, and when
+    we withhold a number, is set out on the
+    <a href="{{ root_prefix }}about.html">about and methodology page</a>.
+    Our commercial position is in the
+    <a href="{{ root_prefix }}disclosure.html">affiliate disclosure</a>.</p>
+</div>
+</article>
+{% endblock %}

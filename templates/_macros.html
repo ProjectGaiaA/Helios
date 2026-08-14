@@ -1,0 +1,111 @@
+{#
+  Shared live-data-table macros. Imported by guide.html AND article.html so
+  the two surfaces cannot drift: audit.py joins on this exact attribute set
+  (data-retailer-id, data-product-id, data-variant-id, data-tier, data-sku,
+  data-scraped-at on the row; data-field on the value; data-spec-* on the
+  divisor behind a rating), so the markup is load-bearing, not decoration.
+
+  A second copy of these rows living in an article template is exactly the
+  drift that would let an article publish a number the product page
+  withholds. There is one copy.
+#}
+
+{%- macro annotations(offer) -%}
+{%- if offer.sku_conflict == "quantity" %}
+  <div class="withheld">Retailers disagree on the quantity behind SKU
+    <code>{{ offer.sku }}</code>. This row may not hold the same number of
+    items as another row with the same label — check the retailer's page.</div>
+{%- elif offer.sku_conflict == "kind" %}
+  <div class="withheld">Retailers disagree on whether SKU
+    <code>{{ offer.sku }}</code> is a standalone unit or a bundle.</div>
+{%- endif %}
+{%- if offer.sku_only_here %}
+  <div class="prov">SKU <code>{{ offer.sku }}</code> — carried only by
+    {{ offer.retailer_name }} among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div>
+{%- endif %}
+{%- if offer.note_warning %}
+  <div class="withheld">Data-quality note recorded against
+    {{ offer.retailer_name }} for this product:
+    {{ offer.note_warning | truncate(260, true, "...") }}</div>
+{%- endif %}
+{%- endmacro -%}
+
+{%- macro availability(offer) -%}
+{%- if offer.available is sameas true %}<span class="instock" data-field="availability" data-value="true">In stock</span>
+{%- elif offer.available is sameas false %}<span class="soldout" data-field="availability" data-value="false">Sold out</span>
+{%- else %}<span class="unknown" data-field="availability" data-value="unknown">Check site</span>{% endif %}
+{%- endmacro -%}
+
+{%- macro rowattrs(offer) -%}
+data-retailer-id="{{ offer.retailer_id }}" data-product-id="{{ offer.product_id }}"{% if offer.variant_id is not none %} data-variant-id="{{ offer.variant_id }}"{% endif %} data-tier="{{ offer.tier }}" data-sku="{{ offer.sku or '' }}" data-scraped-at="{{ offer.scraped_at }}"{% if offer.withheld %} data-withheld="{{ offer.withheld }}"{% endif %}
+{%- endmacro -%}
+
+{#
+  One product's full per-retailer offer table, identical to the one a guide
+  renders. `entry` is a build.guide_entry() view model.
+#}
+{%- macro offer_table(entry, metric) -%}
+<table>
+  <thead>
+    <tr><th>Retailer</th><th>Variant</th><th>Price</th><th>{{ metric.label }}</th>
+        <th>Availability</th><th></th></tr>
+  </thead>
+  <tbody>
+    {% for offer in entry.offers %}
+    <tr {{ rowattrs(offer) }}>
+      <td>{{ offer.retailer_name }}</td>
+      <td>{{ offer.raw_variant or "Standard" }}
+          {% if offer.classification == "bundle" %}<span class="badge">bundle</span>{% endif %}
+          {{ annotations(offer) }}</td>
+      {% if offer.withheld %}
+      <td colspan="3"><span class="muted">price withheld ({{ offer.withheld_reason }})</span></td>
+      {% else %}
+      <td><span data-field="price">{{ offer.price_display }}</span>
+          {% if offer.was_price_display %}<span class="was" data-field="was-price">{{ offer.was_price_display }}</span>{% endif %}
+          <div class="muted" data-field="asof">{{ offer.asof }}</div></td>
+      <td>{% if offer.rating_display %}<span class="wh" data-field="{{ metric.field }}" data-spec-key="{{ metric.spec_key }}" data-spec-value="{{ entry.spec_value }}" data-spec-provenance="{{ offer.spec_provenance }}">{{ offer.rating_display }}</span>
+          {% if offer.available is sameas false %}<div class="prov">not ranked: sold out</div>{% endif %}
+          {% else %}<span class="withheld">{{ offer.rating_withheld_reason }}</span>{% endif %}</td>
+      <td>{{ availability(offer) }}</td>
+      {% endif %}
+      <td><a href="{{ offer.buy_url }}" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{%- endmacro -%}
+
+{#
+  The headline line for a ranked product: rating, price, retailer, stock —
+  all describing the SAME variant (red team #2 MAJOR-1, extended by HIGH-1
+  to include availability).
+#}
+{#
+  The headline is a COMPLETE provenance container, not a summary line.
+
+  It used to carry data-variant-id with only a `best-rating` field: no
+  data-sku, no price, no availability. Where a page rendered a product ONLY
+  as a headline — a compact ranking, with no per-retailer table beneath —
+  audit.py read that half-record as a row missing its sku, its price and
+  its availability, and raised RENDER_DEFECT against three correct
+  articles. Exactly BLOCKER-1's shape: a legitimate rendering context with
+  fewer fields, mistaken for a defective one.
+
+  So the headline now uses rowattrs() and the SAME data-field names a table
+  row uses. Merging a headline with a table row for the same variant is
+  then comparing like with like, and a headline standing alone is a
+  complete, checkable record.
+#}
+{%- macro headline(entry, metric, root_prefix) -%}
+<p class="muted" {{ rowattrs(entry.best) }}>
+  {{ entry.product.brand }}{% if entry.spec_display %} ·
+  <span data-field="spec" data-spec-key="{{ metric.spec_key }}" data-spec-value="{{ entry.spec_value }}" data-spec-provenance="{{ entry.spec_provenance }}">{{ entry.spec_display }}</span>
+  {{ metric.spec_label }}{% endif %} ·
+  best <span class="headline" data-field="{{ metric.field }}" data-spec-key="{{ metric.spec_key }}" data-spec-value="{{ entry.spec_value }}" data-spec-provenance="{{ entry.best.spec_provenance }}">{{ entry.best.rating_display }}</span>
+  at {{ entry.best.retailer_name }}
+  <span data-field="price">{{ entry.best.price_display }}</span>
+  — {{ availability(entry.best) }}
+  (<span data-field="asof">{{ entry.best.asof }}</span>)
+</p>
+{%- endmacro -%}

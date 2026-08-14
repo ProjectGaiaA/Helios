@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LiFePO4 vs NCM, in plain English — Helios</title>
+<meta name="description" content="LiFePO4 (lithium iron phosphate) trades energy density for cycle life and thermal stability; NCM (nickel-cobalt-manganese) trades the opposite way...">
+
+<link rel="canonical" href="https://helios-projectgaiaas-projects.vercel.app/articles/lifepo4-vs-ncm-plain-english.html">
+<style>
+  /* No external assets — everything inline (PLAN section 2). */
+  body { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+         margin: 0; color: #1a1a1a; background: #fafaf7; }
+  header { background: #14324a; color: #fff; padding: 14px 24px; }
+  header a { color: #fff; text-decoration: none; font-weight: 600; }
+  nav { background: #1d4463; padding: 8px 24px; font-size: 0.9rem; }
+  nav a { color: #cfe1f0; text-decoration: none; margin-right: 18px; }
+  nav a:hover { color: #fff; text-decoration: underline; }
+  main { max-width: 1080px; margin: 0 auto; padding: 24px; }
+  h1 { font-size: 1.5rem; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0 28px; background: #fff; }
+  th, td { border: 1px solid #d8d8d2; padding: 8px 10px; text-align: left; font-size: 0.92rem; }
+  th { background: #eef1ee; }
+  .badge { display: inline-block; padding: 1px 7px; border-radius: 9px;
+           font-size: 0.75rem; background: #d9e6f2; color: #14324a; vertical-align: middle; }
+  .soldout { color: #a33; font-weight: 600; }
+  .unknown { color: #777; }
+  .instock { color: #1a7a3a; font-weight: 600; }
+  .wh { color: #1a7a3a; white-space: nowrap; }
+  .muted { color: #777; font-size: 0.85rem; }
+  .was { color: #999; text-decoration: line-through; margin-left: 6px; }
+  footer { max-width: 1080px; margin: 0 auto; padding: 16px 24px; color: #777; font-size: 0.8rem; }
+  footer a { color: #14324a; }
+  /* --- content layer (guides, about, disclosure) --- */
+  article { background: #fff; border: 1px solid #d8d8d2; margin: 0 0 18px;
+            padding: 12px 16px; }
+  article h2 { font-size: 1.08rem; margin: 4px 0; }
+  .rank { display: inline-block; min-width: 1.6em; color: #14324a;
+          font-weight: 700; }
+  .headline { font-size: 1.15rem; color: #1a7a3a; font-weight: 700;
+              white-space: nowrap; }
+  .withheld { color: #a33; font-size: 0.85rem; }
+  .prov { color: #777; font-size: 0.78rem; }
+  .method { background: #f2f4f1; border: 1px solid #d8d8d2; padding: 12px 16px;
+            font-size: 0.86rem; }
+  .method h2 { font-size: 1rem; margin-top: 0; }
+  .method li { margin-bottom: 5px; }
+  .spread { background: #fff; border: 1px solid #d8d8d2; padding: 10px 14px;
+            margin-bottom: 12px; }
+  .prose { max-width: 720px; }
+  .prose p, .prose li { line-height: 1.55; }
+  /* --- editorial layer --- */
+  article.post { max-width: 760px; }
+  article.post p, article.post li { line-height: 1.6; }
+  .answer { background: #eef4ee; border-left: 4px solid #1a7a3a;
+            padding: 12px 16px; font-size: 1.02rem; }
+  .byline { margin-top: -4px; }
+  .author-name { color: #14324a; font-weight: 600; }
+  .callout { background: #fdf6e3; border: 1px solid #e0d6b8;
+             padding: 12px 16px; margin: 16px 0; }
+  .callout p { margin: 0; }
+  .authorbox { border-top: 2px solid #d8d8d2; margin-top: 32px;
+               padding-top: 12px; }
+  .authorbox h2 { font-size: 1rem; }
+  .citations li { margin-bottom: 8px; }
+  .articlelist { padding-left: 18px; }
+  .articlelist li { margin-bottom: 12px; }
+  section.live, div.live { margin-bottom: 20px; }
+  table.specs th[scope="row"] { background: #f6f7f5; width: 30%; }
+</style>
+</head>
+<body>
+<header><a href="../index.html">Helios</a> — solar &amp; home-energy price tracker</header>
+<nav>
+  <a href="../index.html">All prices</a>
+  <a href="../guides/server-rack-and-wall-mount-battery-cost-per-kwh.html">Rack &amp; wall batteries</a><a href="../guides/portable-power-stations-compared-by-real-prices.html">Power stations</a><a href="../guides/solar-panel-pallets-cheapest-cost-per-watt.html">Solar panels</a>
+  <a href="../articles/index.html">Articles</a>
+  <a href="../about.html">About</a>
+  <a href="../disclosure.html">Affiliate disclosure</a>
+</nav>
+<main>
+
+<article class="post">
+<h1>LiFePO4 vs NCM, in plain English</h1>
+
+<p class="answer"><strong>Direct answer:</strong> LiFePO4 (lithium iron phosphate) trades energy density for cycle life and thermal stability; NCM (nickel-cobalt-manganese) trades the opposite way, packing more watt-hours into less weight. For home backup and most portable power stations the industry has settled on LiFePO4, and our catalog reflects that: of the products where a chemistry is recorded, 21 are LiFePO4 and 1 is NCM. Live examples of each are below, with the caveat that we read chemistry off spec sheets rather than cells.</p>
+
+<p class="muted byline">
+  By <span class="author-name">Brandon Hall</span> ·
+  Prices on this page refreshed when the site was last built; price record runs from 2026-08-13
+  to 2026-08-14.
+</p>
+
+
+  
+<h2>The trade, in one paragraph</h2>
+
+  
+
+  
+<p>Both are lithium-ion. The difference is what the cathode is made of, and that choice sets everything else. <strong>LiFePO4</strong> — lithium iron phosphate, sometimes written LFP — uses iron and phosphate: cheap, abundant, chemically stable, and comparatively heavy for the energy it stores. <strong>NCM</strong> — nickel, cobalt, manganese, sometimes NMC — packs more energy into less mass and volume, which is why it dominated the first generation of portable power stations and why it remains common in electric vehicles where range and pack density set the design, particularly in Europe and in premium long-range models. It is no longer the majority chemistry in EVs globally, though: the IEA puts LFP at more than half of all EV batteries deployed worldwide in 2025, overtaking the nickel-based chemistries.</p>
+
+  
+
+  
+<ul class="citations">
+  
+  <li>
+    <a href="https://www.iea.org/reports/global-ev-outlook-2026/electric-vehicle-batteries" rel="nofollow">Electric vehicle batteries — Global EV Outlook 2026</a> —
+    International Energy Agency, 2026-05-20.
+    <span class="muted">LFP accounted for over 55% of EV batteries deployed globally in 2025, up from nearly 50% in 2024, passing the nickel-based chemistries. We have not independently verified these figures; we are citing them.</span>
+  </li>
+  
+</ul>
+    
+
+  
+
+  
+<h2>What each one is better at</h2>
+
+  
+
+  
+<ul><li><strong>Cycle life</strong> favours LiFePO4, usually by a wide margin. Manufacturers typically rate LFP packs for several thousand cycles to 80% capacity, and NCM packs for something in the 800 to 2,000 range. Those are published ratings, not our measurements.</li><li><strong>Energy density</strong> favours NCM. For the same watt-hours, an NCM pack is lighter and smaller.</li><li><strong>Thermal behaviour</strong> favours LiFePO4, which is the main reason it has taken over stationary storage: it is the more forgiving chemistry when something goes wrong.</li><li><strong>Cost per watt-hour</strong> currently favours LiFePO4 on the products we track, which is visible directly in the tables below rather than asserted here.</li></ul><p>For a battery that lives in a garage and cycles daily for a decade, the density penalty costs you floor space and the cycle life pays you back every day. For something you carry, the trade is genuinely closer.</p>
+
+  
+
+  
+<p class="prov">Helios has not physically tested any product on this page. Our authority is price data, published specifications and our own scrape history — that is a narrower claim than a review site makes, and it is the one we can actually support.</p>
+
+  
+
+  
+<h2>LiFePO4 in our catalog, live</h2>
+
+  
+
+  
+<p>Every tracked product whose listing states LiFePO4 cells, ranked on cost per watt-hour.</p>
+
+  
+
+  
+<div class="live">
+  <p class="muted">
+    12 of 21 listed
+    products could be ranked.
+    Only in-stock offers set a rank.
+  </p>
+  
+  <section data-product-id="eg4-wallmount-indoor-16kwh">
+    <h3><span class="rank">1.</span>
+      <a href="../products/eg4-wallmount-indoor-16kwh.html">EG4 Indoor WallMount Battery 48V 314Ah 16kWh</a>
+    </h3>
+    <p class="muted" data-retailer-id="shop-solar-kits" data-product-id="eg4-wallmount-indoor-16kwh" data-variant-id="45192132460684" data-tier="default" data-sku="1510984" data-scraped-at="2026-08-14T13:51:45.829395+00:00">
+  EG4 ·
+  <span data-field="spec" data-spec-key="capacity_wh" data-spec-value="16000" data-spec-provenance="quoted">16,000 Wh</span>
+  usable capacity ·
+  best <span class="headline" data-field="wh" data-spec-key="capacity_wh" data-spec-value="16000" data-spec-provenance="quoted">$0.21/Wh</span>
+  at Shop Solar Kits
+  <span data-field="price">$3,399.99</span>
+  — <span class="instock" data-field="availability" data-value="true">In stock</span>
+  (<span data-field="asof">as of 1h ago</span>)
+</p>
+    
+  </section>
+  
+  <section data-product-id="rich-solar-alpha-12v-100ah">
+    <h3><span class="rank">2.</span>
+      <a href="../products/rich-solar-alpha-12v-100ah.html">Rich Solar ALPHA 12V 100Ah LiFePO4</a>
+    </h3>
+    <p class="muted" data-retailer-id="wild-oak-trail" data-product-id="rich-solar-alpha-12v-100ah" data-variant-id="43677757047020" data-tier="default" data-sku="RS-B12100" data-scraped-at="2026-08-14T13:57:44.616225+00:00">
+  Rich Solar ·
+  <span data-field="spec" data-spec-key="capacity_wh" data-spec-value="1280" data-spec-provenance="cross-retailer">1,280 Wh</span>
+  usable capacity ·
+  best <span class="headline" data-field="wh" data-spec-key="capacity_wh" data-spec-value="1280" data-spec-provenance="cross-retailer">$0.25/Wh</span>
+  at Wild Oak Trail
+  <span data-field="price">$319.99</span>
+  — <span class="instock" data-field="availability" data-value="true">In stock</span>
+  (<span data-field="asof">as of 1h ago</span>)
+</p>
+    
+  </section>
+  
+  <section data-product-id="rich-solar-alpha-24v-100ah">
+    <h3><span class="rank">3.</span>
+      <a href="../products/rich-solar-alpha-24v-100ah.html">Rich Solar ALPHA 4 LITE 24V 100Ah LiFePO4</a>
+    </h3>
+    <p class="muted" data-retailer-id="shop-solar-kits" data-product-id="rich-solar-alpha-24v-100ah" data-variant-id="43258631848076" data-tier="alpha-4-lite" data-sku="RS-B24100" data-scraped-at="2026-08-14T13:48:31.767637+00:00">
+  Rich Solar ·
+  <span data-field="spec" data-spec-key="capacity_wh" data-spec-value="2560" data-spec-provenance="quoted">2,560 Wh</span>
+  usable capacity ·
+  best <span class="headline" data-field="wh" data-spec-key="capacity_wh" data-spec-value="2560" data-spec-provenance="quoted">$0.27/Wh</span>
+  at Shop Solar Kits
+  <span data-field="price">$699.99</span>
+  — <span class="instock" data-field="availability" data-value="true">In stock</span>
+  (<span data-field="asof">as of 1h ago</span>)
+</p>
+    
+  </section>
+  
+  <section data-product-id="eg4-lifepower4">
+    <h3><span class="rank">4.</span>
+      <a href="../products/eg4-lifepower4.html">EG4 LifePower4 V2 48V 100Ah</a>
+    </h3>
+    <p class="muted" data-retailer-id="shop-solar-kits" data-product-id="eg4-lifepower4" data-variant-id="43287020535948" data-tier="default" data-sku="1511105" data-scraped-at="2026-08-14T13:44:45.905903+00:00">
+  EG4 ·
+  <span data-field="spec" data-spec-key="capacity_wh" data-spec-value="5120" data-spec-provenance="quoted">5,120 Wh</span>
+  usable capacity ·
+  best <span class="headline" data-field="wh" data-spec-key="capacity_wh" data-spec-value="5120" data-spec-provenance="quoted">$0.29/Wh</span>
+  at Shop Solar Kits
+  <span data-field="price">$1,470.99</span>
+  — <span class="instock" data-field="availability" data-value="true">In stock</span>
+  (<span data-field="asof">as of 2h ago</span>)
+</p>
+    
+  </section>
+  
+  <section data-product-id="eg4-ll-s-48v-100ah">
+    <h3><span class="rank">5.</span>
+      <a href="../products/eg4-ll-s-48v-100ah.html">EG4 LL-S 48V 100Ah Server Rack Battery</a>
+    </h3>
+    <p class="muted" data-retailer-id="shop-solar-kits" data-product-id="eg4-ll-s-48v-100ah" data-variant-id="41798635487372" data-tier="1-battery-only" data-sku="EG4-1511082" data-scraped-at="2026-08-14T13:51:22.658014+00:00">
+  EG4 ·
+  <span data-field="spec" data-spec-key="capacity_wh" data-spec-value="5120" data-spec-provenance="quoted">5,120 Wh</span>
+  usable capacity ·
+  best <span class="headline" data-field="wh" data-spec-key="capacity_wh" data-spec-value="5120" data-spec-provenance="quoted">$0.30/Wh</span>
+  at Shop Solar Kits
+  <span data-field="price">$1,536.99</span>
+  — <span class="instock" data-field="availability" data-value="true">In stock</span>
+  (<span data-field="asof">as of 1h ago</span>)
+</p>
+    
+  </section>
+  
+  <section data-product-id="midnite-mnpowerflo16">
+    <h3><span class="rank">6.</span>
+      <a href="../products/midnite-mnpowerflo16.html">MidNite Solar MNPowerFlo16 48V 16kWh LFP Battery</a>
+    </h3>
+    <p class="muted" data-retailer-id="alte-store" data-product-id="midnite-mnpowerflo16" data-variant-id="46166697574619" data-tier="default" data-sku="MNPowerFlo16" data-scraped-at="2026-08-14T14:04:39.149353+00:00">
+  MidNite Solar ·
+  <span data-field="spec" data-spec-key="capacity_wh" data-spec-value="16000" data-spec-provenance="quoted">16,000 Wh</span>
+  usable capacity ·
+  best <span class="headline" data-field="wh" data-spec-key="capacity_wh" data-spec-value="16000" data-spec-provenance="quoted">$0.38/Wh</span>
+  at altE Store
+  <span data-field="price">$6,115.01</span>
+  — <span class="instock" data-field="availability" data-value="true">In stock</span>
+  (<span data-field="asof">as of 1h ago</span>)
+</p>
+    
+  </section>
+  
+  <section data-product-id="lion-ut-1300">
+    <h3><span class="rank">7.</span>
+      <a href="../products/lion-ut-1300.html">Lion Energy Safari UT 1300BT 12V 105Ah</a>
+    </h3>
+    <p class="muted" data-retailer-id="wild-oak-trail" data-product-id="lion-ut-1300" data-variant-id="31599398584410" data-tier="default" data-sku="50170171" data-scraped-at="2026-08-14T13:57:23.517712+00:00">
+  Lion Energy ·
+  <span data-field="spec" data-spec-key="capacity_wh" data-spec-value="1344" data-spec-provenance="quoted">1,344 Wh</span>
+  usable capacity ·
+  best <span class="headline" data-field="wh" data-spec-key="capacity_wh" data-spec-value="1344" data-spec-provenance="quoted">$0.67/Wh</span>
+  at Wild Oak Trail
+  <span data-field="price">$899.00</span>
+  — <span class="instock" data-field="availability" data-value="true">In stock</span>
+  (<span data-field="asof">as of 1h ago</span>)
+</p>
+    
+  </section>
+  
+  <section data-product-id="ecoflow-delta-pro-3">
+    <h3><span class="rank">8.</span>
+      <a href="../products/ecoflow-delta-pro-3.html">EcoFlow DELTA Pro 3</a>
+    </h3>
+    <p class="muted" data-retailer-id="shop-solar-kits" data-product-id="ecoflow-delta-pro-3" data-variant-id="43004281094284" data-tier="delta-pro-3-main-unit-only" data-sku="EFDELTAPRO3-US" data-scraped-at="2026-08-14T13:45:10.372165+00:00">
+  EcoFlow ·
+  <span data-field="spec" data-spec-key="capacity_wh" data-spec-value="4096" data-spec-provenance="quoted">4,096 Wh</span>
+  usable capacity ·
+  best <span class="headline" data-field="wh" data-spec-key="capacity_wh" data-spec-value="4096" data-spec-provenance="quoted">$0.68/Wh</span>
+  at Shop Solar Kits
+  <span data-field="price">$2,799.00</span>
+  — <span class="instock" data-field="availability" data-value="true">In stock</span>
+  (<span data-field="asof">as of 2h ago</span>)
+</p>
+    
+  </section>
+  
+  <section data-product-id="enphase-iq-battery-5p">
+    <h3><span class="rank">9.</span>
+      <a href="../products/enphase-iq-battery-5p.html">Enphase IQ Battery 5P</a>
+    </h3>
+    <p class="muted" data-retailer-id="shop-solar-kits" data-product-id="enphase-iq-battery-5p" data-variant-id="42621468999820" data-tier="default" data-sku="IQBATTERY-5P-1P-NA" data-scraped-at="2026-08-14T13:52:22.844794+00:00">
+  Enphase ·
+  <span data-field="spec" data-spec-key="capacity_wh" data-spec-value="5000" data-spec-provenance="quoted">5,000 Wh</span>
+  usable capacity ·
+  best <span class="headline" data-field="wh" data-spec-key="capacity_wh" data-spec-value="5000" data-spec-provenance="quoted">$0.73/Wh</span>
+  at Shop Solar Kits
+  <span data-field="price">$3,669.00</span>
+  — <span class="instock" data-field="availability" data-value="true">In stock</span>
+  (<span data-field="asof">as of 1h ago</span>)
+</p>
+    
+  </section>
+  
+  <section data-product-id="ecoflow-river-2-pro">
+    <h3><span class="rank">10.</span>
+      <a href="../products/ecoflow-river-2-pro.html">EcoFlow RIVER 2 Pro</a>
+    </h3>
+    <p class="muted" data-retailer-id="shop-solar-kits" data-product-id="ecoflow-river-2-pro" data-variant-id="41679254454412" data-tier="ecoflow-river-2-pro-main-unit-only" data-sku="ZMR620-B-US" data-scraped-at="2026-08-14T13:44:06.253549+00:00">
+  EcoFlow ·
+  <span data-field="spec" data-spec-key="capacity_wh" data-spec-value="768" data-spec-provenance="quoted">768 Wh</span>
+  usable capacity ·
+  best <span class="headline" data-field="wh" data-spec-key="capacity_wh" data-spec-value="768" data-spec-provenance="quoted">$0.74/Wh</span>
+  at Shop Solar Kits
+  <span data-field="price">$569.00</span>
+  — <span class="instock" data-field="availability" data-value="true">In stock</span>
+  (<span data-field="asof">as of 2h ago</span>)
+</p>
+    
+  </section>
+  
+  <section data-product-id="bluetti-ac200l">
+    <h3><span class="rank">11.</span>
+      <a href="../products/bluetti-ac200l.html">Bluetti AC200L</a>
+    </h3>
+    <p class="muted" data-retailer-id="wild-oak-trail" data-product-id="bluetti-ac200l" data-variant-id="46535814447340" data-tier="ac200l-only" data-sku="" data-scraped-at="2026-08-14T13:54:41.199128+00:00">
+  Bluetti ·
+  <span data-field="spec" data-spec-key="capacity_wh" data-spec-value="2048" data-spec-provenance="quoted">2,048 Wh</span>
+  usable capacity ·
+  best <span class="headline" data-field="wh" data-spec-key="capacity_wh" data-spec-value="2048" data-spec-provenance="quoted">$0.78/Wh</span>
+  at Wild Oak Trail
+  <span data-field="price">$1,599.00</span>
+  — <span class="instock" data-field="availability" data-value="true">In stock</span>
+  (<span data-field="asof">as of 1h ago</span>)
+</p>
+    
+  </section>
+  
+  <section data-product-id="ecoflow-river-3">
+    <h3><span class="rank">12.</span>
+      <a href="../products/ecoflow-river-3.html">EcoFlow RIVER 3</a>
+    </h3>
+    <p class="muted" data-retailer-id="shop-solar-kits" data-product-id="ecoflow-river-3" data-variant-id="43432948301964" data-tier="river-3-main-unit-only" data-sku="EFRIVER3-US" data-scraped-at="2026-08-14T13:45:53.951364+00:00">
+  EcoFlow ·
+  <span data-field="spec" data-spec-key="capacity_wh" data-spec-value="245" data-spec-provenance="quoted">245 Wh</span>
+  usable capacity ·
+  best <span class="headline" data-field="wh" data-spec-key="capacity_wh" data-spec-value="245" data-spec-provenance="quoted">$0.81/Wh</span>
+  at Shop Solar Kits
+  <span data-field="price">$199.00</span>
+  — <span class="instock" data-field="availability" data-value="true">In stock</span>
+  (<span data-field="asof">as of 2h ago</span>)
+</p>
+    
+  </section>
+  
+  
+  <h3>Listed, but not ranked</h3>
+  <p class="muted">Each reason below is the actual rule that withheld the
+    number, not a placeholder.</p>
+  
+  <section data-product-id="anker-solix-f2600">
+    <h4><a href="../products/anker-solix-f2600.html">Anker SOLIX F2600</a></h4>
+    <p class="withheld">No $/Wh:
+      the best price we can rate is currently sold out, so this product is not ranked today.</p>
+    
+  </section>
+  
+  <section data-product-id="bluetti-ac180">
+    <h4><a href="../products/bluetti-ac180.html">Bluetti AC180</a></h4>
+    <p class="withheld">No $/Wh:
+      usable capacity is not established for this product, so $/Wh is withheld at every retailer.</p>
+    
+  </section>
+  
+  <section data-product-id="bluetti-ac240p">
+    <h4><a href="../products/bluetti-ac240p.html">Bluetti AC240P</a></h4>
+    <p class="withheld">No $/Wh:
+      the best price we can rate is currently sold out, so this product is not ranked today.</p>
+    
+  </section>
+  
+  <section data-product-id="bluetti-b210-expansion">
+    <h4><a href="../products/bluetti-b210-expansion.html">Bluetti B210P Expansion Battery</a></h4>
+    <p class="withheld">No $/Wh:
+      every variant on sale is a bundle or a multi-unit pack, so $/Wh is withheld.</p>
+    
+  </section>
+  
+  <section data-product-id="ecoflow-delta-pro-3-extra-battery">
+    <h4><a href="../products/ecoflow-delta-pro-3-extra-battery.html">EcoFlow DELTA Pro 3 Smart Extra Battery</a></h4>
+    <p class="withheld">No $/Wh:
+      every variant on sale is a bundle or a multi-unit pack, so $/Wh is withheld.</p>
+    
+  </section>
+  
+  <section data-product-id="ecoflow-delta-pro-ultra">
+    <h4><a href="../products/ecoflow-delta-pro-ultra.html">EcoFlow DELTA Pro Ultra</a></h4>
+    <p class="withheld">No $/Wh:
+      usable capacity is not established for this product, so $/Wh is withheld at every retailer.</p>
+    
+  </section>
+  
+  <section data-product-id="rich-solar-alpha-12v-200ah">
+    <h4><a href="../products/rich-solar-alpha-12v-200ah.html">Rich Solar ALPHA 12V 200Ah LiFePO4</a></h4>
+    <p class="withheld">No $/Wh:
+      usable capacity is not established for this product, so $/Wh is withheld at every retailer.</p>
+    
+  </section>
+  
+  <section data-product-id="rich-solar-alpha-5-pro">
+    <h4><a href="../products/rich-solar-alpha-5-pro.html">Rich Solar ALPHA 5 PRO 51.2V 100Ah Server Rack</a></h4>
+    <p class="withheld">No $/Wh:
+      usable capacity is not established for this product, so $/Wh is withheld at every retailer.</p>
+    
+  </section>
+  
+  <section data-product-id="rich-solar-all-in-one-ess">
+    <h4><a href="../products/rich-solar-all-in-one-ess.html">Rich Solar All-in-One Energy Storage System</a></h4>
+    <p class="withheld">No $/Wh:
+      usable capacity is not established for this product, so $/Wh is withheld at every retailer.</p>
+    
+  </section>
+  
+  
+  
+</div>
+
+  
+
+  
+<h2>NCM in our catalog, live</h2>
+
+  
+
+  
+<p>The other side of the comparison is thin, and that is itself the finding: the market has moved. Here is every tracked product recorded as NCM.</p>
+
+  
+
+  
+<div class="live">
+  <p class="muted">
+    0 of 1 listed
+    product could be ranked.
+    Only in-stock offers set a rank.
+  </p>
+  
+  
+  <h3>Listed, but not ranked</h3>
+  <p class="muted">Each reason below is the actual rule that withheld the
+    number, not a placeholder.</p>
+  
+  <section data-product-id="ecoflow-delta-max">
+    <h4><a href="../products/ecoflow-delta-max.html">EcoFlow DELTA Max 2000</a></h4>
+    <p class="withheld">No $/Wh:
+      the best price we can rate is currently sold out, so this product is not ranked today.</p>
+    <table>
+  <thead>
+    <tr><th>Retailer</th><th>Variant</th><th>Price</th><th>$/Wh</th>
+        <th>Availability</th><th></th></tr>
+  </thead>
+  <tbody>
+    
+    <tr data-retailer-id="shop-solar-kits" data-product-id="ecoflow-delta-max" data-variant-id="41674486349964" data-tier="delta-max-unit-only" data-sku="DELTA2000-US" data-scraped-at="2026-08-14T13:43:47.731778+00:00">
+      <td>Shop Solar Kits</td>
+      <td>DELTA MAX [Unit Only]
+          
+          </td>
+      
+      <td><span data-field="price">$1,049.00</span>
+          <span class="was" data-field="was-price">$2,099.00</span>
+          <div class="muted" data-field="asof">as of 2h ago</div></td>
+      <td><span class="wh" data-field="wh" data-spec-key="capacity_wh" data-spec-value="2016" data-spec-provenance="quoted">$0.52/Wh</span>
+          <div class="prov">not ranked: sold out</div>
+          </td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://shopsolarkits.com/products/ecoflow-delta-max?variant=41674486349964" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-max" data-variant-id="44532344914156" data-tier="ecoflow-delta-max-portable-power-station-main-unit-only" data-sku="DELTA2000-US" data-scraped-at="2026-08-14T13:53:37.487837+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Max Portable Power Station(Main Unit ONLY)
+          
+          </td>
+      
+      <td><span data-field="price">$1,599.00</span>
+          <span class="was" data-field="was-price">$2,099.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="wh" data-field="wh" data-spec-key="capacity_wh" data-spec-value="2016" data-spec-provenance="quoted">$0.79/Wh</span>
+          <div class="prov">not ranked: sold out</div>
+          </td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-max-portable-power-station?variant=44532344914156" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-max" data-variant-id="44532345241836" data-tier="ecoflow-delta-max-2000-1-220w-solar-panel" data-sku="TMR310-MS430-US" data-scraped-at="2026-08-14T13:53:37.487837+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Max 2000 + 1*220W Solar Panel
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>TMR310-MS430-US</code> — carried only by
+    Wild Oak Trail among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$1,349.00</span>
+          <span class="was" data-field="was-price">$2,748.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-max-portable-power-station?variant=44532345241836" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="shop-solar-kits" data-product-id="ecoflow-delta-max" data-variant-id="41674484908172" data-tier="delta-max-eclipse-kit-1-x-200w-folding-panel" data-sku="DELTA-MAX-ECLIPSE" data-scraped-at="2026-08-14T13:43:47.731778+00:00">
+      <td>Shop Solar Kits</td>
+      <td>DELTA MAX Eclipse Kit [1 x 200W Folding Panel]
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>DELTA-MAX-ECLIPSE</code> — carried only by
+    Shop Solar Kits among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$1,408.12</span>
+          <span class="was" data-field="was-price">$1,899.00</span>
+          <div class="muted" data-field="asof">as of 2h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://shopsolarkits.com/products/ecoflow-delta-max?variant=41674484908172" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="shop-solar-kits" data-product-id="ecoflow-delta-max" data-variant-id="41674491035788" data-tier="delta-max-double-kit-2-x-200w-rigid-panels" data-sku="DELTA-MAX-DOUBLE" data-scraped-at="2026-08-14T13:43:47.731778+00:00">
+      <td>Shop Solar Kits</td>
+      <td>DELTA MAX Double Kit [2 x 200W Rigid Panels]
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>DELTA-MAX-DOUBLE</code> — carried only by
+    Shop Solar Kits among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$1,486.92</span>
+          <span class="was" data-field="was-price">$1,989.00</span>
+          <div class="muted" data-field="asof">as of 2h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://shopsolarkits.com/products/ecoflow-delta-max?variant=41674491035788" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="shop-solar-kits" data-product-id="ecoflow-delta-max" data-variant-id="41677437665420" data-tier="delta-max-nomad-kit-2-x-200w-folding-panels" data-sku="DELTA-MAX-NOMAD" data-scraped-at="2026-08-14T13:43:47.731778+00:00">
+      <td>Shop Solar Kits</td>
+      <td>DELTA MAX Nomad Kit [2 x 200W Folding Panels]
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>DELTA-MAX-NOMAD</code> — carried only by
+    Shop Solar Kits among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$1,687.81</span>
+          <span class="was" data-field="was-price">$2,179.00</span>
+          <div class="muted" data-field="asof">as of 2h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://shopsolarkits.com/products/ecoflow-delta-max?variant=41677437665420" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-max" data-variant-id="44532345372908" data-tier="ecoflow-delta-max-2000-1-400w-solar-panel" data-sku="DELTAMax2000-400W-US" data-scraped-at="2026-08-14T13:53:37.487837+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Max 2000 + 1*400W Solar Panel
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>DELTAMax2000-400W-US</code> — carried only by
+    Wild Oak Trail among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$1,699.00</span>
+          <span class="was" data-field="was-price">$4,046.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-max-portable-power-station?variant=44532345372908" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-max" data-variant-id="44532344979692" data-tier="ecoflow-delta-max-2000-1-110w-solar-panel" data-sku="DELTAMax2000+110W" data-scraped-at="2026-08-14T13:53:37.487837+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Max 2000 + 1*110W Solar Panel
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>DELTAMax2000+110W</code> — carried only by
+    Wild Oak Trail among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$1,799.00</span>
+          <span class="was" data-field="was-price">$2,498.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-max-portable-power-station?variant=44532344979692" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="shop-solar-kits" data-product-id="ecoflow-delta-max" data-variant-id="41677437730956" data-tier="delta-max-quad-kit-4-x-200w-rigid-panels" data-sku="DELTA-MAX-QUAD" data-scraped-at="2026-08-14T13:43:47.731778+00:00">
+      <td>Shop Solar Kits</td>
+      <td>DELTA MAX Quad Kit [4 x 200W Rigid Panels]
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>DELTA-MAX-QUAD</code> — carried only by
+    Shop Solar Kits among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$1,838.37</span>
+          <span class="was" data-field="was-price">$2,469.00</span>
+          <div class="muted" data-field="asof">as of 2h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://shopsolarkits.com/products/ecoflow-delta-max?variant=41677437730956" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-max" data-variant-id="44532345110764" data-tier="ecoflow-delta-max-2000-1-160w-solar-panel" data-sku="DELTAMax2000+160W" data-scraped-at="2026-08-14T13:53:37.487837+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Max 2000 + 1*160W Solar Panel
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>DELTAMax2000+160W</code> — carried only by
+    Wild Oak Trail among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$1,899.00</span>
+          <span class="was" data-field="was-price">$2,548.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-max-portable-power-station?variant=44532345110764" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-max" data-variant-id="44532345012460" data-tier="ecoflow-delta-max-2000-2-110w-solar-panel" data-sku="DELTAMax2000US112" data-scraped-at="2026-08-14T13:53:37.487837+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Max 2000 + 2*110W Solar Panel
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>DELTAMax2000US112</code> — carried only by
+    Wild Oak Trail among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$1,999.00</span>
+          <span class="was" data-field="was-price">$2,897.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-max-portable-power-station?variant=44532345012460" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="shop-solar-kits" data-product-id="ecoflow-delta-max" data-variant-id="41677437632652" data-tier="delta-max-hex-kit-6-x-100w-rigid-panels" data-sku="DELTA-MAX-HEX" data-scraped-at="2026-08-14T13:43:47.731778+00:00">
+      <td>Shop Solar Kits</td>
+      <td>DELTA MAX Hex Kit [6 x 100W Rigid Panels]
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>DELTA-MAX-HEX</code> — carried only by
+    Shop Solar Kits among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$2,155.94</span>
+          
+          <div class="muted" data-field="asof">as of 2h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://shopsolarkits.com/products/ecoflow-delta-max?variant=41677437632652" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-max" data-variant-id="44532345045228" data-tier="ecoflow-delta-max-2000-3-110w-solar-panel" data-sku="DELTAMax2000US113" data-scraped-at="2026-08-14T13:53:37.487837+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Max 2000 + 3*110W Solar Panel
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>DELTAMax2000US113</code> — carried only by
+    Wild Oak Trail among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$2,199.00</span>
+          <span class="was" data-field="was-price">$3,299.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-max-portable-power-station?variant=44532345045228" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-max" data-variant-id="44532345143532" data-tier="ecoflow-delta-max-2000-2-160w-solar-panel" data-sku="DELTAMax2000US162" data-scraped-at="2026-08-14T13:53:37.487837+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Max 2000 + 2*160W Solar Panel
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>DELTAMax2000US162</code> — carried only by
+    Wild Oak Trail among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$2,199.00</span>
+          <span class="was" data-field="was-price">$2,997.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-max-portable-power-station?variant=44532345143532" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-max" data-variant-id="45092895228140" data-tier="ecoflow-delta-max-with-100w-12v-solar-panel-bundle" data-sku="" data-scraped-at="2026-08-14T13:53:37.487837+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Max  with 100w 12v Solar Panel Bundle
+          <span class="badge">bundle</span>
+          </td>
+      
+      <td><span data-field="price">$2,208.99</span>
+          
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-max-portable-power-station?variant=45092895228140" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-max" data-variant-id="45092885299436" data-tier="ecoflow-delta-max-with-2x-100w-12v-solar-panel-bundle" data-sku="" data-scraped-at="2026-08-14T13:53:37.487837+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Max  with  2x 100w 12v Solar Panel Bundle
+          <span class="badge">bundle</span>
+          </td>
+      
+      <td><span data-field="price">$2,318.98</span>
+          
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-max-portable-power-station?variant=45092885299436" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-max" data-variant-id="44532345077996" data-tier="ecoflow-delta-max-2000-4-110w-solar-panel" data-sku="DELTAMax2000US114" data-scraped-at="2026-08-14T13:53:37.487837+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Max 2000 + 4*110W Solar Panel
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>DELTAMax2000US114</code> — carried only by
+    Wild Oak Trail among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$2,399.00</span>
+          <span class="was" data-field="was-price">$3,699.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-max-portable-power-station?variant=44532345077996" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="shop-solar-kits" data-product-id="ecoflow-delta-max" data-variant-id="41674491560076" data-tier="delta-max-base-camp-kit-4-x-200w-panels-emp-bag" data-sku="DELTA-MAX-BASECAMP" data-scraped-at="2026-08-14T13:43:47.731778+00:00">
+      <td>Shop Solar Kits</td>
+      <td>DELTA MAX Base Camp Kit [4 x 200W Panels + EMP Bag]
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>DELTA-MAX-BASECAMP</code> — carried only by
+    Shop Solar Kits among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$2,424.53</span>
+          <span class="was" data-field="was-price">$3,179.00</span>
+          <div class="muted" data-field="asof">as of 2h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://shopsolarkits.com/products/ecoflow-delta-max?variant=41674491560076" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-max" data-variant-id="45092907909356" data-tier="ecoflow-delta-max-with-300w-12v-solar-panel-bundle" data-sku="" data-scraped-at="2026-08-14T13:53:37.487837+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Max with 300w 12v Solar Panel Bundle
+          <span class="badge">bundle</span>
+          </td>
+      
+      <td><span data-field="price">$2,428.97</span>
+          
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-max-portable-power-station?variant=45092907909356" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-max" data-variant-id="44532345176300" data-tier="ecoflow-delta-max-2000-3-160w-solar-panel" data-sku="DELTAMax2000US163" data-scraped-at="2026-08-14T13:53:37.487837+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Max 2000 + 3*160W Solar Panel
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>DELTAMax2000US163</code> — carried only by
+    Wild Oak Trail among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$2,499.00</span>
+          <span class="was" data-field="was-price">$3,446.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-max-portable-power-station?variant=44532345176300" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-max" data-variant-id="45092914725100" data-tier="ecoflow-delta-max-with-400w-12v-solar-panel-bundle" data-sku="" data-scraped-at="2026-08-14T13:53:37.487837+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Max with 400w 12v Solar Panel Bundle
+          <span class="badge">bundle</span>
+          </td>
+      
+      <td><span data-field="price">$2,538.96</span>
+          
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-max-portable-power-station?variant=45092914725100" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-max" data-variant-id="44532344946924" data-tier="ecoflow-delta-max-2000-1-extra-battery" data-sku="DELTAMax2000-DELTAMaxEB-US" data-scraped-at="2026-08-14T13:53:37.487837+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Max 2000 + 1*Extra Battery
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>DELTAMax2000-DELTAMaxEB-US</code> — carried only by
+    Wild Oak Trail among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$2,699.00</span>
+          <span class="was" data-field="was-price">$3,698.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-max-portable-power-station?variant=44532344946924" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-max" data-variant-id="44532345274604" data-tier="ecoflow-delta-max-2000-2-220w-solar-panel" data-sku="TMR310-2MS430-US" data-scraped-at="2026-08-14T13:53:37.487837+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Max 2000 + 2*220W Solar Panel
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>TMR310-2MS430-US</code> — carried only by
+    Wild Oak Trail among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$2,699.00</span>
+          <span class="was" data-field="was-price">$3,397.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-max-portable-power-station?variant=44532345274604" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-max" data-variant-id="44532345209068" data-tier="ecoflow-delta-max-2000-4-160w-solar-panel" data-sku="DELTAMax2000US164" data-scraped-at="2026-08-14T13:53:37.487837+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Max 2000 + 4*160W Solar Panel
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>DELTAMax2000US164</code> — carried only by
+    Wild Oak Trail among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$2,799.00</span>
+          <span class="was" data-field="was-price">$3,895.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-max-portable-power-station?variant=44532345209068" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-max" data-variant-id="45092900864236" data-tier="ecoflow-delta-max-smart-generator-dual-fuel" data-sku="DM2000-DG200" data-scraped-at="2026-08-14T13:53:37.487837+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Max + Smart Generator (Dual Fuel)
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>DM2000-DG200</code> — carried only by
+    Wild Oak Trail among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$3,099.00</span>
+          <span class="was" data-field="was-price">$3,199.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-max-portable-power-station?variant=45092900864236" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-max" data-variant-id="44532345307372" data-tier="ecoflow-delta-max-2000-3-220w-solar-panel" data-sku="TMR310-3MS430-US" data-scraped-at="2026-08-14T13:53:37.487837+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Max 2000 + 3*220W Solar Panel
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>TMR310-3MS430-US</code> — carried only by
+    Wild Oak Trail among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$3,099.00</span>
+          <span class="was" data-field="was-price">$3,298.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-max-portable-power-station?variant=44532345307372" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-max" data-variant-id="44532345405676" data-tier="ecoflow-delta-max-2000-2-400w-solar-panel" data-sku="DELTAMax2000-400W2-US" data-scraped-at="2026-08-14T13:53:37.487837+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Max 2000 + 2*400W Solar Panel
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>DELTAMax2000-400W2-US</code> — carried only by
+    Wild Oak Trail among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$3,199.00</span>
+          <span class="was" data-field="was-price">$4,695.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-max-portable-power-station?variant=44532345405676" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-max" data-variant-id="44532345340140" data-tier="ecoflow-delta-max-2000-4-220w-solar-panel" data-sku="TMR310-4MS430-US" data-scraped-at="2026-08-14T13:53:37.487837+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Max 2000 + 4*220W Solar Panel
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>TMR310-4MS430-US</code> — carried only by
+    Wild Oak Trail among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$3,399.00</span>
+          <span class="was" data-field="was-price">$4,497.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-max-portable-power-station?variant=44532345340140" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="shop-solar-kits" data-product-id="ecoflow-delta-max" data-variant-id="41674491723916" data-tier="delta-max-double-quad-kit-8-x-200w-rigid-panels" data-sku="DELTA-MAX-DOUBLE-QUAD" data-scraped-at="2026-08-14T13:43:47.731778+00:00">
+      <td>Shop Solar Kits</td>
+      <td>DELTA MAX Double Quad Kit [8 x 200W Rigid Panels]
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>DELTA-MAX-DOUBLE-QUAD</code> — carried only by
+    Shop Solar Kits among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$3,647.92</span>
+          <span class="was" data-field="was-price">$5,369.00</span>
+          <div class="muted" data-field="asof">as of 2h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://shopsolarkits.com/products/ecoflow-delta-max?variant=41674491723916" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+  </tbody>
+</table>
+  </section>
+  
+  
+  
+</div>
+
+  
+
+  
+<h2>How we know the chemistry</h2>
+
+  
+
+  
+<p>From the retailer's own listing text, recorded in our catalog when the listing states it. We have not opened a pack or tested a cell, and where a listing does not state a chemistry we leave the field empty rather than infer one from the brand or the price. Products with no recorded chemistry appear in neither table above.</p>
+
+  
+
+
+<div class="authorbox">
+  <h2>About the author</h2>
+  <p><strong class="author-name">Brandon Hall</strong> — Brandon Hall builds and runs Helios. He writes the scrapers that collect these prices, the audit that checks the site against its own price store, and the rules that decide when a number is too uncertain to publish.</p>
+  <p class="muted">Helios does not physically test equipment. Everything here comes from tracked prices, published specifications and the site&#39;s own scrape history. How the data is collected, and when
+    we withhold a number, is set out on the
+    <a href="../about.html">about and methodology page</a>.
+    Our commercial position is in the
+    <a href="../disclosure.html">affiliate disclosure</a>.</p>
+</div>
+</article>
+
+</main>
+<footer>
+  Prices are collected from retailer product data and may lag the live site.
+  $/Wh is shown only for standalone units with a known capacity — bundles and
+  unknown capacities are deliberately unrated. Outbound retailer links are
+  marked <code>rel="nofollow sponsored"</code>; see the
+  <a href="../disclosure.html">affiliate disclosure</a> and
+  <a href="../about.html">about page</a>. Helios never automates
+  checkout.
+</footer>
+</body>
+</html>

@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How many watt-hours do you need to run a fridge? — Helios</title>
+<meta name="description" content="Take the kWh-per-year figure off your fridge&#39;s energy label, multiply by 1,000 and divide by 365. That is the watt-hours it needs per day, already...">
+
+<link rel="canonical" href="https://helios-projectgaiaas-projects.vercel.app/articles/how-many-watt-hours-to-run-a-refrigerator.html">
+<style>
+  /* No external assets — everything inline (PLAN section 2). */
+  body { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+         margin: 0; color: #1a1a1a; background: #fafaf7; }
+  header { background: #14324a; color: #fff; padding: 14px 24px; }
+  header a { color: #fff; text-decoration: none; font-weight: 600; }
+  nav { background: #1d4463; padding: 8px 24px; font-size: 0.9rem; }
+  nav a { color: #cfe1f0; text-decoration: none; margin-right: 18px; }
+  nav a:hover { color: #fff; text-decoration: underline; }
+  main { max-width: 1080px; margin: 0 auto; padding: 24px; }
+  h1 { font-size: 1.5rem; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0 28px; background: #fff; }
+  th, td { border: 1px solid #d8d8d2; padding: 8px 10px; text-align: left; font-size: 0.92rem; }
+  th { background: #eef1ee; }
+  .badge { display: inline-block; padding: 1px 7px; border-radius: 9px;
+           font-size: 0.75rem; background: #d9e6f2; color: #14324a; vertical-align: middle; }
+  .soldout { color: #a33; font-weight: 600; }
+  .unknown { color: #777; }
+  .instock { color: #1a7a3a; font-weight: 600; }
+  .wh { color: #1a7a3a; white-space: nowrap; }
+  .muted { color: #777; font-size: 0.85rem; }
+  .was { color: #999; text-decoration: line-through; margin-left: 6px; }
+  footer { max-width: 1080px; margin: 0 auto; padding: 16px 24px; color: #777; font-size: 0.8rem; }
+  footer a { color: #14324a; }
+  /* --- content layer (guides, about, disclosure) --- */
+  article { background: #fff; border: 1px solid #d8d8d2; margin: 0 0 18px;
+            padding: 12px 16px; }
+  article h2 { font-size: 1.08rem; margin: 4px 0; }
+  .rank { display: inline-block; min-width: 1.6em; color: #14324a;
+          font-weight: 700; }
+  .headline { font-size: 1.15rem; color: #1a7a3a; font-weight: 700;
+              white-space: nowrap; }
+  .withheld { color: #a33; font-size: 0.85rem; }
+  .prov { color: #777; font-size: 0.78rem; }
+  .method { background: #f2f4f1; border: 1px solid #d8d8d2; padding: 12px 16px;
+            font-size: 0.86rem; }
+  .method h2 { font-size: 1rem; margin-top: 0; }
+  .method li { margin-bottom: 5px; }
+  .spread { background: #fff; border: 1px solid #d8d8d2; padding: 10px 14px;
+            margin-bottom: 12px; }
+  .prose { max-width: 720px; }
+  .prose p, .prose li { line-height: 1.55; }
+  /* --- editorial layer --- */
+  article.post { max-width: 760px; }
+  article.post p, article.post li { line-height: 1.6; }
+  .answer { background: #eef4ee; border-left: 4px solid #1a7a3a;
+            padding: 12px 16px; font-size: 1.02rem; }
+  .byline { margin-top: -4px; }
+  .author-name { color: #14324a; font-weight: 600; }
+  .callout { background: #fdf6e3; border: 1px solid #e0d6b8;
+             padding: 12px 16px; margin: 16px 0; }
+  .callout p { margin: 0; }
+  .authorbox { border-top: 2px solid #d8d8d2; margin-top: 32px;
+               padding-top: 12px; }
+  .authorbox h2 { font-size: 1rem; }
+  .citations li { margin-bottom: 8px; }
+  .articlelist { padding-left: 18px; }
+  .articlelist li { margin-bottom: 12px; }
+  section.live, div.live { margin-bottom: 20px; }
+  table.specs th[scope="row"] { background: #f6f7f5; width: 30%; }
+</style>
+</head>
+<body>
+<header><a href="../index.html">Helios</a> — solar &amp; home-energy price tracker</header>
+<nav>
+  <a href="../index.html">All prices</a>
+  <a href="../guides/server-rack-and-wall-mount-battery-cost-per-kwh.html">Rack &amp; wall batteries</a><a href="../guides/portable-power-stations-compared-by-real-prices.html">Power stations</a><a href="../guides/solar-panel-pallets-cheapest-cost-per-watt.html">Solar panels</a>
+  <a href="../articles/index.html">Articles</a>
+  <a href="../about.html">About</a>
+  <a href="../disclosure.html">Affiliate disclosure</a>
+</nav>
+<main>
+
+<article class="post">
+<h1>How many watt-hours do you need to run a fridge?</h1>
+
+<p class="answer"><strong>Direct answer:</strong> Take the kWh-per-year figure off your fridge&#39;s energy label, multiply by 1,000 and divide by 365. That is the watt-hours it needs per day, already averaged across the compressor&#39;s on/off cycling. Multiply by the number of days you want to cover, then add headroom for inverter losses. A label reading 365 kWh/year works out to about 1,000 Wh a day, so a single day of fridge-only backup needs a battery in the 1,000-1,500 Wh class once losses are allowed for. The worked arithmetic and live prices for tracked units in that range are below.</p>
+
+<p class="muted byline">
+  By <span class="author-name">Brandon Hall</span> ·
+  Prices on this page refreshed when the site was last built; price record runs from 2026-08-13
+  to 2026-08-14.
+</p>
+
+
+  
+<h2>Start with the label, not a rule of thumb</h2>
+
+  
+
+  
+<p>A fridge does not draw its rated wattage continuously. The compressor cycles on and off, so the number that matters is energy over time, not power at an instant. Every fridge sold with an energy label carries that figure already: kilowatt-hours per year, measured over a standardised test cycle.</p><p>That single number does the work. You do not need to guess a duty cycle, and you should be sceptical of any guide that hands you an average wattage for &ldquo;a fridge&rdquo; — the range across sizes and ages is enormous, and your own label is authoritative for your own appliance.</p>
+
+  
+
+  
+<h2>The arithmetic</h2>
+
+  
+
+  
+<p>Suppose the label reads <strong>365 kWh per year</strong>. That is an assumed example input, not a claim about your fridge:</p><ol><li>365 kWh/year &times; 1,000 = 365,000 Wh per year.</li><li>365,000 &divide; 365 days = <strong>1,000 Wh per day</strong>.</li><li>Two days of cover = 2,000 Wh of <em>delivered</em> energy.</li><li>Inverter and conversion losses are real and vary by unit and load; add headroom rather than assuming a figure. Losses divide, they do not add: if you assume 20% of what the battery holds is lost on the way to the appliance, the nameplate capacity you need is 2,000 &divide; 0.8 = <strong>2,500 Wh</strong>, not 2,000 &times; 1.2.</li></ol><p>Run the same three lines with your own label figure and you have your answer. The reason this article does not publish a tidy &ldquo;fridges need X&rdquo; number is that the honest version of that number is a range so wide it would not help you.</p>
+
+  
+
+  
+<h2>Two more things the arithmetic misses</h2>
+
+  
+
+  
+<p><strong>Starting surge.</strong> A compressor draws far more at the moment it starts than while it runs. Energy capacity does not help here; the inverter's rated and surge output does. Check your appliance's requirement against the rated output figures in the table below.</p><p><strong>Usable versus nameplate.</strong> Published capacity is not always the energy you can draw. We publish the capacity the retailer's listing states, which is the same figure the manufacturer markets.</p>
+
+  
+
+  
+<p class="prov">Helios has not physically tested any product on this page. Our authority is price data, published specifications and our own scrape history — that is a narrower claim than a review site makes, and it is the one we can actually support.</p>
+
+  
+
+  
+<h2>Tracked units in the relevant range</h2>
+
+  
+
+  
+<p>Live prices, refreshed on every build. The smallest units here cover well under a day of the worked example above; the largest cover several.</p>
+
+  
+
+  
+    
+    
+<section class="live" data-product-id="ecoflow-river-2-pro">
+  <h3><a href="../products/ecoflow-river-2-pro.html">EcoFlow RIVER 2 Pro</a></h3>
+  <p class="muted" data-retailer-id="shop-solar-kits" data-product-id="ecoflow-river-2-pro" data-variant-id="41679254454412" data-tier="ecoflow-river-2-pro-main-unit-only" data-sku="ZMR620-B-US" data-scraped-at="2026-08-14T13:44:06.253549+00:00">
+  EcoFlow ·
+  <span data-field="spec" data-spec-key="capacity_wh" data-spec-value="768" data-spec-provenance="quoted">768 Wh</span>
+  usable capacity ·
+  best <span class="headline" data-field="wh" data-spec-key="capacity_wh" data-spec-value="768" data-spec-provenance="quoted">$0.74/Wh</span>
+  at Shop Solar Kits
+  <span data-field="price">$569.00</span>
+  — <span class="instock" data-field="availability" data-value="true">In stock</span>
+  (<span data-field="asof">as of 2h ago</span>)
+</p>
+  
+  <table>
+  <thead>
+    <tr><th>Retailer</th><th>Variant</th><th>Price</th><th>$/Wh</th>
+        <th>Availability</th><th></th></tr>
+  </thead>
+  <tbody>
+    
+    <tr data-retailer-id="shop-solar-kits" data-product-id="ecoflow-river-2-pro" data-variant-id="41679254454412" data-tier="ecoflow-river-2-pro-main-unit-only" data-sku="ZMR620-B-US" data-scraped-at="2026-08-14T13:44:06.253549+00:00">
+      <td>Shop Solar Kits</td>
+      <td>EcoFlow River 2 Pro [Main Unit Only]
+          
+          
+  <div class="prov">SKU <code>ZMR620-B-US</code> — carried only by
+    Shop Solar Kits among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$569.00</span>
+          <span class="was" data-field="was-price">$748.00</span>
+          <div class="muted" data-field="asof">as of 2h ago</div></td>
+      <td><span class="wh" data-field="wh" data-spec-key="capacity_wh" data-spec-value="768" data-spec-provenance="quoted">$0.74/Wh</span>
+          
+          </td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://shopsolarkits.com/products/ecoflow-river-2-pro?variant=41679254454412" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-river-2-pro" data-variant-id="44532078903532" data-tier="ecoflow-river-2-pro-portable-power-station-main-unit-only" data-sku="ZMR620-B-US-1" data-scraped-at="2026-08-14T13:54:00.722294+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow RIVER 2 Pro Portable Power Station(Main Unit Only)
+          
+          
+  <div class="prov">SKU <code>ZMR620-B-US-1</code> — carried only by
+    Wild Oak Trail among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$569.00</span>
+          <span class="was" data-field="was-price">$599.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="wh" data-field="wh" data-spec-key="capacity_wh" data-spec-value="768" data-spec-provenance="quoted">$0.74/Wh</span>
+          <div class="prov">not ranked: sold out</div>
+          </td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-river-2-pro-portable-power-station?variant=44532078903532" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-river-2-pro" data-variant-id="44532078936300" data-tier="ecoflow-river-2-pro-1-110w-portable-solar-panel" data-sku="RIVER2PRO-110-1-US" data-scraped-at="2026-08-14T13:54:00.722294+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow RIVER 2 Pro + 1 110W Portable Solar Panel
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>RIVER2PRO-110-1-US</code> — carried only by
+    Wild Oak Trail among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$509.00</span>
+          <span class="was" data-field="was-price">$998.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-river-2-pro-portable-power-station?variant=44532078936300" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-river-2-pro" data-variant-id="44532078969068" data-tier="ecoflow-river-2-pro-1-160w-portable-solar-panel" data-sku="RIVER2PRO-160-1-US" data-scraped-at="2026-08-14T13:54:00.722294+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow RIVER 2 Pro + 1 160W Portable Solar Panel
+          <span class="badge">bundle</span>
+          </td>
+      
+      <td><span data-field="price">$569.00</span>
+          <span class="was" data-field="was-price">$1,048.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-river-2-pro-portable-power-station?variant=44532078969068" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-river-2-pro" data-variant-id="44532079001836" data-tier="ecoflow-river-2-pro-1-220w-portable-solar-panel" data-sku="RIVER2PRO-220-1-US" data-scraped-at="2026-08-14T13:54:00.722294+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow RIVER 2 Pro + 1 220W Portable Solar Panel
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>RIVER2PRO-220-1-US</code> — carried only by
+    Wild Oak Trail among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$619.00</span>
+          <span class="was" data-field="was-price">$1,248.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-river-2-pro-portable-power-station?variant=44532079001836" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="shop-solar-kits" data-product-id="ecoflow-river-2-pro" data-variant-id="41737132769420" data-tier="ecoflow-river-2-pro-160w-solar-panel" data-sku="RIVER2PRO-160-1-US" data-scraped-at="2026-08-14T13:44:06.253549+00:00">
+      <td>Shop Solar Kits</td>
+      <td>EcoFlow River 2 Pro + 160W Solar Panel
+          <span class="badge">bundle</span>
+          </td>
+      
+      <td><span data-field="price">$899.00</span>
+          <span class="was" data-field="was-price">$999.00</span>
+          <div class="muted" data-field="asof">as of 2h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://shopsolarkits.com/products/ecoflow-river-2-pro?variant=41737132769420" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+  </tbody>
+</table>
+  
+</section>
+    
+<section class="live" data-product-id="bluetti-ac200l">
+  <h3><a href="../products/bluetti-ac200l.html">Bluetti AC200L</a></h3>
+  <p class="muted" data-retailer-id="wild-oak-trail" data-product-id="bluetti-ac200l" data-variant-id="46535814447340" data-tier="ac200l-only" data-sku="" data-scraped-at="2026-08-14T13:54:41.199128+00:00">
+  Bluetti ·
+  <span data-field="spec" data-spec-key="capacity_wh" data-spec-value="2048" data-spec-provenance="quoted">2,048 Wh</span>
+  usable capacity ·
+  best <span class="headline" data-field="wh" data-spec-key="capacity_wh" data-spec-value="2048" data-spec-provenance="quoted">$0.78/Wh</span>
+  at Wild Oak Trail
+  <span data-field="price">$1,599.00</span>
+  — <span class="instock" data-field="availability" data-value="true">In stock</span>
+  (<span data-field="asof">as of 1h ago</span>)
+</p>
+  
+  <table>
+  <thead>
+    <tr><th>Retailer</th><th>Variant</th><th>Price</th><th>$/Wh</th>
+        <th>Availability</th><th></th></tr>
+  </thead>
+  <tbody>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="bluetti-ac200l" data-variant-id="46535814447340" data-tier="ac200l-only" data-sku="" data-scraped-at="2026-08-14T13:54:41.199128+00:00">
+      <td>Wild Oak Trail</td>
+      <td>AC200L Only
+          
+          </td>
+      
+      <td><span data-field="price">$1,599.00</span>
+          
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="wh" data-field="wh" data-spec-key="capacity_wh" data-spec-value="2048" data-spec-provenance="quoted">$0.78/Wh</span>
+          
+          </td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/bluetti-ac200l?variant=46535814447340" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="bluetti-ac200l" data-variant-id="46535814742252" data-tier="ac200l-d40" data-sku="" data-scraped-at="2026-08-14T13:54:41.199128+00:00">
+      <td>Wild Oak Trail</td>
+      <td>AC200L + D40
+          <span class="badge">bundle</span>
+          </td>
+      
+      <td><span data-field="price">$1,699.00</span>
+          
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/bluetti-ac200l?variant=46535814742252" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="bluetti-ac200l" data-variant-id="46535814578412" data-tier="ac200l-200w-solar-panel" data-sku="" data-scraped-at="2026-08-14T13:54:41.199128+00:00">
+      <td>Wild Oak Trail</td>
+      <td>AC200L + 200W Solar Panel
+          <span class="badge">bundle</span>
+          </td>
+      
+      <td><span data-field="price">$1,899.00</span>
+          
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/bluetti-ac200l?variant=46535814578412" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="bluetti-ac200l" data-variant-id="46535814643948" data-tier="ac200l-charger-1" data-sku="" data-scraped-at="2026-08-14T13:54:41.199128+00:00">
+      <td>Wild Oak Trail</td>
+      <td>AC200L + Charger 1
+          <span class="badge">bundle</span>
+          </td>
+      
+      <td><span data-field="price">$1,999.00</span>
+          
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/bluetti-ac200l?variant=46535814643948" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="bluetti-ac200l" data-variant-id="46535814709484" data-tier="ac200l-350w-solar-panel" data-sku="" data-scraped-at="2026-08-14T13:54:41.199128+00:00">
+      <td>Wild Oak Trail</td>
+      <td>AC200L + 350W Solar Panel
+          <span class="badge">bundle</span>
+          </td>
+      
+      <td><span data-field="price">$1,999.00</span>
+          
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/bluetti-ac200l?variant=46535814709484" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="bluetti-ac200l" data-variant-id="46535814676716" data-tier="ac200l-200w-solar-panel-charger-1" data-sku="" data-scraped-at="2026-08-14T13:54:41.199128+00:00">
+      <td>Wild Oak Trail</td>
+      <td>AC200L + 200W Solar Panel + Charger 1
+          <span class="badge">bundle</span>
+          </td>
+      
+      <td><span data-field="price">$2,498.00</span>
+          
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/bluetti-ac200l?variant=46535814676716" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="bluetti-ac200l" data-variant-id="46535814611180" data-tier="ac200l-2-200w-solar-panels" data-sku="" data-scraped-at="2026-08-14T13:54:41.199128+00:00">
+      <td>Wild Oak Trail</td>
+      <td>AC200L + (2) 200W Solar Panels
+          <span class="badge">bundle</span>
+          </td>
+      
+      <td><span data-field="price">$2,499.00</span>
+          
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/bluetti-ac200l?variant=46535814611180" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="bluetti-ac200l" data-variant-id="46535814480108" data-tier="ac200l-b300k-battery" data-sku="" data-scraped-at="2026-08-14T13:54:41.199128+00:00">
+      <td>Wild Oak Trail</td>
+      <td>AC200L + B300K Battery
+          <span class="badge">bundle</span>
+          </td>
+      
+      <td><span data-field="price">$2,999.00</span>
+          
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/bluetti-ac200l?variant=46535814480108" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="bluetti-ac200l" data-variant-id="46535814512876" data-tier="ac200l-2-b300k-batteries-2-free-200w-panels" data-sku="" data-scraped-at="2026-08-14T13:54:41.199128+00:00">
+      <td>Wild Oak Trail</td>
+      <td>AC200L + (2) B300K Batteries + (2) FREE 200W Panels
+          <span class="badge">bundle</span>
+          </td>
+      
+      <td><span data-field="price">$4,699.00</span>
+          
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/bluetti-ac200l?variant=46535814512876" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="bluetti-ac200l" data-variant-id="46535814545644" data-tier="ac200l-2-b300k-batteries-d300s" data-sku="" data-scraped-at="2026-08-14T13:54:41.199128+00:00">
+      <td>Wild Oak Trail</td>
+      <td>AC200L + (2) B300K Batteries + D300S
+          <span class="badge">bundle</span>
+          </td>
+      
+      <td><span data-field="price">$4,999.00</span>
+          
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/bluetti-ac200l?variant=46535814545644" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+  </tbody>
+</table>
+  
+</section>
+    
+<section class="live" data-product-id="ecoflow-delta-pro-3">
+  <h3><a href="../products/ecoflow-delta-pro-3.html">EcoFlow DELTA Pro 3</a></h3>
+  <p class="muted" data-retailer-id="shop-solar-kits" data-product-id="ecoflow-delta-pro-3" data-variant-id="43004281094284" data-tier="delta-pro-3-main-unit-only" data-sku="EFDELTAPRO3-US" data-scraped-at="2026-08-14T13:45:10.372165+00:00">
+  EcoFlow ·
+  <span data-field="spec" data-spec-key="capacity_wh" data-spec-value="4096" data-spec-provenance="quoted">4,096 Wh</span>
+  usable capacity ·
+  best <span class="headline" data-field="wh" data-spec-key="capacity_wh" data-spec-value="4096" data-spec-provenance="quoted">$0.68/Wh</span>
+  at Shop Solar Kits
+  <span data-field="price">$2,799.00</span>
+  — <span class="instock" data-field="availability" data-value="true">In stock</span>
+  (<span data-field="asof">as of 2h ago</span>)
+</p>
+  
+  <table>
+  <thead>
+    <tr><th>Retailer</th><th>Variant</th><th>Price</th><th>$/Wh</th>
+        <th>Availability</th><th></th></tr>
+  </thead>
+  <tbody>
+    
+    <tr data-retailer-id="shop-solar-kits" data-product-id="ecoflow-delta-pro-3" data-variant-id="43004281094284" data-tier="delta-pro-3-main-unit-only" data-sku="EFDELTAPRO3-US" data-scraped-at="2026-08-14T13:45:10.372165+00:00">
+      <td>Shop Solar Kits</td>
+      <td>DELTA PRO 3 [Main Unit Only]
+          
+          </td>
+      
+      <td><span data-field="price">$2,799.00</span>
+          
+          <div class="muted" data-field="asof">as of 2h ago</div></td>
+      <td><span class="wh" data-field="wh" data-spec-key="capacity_wh" data-spec-value="4096" data-spec-provenance="quoted">$0.68/Wh</span>
+          
+          </td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://shopsolarkits.com/products/ecoflow-delta-pro-3?variant=43004281094284" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-pro-3" data-variant-id="45371860484332" data-tier="ecoflow-delta-pro-3-main-unit-only" data-sku="EFDELTAPRO3-US" data-scraped-at="2026-08-14T13:54:59.991927+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Pro 3 (Main Unit Only)
+          
+          </td>
+      
+      <td><span data-field="price">$2,799.00</span>
+          <span class="was" data-field="was-price">$3,699.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="wh" data-field="wh" data-spec-key="capacity_wh" data-spec-value="4096" data-spec-provenance="quoted">$0.68/Wh</span>
+          
+          </td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-pro-3-portable-power-station?variant=45371860484332" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="shop-solar-kits" data-product-id="ecoflow-delta-pro-3" data-variant-id="43048314830988" data-tier="nomad-kit-2-x-200w-folding-panels" data-sku="ECOFLOW-DELTA-PRO-3-NOMAD" data-scraped-at="2026-08-14T13:45:10.372165+00:00">
+      <td>Shop Solar Kits</td>
+      <td>Nomad Kit [2 x 200W Folding Panels]
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>ECOFLOW-DELTA-PRO-3-NOMAD</code> — carried only by
+    Shop Solar Kits among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$2,905.97</span>
+          <span class="was" data-field="was-price">$3,227.09</span>
+          <div class="muted" data-field="asof">as of 2h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://shopsolarkits.com/products/ecoflow-delta-pro-3?variant=43048314830988" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="shop-solar-kits" data-product-id="ecoflow-delta-pro-3" data-variant-id="43048314863756" data-tier="quad-kit-4-x-200w-rigid-panels" data-sku="ECOFLOW-DELTA-PRO-3-QUAD" data-scraped-at="2026-08-14T13:45:10.372165+00:00">
+      <td>Shop Solar Kits</td>
+      <td>Quad Kit [4 x 200W Rigid Panels]
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>ECOFLOW-DELTA-PRO-3-QUAD</code> — carried only by
+    Shop Solar Kits among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$3,051.97</span>
+          <span class="was" data-field="was-price">$3,395.09</span>
+          <div class="muted" data-field="asof">as of 2h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://shopsolarkits.com/products/ecoflow-delta-pro-3?variant=43048314863756" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-pro-3" data-variant-id="45371860549868" data-tier="ecoflow-delta-pro-3-with-1-400w-solar-panel" data-sku="DP3-400W" data-scraped-at="2026-08-14T13:54:59.991927+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Pro 3 with 1 400W Solar Panel
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>DP3-400W</code> — carried only by
+    Wild Oak Trail among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$3,099.00</span>
+          <span class="was" data-field="was-price">$4,898.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-pro-3-portable-power-station?variant=45371860549868" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="shop-solar-kits" data-product-id="ecoflow-delta-pro-3" data-variant-id="46524781133964" data-tier="hex-kit-6-x-200w-rigid-panels" data-sku="ECOFLOW-DELTA-PRO-3-HEX" data-scraped-at="2026-08-14T13:45:10.372165+00:00">
+      <td>Shop Solar Kits</td>
+      <td>Hex Kit [6 x 200W Rigid Panels]
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>ECOFLOW-DELTA-PRO-3-HEX</code> — carried only by
+    Shop Solar Kits among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$3,371.97</span>
+          <span class="was" data-field="was-price">$3,763.09</span>
+          <div class="muted" data-field="asof">as of 2h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://shopsolarkits.com/products/ecoflow-delta-pro-3?variant=46524781133964" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="shop-solar-kits" data-product-id="ecoflow-delta-pro-3" data-variant-id="43048314896524" data-tier="basecamp-kit-2-x-200w-folding-panels-emp-bag" data-sku="ECOFLOW-DELTA-PRO-3-BASECAMP" data-scraped-at="2026-08-14T13:45:10.372165+00:00">
+      <td>Shop Solar Kits</td>
+      <td>Basecamp Kit [2 x 200W Folding Panels + EMP Bag]
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>ECOFLOW-DELTA-PRO-3-BASECAMP</code> — carried only by
+    Shop Solar Kits among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$3,455.97</span>
+          <span class="was" data-field="was-price">$3,859.09</span>
+          <div class="muted" data-field="asof">as of 2h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://shopsolarkits.com/products/ecoflow-delta-pro-3?variant=43048314896524" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-pro-3" data-variant-id="47170201092332" data-tier="ecoflow-delta-pro-3-with-2-400w-solar-panel" data-sku="DP3-400W2" data-scraped-at="2026-08-14T13:54:59.991927+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Pro 3 with 2 400W Solar Panel
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>DP3-400W2</code> — carried only by
+    Wild Oak Trail among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$3,499.00</span>
+          <span class="was" data-field="was-price">$6,097.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-pro-3-portable-power-station?variant=47170201092332" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="shop-solar-kits" data-product-id="ecoflow-delta-pro-3" data-variant-id="46631132037260" data-tier="octo-kit-8-x-200w-rigid-panels" data-sku="ECOFLOW-DELTA-PRO-3-OCTO" data-scraped-at="2026-08-14T13:45:10.372165+00:00">
+      <td>Shop Solar Kits</td>
+      <td>Octo Kit [8 x 200W Rigid Panels]
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>ECOFLOW-DELTA-PRO-3-OCTO</code> — carried only by
+    Shop Solar Kits among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$3,749.97</span>
+          <span class="was" data-field="was-price">$4,197.09</span>
+          <div class="muted" data-field="asof">as of 2h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://shopsolarkits.com/products/ecoflow-delta-pro-3?variant=46631132037260" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="wild-oak-trail" data-product-id="ecoflow-delta-pro-3" data-variant-id="45371860517100" data-tier="ecoflow-delta-pro-3-with-extra-battery" data-sku="DP3-EB" data-scraped-at="2026-08-14T13:54:59.991927+00:00">
+      <td>Wild Oak Trail</td>
+      <td>EcoFlow DELTA Pro 3 with Extra Battery
+          <span class="badge">bundle</span>
+          
+  <div class="prov">SKU <code>DP3-EB</code> — carried only by
+    Wild Oak Trail among tracked retailers, so it has no
+    like-for-like counterpart in this table.</div></td>
+      
+      <td><span data-field="price">$3,999.00</span>
+          <span class="was" data-field="was-price">$6,298.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
+      
+      <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-pro-3-portable-power-station?variant=45371860517100" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+  </tbody>
+</table>
+  
+    
+  <p class="muted">Same SKU <code>EFDELTAPRO3-US</code> at
+    2 tracked retailers:
+    identical price.
+    
+  </p>
+    
+  
+</section>
+    
+
+  
+
+
+<div class="authorbox">
+  <h2>About the author</h2>
+  <p><strong class="author-name">Brandon Hall</strong> — Brandon Hall builds and runs Helios. He writes the scrapers that collect these prices, the audit that checks the site against its own price store, and the rules that decide when a number is too uncertain to publish.</p>
+  <p class="muted">Helios does not physically test equipment. Everything here comes from tracked prices, published specifications and the site&#39;s own scrape history. How the data is collected, and when
+    we withhold a number, is set out on the
+    <a href="../about.html">about and methodology page</a>.
+    Our commercial position is in the
+    <a href="../disclosure.html">affiliate disclosure</a>.</p>
+</div>
+</article>
+
+</main>
+<footer>
+  Prices are collected from retailer product data and may lag the live site.
+  $/Wh is shown only for standalone units with a known capacity — bundles and
+  unknown capacities are deliberately unrated. Outbound retailer links are
+  marked <code>rel="nofollow sponsored"</code>; see the
+  <a href="../disclosure.html">affiliate disclosure</a> and
+  <a href="../about.html">about page</a>. Helios never automates
+  checkout.
+</footer>
+</body>
+</html>

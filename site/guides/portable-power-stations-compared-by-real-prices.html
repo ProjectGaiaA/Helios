@@ -49,6 +49,24 @@
             margin-bottom: 12px; }
   .prose { max-width: 720px; }
   .prose p, .prose li { line-height: 1.55; }
+  /* --- editorial layer --- */
+  article.post { max-width: 760px; }
+  article.post p, article.post li { line-height: 1.6; }
+  .answer { background: #eef4ee; border-left: 4px solid #1a7a3a;
+            padding: 12px 16px; font-size: 1.02rem; }
+  .byline { margin-top: -4px; }
+  .author-name { color: #14324a; font-weight: 600; }
+  .callout { background: #fdf6e3; border: 1px solid #e0d6b8;
+             padding: 12px 16px; margin: 16px 0; }
+  .callout p { margin: 0; }
+  .authorbox { border-top: 2px solid #d8d8d2; margin-top: 32px;
+               padding-top: 12px; }
+  .authorbox h2 { font-size: 1rem; }
+  .citations li { margin-bottom: 8px; }
+  .articlelist { padding-left: 18px; }
+  .articlelist li { margin-bottom: 12px; }
+  section.live, div.live { margin-bottom: 20px; }
+  table.specs th[scope="row"] { background: #f6f7f5; width: 30%; }
 </style>
 </head>
 <body>
@@ -56,6 +74,7 @@
 <nav>
   <a href="../index.html">All prices</a>
   <a href="../guides/server-rack-and-wall-mount-battery-cost-per-kwh.html">Rack &amp; wall batteries</a><a href="../guides/portable-power-stations-compared-by-real-prices.html">Power stations</a><a href="../guides/solar-panel-pallets-cheapest-cost-per-watt.html">Solar panels</a>
+  <a href="../articles/index.html">Articles</a>
   <a href="../about.html">About</a>
   <a href="../disclosure.html">Affiliate disclosure</a>
 </nav>
@@ -67,7 +86,7 @@
   4 of 8 tracked
   portable power stations could be ranked;
   83 retailer prices shown, the
-  freshest &lt;1h ago.
+  freshest 1h ago.
   Only offers that are actually in stock set a rank.
   <a href="#methodology">How this is put together</a>.
 </p>
@@ -78,17 +97,16 @@
   <h2><span class="rank">1.</span>
     <a href="../products/ecoflow-delta-pro-3.html">EcoFlow DELTA Pro 3</a>
   </h2>
-  <p class="muted">
-    EcoFlow ·
-    <span data-field="spec" data-spec-key="capacity_wh" data-spec-value="4096" data-spec-provenance="quoted">4,096 Wh</span>
-    usable capacity ·
-    
-    best <span class="headline" data-field="best-rating" data-variant-id="43004281094284" data-scraped-at="2026-08-14T13:45:10.372165+00:00">$0.68/Wh</span>
-    at Shop Solar Kits
-    <span data-field="best-price">$2,799.00</span>
-    — <span class="instock" data-field="availability" data-value="true">In stock</span>
-    (as of &lt;1h ago)
-  </p>
+  <p class="muted" data-retailer-id="shop-solar-kits" data-product-id="ecoflow-delta-pro-3" data-variant-id="43004281094284" data-tier="delta-pro-3-main-unit-only" data-sku="EFDELTAPRO3-US" data-scraped-at="2026-08-14T13:45:10.372165+00:00">
+  EcoFlow ·
+  <span data-field="spec" data-spec-key="capacity_wh" data-spec-value="4096" data-spec-provenance="quoted">4,096 Wh</span>
+  usable capacity ·
+  best <span class="headline" data-field="wh" data-spec-key="capacity_wh" data-spec-value="4096" data-spec-provenance="quoted">$0.68/Wh</span>
+  at Shop Solar Kits
+  <span data-field="price">$2,799.00</span>
+  — <span class="instock" data-field="availability" data-value="true">In stock</span>
+  (<span data-field="asof">as of 2h ago</span>)
+</p>
   
   
   <table>
@@ -106,7 +124,7 @@
         
         <td><span data-field="price">$2,799.00</span>
             
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="wh" data-field="wh" data-spec-key="capacity_wh" data-spec-value="4096" data-spec-provenance="quoted">$0.68/Wh</span>
             
             </td>
@@ -123,7 +141,7 @@
         
         <td><span data-field="price">$2,799.00</span>
             <span class="was" data-field="was-price">$3,699.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="wh" data-field="wh" data-spec-key="capacity_wh" data-spec-value="4096" data-spec-provenance="quoted">$0.68/Wh</span>
             
             </td>
@@ -143,7 +161,7 @@
         
         <td><span data-field="price">$2,905.97</span>
             <span class="was" data-field="was-price">$3,227.09</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -161,7 +179,7 @@
         
         <td><span data-field="price">$3,051.97</span>
             <span class="was" data-field="was-price">$3,395.09</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -179,7 +197,7 @@
         
         <td><span data-field="price">$3,099.00</span>
             <span class="was" data-field="was-price">$4,898.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -197,7 +215,7 @@
         
         <td><span data-field="price">$3,371.97</span>
             <span class="was" data-field="was-price">$3,763.09</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -215,7 +233,7 @@
         
         <td><span data-field="price">$3,455.97</span>
             <span class="was" data-field="was-price">$3,859.09</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -233,7 +251,7 @@
         
         <td><span data-field="price">$3,499.00</span>
             <span class="was" data-field="was-price">$6,097.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -251,7 +269,7 @@
         
         <td><span data-field="price">$3,749.97</span>
             <span class="was" data-field="was-price">$4,197.09</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -269,7 +287,7 @@
         
         <td><span data-field="price">$3,999.00</span>
             <span class="was" data-field="was-price">$6,298.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -284,17 +302,16 @@
   <h2><span class="rank">2.</span>
     <a href="../products/ecoflow-river-2-pro.html">EcoFlow RIVER 2 Pro</a>
   </h2>
-  <p class="muted">
-    EcoFlow ·
-    <span data-field="spec" data-spec-key="capacity_wh" data-spec-value="768" data-spec-provenance="quoted">768 Wh</span>
-    usable capacity ·
-    
-    best <span class="headline" data-field="best-rating" data-variant-id="41679254454412" data-scraped-at="2026-08-14T13:44:06.253549+00:00">$0.74/Wh</span>
-    at Shop Solar Kits
-    <span data-field="best-price">$569.00</span>
-    — <span class="instock" data-field="availability" data-value="true">In stock</span>
-    (as of &lt;1h ago)
-  </p>
+  <p class="muted" data-retailer-id="shop-solar-kits" data-product-id="ecoflow-river-2-pro" data-variant-id="41679254454412" data-tier="ecoflow-river-2-pro-main-unit-only" data-sku="ZMR620-B-US" data-scraped-at="2026-08-14T13:44:06.253549+00:00">
+  EcoFlow ·
+  <span data-field="spec" data-spec-key="capacity_wh" data-spec-value="768" data-spec-provenance="quoted">768 Wh</span>
+  usable capacity ·
+  best <span class="headline" data-field="wh" data-spec-key="capacity_wh" data-spec-value="768" data-spec-provenance="quoted">$0.74/Wh</span>
+  at Shop Solar Kits
+  <span data-field="price">$569.00</span>
+  — <span class="instock" data-field="availability" data-value="true">In stock</span>
+  (<span data-field="asof">as of 2h ago</span>)
+</p>
   
   
   <table>
@@ -315,7 +332,7 @@
         
         <td><span data-field="price">$569.00</span>
             <span class="was" data-field="was-price">$748.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="wh" data-field="wh" data-spec-key="capacity_wh" data-spec-value="768" data-spec-provenance="quoted">$0.74/Wh</span>
             
             </td>
@@ -335,7 +352,7 @@
         
         <td><span data-field="price">$569.00</span>
             <span class="was" data-field="was-price">$599.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="wh" data-field="wh" data-spec-key="capacity_wh" data-spec-value="768" data-spec-provenance="quoted">$0.74/Wh</span>
             <div class="prov">not ranked: sold out</div>
             </td>
@@ -355,7 +372,7 @@
         
         <td><span data-field="price">$509.00</span>
             <span class="was" data-field="was-price">$998.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -370,7 +387,7 @@
         
         <td><span data-field="price">$569.00</span>
             <span class="was" data-field="was-price">$1,048.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -388,7 +405,7 @@
         
         <td><span data-field="price">$619.00</span>
             <span class="was" data-field="was-price">$1,248.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -403,7 +420,7 @@
         
         <td><span data-field="price">$899.00</span>
             <span class="was" data-field="was-price">$999.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -418,17 +435,16 @@
   <h2><span class="rank">3.</span>
     <a href="../products/bluetti-ac200l.html">Bluetti AC200L</a>
   </h2>
-  <p class="muted">
-    Bluetti ·
-    <span data-field="spec" data-spec-key="capacity_wh" data-spec-value="2048" data-spec-provenance="quoted">2,048 Wh</span>
-    usable capacity ·
-    
-    best <span class="headline" data-field="best-rating" data-variant-id="46535814447340" data-scraped-at="2026-08-14T13:54:41.199128+00:00">$0.78/Wh</span>
-    at Wild Oak Trail
-    <span data-field="best-price">$1,599.00</span>
-    — <span class="instock" data-field="availability" data-value="true">In stock</span>
-    (as of &lt;1h ago)
-  </p>
+  <p class="muted" data-retailer-id="wild-oak-trail" data-product-id="bluetti-ac200l" data-variant-id="46535814447340" data-tier="ac200l-only" data-sku="" data-scraped-at="2026-08-14T13:54:41.199128+00:00">
+  Bluetti ·
+  <span data-field="spec" data-spec-key="capacity_wh" data-spec-value="2048" data-spec-provenance="quoted">2,048 Wh</span>
+  usable capacity ·
+  best <span class="headline" data-field="wh" data-spec-key="capacity_wh" data-spec-value="2048" data-spec-provenance="quoted">$0.78/Wh</span>
+  at Wild Oak Trail
+  <span data-field="price">$1,599.00</span>
+  — <span class="instock" data-field="availability" data-value="true">In stock</span>
+  (<span data-field="asof">as of 1h ago</span>)
+</p>
   
   
   <table>
@@ -446,7 +462,7 @@
         
         <td><span data-field="price">$1,599.00</span>
             
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="wh" data-field="wh" data-spec-key="capacity_wh" data-spec-value="2048" data-spec-provenance="quoted">$0.78/Wh</span>
             
             </td>
@@ -463,7 +479,7 @@
         
         <td><span data-field="price">$1,699.00</span>
             
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -478,7 +494,7 @@
         
         <td><span data-field="price">$1,899.00</span>
             
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -493,7 +509,7 @@
         
         <td><span data-field="price">$1,999.00</span>
             
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -508,7 +524,7 @@
         
         <td><span data-field="price">$1,999.00</span>
             
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -523,7 +539,7 @@
         
         <td><span data-field="price">$2,498.00</span>
             
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -538,7 +554,7 @@
         
         <td><span data-field="price">$2,499.00</span>
             
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -553,7 +569,7 @@
         
         <td><span data-field="price">$2,999.00</span>
             
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -568,7 +584,7 @@
         
         <td><span data-field="price">$4,699.00</span>
             
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -583,7 +599,7 @@
         
         <td><span data-field="price">$4,999.00</span>
             
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -598,17 +614,16 @@
   <h2><span class="rank">4.</span>
     <a href="../products/ecoflow-river-3.html">EcoFlow RIVER 3</a>
   </h2>
-  <p class="muted">
-    EcoFlow ·
-    <span data-field="spec" data-spec-key="capacity_wh" data-spec-value="245" data-spec-provenance="quoted">245 Wh</span>
-    usable capacity ·
-    
-    best <span class="headline" data-field="best-rating" data-variant-id="43432948301964" data-scraped-at="2026-08-14T13:45:53.951364+00:00">$0.81/Wh</span>
-    at Shop Solar Kits
-    <span data-field="best-price">$199.00</span>
-    — <span class="instock" data-field="availability" data-value="true">In stock</span>
-    (as of &lt;1h ago)
-  </p>
+  <p class="muted" data-retailer-id="shop-solar-kits" data-product-id="ecoflow-river-3" data-variant-id="43432948301964" data-tier="river-3-main-unit-only" data-sku="EFRIVER3-US" data-scraped-at="2026-08-14T13:45:53.951364+00:00">
+  EcoFlow ·
+  <span data-field="spec" data-spec-key="capacity_wh" data-spec-value="245" data-spec-provenance="quoted">245 Wh</span>
+  usable capacity ·
+  best <span class="headline" data-field="wh" data-spec-key="capacity_wh" data-spec-value="245" data-spec-provenance="quoted">$0.81/Wh</span>
+  at Shop Solar Kits
+  <span data-field="price">$199.00</span>
+  — <span class="instock" data-field="availability" data-value="true">In stock</span>
+  (<span data-field="asof">as of 2h ago</span>)
+</p>
   
   
   <table>
@@ -626,7 +641,7 @@
         
         <td><span data-field="price">$199.00</span>
             <span class="was" data-field="was-price">$299.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="wh" data-field="wh" data-spec-key="capacity_wh" data-spec-value="245" data-spec-provenance="quoted">$0.81/Wh</span>
             
             </td>
@@ -643,7 +658,7 @@
         
         <td><span data-field="price">$199.00</span>
             <span class="was" data-field="was-price">$239.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="wh" data-field="wh" data-spec-key="capacity_wh" data-spec-value="245" data-spec-provenance="quoted">$0.81/Wh</span>
             
             </td>
@@ -663,7 +678,7 @@
         
         <td><span data-field="price">$342.94</span>
             <span class="was" data-field="was-price">$381.09</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -681,7 +696,7 @@
         
         <td><span data-field="price">$391.73</span>
             <span class="was" data-field="was-price">$489.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -699,7 +714,7 @@
         
         <td><span data-field="price">$659.89</span>
             <span class="was" data-field="was-price">$849.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -739,7 +754,7 @@ that is flagged.</p>
         <td>DELTA PRO 3 [Main Unit Only]
             </td>
         <td><span data-field="price">$2,799.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         <td><a href="https://shopsolarkits.com/products/ecoflow-delta-pro-3?variant=43004281094284" rel="nofollow sponsored">View at retailer</a></td>
       </tr>
@@ -749,7 +764,7 @@ that is flagged.</p>
         <td>EcoFlow DELTA Pro 3 (Main Unit Only)
             </td>
         <td><span data-field="price">$2,799.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         <td><a href="https://www.wildoaktrail.com/products/ecoflow-delta-pro-3-portable-power-station?variant=45371860484332" rel="nofollow sponsored">View at retailer</a></td>
       </tr>
@@ -777,7 +792,7 @@ that is flagged.</p>
         <td>River 3 [Main Unit Only]
             </td>
         <td><span data-field="price">$199.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         <td><a href="https://shopsolarkits.com/products/ecoflow-river-3?variant=43432948301964" rel="nofollow sponsored">View at retailer</a></td>
       </tr>
@@ -787,7 +802,7 @@ that is flagged.</p>
         <td>Default Title
             </td>
         <td><span data-field="price">$199.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         <td><a href="https://www.wildoaktrail.com/products/ecoflow-river-3-portable-power-station?variant=46868877508844" rel="nofollow sponsored">View at retailer</a></td>
       </tr>
@@ -821,7 +836,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$1,254.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="wh" data-field="wh" data-spec-key="capacity_wh" data-spec-value="2560" data-spec-provenance="quoted">$0.49/Wh</span>
             <div class="prov">not ranked: sold out</div>
             </td>
@@ -837,7 +852,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$1,618.49</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -851,7 +866,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$1,853.65</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -865,7 +880,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$1,889.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -879,7 +894,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$2,749.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -907,7 +922,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$699.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">usable capacity not established, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -921,7 +936,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$699.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">usable capacity not established, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -935,7 +950,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$999.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -949,7 +964,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$1,299.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -963,7 +978,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$1,398.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -977,7 +992,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$1,498.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -991,7 +1006,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$1,498.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -1005,7 +1020,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$1,499.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -1019,7 +1034,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$1,599.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -1033,7 +1048,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$1,798.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -1047,7 +1062,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$1,848.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -1075,7 +1090,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$1,539.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="wh" data-field="wh" data-spec-key="capacity_wh" data-spec-value="1843" data-spec-provenance="quoted">$0.84/Wh</span>
             <div class="prov">not ranked: sold out</div>
             </td>
@@ -1091,7 +1106,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$1,799.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="wh" data-field="wh" data-spec-key="capacity_wh" data-spec-value="1843" data-spec-provenance="quoted">$0.98/Wh</span>
             <div class="prov">not ranked: sold out</div>
             </td>
@@ -1110,7 +1125,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$1,709.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1127,7 +1142,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$1,909.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1144,7 +1159,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$2,189.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1158,7 +1173,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$2,298.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1172,7 +1187,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$2,598.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1200,7 +1215,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$1,049.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="wh" data-field="wh" data-spec-key="capacity_wh" data-spec-value="2016" data-spec-provenance="quoted">$0.52/Wh</span>
             <div class="prov">not ranked: sold out</div>
             </td>
@@ -1216,7 +1231,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$1,599.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="wh" data-field="wh" data-spec-key="capacity_wh" data-spec-value="2016" data-spec-provenance="quoted">$0.79/Wh</span>
             <div class="prov">not ranked: sold out</div>
             </td>
@@ -1235,7 +1250,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$1,349.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1252,7 +1267,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$1,408.12</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1269,7 +1284,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$1,486.92</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1286,7 +1301,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$1,687.81</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1303,7 +1318,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$1,699.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1320,7 +1335,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$1,799.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1337,7 +1352,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$1,838.37</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1354,7 +1369,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$1,899.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1371,7 +1386,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$1,999.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1388,7 +1403,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$2,155.94</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1405,7 +1420,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$2,199.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1422,7 +1437,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$2,199.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1436,7 +1451,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$2,208.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1450,7 +1465,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$2,318.98</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1467,7 +1482,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$2,399.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1484,7 +1499,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$2,424.53</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1498,7 +1513,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$2,428.97</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1515,7 +1530,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$2,499.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1529,7 +1544,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$2,538.96</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1546,7 +1561,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$2,699.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1563,7 +1578,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$2,699.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1580,7 +1595,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$2,799.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1597,7 +1612,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$3,099.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1614,7 +1629,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$3,099.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1631,7 +1646,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$3,199.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1648,7 +1663,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$3,399.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1665,7 +1680,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$3,647.92</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 2h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -1743,8 +1758,8 @@ withheld the number, not a placeholder.</p>
 <h3>Data freshness</h3>
 <ul>
   <li>The freshest price on this page was read
-    &lt;1h ago; the oldest
-    &lt;1h ago. Every price shows its own age.
+    1h ago; the oldest
+    2h ago. Every price shows its own age.
     </li>
   <li>Scrapes are run on demand rather than on a fixed schedule, so an age of a
     few days is normal. A retailer can change a price at any moment after a

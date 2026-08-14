@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What $/Wh tells you, and what it hides — Helios</title>
+<meta name="description" content="Cost per watt-hour is a purchase price divided by a published capacity, and it is only meaningful when both halves describe the same standalone thing...">
+
+<link rel="canonical" href="https://helios-projectgaiaas-projects.vercel.app/articles/what-dollars-per-wh-tells-you.html">
+<style>
+  /* No external assets — everything inline (PLAN section 2). */
+  body { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+         margin: 0; color: #1a1a1a; background: #fafaf7; }
+  header { background: #14324a; color: #fff; padding: 14px 24px; }
+  header a { color: #fff; text-decoration: none; font-weight: 600; }
+  nav { background: #1d4463; padding: 8px 24px; font-size: 0.9rem; }
+  nav a { color: #cfe1f0; text-decoration: none; margin-right: 18px; }
+  nav a:hover { color: #fff; text-decoration: underline; }
+  main { max-width: 1080px; margin: 0 auto; padding: 24px; }
+  h1 { font-size: 1.5rem; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0 28px; background: #fff; }
+  th, td { border: 1px solid #d8d8d2; padding: 8px 10px; text-align: left; font-size: 0.92rem; }
+  th { background: #eef1ee; }
+  .badge { display: inline-block; padding: 1px 7px; border-radius: 9px;
+           font-size: 0.75rem; background: #d9e6f2; color: #14324a; vertical-align: middle; }
+  .soldout { color: #a33; font-weight: 600; }
+  .unknown { color: #777; }
+  .instock { color: #1a7a3a; font-weight: 600; }
+  .wh { color: #1a7a3a; white-space: nowrap; }
+  .muted { color: #777; font-size: 0.85rem; }
+  .was { color: #999; text-decoration: line-through; margin-left: 6px; }
+  footer { max-width: 1080px; margin: 0 auto; padding: 16px 24px; color: #777; font-size: 0.8rem; }
+  footer a { color: #14324a; }
+  /* --- content layer (guides, about, disclosure) --- */
+  article { background: #fff; border: 1px solid #d8d8d2; margin: 0 0 18px;
+            padding: 12px 16px; }
+  article h2 { font-size: 1.08rem; margin: 4px 0; }
+  .rank { display: inline-block; min-width: 1.6em; color: #14324a;
+          font-weight: 700; }
+  .headline { font-size: 1.15rem; color: #1a7a3a; font-weight: 700;
+              white-space: nowrap; }
+  .withheld { color: #a33; font-size: 0.85rem; }
+  .prov { color: #777; font-size: 0.78rem; }
+  .method { background: #f2f4f1; border: 1px solid #d8d8d2; padding: 12px 16px;
+            font-size: 0.86rem; }
+  .method h2 { font-size: 1rem; margin-top: 0; }
+  .method li { margin-bottom: 5px; }
+  .spread { background: #fff; border: 1px solid #d8d8d2; padding: 10px 14px;
+            margin-bottom: 12px; }
+  .prose { max-width: 720px; }
+  .prose p, .prose li { line-height: 1.55; }
+  /* --- editorial layer --- */
+  article.post { max-width: 760px; }
+  article.post p, article.post li { line-height: 1.6; }
+  .answer { background: #eef4ee; border-left: 4px solid #1a7a3a;
+            padding: 12px 16px; font-size: 1.02rem; }
+  .byline { margin-top: -4px; }
+  .author-name { color: #14324a; font-weight: 600; }
+  .callout { background: #fdf6e3; border: 1px solid #e0d6b8;
+             padding: 12px 16px; margin: 16px 0; }
+  .callout p { margin: 0; }
+  .authorbox { border-top: 2px solid #d8d8d2; margin-top: 32px;
+               padding-top: 12px; }
+  .authorbox h2 { font-size: 1rem; }
+  .citations li { margin-bottom: 8px; }
+  .articlelist { padding-left: 18px; }
+  .articlelist li { margin-bottom: 12px; }
+  section.live, div.live { margin-bottom: 20px; }
+  table.specs th[scope="row"] { background: #f6f7f5; width: 30%; }
+</style>
+</head>
+<body>
+<header><a href="../index.html">Helios</a> — solar &amp; home-energy price tracker</header>
+<nav>
+  <a href="../index.html">All prices</a>
+  <a href="../guides/server-rack-and-wall-mount-battery-cost-per-kwh.html">Rack &amp; wall batteries</a><a href="../guides/portable-power-stations-compared-by-real-prices.html">Power stations</a><a href="../guides/solar-panel-pallets-cheapest-cost-per-watt.html">Solar panels</a>
+  <a href="../articles/index.html">Articles</a>
+  <a href="../about.html">About</a>
+  <a href="../disclosure.html">Affiliate disclosure</a>
+</nav>
+<main>
+
+<article class="post">
+<h1>What $/Wh tells you, and what it hides</h1>
+
+<p class="answer"><strong>Direct answer:</strong> Cost per watt-hour is a purchase price divided by a published capacity, and it is only meaningful when both halves describe the same standalone thing. It tells you which battery stores energy most cheaply. It hides cycle life, usable depth of discharge, inverter capability, warranty, and everything a kit bundles in. Helios computes it for one variant at a time and withholds it entirely for bundles and multi-packs, because a kit price over a battery&#39;s capacity produces a precise-looking number that is wrong by construction. This page is the full rule set.</p>
+
+<p class="muted byline">
+  By <span class="author-name">Brandon Hall</span> ·
+  Prices on this page refreshed when the site was last built; price record runs from 2026-08-13
+  to 2026-08-14.
+</p>
+
+
+  
+<p>Cost per watt-hour is the most useful single number in battery shopping and the easiest one to compute wrongly. This page is both an explainer and our public specification: the rules below are the rules the site enforces in code, not aspirations.</p>
+
+  
+
+  
+<h2>What it is</h2>
+
+  
+
+  
+<p>A retailer's price for one standalone product, divided by that product's published capacity in watt-hours. Nothing else. It answers exactly one question — which battery stores energy most cheaply — and answers it well.</p>
+
+  
+
+  
+<h2>The four rules we enforce</h2>
+
+  
+
+  
+<ol><li><strong>One variant at a time.</strong> The price and the rating in any row always describe the same variant. Pairing a discounted bundle's price with a bare unit's rating is a defect we have shipped once and now test against.</li><li><strong>Bundles get no rating.</strong> If the listing sells a kit, a multi-pack or a battery-plus-panels bundle, we show the price and withhold the $/Wh. A kit price over a battery's capacity is wrong by construction, and the wrongness scales with how good the kit is.</li><li><strong>Unknown capacity withholds.</strong> Capacity is used only where a tracked listing states it, backed by a verbatim quote from that listing. Where two retailers disagree about a capacity, we publish no rating for that product at any retailer.</li><li><strong>Stale and disputed numbers come off the page.</strong> Prices older than our staleness threshold are withheld rather than shown with a caveat, and any figure our audit finds disagreeing with its own source is quarantined until it verifies clean.</li></ol>
+
+  
+
+  
+<h2>The rule, visible</h2>
+
+  
+
+  
+<p>Here is the discipline working on a real product. The single-battery variant carries a rating; the multi-battery variants of the <em>same</em> product carry prices and a bundle badge, and no rating at all — because we do not know from the listing alone that a &ldquo;2 Batteries&rdquo; variant is exactly twice the capacity.</p>
+
+  
+
+  
+    
+    
+<section class="live" data-product-id="eg4-ll-s-48v-100ah">
+  <h3><a href="../products/eg4-ll-s-48v-100ah.html">EG4 LL-S 48V 100Ah Server Rack Battery</a></h3>
+  <p class="muted" data-retailer-id="shop-solar-kits" data-product-id="eg4-ll-s-48v-100ah" data-variant-id="41798635487372" data-tier="1-battery-only" data-sku="EG4-1511082" data-scraped-at="2026-08-14T13:51:22.658014+00:00">
+  EG4 ·
+  <span data-field="spec" data-spec-key="capacity_wh" data-spec-value="5120" data-spec-provenance="quoted">5,120 Wh</span>
+  usable capacity ·
+  best <span class="headline" data-field="wh" data-spec-key="capacity_wh" data-spec-value="5120" data-spec-provenance="quoted">$0.30/Wh</span>
+  at Shop Solar Kits
+  <span data-field="price">$1,536.99</span>
+  — <span class="instock" data-field="availability" data-value="true">In stock</span>
+  (<span data-field="asof">as of 1h ago</span>)
+</p>
+  
+  <table>
+  <thead>
+    <tr><th>Retailer</th><th>Variant</th><th>Price</th><th>$/Wh</th>
+        <th>Availability</th><th></th></tr>
+  </thead>
+  <tbody>
+    
+    <tr data-retailer-id="shop-solar-kits" data-product-id="eg4-ll-s-48v-100ah" data-variant-id="41798635487372" data-tier="1-battery-only" data-sku="EG4-1511082" data-scraped-at="2026-08-14T13:51:22.658014+00:00">
+      <td>Shop Solar Kits</td>
+      <td>1 Battery Only
+          
+          </td>
+      
+      <td><span data-field="price">$1,536.99</span>
+          <span class="was" data-field="was-price">$1,999.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="wh" data-field="wh" data-spec-key="capacity_wh" data-spec-value="5120" data-spec-provenance="quoted">$0.30/Wh</span>
+          
+          </td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://shopsolarkits.com/products/eg4-ll-gyll-lithium-battery-v2?variant=41798635487372" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="shop-solar-kits" data-product-id="eg4-ll-s-48v-100ah" data-variant-id="41798635520140" data-tier="2-batteries-only" data-sku="EG4-1511082-2" data-scraped-at="2026-08-14T13:51:22.658014+00:00">
+      <td>Shop Solar Kits</td>
+      <td>2 Batteries Only
+          <span class="badge">bundle</span>
+          </td>
+      
+      <td><span data-field="price">$3,072.00</span>
+          <span class="was" data-field="was-price">$4,199.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://shopsolarkits.com/products/eg4-ll-gyll-lithium-battery-v2?variant=41798635520140" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="shop-solar-kits" data-product-id="eg4-ll-s-48v-100ah" data-variant-id="41798635552908" data-tier="3-batteries-only" data-sku="EG4-1511082-3" data-scraped-at="2026-08-14T13:51:22.658014+00:00">
+      <td>Shop Solar Kits</td>
+      <td>3 Batteries Only
+          <span class="badge">bundle</span>
+          </td>
+      
+      <td><span data-field="price">$4,608.00</span>
+          <span class="was" data-field="was-price">$5,879.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://shopsolarkits.com/products/eg4-ll-gyll-lithium-battery-v2?variant=41798635552908" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="shop-solar-kits" data-product-id="eg4-ll-s-48v-100ah" data-variant-id="41798635585676" data-tier="4-batteries-6-slot-rack" data-sku="EG4-1511082-4" data-scraped-at="2026-08-14T13:51:22.658014+00:00">
+      <td>Shop Solar Kits</td>
+      <td>4 Batteries + 6 Slot Rack
+          <span class="badge">bundle</span>
+          </td>
+      
+      <td><span data-field="price">$6,873.00</span>
+          <span class="was" data-field="was-price">$8,999.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://shopsolarkits.com/products/eg4-ll-gyll-lithium-battery-v2?variant=41798635585676" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="shop-solar-kits" data-product-id="eg4-ll-s-48v-100ah" data-variant-id="41798635651212" data-tier="5-batteries-6-slot-rack" data-sku="EG4-1511082-5" data-scraped-at="2026-08-14T13:51:22.658014+00:00">
+      <td>Shop Solar Kits</td>
+      <td>5 Batteries + 6 Slot Rack
+          <span class="badge">bundle</span>
+          </td>
+      
+      <td><span data-field="price">$8,409.00</span>
+          <span class="was" data-field="was-price">$10,999.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://shopsolarkits.com/products/eg4-ll-gyll-lithium-battery-v2?variant=41798635651212" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+    <tr data-retailer-id="shop-solar-kits" data-product-id="eg4-ll-s-48v-100ah" data-variant-id="41798635716748" data-tier="6-batteries-6-slot-rack" data-sku="EG4-1511082-6" data-scraped-at="2026-08-14T13:51:22.658014+00:00">
+      <td>Shop Solar Kits</td>
+      <td>6 Batteries + 6 Slot Rack
+          <span class="badge">bundle</span>
+          </td>
+      
+      <td><span data-field="price">$9,945.00</span>
+          <span class="was" data-field="was-price">$13,099.00</span>
+          <div class="muted" data-field="asof">as of 1h ago</div></td>
+      <td><span class="withheld">bundle or multi-unit pack, so $/Wh is withheld</span></td>
+      <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
+      
+      <td><a href="https://shopsolarkits.com/products/eg4-ll-gyll-lithium-battery-v2?variant=41798635716748" rel="nofollow sponsored">View at retailer</a></td>
+    </tr>
+    
+  </tbody>
+</table>
+  
+</section>
+    
+
+  
+
+  
+<h2>What it hides</h2>
+
+  
+
+  
+<ul><li><strong>Cycle life.</strong> Two batteries at the same $/Wh are not the same purchase if one lasts three times as long. Divide by rated cycles and the ranking can invert.</li><li><strong>Usable depth of discharge.</strong> Nameplate capacity is not always drawable capacity.</li><li><strong>Everything that is not the battery.</strong> Inverter capability, outlets, solar input, app, warranty, and whether the thing needs an electrician.</li><li><strong>Total installed cost.</strong> Especially for rack batteries, where the battery is a component of a system you have to finish buying.</li><li><strong>Shipping and tax.</strong> Not in any price on this site.</li></ul><p>Use $/Wh to shortlist and to catch a bad price. Do not use it to pick a winner on its own.</p>
+
+  
+
+  
+<h2>Why we would rather show nothing</h2>
+
+  
+
+  
+<p>A missing number is a gap a reader can see and work around. A wrong number looks exactly like a right one. Every withheld rating on this site prints the rule that withheld it, so you can judge whether the gap matters to you rather than wondering whether we simply failed to look.</p>
+
+  
+
+
+<div class="authorbox">
+  <h2>About the author</h2>
+  <p><strong class="author-name">Brandon Hall</strong> — Brandon Hall builds and runs Helios. He writes the scrapers that collect these prices, the audit that checks the site against its own price store, and the rules that decide when a number is too uncertain to publish.</p>
+  <p class="muted">Helios does not physically test equipment. Everything here comes from tracked prices, published specifications and the site&#39;s own scrape history. How the data is collected, and when
+    we withhold a number, is set out on the
+    <a href="../about.html">about and methodology page</a>.
+    Our commercial position is in the
+    <a href="../disclosure.html">affiliate disclosure</a>.</p>
+</div>
+</article>
+
+</main>
+<footer>
+  Prices are collected from retailer product data and may lag the live site.
+  $/Wh is shown only for standalone units with a known capacity — bundles and
+  unknown capacities are deliberately unrated. Outbound retailer links are
+  marked <code>rel="nofollow sponsored"</code>; see the
+  <a href="../disclosure.html">affiliate disclosure</a> and
+  <a href="../about.html">about page</a>. Helios never automates
+  checkout.
+</footer>
+</body>
+</html>

@@ -49,6 +49,24 @@
             margin-bottom: 12px; }
   .prose { max-width: 720px; }
   .prose p, .prose li { line-height: 1.55; }
+  /* --- editorial layer --- */
+  article.post { max-width: 760px; }
+  article.post p, article.post li { line-height: 1.6; }
+  .answer { background: #eef4ee; border-left: 4px solid #1a7a3a;
+            padding: 12px 16px; font-size: 1.02rem; }
+  .byline { margin-top: -4px; }
+  .author-name { color: #14324a; font-weight: 600; }
+  .callout { background: #fdf6e3; border: 1px solid #e0d6b8;
+             padding: 12px 16px; margin: 16px 0; }
+  .callout p { margin: 0; }
+  .authorbox { border-top: 2px solid #d8d8d2; margin-top: 32px;
+               padding-top: 12px; }
+  .authorbox h2 { font-size: 1rem; }
+  .citations li { margin-bottom: 8px; }
+  .articlelist { padding-left: 18px; }
+  .articlelist li { margin-bottom: 12px; }
+  section.live, div.live { margin-bottom: 20px; }
+  table.specs th[scope="row"] { background: #f6f7f5; width: 30%; }
 </style>
 </head>
 <body>
@@ -56,6 +74,7 @@
 <nav>
   <a href="index.html">All prices</a>
   <a href="guides/server-rack-and-wall-mount-battery-cost-per-kwh.html">Rack &amp; wall batteries</a><a href="guides/portable-power-stations-compared-by-real-prices.html">Power stations</a><a href="guides/solar-panel-pallets-cheapest-cost-per-watt.html">Solar panels</a>
+  <a href="articles/index.html">Articles</a>
   <a href="about.html">About</a>
   <a href="disclosure.html">Affiliate disclosure</a>
 </nav>
@@ -91,7 +110,7 @@ standalone unit's capacity is known.</p>
           <div class="wh" data-field="wh">$0.52/Wh</div>
           <div class="soldout" data-field="availability" data-value="false">Sold out</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 2h ago</div>
         
       </td>
       
@@ -105,7 +124,7 @@ standalone unit's capacity is known.</p>
           
           <div class="soldout" data-field="availability" data-value="false">Sold out</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -135,7 +154,7 @@ standalone unit's capacity is known.</p>
           <div class="wh" data-field="wh">$0.74/Wh</div>
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 2h ago</div>
         
       </td>
       
@@ -149,7 +168,7 @@ standalone unit's capacity is known.</p>
           
           <div class="soldout" data-field="availability" data-value="false">Sold out</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -179,7 +198,7 @@ standalone unit's capacity is known.</p>
           <div class="wh" data-field="wh">$0.49/Wh</div>
           <div class="soldout" data-field="availability" data-value="false">Sold out</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 2h ago</div>
         
       </td>
       
@@ -213,7 +232,7 @@ standalone unit's capacity is known.</p>
           <div class="wh" data-field="wh">$0.29/Wh</div>
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 2h ago</div>
         
       </td>
       
@@ -251,7 +270,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -285,7 +304,7 @@ standalone unit's capacity is known.</p>
           <div class="wh" data-field="wh">$0.78/Wh</div>
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -315,7 +334,7 @@ standalone unit's capacity is known.</p>
           <div class="wh" data-field="wh">$0.68/Wh</div>
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 2h ago</div>
         
       </td>
       
@@ -329,7 +348,7 @@ standalone unit's capacity is known.</p>
           <div class="wh" data-field="wh">$0.68/Wh</div>
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -359,7 +378,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 2h ago</div>
         
       </td>
       
@@ -373,7 +392,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -403,7 +422,7 @@ standalone unit's capacity is known.</p>
           <div class="wh" data-field="wh">$0.81/Wh</div>
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 2h ago</div>
         
       </td>
       
@@ -417,7 +436,7 @@ standalone unit's capacity is known.</p>
           <div class="wh" data-field="wh">$0.81/Wh</div>
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -447,7 +466,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -481,7 +500,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -495,7 +514,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -525,7 +544,7 @@ standalone unit's capacity is known.</p>
           <div class="wh" data-field="wh">$0.84/Wh</div>
           <div class="soldout" data-field="availability" data-value="false">Sold out</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -539,7 +558,7 @@ standalone unit's capacity is known.</p>
           <div class="wh" data-field="wh">$0.98/Wh</div>
           <div class="soldout" data-field="availability" data-value="false">Sold out</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -569,7 +588,7 @@ standalone unit's capacity is known.</p>
           
           <div class="soldout" data-field="availability" data-value="false">Sold out</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -583,7 +602,7 @@ standalone unit's capacity is known.</p>
           
           <div class="soldout" data-field="availability" data-value="false">Sold out</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -613,7 +632,7 @@ standalone unit's capacity is known.</p>
           <div class="wh" data-field="wh">$0.67/Wh</div>
           <div class="soldout" data-field="availability" data-value="false">Sold out</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -627,7 +646,7 @@ standalone unit's capacity is known.</p>
           <div class="wh" data-field="wh">$0.67/Wh</div>
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -657,7 +676,7 @@ standalone unit's capacity is known.</p>
           <div class="wh" data-field="wh">$0.31/Wh</div>
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -671,7 +690,7 @@ standalone unit's capacity is known.</p>
           <div class="wh" data-field="wh">$0.25/Wh</div>
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -685,7 +704,7 @@ standalone unit's capacity is known.</p>
           <div class="wh" data-field="wh">$0.31/Wh</div>
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -711,7 +730,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -725,7 +744,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -739,7 +758,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -765,7 +784,7 @@ standalone unit's capacity is known.</p>
           <div class="wh" data-field="wh">$0.27/Wh</div>
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -783,7 +802,7 @@ standalone unit's capacity is known.</p>
           <div class="wh" data-field="wh">$0.31/Wh</div>
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -809,7 +828,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -827,7 +846,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -857,7 +876,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -887,7 +906,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -901,7 +920,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -915,7 +934,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -941,7 +960,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -955,7 +974,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -969,7 +988,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -995,7 +1014,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -1009,7 +1028,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -1023,7 +1042,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -1049,7 +1068,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -1063,7 +1082,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -1077,7 +1096,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -1103,7 +1122,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -1117,7 +1136,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -1131,7 +1150,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -1157,7 +1176,7 @@ standalone unit's capacity is known.</p>
           
           <div class="soldout" data-field="availability" data-value="false">Sold out</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -1171,7 +1190,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -1185,7 +1204,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -1211,7 +1230,7 @@ standalone unit's capacity is known.</p>
           <div class="wh" data-field="wh">$0.30/Wh</div>
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -1245,7 +1264,7 @@ standalone unit's capacity is known.</p>
           <div class="wh" data-field="wh">$0.21/Wh</div>
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -1279,7 +1298,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -1313,7 +1332,7 @@ standalone unit's capacity is known.</p>
           <div class="wh" data-field="wh">$0.73/Wh</div>
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -1335,7 +1354,7 @@ standalone unit's capacity is known.</p>
           <div class="wh" data-field="wh">$0.77/Wh</div>
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -1357,7 +1376,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -1379,7 +1398,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -1401,7 +1420,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -1423,7 +1442,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -1445,7 +1464,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -1467,7 +1486,7 @@ standalone unit's capacity is known.</p>
           
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       
@@ -1501,7 +1520,7 @@ standalone unit's capacity is known.</p>
           <div class="wh" data-field="wh">$0.38/Wh</div>
           <div class="instock" data-field="availability" data-value="true">In stock</div>
           
-          <div class="muted" data-field="asof">as of &lt;1h ago</div>
+          <div class="muted" data-field="asof">as of 1h ago</div>
         
       </td>
       

@@ -848,7 +848,7 @@ def test_tampered_guide_price_is_render_defect(tmp_path, no_sleep):
     assert report["verdict_counts"][RENDER_DEFECT] == 1
     defect = next(e for e in report["results"] if e["verdict"] == RENDER_DEFECT)
     assert defect["variant_id"] == str(BUNDLE_VID)
-    assert any(m["where"].startswith("guide:") and m["field"] == "price"
+    assert any(m["where"].startswith("content:") and m["field"] == "price"
                for m in defect["mismatches"]), defect["mismatches"]
     assert list(_quarantine_out(tmp_path)) == [QKEY]
 
@@ -869,7 +869,7 @@ def test_tampered_guide_rating_is_render_defect(tmp_path, no_sleep):
 
     assert exit_code == 3
     defect = next(e for e in report["results"] if e["verdict"] == RENDER_DEFECT)
-    assert any(m["where"].startswith("guide:") and m["field"] == "wh"
+    assert any(m["where"].startswith("content:") and m["field"] == "wh"
                for m in defect["mismatches"]), defect["mismatches"]
 
 
@@ -895,7 +895,7 @@ def test_tampered_guide_availability_is_render_defect(tmp_path, no_sleep):
 
     assert exit_code == 3
     defect = next(e for e in report["results"] if e["verdict"] == RENDER_DEFECT)
-    assert any(m["where"].startswith("guide:") and m["field"] == "availability"
+    assert any(m["where"].startswith("content:") and m["field"] == "availability"
                for m in defect["mismatches"]), defect["mismatches"]
 
 
@@ -925,10 +925,10 @@ def test_guide_check_costs_no_extra_live_requests(tmp_path, no_sleep):
 def test_guide_provenance_parser_reads_every_guide(tmp_path):
     """Offline: the parser must actually find rows, or every guide
     assertion above would pass vacuously."""
-    from audit import parse_guide_provenance
+    from audit import parse_content_provenance
     data_dir = _seed_audit(tmp_path)
     site_dir = _rebuild(tmp_path, data_dir)
-    prov = parse_guide_provenance(site_dir)
+    prov = parse_content_provenance(site_dir)
     assert str(BUNDLE_VID) in prov
     record = prov[str(BUNDLE_VID)]
     assert record["guide"].endswith(".html")
@@ -936,8 +936,8 @@ def test_guide_provenance_parser_reads_every_guide(tmp_path):
 
 
 def test_guide_provenance_parser_tolerates_a_missing_guides_dir(tmp_path):
-    from audit import parse_guide_provenance
-    assert parse_guide_provenance(tmp_path / "nope") == {}
+    from audit import parse_content_provenance
+    assert parse_content_provenance(tmp_path / "nope") == {}
 
 
 # ---------------------------------------------------------------------------
@@ -965,24 +965,27 @@ def _spread_variant(site_dir):
 
 
 def test_variant_rendered_more_than_once_on_a_guide_is_merged(tmp_path):
-    from audit import parse_guide_provenance
+    from audit import parse_content_provenance
     data_dir = _seed_audit(tmp_path)
     site_dir = _rebuild(tmp_path, data_dir)
 
     multi = _spread_variant(site_dir)
     assert multi, "fixture no longer renders any variant twice on a guide"
 
-    prov = parse_guide_provenance(site_dir)
+    prov = parse_content_provenance(site_dir)
+    merged_any = False
     for vid, records in multi.items():
-        # at least one appearance lacks the rating cell (the spreads row)
-        assert any("wh" not in r["fields"] for r in records), vid
-        # ...and at least one has it (the ranked row)
+        assert len(records) > 1
+        merged_any = True
+        # Every appearance of one variant must agree, and the merged view
+        # must keep the rating. (The case where a context carries NO rating
+        # cell at all — a spreads table — is exercised in test_guides.py,
+        # whose fixture has two retailers and therefore renders spreads.)
         assert any("wh" in r["fields"] for r in records), vid
-        # the merged view keeps the rating: absence in a table that has no
-        # rating column is not evidence of a missing rating
         assert "wh" in prov[vid]["fields"], vid
         assert prov[vid]["fields"]["wh"]["text"].endswith("/Wh"), vid
         assert not prov[vid]["internal_conflicts"], prov[vid]["internal_conflicts"]
+    assert merged_any, "nothing was merged — this test proved nothing"
 
 
 @responses.activate
@@ -1016,7 +1019,7 @@ def test_merging_still_catches_a_tamper_in_the_ranked_table(tmp_path, no_sleep):
     report, exit_code = _run(tmp_path, data_dir, site_dir)
     assert exit_code == 3
     defect = next(e for e in report["results"] if e["verdict"] == RENDER_DEFECT)
-    assert any(m["where"].startswith("guide:") and m["field"] == "wh"
+    assert any(m["where"].startswith("content:") and m["field"] == "wh"
                for m in defect["mismatches"]), defect["mismatches"]
 
 

@@ -14,36 +14,8 @@
   is holding back.
 #}
 
-{%- macro annotations(offer) -%}
-{%- if offer.sku_conflict == "quantity" %}
-  <div class="withheld">Retailers disagree on the quantity behind SKU
-    <code>{{ offer.sku }}</code>. This row may not hold the same number of
-    items as another row with the same label — check the retailer's page.</div>
-{%- elif offer.sku_conflict == "kind" %}
-  <div class="withheld">Retailers disagree on whether SKU
-    <code>{{ offer.sku }}</code> is a standalone unit or a bundle.</div>
-{%- endif %}
-{%- if offer.sku_only_here %}
-  <div class="prov">SKU <code>{{ offer.sku }}</code> — carried only by
-    {{ offer.retailer_name }} among tracked retailers, so it has no
-    like-for-like counterpart in this table.</div>
-{%- endif %}
-{%- if offer.note_warning %}
-  <div class="withheld">Data-quality note recorded against
-    {{ offer.retailer_name }} for this product:
-    {{ offer.note_warning | truncate(260, true, "...") }}</div>
-{%- endif %}
-{%- endmacro -%}
-
-{%- macro availability(offer) -%}
-{%- if offer.available is sameas true %}<span class="instock" data-field="availability" data-value="true">In stock</span>
-{%- elif offer.available is sameas false %}<span class="soldout" data-field="availability" data-value="false">Sold out</span>
-{%- else %}<span class="unknown" data-field="availability" data-value="unknown">Check site</span>{% endif %}
-{%- endmacro -%}
-
-{%- macro rowattrs(offer) -%}
-data-retailer-id="{{ offer.retailer_id }}" data-product-id="{{ offer.product_id }}"{% if offer.variant_id is not none %} data-variant-id="{{ offer.variant_id }}"{% endif %} data-tier="{{ offer.tier }}" data-sku="{{ offer.sku or '' }}" data-scraped-at="{{ offer.scraped_at }}"{% if offer.withheld %} data-withheld="{{ offer.withheld }}"{% endif %}
-{%- endmacro -%}
+{# One copy of the row markup, shared with article.html (templates/_macros.html) #}
+{%- from "_macros.html" import annotations, availability, rowattrs, headline with context -%}
 
 {% block content %}
 <h1>{{ guide.h1 }}</h1>
@@ -64,18 +36,7 @@ data-retailer-id="{{ offer.retailer_id }}" data-product-id="{{ offer.product_id 
     <a href="{{ root_prefix }}products/{{ entry.product.id }}.html">{{ entry.product.name }}</a>
     {%- if entry.tied %} <span class="badge">tie</span>{% endif %}
   </h2>
-  <p class="muted">
-    {{ entry.product.brand }}{% if entry.spec_display %} ·
-    <span data-field="spec" data-spec-key="{{ metric.spec_key }}" data-spec-value="{{ entry.spec_value }}" data-spec-provenance="{{ entry.spec_provenance }}">{{ entry.spec_display }}</span>
-    {{ metric.spec_label }}{% endif %} ·
-    {# data-variant-id only when the id is REAL: a literal "None" in a
-       provenance attribute is a lie about identity (red team #4, MAJOR-7) #}
-    best <span class="headline" data-field="best-rating"{% if entry.best.variant_id is not none %} data-variant-id="{{ entry.best.variant_id }}"{% endif %} data-scraped-at="{{ entry.best.scraped_at }}">{{ entry.best.rating_display }}</span>
-    at {{ entry.best.retailer_name }}
-    <span data-field="best-price">{{ entry.best.price_display }}</span>
-    — {{ availability(entry.best) }}
-    ({{ entry.best.asof }})
-  </p>
+  {{ headline(entry, metric, root_prefix) }}
   {% if entry.tied %}
   <p class="prov">This figure rounds to the same displayed value as an
     adjacent rank. The ordering uses the unrounded numbers; treat the two as

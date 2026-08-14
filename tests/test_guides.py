@@ -351,7 +351,8 @@ def test_every_guide_renders(built):
         assert escape(spec["h1"]) in html
         assert "Methodology" in html
     assert summary["guide_pages"] == 3
-    assert summary["info_pages"] == 2
+    # articles index + about + disclosure
+    assert summary["info_pages"] == 3
 
 
 def test_guides_rank_by_metric_ascending(built):
@@ -1042,7 +1043,7 @@ def test_headline_shows_availability_of_the_ranked_variant(built):
     _, site_dir, _ = built
     for slug in (RACK_GUIDE, STATION_GUIDE, PANEL_GUIDE):
         html = guide_html(site_dir, slug)
-        blocks = re.findall(r'data-field="best-rating".*?</p>', html, re.S)
+        blocks = re.findall(r'<p class="muted" [^>]*>.*?class="headline".*?</p>', html, re.S)
         assert blocks, slug
         for block in blocks:
             assert 'data-field="availability"' in block, slug
@@ -1426,7 +1427,7 @@ def test_variant_in_both_ranked_and_spread_tables_keeps_its_rating(built):
     none, by design). Keying provenance by variant_id alone let the
     ratingless spreads row overwrite the rated one, so audit.py read the
     rating as absent and raised RENDER_DEFECT against a correct page."""
-    from audit import parse_guide_provenance, parse_provenance_list
+    from audit import parse_content_provenance, parse_provenance_list
 
     _, site_dir, _ = built
     guide = site_dir / "guides" / f"{STATION_GUIDE}.html"
@@ -1442,7 +1443,7 @@ def test_variant_in_both_ranked_and_spread_tables_keeps_its_rating(built):
                    if any(r.get("sku") == "SKU-A" for r in recs)]
     assert spread_vids, "SKU-A not duplicated - the spread stopped rendering"
 
-    merged = parse_guide_provenance(site_dir)
+    merged = parse_content_provenance(site_dir)
     for vid in spread_vids:
         records = twice[vid]
         assert any("wh" not in r["fields"] for r in records), vid

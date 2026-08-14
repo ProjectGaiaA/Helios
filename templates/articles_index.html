@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Articles</h1>
+<p class="prose">Explainers and comparisons built the same way as the rest of
+this site: the words are written once and the numbers inside them are
+re-rendered from the price store on every build, with their own provenance
+and their own age. Nothing here is a physical product review — Helios has not
+tested any unit itself, and every article says so.</p>
+
+<ul class="articlelist">
+  {% for item in articles %}
+  <li>
+    <a href="{{ root_prefix }}articles/{{ item.slug }}.html">{{ item.h1 }}</a>
+    <div class="muted">{{ item.subject }}</div>
+  </li>
+  {% endfor %}
+</ul>
+
+<p class="muted">All articles are written by
+  <span class="author-name">{{ author.name }}</span>, who builds and runs this
+  tracker. See the <a href="{{ root_prefix }}about.html">about page</a> for
+  how the data is collected and when a number is withheld.</p>
+{% endblock %}

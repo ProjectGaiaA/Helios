@@ -1,11 +1,12 @@
 # Project Helios — Solar/Home-Energy Price Tracker
 
 ## What This Is
-Solar and home-energy price comparison skeleton (Phase A). Scrapes Shopify
-retailers politely, appends JSONL price history, builds a static site with
-$/Wh comparisons. Not deployed; no domain yet. Ported from the plant price
-tracker (project_gaia) — its scraper defect history is baked into the
-comments here as constraints.
+Solar and home-energy price comparison site. Scrapes Shopify retailers
+politely, appends JSONL price history, builds a static site with $/Wh
+comparisons. Deployed: Vercel project "helios" auto-deploys main →
+https://helios-projectgaiaas-projects.vercel.app/ (no custom domain yet).
+Ported from the plant price tracker (project_gaia) — its scraper defect
+history is baked into the comments here as constraints.
 
 ## Health Check Protocol
 
@@ -47,11 +48,14 @@ see the workflow's comments for the reasoning and for how to add Slack or
 email later. Windows and failure codes are documented in
 `docs/HEARTBEAT_LOG.md`.
 
-**Known open item (2026-08-14):** the GitHub API reports **zero** completed
-runs of `scrape.yml` — the 2x-daily cron has never actually fired in CI, and
-every price commit so far was made locally. Expect `NO_COMPLETED_SCRAPE_RUN`
-to go red once this repo is older than the window; that is the check working,
-not a bug. See `docs/HEARTBEAT_LOG.md` §8.
+**Cron status (2026-08-14):** `scrape.yml` carries the 2x-daily cron
+(11:00 / 21:30 UTC) plus workflow_dispatch. One completed CI run exists — a
+manual dispatch on 2026-08-14 that published `f295a13`; its job showed red
+only because the audit step ran `--all` into the 25-request politeness
+budget (fixed in `35c0df6`: scheduled runs sample, per PLAN 4c.2). The
+first *scheduled* run is expected 2026-08-14 21:30 UTC. A red heartbeat
+before the grace expiry (2026-08-15 13:00 UTC) is startup noise, not a
+defect. See `docs/HEARTBEAT_LOG.md` §8.
 
 ## Key Commands
 
@@ -74,7 +78,8 @@ python -X utf8 -m ruff check .
 `audit.py` compares each sampled (product, retailer, variant) triple on
 TWO independent hops. Render hop: site HTML (via `data-*` provenance
 attributes) vs the latest JSONL row. Freshness hop: that row vs the live
-retailer `.json`+`.js` (UCP once O5 resolves).
+retailer `.json`+`.js` (UCP as a freshness source is pending the
+live-payload parser fix; the agent profile itself is live).
 
 - `RENDER_DEFECT` — site disagrees with its own store. The ONLY defect
   class: alarm + quarantine + exit 3.
@@ -117,9 +122,12 @@ retailer `.json`+`.js` (UCP once O5 resolves).
 - `scrapers/polite.py` — Bot UA, browser UA rotation, robots.txt (fail-open
   with warning), 5-15s delays.
 - `scrapers/ucp.py` — UCP/MCP catalog client (search/lookup/get_product
-  ONLY — checkout tools are never wrapped). Fixture-tested; live use
-  gated on O5 (Helios-hosted agent profile; never gaia's). Money is
-  integer minor units; compare in cents, never float ==.
+  ONLY — checkout tools are never wrapped). Fixture-tested; live
+  lookup_catalog proven under the Helios-hosted agent profile (served
+  from site/.well-known + vercel.json headers — never gaia's profile).
+  Pipeline use pending the live-payload parser fix: the live response
+  nests price differently than the published example. Money is integer
+  minor units; compare in cents, never float ==.
 - `audit.py` — the end-to-end correctness loop (see taxonomy above).
   Outputs data/audit_report.json + data/quarantine.json.
 - `heartbeat.py` — the dead-man's switch. Every other guard runs as part of
@@ -144,10 +152,13 @@ retailer `.json`+`.js` (UCP once O5 resolves).
   Seeded from live discovery 2026-08-13; missing file = empty mapping.
 - `data/prices/*.jsonl` — Append-only price history, one file per product,
   LF-only (enforced by .gitattributes AND the writer).
-- `templates/` — base, home, product (inline CSS, no external assets).
+- `templates/` — base, home, product, guide, article (+ `_macros`,
+  `articles_index`), about, disclosure (inline CSS, no external assets).
 - `site/` — Generated output, committed (gaia convention).
-- `.github/workflows/scrape.yml` — workflow_dispatch ONLY. No cron until
-  the project deploys.
+- `.github/workflows/scrape.yml` — cron 11:00 & 21:30 UTC plus
+  workflow_dispatch. Scrapes all active retailers, tests, builds, runs the
+  SAMPLED audit as the publish gate, commits site/ + data/. Alarms are the
+  job's own failure annotations.
 
 ## Key Decisions
 

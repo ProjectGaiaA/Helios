@@ -49,6 +49,24 @@
             margin-bottom: 12px; }
   .prose { max-width: 720px; }
   .prose p, .prose li { line-height: 1.55; }
+  /* --- editorial layer --- */
+  article.post { max-width: 760px; }
+  article.post p, article.post li { line-height: 1.6; }
+  .answer { background: #eef4ee; border-left: 4px solid #1a7a3a;
+            padding: 12px 16px; font-size: 1.02rem; }
+  .byline { margin-top: -4px; }
+  .author-name { color: #14324a; font-weight: 600; }
+  .callout { background: #fdf6e3; border: 1px solid #e0d6b8;
+             padding: 12px 16px; margin: 16px 0; }
+  .callout p { margin: 0; }
+  .authorbox { border-top: 2px solid #d8d8d2; margin-top: 32px;
+               padding-top: 12px; }
+  .authorbox h2 { font-size: 1rem; }
+  .citations li { margin-bottom: 8px; }
+  .articlelist { padding-left: 18px; }
+  .articlelist li { margin-bottom: 12px; }
+  section.live, div.live { margin-bottom: 20px; }
+  table.specs th[scope="row"] { background: #f6f7f5; width: 30%; }
 </style>
 </head>
 <body>
@@ -56,6 +74,7 @@
 <nav>
   <a href="../index.html">All prices</a>
   <a href="../guides/server-rack-and-wall-mount-battery-cost-per-kwh.html">Rack &amp; wall batteries</a><a href="../guides/portable-power-stations-compared-by-real-prices.html">Power stations</a><a href="../guides/solar-panel-pallets-cheapest-cost-per-watt.html">Solar panels</a>
+  <a href="../articles/index.html">Articles</a>
   <a href="../about.html">About</a>
   <a href="../disclosure.html">Affiliate disclosure</a>
 </nav>
@@ -67,7 +86,7 @@
   3 of 5 tracked
   solar panels could be ranked;
   31 retailer prices shown, the
-  freshest &lt;1h ago.
+  freshest 1h ago.
   Only offers that are actually in stock set a rank.
   <a href="#methodology">How this is put together</a>.
 </p>
@@ -78,17 +97,16 @@
   <h2><span class="rank">1.</span>
     <a href="../products/rich-solar-mega-200.html">Rich Solar MEGA 200 200W 12V Solar Panel</a> <span class="badge">tie</span>
   </h2>
-  <p class="muted">
-    Rich Solar ·
-    <span data-field="spec" data-spec-key="output_w" data-spec-value="200" data-spec-provenance="unquoted">200 W</span>
-    rated output ·
-    
-    best <span class="headline" data-field="best-rating" data-variant-id="45167084962028" data-scraped-at="2026-08-14T13:58:30.189720+00:00">$0.96/W</span>
-    at Wild Oak Trail
-    <span data-field="best-price">$191.99</span>
-    — <span class="instock" data-field="availability" data-value="true">In stock</span>
-    (as of &lt;1h ago)
-  </p>
+  <p class="muted" data-retailer-id="wild-oak-trail" data-product-id="rich-solar-mega-200" data-variant-id="45167084962028" data-tier="12v" data-sku="RS-M200" data-scraped-at="2026-08-14T13:58:30.189720+00:00">
+  Rich Solar ·
+  <span data-field="spec" data-spec-key="output_w" data-spec-value="200" data-spec-provenance="unquoted">200 W</span>
+  rated output ·
+  best <span class="headline" data-field="watt" data-spec-key="output_w" data-spec-value="200" data-spec-provenance="unquoted">$0.96/W</span>
+  at Wild Oak Trail
+  <span data-field="price">$191.99</span>
+  — <span class="instock" data-field="availability" data-value="true">In stock</span>
+  (<span data-field="asof">as of 1h ago</span>)
+</p>
   
   <p class="prov">This figure rounds to the same displayed value as an
     adjacent rank. The ordering uses the unrounded numbers; treat the two as
@@ -114,7 +132,7 @@
         
         <td><span data-field="price">$191.99</span>
             <span class="was" data-field="was-price">$239.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="wh" data-field="watt" data-spec-key="output_w" data-spec-value="200" data-spec-provenance="unquoted">$0.96/W</span>
             
             </td>
@@ -131,7 +149,7 @@
         
         <td><span data-field="price">$199.00</span>
             <span class="was" data-field="was-price">$369.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="wh" data-field="watt" data-spec-key="output_w" data-spec-value="200" data-spec-provenance="unquoted">$0.99/W</span>
             
             </td>
@@ -151,7 +169,7 @@
         
         <td><span data-field="price">$199.99</span>
             <span class="was" data-field="was-price">$249.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="wh" data-field="watt" data-spec-key="output_w" data-spec-value="200" data-spec-provenance="unquoted">$1.00/W</span>
             
             </td>
@@ -168,7 +186,7 @@
         
         <td><span data-field="price">$239.99</span>
             
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="wh" data-field="watt" data-spec-key="output_w" data-spec-value="200" data-spec-provenance="unquoted">$1.20/W</span>
             
             </td>
@@ -185,17 +203,16 @@
   <h2><span class="rank">2.</span>
     <a href="../products/rich-solar-mega-250.html">Rich Solar MEGA 250 250W 12V Solar Panel</a> <span class="badge">tie</span>
   </h2>
-  <p class="muted">
-    Rich Solar ·
-    <span data-field="spec" data-spec-key="output_w" data-spec-value="250" data-spec-provenance="unquoted">250 W</span>
-    rated output ·
-    
-    best <span class="headline" data-field="best-rating" data-variant-id="44130227847404" data-scraped-at="2026-08-14T13:58:48.867000+00:00">$0.96/W</span>
-    at Wild Oak Trail
-    <span data-field="best-price">$239.99</span>
-    — <span class="instock" data-field="availability" data-value="true">In stock</span>
-    (as of &lt;1h ago)
-  </p>
+  <p class="muted" data-retailer-id="wild-oak-trail" data-product-id="rich-solar-mega-250" data-variant-id="44130227847404" data-tier="default" data-sku="RS-M250" data-scraped-at="2026-08-14T13:58:48.867000+00:00">
+  Rich Solar ·
+  <span data-field="spec" data-spec-key="output_w" data-spec-value="250" data-spec-provenance="unquoted">250 W</span>
+  rated output ·
+  best <span class="headline" data-field="watt" data-spec-key="output_w" data-spec-value="250" data-spec-provenance="unquoted">$0.96/W</span>
+  at Wild Oak Trail
+  <span data-field="price">$239.99</span>
+  — <span class="instock" data-field="availability" data-value="true">In stock</span>
+  (<span data-field="asof">as of 1h ago</span>)
+</p>
   
   <p class="prov">This figure rounds to the same displayed value as an
     adjacent rank. The ordering uses the unrounded numbers; treat the two as
@@ -221,7 +238,7 @@
         
         <td><span data-field="price">$239.99</span>
             <span class="was" data-field="was-price">$299.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="wh" data-field="watt" data-spec-key="output_w" data-spec-value="250" data-spec-provenance="unquoted">$0.96/W</span>
             
             </td>
@@ -238,7 +255,7 @@
         
         <td><span data-field="price">$299.99</span>
             
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="wh" data-field="watt" data-spec-key="output_w" data-spec-value="250" data-spec-provenance="unquoted">$1.20/W</span>
             
             </td>
@@ -255,7 +272,7 @@
         
         <td><span data-field="price">$299.99</span>
             <span class="was" data-field="was-price">$399.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="wh" data-field="watt" data-spec-key="output_w" data-spec-value="250" data-spec-provenance="unquoted">$1.20/W</span>
             
             </td>
@@ -272,17 +289,16 @@
   <h2><span class="rank">3.</span>
     <a href="../products/rich-solar-mega-200-briefcase.html">Rich Solar MEGA 200 Briefcase 200W Portable Panel</a>
   </h2>
-  <p class="muted">
-    Rich Solar ·
-    <span data-field="spec" data-spec-key="output_w" data-spec-value="200" data-spec-provenance="unquoted">200 W</span>
-    rated output ·
-    
-    best <span class="headline" data-field="best-rating" data-variant-id="39295850446988" data-scraped-at="2026-08-14T13:50:40.079916+00:00">$1.30/W</span>
-    at Shop Solar Kits
-    <span data-field="best-price">$259.88</span>
-    — <span class="instock" data-field="availability" data-value="true">In stock</span>
-    (as of &lt;1h ago)
-  </p>
+  <p class="muted" data-retailer-id="shop-solar-kits" data-product-id="rich-solar-mega-200-briefcase" data-variant-id="39295850446988" data-tier="default" data-sku="RS-X200B" data-scraped-at="2026-08-14T13:50:40.079916+00:00">
+  Rich Solar ·
+  <span data-field="spec" data-spec-key="output_w" data-spec-value="200" data-spec-provenance="unquoted">200 W</span>
+  rated output ·
+  best <span class="headline" data-field="watt" data-spec-key="output_w" data-spec-value="200" data-spec-provenance="unquoted">$1.30/W</span>
+  at Shop Solar Kits
+  <span data-field="price">$259.88</span>
+  — <span class="instock" data-field="availability" data-value="true">In stock</span>
+  (<span data-field="asof">as of 1h ago</span>)
+</p>
   
   
   <p class="prov">The rated output used here is taken from the product's
@@ -304,7 +320,7 @@
         
         <td><span data-field="price">$259.88</span>
             <span class="was" data-field="was-price">$469.00</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="wh" data-field="watt" data-spec-key="output_w" data-spec-value="200" data-spec-provenance="unquoted">$1.30/W</span>
             
             </td>
@@ -321,7 +337,7 @@
         
         <td><span data-field="price">$319.99</span>
             <span class="was" data-field="was-price">$399.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="wh" data-field="watt" data-spec-key="output_w" data-spec-value="200" data-spec-provenance="unquoted">$1.60/W</span>
             
             </td>
@@ -338,7 +354,7 @@
         
         <td><span data-field="price">$399.99</span>
             
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="wh" data-field="watt" data-spec-key="output_w" data-spec-value="200" data-spec-provenance="unquoted">$2.00/W</span>
             
             </td>
@@ -358,7 +374,7 @@
         
         <td><span data-field="price">$359.99</span>
             <span class="was" data-field="was-price">$449.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/W is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -395,7 +411,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$2,159.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/W is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -409,7 +425,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$2,499.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/W is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -423,7 +439,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$2,639.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/W is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -437,7 +453,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$2,699.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/W is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -451,7 +467,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$3,099.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/W is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -465,7 +481,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$3,119.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/W is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -479,7 +495,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$3,299.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/W is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -493,7 +509,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$3,699.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/W is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -507,7 +523,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$3,899.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/W is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -524,7 +540,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$12,099.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/W is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -555,7 +571,7 @@ withheld the number, not a placeholder.</p>
     This retailer&#39;s MEGA 410 pack SKUs are shifted one step against its own labels: it lists RS-M410-9 as &#34;10 Solar Panels&#34; at $3,399.99 and RS-M410-10 as &#34;12 Solar Panels&#34; at $2,719.99, while shop-solar-kits and rich-solar both put RS-M410-10 on a 10-panel pac...</div></td>
         
         <td><span data-field="price">$2,239.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/W is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -569,7 +585,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$2,599.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/W is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -589,7 +605,7 @@ withheld the number, not a placeholder.</p>
     This retailer&#39;s MEGA 410 pack SKUs are shifted one step against its own labels: it lists RS-M410-9 as &#34;10 Solar Panels&#34; at $3,399.99 and RS-M410-10 as &#34;12 Solar Panels&#34; at $2,719.99, while shop-solar-kits and rich-solar both put RS-M410-10 on a 10-panel pac...</div></td>
         
         <td><span data-field="price">$2,719.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/W is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -603,7 +619,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$2,799.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/W is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -620,7 +636,7 @@ withheld the number, not a placeholder.</p>
     items as another row with the same label — check the retailer's page.</div></td>
         
         <td><span data-field="price">$3,199.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/W is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -637,7 +653,7 @@ withheld the number, not a placeholder.</p>
     items as another row with the same label — check the retailer's page.</div></td>
         
         <td><span data-field="price">$3,399.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/W is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -657,7 +673,7 @@ withheld the number, not a placeholder.</p>
     This retailer&#39;s MEGA 410 pack SKUs are shifted one step against its own labels: it lists RS-M410-9 as &#34;10 Solar Panels&#34; at $3,399.99 and RS-M410-10 as &#34;12 Solar Panels&#34; at $2,719.99, while shop-solar-kits and rich-solar both put RS-M410-10 on a 10-panel pac...</div></td>
         
         <td><span data-field="price">$3,399.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/W is withheld</span></td>
         <td><span class="soldout" data-field="availability" data-value="false">Sold out</span></td>
         
@@ -671,7 +687,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$3,699.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/W is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -685,7 +701,7 @@ withheld the number, not a placeholder.</p>
             </td>
         
         <td><span data-field="price">$3,999.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/W is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -702,7 +718,7 @@ withheld the number, not a placeholder.</p>
     like-for-like counterpart in this table.</div></td>
         
         <td><span data-field="price">$12,199.99</span>
-            <div class="muted" data-field="asof">as of &lt;1h ago</div></td>
+            <div class="muted" data-field="asof">as of 1h ago</div></td>
         <td><span class="withheld">bundle or multi-unit pack, so $/W is withheld</span></td>
         <td><span class="instock" data-field="availability" data-value="true">In stock</span></td>
         
@@ -795,8 +811,8 @@ withheld the number, not a placeholder.</p>
 <h3>Data freshness</h3>
 <ul>
   <li>The freshest price on this page was read
-    &lt;1h ago; the oldest
-    &lt;1h ago. Every price shows its own age.
+    1h ago; the oldest
+    1h ago. Every price shows its own age.
     </li>
   <li>Scrapes are run on demand rather than on a fixed schedule, so an age of a
     few days is normal. A retailer can change a price at any moment after a
