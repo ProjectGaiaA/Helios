@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-14T03:35:30.950806+00:00",
+  "timestamp": "2026-08-14T14:04:39.150787+00:00",
   "retailers": [
     {
       "retailer_id": "shop-solar-kits",
@@ -158,12 +158,12 @@
     {
       "retailer_id": "wild-oak-trail",
       "status": "completed",
-      "products_expected": 21,
-      "products_found": 21,
+      "products_expected": 20,
+      "products_found": 20,
       "products_no_sizes": 0,
-      "products_priced": 21,
+      "products_priced": 20,
       "products_error": 0,
-      "prices_collected": 84,
+      "prices_collected": 75,
       "anomalies": [],
       "price_records": {
         "ecoflow-delta-max:wild-oak-trail": {
@@ -232,17 +232,6 @@
         "ecoflow-river-3:wild-oak-trail": {
           "default": 199.0
         },
-        "ecoflow-delta-pro-ultra:wild-oak-trail": {
-          "delta-pro-ultra-inverter-only": 2799.0,
-          "delta-pro-ultra-with-1-battery": 4199.0,
-          "delta-pro-ultra-with-2-batteries": 5999.0,
-          "delta-pro-ultra-with-3-batteries": 7999.0,
-          "delta-pro-ultra-with-4-batteries": 10099.0,
-          "delta-pro-ultra-with-5-batteries": 12199.0,
-          "delta-pro-ultra-with-1-battery-and-8-400w-panels": 8598.97,
-          "delta-pro-ultra-with-2-batteries-and-10-400w-panels": 12198.97,
-          "delta-pro-ultra-with-3-batteries-and-12-400w-panels": 15998.97
-        },
         "ecoflow-smart-generator-4000:wild-oak-trail": {
           "ecoflow-smart-generator-4000-dual-fuel-only": 1799.0,
           "ecoflow-smart-generator-4000-dual-fuel-with-delta-pro-3": 4698.0
@@ -296,6 +285,61 @@
       "health": "healthy"
     },
     {
+      "retailer_id": "rich-solar",
+      "status": "completed",
+      "products_expected": 10,
+      "products_found": 10,
+      "products_no_sizes": 0,
+      "products_priced": 10,
+      "products_error": 0,
+      "prices_collected": 21,
+      "anomalies": [],
+      "price_records": {
+        "rich-solar-alpha-12v-100ah:rich-solar": {
+          "default": 399.99
+        },
+        "rich-solar-alpha-12v-200ah:rich-solar": {
+          "default": 799.99
+        },
+        "rich-solar-alpha-24v-100ah:rich-solar": {
+          "default": 799.99
+        },
+        "rich-solar-alpha-5-pro:rich-solar": {
+          "1-battery": 1799.99,
+          "2-batteries": 3599.98,
+          "3-batteries": 5399.97,
+          "4-batteries": 7199.96,
+          "5-batteries": 8999.95,
+          "6-batteries": 10799.94
+        },
+        "rich-solar-mega-200:rich-solar": {
+          "default": 239.99
+        },
+        "rich-solar-mega-250:rich-solar": {
+          "default": 299.99
+        },
+        "rich-solar-mega-400:rich-solar": {
+          "8-panels": 2699.99,
+          "10-panels": 3299.99,
+          "12-panels": 3899.99,
+          "36-panels": 12099.99
+        },
+        "rich-solar-mega-410:rich-solar": {
+          "8-panels": 2799.99,
+          "10-panels": 3399.99,
+          "12-panels": 3999.99,
+          "36-panels": 12199.99
+        },
+        "rich-solar-mega-200-briefcase:rich-solar": {
+          "default": 399.99
+        },
+        "rich-solar-mppt-40a:rich-solar": {
+          "default": 159.99
+        }
+      },
+      "health": "healthy"
+    },
+    {
       "retailer_id": "alte-store",
       "status": "completed",
       "products_expected": 5,
@@ -323,26 +367,9 @@
         }
       },
       "health": "healthy"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "status": "completed",
-      "products_expected": 1,
-      "products_found": 1,
-      "products_no_sizes": 0,
-      "products_priced": 1,
-      "products_error": 0,
-      "prices_collected": 1,
-      "anomalies": [],
-      "price_records": {
-        "rich-solar-alpha-24v-100ah:rich-solar": {
-          "default": 799.99
-        }
-      },
-      "health": "healthy"
     }
   ],
-  "total_prices_collected": 172,
+  "total_prices_collected": 183,
   "total_anomalies": 0,
   "anomalies": [],
   "prices": {
@@ -552,17 +579,6 @@
     "ecoflow-river-3:wild-oak-trail": {
       "default": 199.0
     },
-    "ecoflow-delta-pro-ultra:wild-oak-trail": {
-      "delta-pro-ultra-inverter-only": 2799.0,
-      "delta-pro-ultra-with-1-battery": 4199.0,
-      "delta-pro-ultra-with-2-batteries": 5999.0,
-      "delta-pro-ultra-with-3-batteries": 7999.0,
-      "delta-pro-ultra-with-4-batteries": 10099.0,
-      "delta-pro-ultra-with-5-batteries": 12199.0,
-      "delta-pro-ultra-with-1-battery-and-8-400w-panels": 8598.97,
-      "delta-pro-ultra-with-2-batteries-and-10-400w-panels": 12198.97,
-      "delta-pro-ultra-with-3-batteries-and-12-400w-panels": 15998.97
-    },
     "ecoflow-smart-generator-4000:wild-oak-trail": {
       "ecoflow-smart-generator-4000-dual-fuel-only": 1799.0,
       "ecoflow-smart-generator-4000-dual-fuel-with-delta-pro-3": 4698.0
@@ -612,6 +628,47 @@
     "rich-solar-mppt-40a:wild-oak-trail": {
       "default": 127.99
     },
+    "rich-solar-alpha-12v-100ah:rich-solar": {
+      "default": 399.99
+    },
+    "rich-solar-alpha-12v-200ah:rich-solar": {
+      "default": 799.99
+    },
+    "rich-solar-alpha-24v-100ah:rich-solar": {
+      "default": 799.99
+    },
+    "rich-solar-alpha-5-pro:rich-solar": {
+      "1-battery": 1799.99,
+      "2-batteries": 3599.98,
+      "3-batteries": 5399.97,
+      "4-batteries": 7199.96,
+      "5-batteries": 8999.95,
+      "6-batteries": 10799.94
+    },
+    "rich-solar-mega-200:rich-solar": {
+      "default": 239.99
+    },
+    "rich-solar-mega-250:rich-solar": {
+      "default": 299.99
+    },
+    "rich-solar-mega-400:rich-solar": {
+      "8-panels": 2699.99,
+      "10-panels": 3299.99,
+      "12-panels": 3899.99,
+      "36-panels": 12099.99
+    },
+    "rich-solar-mega-410:rich-solar": {
+      "8-panels": 2799.99,
+      "10-panels": 3399.99,
+      "12-panels": 3999.99,
+      "36-panels": 12199.99
+    },
+    "rich-solar-mega-200-briefcase:rich-solar": {
+      "default": 399.99
+    },
+    "rich-solar-mppt-40a:rich-solar": {
+      "default": 159.99
+    },
     "enphase-iq-battery-5p:alte-store": {
       "default": 3846.15
     },
@@ -626,9 +683,6 @@
     },
     "midnite-mnpowerflo16:alte-store": {
       "default": 6115.01
-    },
-    "rich-solar-alpha-24v-100ah:rich-solar": {
-      "default": 799.99
     }
   },
   "degraded_retailers": [],
