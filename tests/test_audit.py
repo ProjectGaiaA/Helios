@@ -20,6 +20,7 @@ from audit import (
     RENDER_DEFECT,
     STALE,
     UNRESOLVED,
+    check_capacity_quote,
     display_price_to_cents,
     main,
     parse_provenance,
@@ -345,6 +346,109 @@ def test_capacity_confirmed_and_kwh_form(tmp_path, no_sleep):
     _add_live(title_wh="5.12kWh")
     report, _ = _run(tmp_path, data_dir, site_dir)
     assert not any("CAPACITY" in a for a in report["alarms"])
+
+
+# --- red team #5: was-price normalization + quote provenance ---
+
+
+def _drop_stored_was_prices(data_dir):
+    """Mirror shopify.py: a compare_at that is not a real discount is
+    stored as `was_price: None`, not as the raw compare_at."""
+    path = data_dir / "prices" / "ecoflow-river-2-pro.jsonl"
+    lines = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        row = json.loads(line)
+        for v in row["variants"].values():
+            v["was_price"] = None
+        lines.append(json.dumps(row))
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
+
+
+@responses.activate
+def test_compare_at_below_price_is_clean_not_stale(tmp_path, no_sleep):
+    """A compare_at that is NOT a discount must not read as a price move.
+
+    shopify.py stores `was_price: None` when compare_at <= price ("not
+    actually a discount"). The freshness hop compared that None against
+    the RAW live compare_at and reported a move that never happened. Real
+    triple: EcoFlow DELTA Pro 3 @ shop-solar-kits, price $2,799.00,
+    compare_at $2,644.09 — a permanent STALE no re-scrape could clear.
+    """
+    data_dir = _seed_audit(tmp_path)
+    _drop_stored_was_prices(data_dir)   # what shopify.py actually writes
+    site_dir = _rebuild(tmp_path, data_dir)
+    _add_live(unit_compare="500.00", bundle_compare="400.00")  # both < price
+    report, code = _run(tmp_path, data_dir, site_dir)
+    assert all(r["verdict"] == CLEAN for r in report["results"]), report["results"]
+    assert code == 0
+
+
+@responses.activate
+def test_compare_at_equal_to_price_is_clean_not_stale(tmp_path, no_sleep):
+    """Real triple: Rich Solar MEGA 410 @ rich-solar, compare_at == price."""
+    data_dir = _seed_audit(tmp_path)
+    _drop_stored_was_prices(data_dir)
+    site_dir = _rebuild(tmp_path, data_dir)
+    _add_live(unit_compare="569.00", bundle_compare="509.00")  # == price
+    report, code = _run(tmp_path, data_dir, site_dir)
+    assert all(r["verdict"] == CLEAN for r in report["results"]), report["results"]
+    assert code == 0
+
+
+@responses.activate
+def test_real_discount_still_reports_stale(tmp_path, no_sleep):
+    """The normalization must not blind the hop to a genuine was-price
+    move: a compare_at ABOVE price is a real discount and still compares."""
+    data_dir = _seed_audit(tmp_path)
+    site_dir = _rebuild(tmp_path, data_dir)
+    _add_live(unit_compare="1299.00")  # stored row holds 599.00
+    report, _ = _run(tmp_path, data_dir, site_dir)
+    stale = [r for r in report["results"] if r["verdict"] == STALE]
+    assert stale, report["results"]
+    assert any(d["field"] == "was_price" for d in stale[0]["freshness_diffs"])
+
+
+def test_check_capacity_quote_detects_a_fabricated_quote():
+    """A right number with an invented quotation is still a provenance
+    failure — and it is what shipped: enphase-iq-battery-5p cited
+    listing-body '5000Wh' when both merchants wrote "total usable energy
+    capacity of 5.0 kWh". Every numeric check passed it."""
+    product = {"specs": {"capacity_wh": 5000,
+                         "capacity_quotes": {"alte-store": "5000Wh"}}}
+    body = "<p>It has a total usable energy capacity of 5.0 kWh and more.</p>"
+    assert check_capacity_quote(product, "alte-store", "IQ Battery 5P",
+                                body) == "QUOTE_NOT_FOUND"
+
+
+def test_check_capacity_quote_accepts_a_verbatim_quote():
+    product = {"specs": {"capacity_wh": 5000, "capacity_quotes": {
+        "alte-store": "total usable energy capacity of 5.0 kWh"}}}
+    body = "<p>It has a  total usable energy\n capacity of 5.0 kWh and more.</p>"
+    # tags stripped and whitespace collapsed on BOTH sides before comparing
+    assert check_capacity_quote(product, "alte-store", "IQ Battery 5P",
+                                body) == "FOUND"
+
+
+def test_check_capacity_quote_is_scoped_to_the_quoting_retailer():
+    """A quote recorded for one retailer must not be asserted against a
+    different retailer's listing — merchants word things differently."""
+    product = {"specs": {"capacity_wh": 5000,
+                         "capacity_quotes": {"alte-store": "5.0 kWh"}}}
+    assert check_capacity_quote(product, "shop-solar-kits", "t", "b") is None
+
+
+@responses.activate
+def test_fabricated_quote_surfaces_as_a_notice_not_an_alarm(tmp_path, no_sleep):
+    data_dir = _seed_audit(tmp_path)
+    products = json.loads((data_dir / "products.json").read_text(encoding="utf-8"))
+    products[0]["specs"]["capacity_quotes"] = {"wild-oak-trail": "768Wh of pure fiction"}
+    _write_json(data_dir / "products.json", products)
+    site_dir = _rebuild(tmp_path, data_dir)
+    _add_live()
+    report, code = _run(tmp_path, data_dir, site_dir)
+    assert any("QUOTE_NOT_FOUND" in n for n in report["notices"]), report["notices"]
+    assert not report["alarms"]      # a reworded listing must not fail a run
+    assert code == 0
 
 
 # --- usage/config errors exit 1 ---

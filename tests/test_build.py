@@ -472,3 +472,43 @@ def test_quarantine_removed_renders_again(tmp_path):
     home = (site_dir / "index.html").read_text(encoding="utf-8")
     assert "$509.00" in home
     assert 'data-withheld="quarantine"' not in home
+
+
+# --- carriage contract: handle_maps governs rendering (red team #5) ---
+# handle_maps says which retailer sells which product. It used to govern
+# only SCRAPING, so withdrawing a carriage left its last stored price on
+# the site forever — which made "exclude the misleading cell" a no-op.
+
+
+def test_unmapped_pair_is_not_rendered(tmp_path):
+    data_dir = _seed_509_scenario(tmp_path)
+    _write_json(data_dir / "handle_maps.json", {"wild-oak-trail": {}})
+    _, site_dir = _build_509(tmp_path, data_dir)
+    home = (site_dir / "index.html").read_text(encoding="utf-8")
+    assert "$509.00" not in home
+    assert "$569.00" not in home
+
+
+def test_mapped_pair_is_rendered(tmp_path):
+    data_dir = _seed_509_scenario(tmp_path)
+    _write_json(data_dir / "handle_maps.json",
+                {"wild-oak-trail": {"ecoflow-river-2-pro": "any-handle"}})
+    _, site_dir = _build_509(tmp_path, data_dir)
+    assert "$509.00" in (site_dir / "index.html").read_text(encoding="utf-8")
+
+
+def test_absent_handle_maps_file_filters_nothing(tmp_path):
+    """No file means no contract recorded — matching load_handle_maps()'s
+    missing-file behaviour, so a fresh checkout still renders."""
+    data_dir = _seed_509_scenario(tmp_path)
+    assert not (data_dir / "handle_maps.json").exists()
+    _, site_dir = _build_509(tmp_path, data_dir)
+    assert "$509.00" in (site_dir / "index.html").read_text(encoding="utf-8")
+
+
+def test_filter_to_mapped_pairs_is_a_noop_without_maps():
+    from build import filter_to_mapped_pairs
+    latest = {"p": {"r": {"variants": {}}}}
+    assert filter_to_mapped_pairs(latest, None) == latest
+    assert filter_to_mapped_pairs(latest, {"r": {"p": "h"}}) == latest
+    assert filter_to_mapped_pairs(latest, {"r": {}}) == {}

@@ -129,6 +129,82 @@ def test_dollars_per_wh_withheld_when_price_unusable():
     assert dollars_per_wh(None, 768, "unit") is None
 
 
+# --- quantity forms (red team #5) -------------------------------------
+# PLAN 2b has always said "Multi-pack = bundle (capacity multiplier
+# unknown -> withhold)", but the only signal implementing it was the
+# literal word "pack". Everything below read as `unit`, and EG4 LL-S
+# really did render $0.60/Wh and $0.90/Wh for 2- and 3-battery packs
+# whose true per-battery figure is $0.30/Wh.
+
+@pytest.mark.parametrize("title", [
+    "2 Batteries Only",                            # EG4 LL-S, real row
+    "3 Batteries Only",                            # EG4 LL-S, real row
+    "ALPHA 5 PRO [Standard] / 2 Batteries",        # Rich Solar, real row
+    "6 Batteries",
+    "8 Solar Panels",                              # Rich Solar MEGA, real row
+    "12 Panels",                                   # rich-solar phrasing, real row
+    "10 Solar Panels",
+    "4 Modules",
+    "2 Units",
+    "Pair of Batteries",
+    "Dual Battery",
+    "Twin Pack",
+    "Twin",
+    "Set of 4",
+    "x2",
+    "2x",
+    "2 x 200W Rigid Panels",
+])
+def test_quantity_form_titles_classify_as_bundle(title):
+    assert classify_variant(title) == "bundle"
+
+
+@pytest.mark.parametrize("title", [
+    # The false positive that started this: a SINGLE 24V/100Ah battery
+    # whose descriptive title merely contains the word "and". Classifying
+    # it as a bundle suppressed its honest $0.35/Wh, and the home cell
+    # fell back to a different trim, implying a 44% cross-retailer gap
+    # where the same-SKU truth is 11%.
+    "ALPHA 4 - Self Heating and Bluetooth",
+    "1 Battery Only",              # singular: one battery is a unit
+    "ALPHA 5 PRO [Standard] / 1 Battery Only",
+    "DELTA PRO 3 [Main Unit Only]",
+    "Rich Solar - 200 Watt 12V Briefcase Solar Panel",
+    "Only Battery (51.2V 100Ah)",
+    # "Dual Fuel" is a fuel type, not a quantity — real EcoFlow row.
+    "EcoFlow Smart Generator 4000 (Dual Fuel) Only",
+])
+def test_singular_and_descriptive_titles_stay_unit(title):
+    assert classify_variant(title) == "unit"
+
+
+def test_and_signal_is_kept_for_product_joiners():
+    """Dropping "and" outright would re-open red team #2's MAJOR-2. It is
+    qualified instead: "and" counts only when the next token has a digit."""
+    assert classify_variant("AC200L and D40") == "bundle"
+    assert classify_variant("DELTA Max and 220W Panel") == "bundle"
+    assert classify_variant("Self Heating and Bluetooth") == "unit"
+
+
+# --- non-finite guards (red team #5) ----------------------------------
+# `nan <= 0` is False and `inf > 0` is True, so the ordinary positivity
+# guard passes both straight through and the page renders "$nan/Wh".
+
+@pytest.mark.parametrize("bad", [float("nan"), float("inf"), float("-inf")])
+def test_dollars_per_wh_withholds_non_finite_price(bad):
+    assert dollars_per_wh(bad, 768, "unit") is None
+
+
+@pytest.mark.parametrize("bad", [float("nan"), float("inf"), float("-inf")])
+def test_dollars_per_wh_withholds_non_finite_capacity(bad):
+    assert dollars_per_wh(569.0, bad, "unit") is None
+
+
+def test_dollars_per_wh_rejects_bool_masquerading_as_number():
+    assert dollars_per_wh(True, 768, "unit") is None
+    assert dollars_per_wh(569.0, True, "unit") is None
+
+
 # --- money formatting: two decimals, thousands separators ---
 
 

@@ -17,6 +17,7 @@ Usage:
 """
 
 import json
+import math
 import re
 import sys
 from datetime import datetime, timezone
@@ -43,10 +44,38 @@ SITE_DIR = BASE_DIR / "site"
 # proved 7/13 adversarial titles misclassified, so the signal list grew:
 # &, w/, and, N-Pack(s), expansion, extra/spare battery. Multi-pack IS a
 # bundle here — the capacity multiplier is unknown, and unknown withholds.
+# CHANGED 2026-08-13 (red team #5). Two corrections, both evidenced:
+#
+# (1) The bare `\band\b` signal was a FALSE POSITIVE on descriptive titles.
+#     "ALPHA 4 - Self Heating and Bluetooth" (a single 24V/100Ah battery)
+#     classified as a bundle, so its honest $0.35/Wh was suppressed and the
+#     home cell fell back to a DIFFERENT trim, rendering a 44% cross-retailer
+#     gap where the same-SKU truth is 11%. The signal is now qualified: "and"
+#     only counts when the token after it CONTAINS A DIGIT ("AC200L and D40",
+#     "DELTA and 220W Panel"). That keeps every red team #2 "and"-joined case
+#     while dropping prose. (Red team #5 asked for the bare signal to be
+#     deleted outright; qualifying it preserves red team #2's MAJOR-2 catch
+#     instead of trading one regression for another. Both cases are tested.)
+#
+# (2) The multi-pack rule did not implement itself. PLAN 2b says "Multi-pack
+#     = bundle (capacity multiplier unknown -> withhold)", but the only
+#     signal was the literal word "pack". "2 Batteries Only", "8 Solar
+#     Panels", "Set of 4", "x2" all read as `unit` -- and EG4 LL-S really did
+#     render $0.60/Wh and $0.90/Wh for 2- and 3-battery packs whose true
+#     figure is $0.30/Wh. Quantity forms are now enumerated.
 _BUNDLE_RE = re.compile(
-    r'(kit|bundle|\+|&|\bw/|\bwith\b|\band\b|\d+\s*-?\s*packs?\b|'
+    r'(kit|bundle|\+|&|\bw/|\bwith\b|'
+    r'\band\s+\S*\d|'                                  # "and" + digit token
+    r'\d+\s*-?\s*packs?\b|'
     r'expansion|extra\s+batter|spare\s+batter|'
-    r'panel(s)?\b.*\bx\b|x\s*\d+\s*w)',
+    r'panel(s)?\b.*\bx\b|x\s*\d+\s*w|'
+    # --- quantity forms (red team #5) ---
+    r'\b\d+\s*x\b|\bx\s*\d+\b|'                        # "2x", "x 2"
+    r'\b\d+\s+(?:\w+\s+)?'                             # "8 Solar Panels",
+    r'(?:batteries|panels|modules|units|cells)\b|'     # "2 Batteries", "12 Panels"
+    r'\bpair\s+of\b|\btwin\b|\bset\s+of\s+\d+\b|'
+    # "Dual Battery" is a quantity; "Dual Fuel" is a fuel type, not a pack.
+    r'\bdual\b(?!\s+fuel\b))',
     re.IGNORECASE,
 )
 # A wattage token is watts, not watt-hours: "200W" / "2.4kW" yes, "2016Wh"
@@ -75,6 +104,19 @@ def classify_variant(raw_variant: str, product_title: str = "") -> str:
     return "unit"
 
 
+def _usable_number(value) -> bool:
+    """A real, finite, positive number.
+
+    bool is excluded deliberately (it is an int subclass, and True would
+    otherwise sail through as the number 1). NaN/Inf are excluded because
+    the ordinary `<= 0` guard does NOT stop them: `nan <= 0` is False and
+    `inf > 0` is True, so JSON `NaN`/`Infinity` in a price or a capacity
+    would have produced "$nan/Wh" or "$inf/Wh" on the page (red team #5).
+    """
+    return (isinstance(value, (int, float)) and not isinstance(value, bool)
+            and math.isfinite(value) and value > 0)
+
+
 def dollars_per_wh(price, capacity_wh, classification: str):
     """$/Wh, or None when it must be withheld (PLAN section 2b).
 
@@ -83,9 +125,7 @@ def dollars_per_wh(price, capacity_wh, classification: str):
     """
     if classification != "unit":
         return None
-    if not isinstance(capacity_wh, (int, float)) or capacity_wh <= 0:
-        return None
-    if not isinstance(price, (int, float)) or price <= 0:
+    if not _usable_number(capacity_wh) or not _usable_number(price):
         return None
     return price / capacity_wh
 
@@ -222,6 +262,34 @@ def load_latest_prices(prices_dir: Path, product_ids: list[str]) -> dict:
         if per_retailer:
             latest[product_id] = per_retailer
     return latest
+
+
+def filter_to_mapped_pairs(latest: dict, handle_maps: dict | None) -> dict:
+    """Drop rows for (product, retailer) pairs the catalog no longer carries.
+
+    handle_maps is the CARRIAGE CONTRACT: it says which retailer sells which
+    product. Until now it governed only scraping, so un-mapping a pair
+    stopped future scrapes but left its last stored price rendering on the
+    site indefinitely — the operator's decision had no effect on what
+    readers saw. That mattered the moment a carriage had to be withdrawn
+    because its cell was misleading (red team #5): withdrawing it did
+    nothing.
+
+    `handle_maps is None` (no file) means "no contract recorded" and
+    filters nothing, matching load_handle_maps()'s missing-file behaviour
+    and keeping fixtures that predate the file working.
+    """
+    if handle_maps is None:
+        return latest
+    out = {}
+    for product_id, by_retailer in latest.items():
+        kept = {
+            rid: row for rid, row in by_retailer.items()
+            if product_id in (handle_maps.get(rid) or {})
+        }
+        if kept:
+            out[product_id] = kept
+    return out
 
 
 def _strip_query(url: str) -> str:
@@ -468,6 +536,11 @@ def build_site(data_dir: Path = DATA_DIR, site_dir: Path = SITE_DIR,
         quarantine = load_quarantine(data_dir)
 
     latest = load_latest_prices(data_dir / "prices", [p["id"] for p in products])
+    handle_maps_path = data_dir / "handle_maps.json"
+    latest = filter_to_mapped_pairs(
+        latest,
+        load_json(handle_maps_path) if handle_maps_path.exists() else None,
+    )
 
     env = Environment(
         loader=FileSystemLoader(templates_dir),

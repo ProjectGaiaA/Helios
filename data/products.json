@@ -9,10 +9,14 @@
       "output_w": 2400,
       "chemistry": "NCM",
       "weight_lb": 48.0,
-      "capacity_source": "listing-title: '2,400W / 2,016Wh' (shop-solar-kits, 2026-08-13)"
+      "capacity_source": "shop-solar-kits listing 2026-08-13, verbatim: \"EcoFlow DELTA [MAX] Solar Kits - 2,400W / 2,016Wh Portable Power\"; wild-oak-trail listing 2026-08-13, verbatim: \"DELTA Max Portable Power Station by EcoFlow With a 2016Wh of energy storage\"",
+      "capacity_quotes": {
+        "shop-solar-kits": "EcoFlow DELTA [MAX] Solar Kits - 2,400W / 2,016Wh Portable Power",
+        "wild-oak-trail": "DELTA Max Portable Power Station by EcoFlow With a 2016Wh of energy storage"
+      }
     },
     "active": true,
-    "notes": "Every variant sold out at both retailers on 2026-08-13 (C9) — good sold-out edge case, disqualified as acceptance-scrape product."
+    "notes": "Every variant sold out at both retailers on 2026-08-13 (C9) - good sold-out edge case, disqualified as acceptance-scrape product."
   },
   {
     "id": "ecoflow-river-2-pro",
@@ -24,7 +28,11 @@
       "output_w": 800,
       "chemistry": "LiFePO4",
       "weight_lb": 17.2,
-      "capacity_source": "listing-title: '768Wh / 800W' (shop-solar-kits, 2026-08-13)"
+      "capacity_source": "shop-solar-kits listing 2026-08-13, verbatim: \"EcoFlow RIVER 2 [PRO] 768Wh / 800W Portable\"; wild-oak-trail listing 2026-08-13, verbatim: \"you get 80% of your total power needs with up to 768Wh Capacity and\"",
+      "capacity_quotes": {
+        "shop-solar-kits": "EcoFlow RIVER 2 [PRO] 768Wh / 800W Portable",
+        "wild-oak-trail": "you get 80% of your total power needs with up to 768Wh Capacity and"
+      }
     },
     "active": true,
     "notes": "Confirmed in stock at shop-solar-kits on 2026-08-13; acceptance-scrape product."
@@ -39,7 +47,10 @@
       "output_w": 2400,
       "chemistry": "LiFePO4",
       "weight_lb": 67.2,
-      "capacity_source": "listing-title: '2,560Wh / 2,400W' (shop-solar-kits, 2026-08-13)"
+      "capacity_source": "shop-solar-kits listing 2026-08-13, verbatim: \"Anker Solix F2600 - 2,560Wh / 2,400W Portable\"",
+      "capacity_quotes": {
+        "shop-solar-kits": "Anker Solix F2600 - 2,560Wh / 2,400W Portable"
+      }
     },
     "active": true,
     "notes": null
@@ -54,7 +65,11 @@
       "output_w": 5120,
       "chemistry": "LiFePO4",
       "weight_lb": null,
-      "capacity_source": "listing-title: '5.12kWh Server Rack' (shop-solar-kits, 2026-08-13)"
+      "capacity_source": "shop-solar-kits listing 2026-08-13, verbatim: \"EG4 LifePower4 V2 Lithium Battery | 48V 100Ah | 5.12kWh Server Rack\"",
+      "capacity_quotes": {
+        "shop-solar-kits": "EG4 LifePower4 V2 Lithium Battery | 48V 100Ah | 5.12kWh Server Rack"
+      },
+      "capacity_conversion": "quoted figure is expressed in kWh; 5120 Wh is the same value converted (1 kWh = 1,000 Wh)"
     },
     "active": true,
     "notes": "Server-rack battery, not a power station. output_w is 100A continuous discharge at 51.2V nominal."
@@ -84,9 +99,465 @@
       "output_w": 2400,
       "chemistry": "LiFePO4",
       "weight_lb": 62.4,
-      "capacity_source": "vendor-spec: AC200L 2,048Wh (2026-08-13; wild-oak-trail title carries no Wh figure)"
+      "capacity_source": "wild-oak-trail listing 2026-08-13, verbatim: \"expandable power that keeps everything running. With 2,048Wh capacity, 2,400W\"",
+      "capacity_quotes": {
+        "wild-oak-trail": "expandable power that keeps everything running. With 2,048Wh capacity, 2,400W"
+      }
     },
     "active": true,
     "notes": null
+  },
+  {
+    "id": "ecoflow-delta-pro-3",
+    "name": "EcoFlow DELTA Pro 3",
+    "brand": "EcoFlow",
+    "category": "portable-power-station",
+    "specs": {
+      "capacity_wh": 4096,
+      "output_w": 4000,
+      "chemistry": "LiFePO4",
+      "weight_lb": null,
+      "capacity_source": "shop-solar-kits listing 2026-08-13, verbatim: \"EcoFlow DELTA PRO 3 - 4,096Wh / 4,000W Portable\"; wild-oak-trail listing 2026-08-13, verbatim: \"4000W continuous and 8000W surge power output, 4096Wh battery capacity,\"",
+      "capacity_quotes": {
+        "shop-solar-kits": "EcoFlow DELTA PRO 3 - 4,096Wh / 4,000W Portable",
+        "wild-oak-trail": "4000W continuous and 8000W surge power output, 4096Wh battery capacity,"
+      }
+    },
+    "active": true,
+    "notes": "Cross-retailer: main unit EFDELTAPRO3-US carried by both actives at the same list price."
+  },
+  {
+    "id": "ecoflow-delta-pro-3-extra-battery",
+    "name": "EcoFlow DELTA Pro 3 Smart Extra Battery",
+    "brand": "EcoFlow",
+    "category": "expansion-battery",
+    "specs": {
+      "capacity_wh": 4096,
+      "output_w": null,
+      "chemistry": "LiFePO4",
+      "weight_lb": null,
+      "capacity_source": "shop-solar-kits listing 2026-08-13, verbatim: \"EcoFlow DELTA PRO 3 Smart Extra Battery | 4,096Wh Capacity | Expandable\"; wild-oak-trail listing 2026-08-13, verbatim: \"your DELTA Pro 3 and boost your total capacity by 4096Wh per Battery.\"",
+      "capacity_quotes": {
+        "shop-solar-kits": "EcoFlow DELTA PRO 3 Smart Extra Battery | 4,096Wh Capacity | Expandable",
+        "wild-oak-trail": "your DELTA Pro 3 and boost your total capacity by 4096Wh per Battery."
+      }
+    },
+    "active": true,
+    "notes": "Expansion battery: the 2b classifier reads 'Extra Battery' as a bundle signal, so no $/Wh renders even though capacity is known. Intentional - it is not a standalone unit."
+  },
+  {
+    "id": "ecoflow-river-3",
+    "name": "EcoFlow RIVER 3",
+    "brand": "EcoFlow",
+    "category": "portable-power-station",
+    "specs": {
+      "capacity_wh": 245,
+      "output_w": 300,
+      "chemistry": "LiFePO4",
+      "weight_lb": null,
+      "capacity_source": "shop-solar-kits listing 2026-08-13, verbatim: \"EcoFlow RIVER 3 300W / 245Wh Portable Power\"; wild-oak-trail listing 2026-08-13, verbatim: \"Generator Charging EcoFlow RIVER 3 Specs Capacity: 245Wh Dimensions:\"",
+      "capacity_quotes": {
+        "shop-solar-kits": "EcoFlow RIVER 3 300W / 245Wh Portable Power",
+        "wild-oak-trail": "Generator Charging EcoFlow RIVER 3 Specs Capacity: 245Wh Dimensions:"
+      }
+    },
+    "active": true,
+    "notes": null
+  },
+  {
+    "id": "ecoflow-delta-pro-ultra",
+    "name": "EcoFlow DELTA Pro Ultra",
+    "brand": "EcoFlow",
+    "category": "modular-power-system",
+    "specs": {
+      "capacity_wh": null,
+      "output_w": 7200,
+      "chemistry": "LiFePO4",
+      "weight_lb": null,
+      "capacity_source": null
+    },
+    "active": true,
+    "notes": "capacity_wh null by construction: this is a modular inverter + 6kWh battery stack sold 1-5 batteries deep (6kWh-90kWh). No single capacity describes the listing, so $/Wh is withheld (PLAN 2b, same reasoning as C15). CARRIAGE WITHDRAWN 2026-08-13 (red team #5): wild-oak-trail's listing includes an inverter-ONLY variant ($2,799.00, EFDeltaProUltra-US) that shop-solar-kits does not sell, so the cheapest-variant home cell compared a bare inverter against shop-solar-kits' inverter+battery ($4,199.00) and implied a $1,400 saving on the same item. Both retailers list EFDPUPCS-BP at $4,199.00 - a genuine tie the home table has no way to express - so the wild-oak-trail carriage is withdrawn."
+  },
+  {
+    "id": "ecoflow-smart-generator-4000",
+    "name": "EcoFlow Smart Generator 4000 (Dual Fuel)",
+    "brand": "EcoFlow",
+    "category": "generator",
+    "specs": {
+      "capacity_wh": null,
+      "output_w": 4000,
+      "chemistry": null,
+      "weight_lb": null,
+      "capacity_source": null
+    },
+    "active": true,
+    "notes": "Fuel generator, not a battery - it has no watt-hour capacity at all, so capacity_wh is null and $/Wh never renders. Included as a cross-retailer price check (same SKU both actives)."
+  },
+  {
+    "id": "bluetti-ac240p",
+    "name": "Bluetti AC240P",
+    "brand": "Bluetti",
+    "category": "portable-power-station",
+    "specs": {
+      "capacity_wh": 1843,
+      "output_w": 2400,
+      "chemistry": "LiFePO4",
+      "weight_lb": null,
+      "capacity_source": "shop-solar-kits listing 2026-08-13, verbatim: \"Station | Complete Solar Generator Kit | 2,400 W / 1,843Wh LiFePO4 | 6-Year\"; wild-oak-trail listing 2026-08-13, verbatim: \"power tools. • Highly Expandable Storage Base 1,843 Wh Expand up to\"",
+      "capacity_quotes": {
+        "shop-solar-kits": "Station | Complete Solar Generator Kit | 2,400 W / 1,843Wh LiFePO4 | 6-Year",
+        "wild-oak-trail": "power tools. • Highly Expandable Storage Base 1,843 Wh Expand up to"
+      }
+    },
+    "active": true,
+    "notes": "IP65-rated station. Cross-retailer on SKU P-AC240P-US-GY-BL-010."
+  },
+  {
+    "id": "bluetti-b210-expansion",
+    "name": "Bluetti B210P Expansion Battery",
+    "brand": "Bluetti",
+    "category": "expansion-battery",
+    "specs": {
+      "capacity_wh": 2150,
+      "output_w": null,
+      "chemistry": "LiFePO4",
+      "weight_lb": null,
+      "capacity_source": "shop-solar-kits listing 2026-08-13, verbatim: \"Bluetti B210P Expansion Battery | 2,150Wh Bluetti B210P\"; wild-oak-trail listing 2026-08-13, verbatim: \"Card User Manual BLUETTI B210 Specs Capacity: 2,150Wh IP Rating: IP65\"",
+      "capacity_quotes": {
+        "shop-solar-kits": "Bluetti B210P Expansion Battery | 2,150Wh Bluetti B210P",
+        "wild-oak-trail": "Card User Manual BLUETTI B210 Specs Capacity: 2,150Wh IP Rating: IP65"
+      }
+    },
+    "active": true,
+    "notes": "Expansion battery - classifier treats 'Expansion' as a bundle signal, so $/Wh is withheld despite a known capacity."
+  },
+  {
+    "id": "lion-ut-1300",
+    "name": "Lion Energy Safari UT 1300BT 12V 105Ah",
+    "brand": "Lion Energy",
+    "category": "deep-cycle-battery",
+    "specs": {
+      "capacity_wh": 1344,
+      "output_w": null,
+      "chemistry": "LiFePO4",
+      "weight_lb": null,
+      "capacity_source": "shop-solar-kits listing 2026-08-13, verbatim: \"lasting Lithium Iron Phosphate batteries. It has 1344Wh, 105Ah and 12.8V\"; wild-oak-trail listing 2026-08-13, verbatim: \"12.8V, 105Ah (how much energy is stored in it), 1344Wh (12.8V x 105Ah).\"",
+      "capacity_quotes": {
+        "shop-solar-kits": "lasting Lithium Iron Phosphate batteries. It has 1344Wh, 105Ah and 12.8V",
+        "wild-oak-trail": "12.8V, 105Ah (how much energy is stored in it), 1344Wh (12.8V x 105Ah)."
+      }
+    },
+    "active": true,
+    "notes": "Cross-retailer on SKU 50170171; both actives list $899.00 on 2026-08-13."
+  },
+  {
+    "id": "rich-solar-alpha-12v-100ah",
+    "name": "Rich Solar ALPHA 12V 100Ah LiFePO4",
+    "brand": "Rich Solar",
+    "category": "deep-cycle-battery",
+    "specs": {
+      "capacity_wh": 1280,
+      "output_w": null,
+      "chemistry": "LiFePO4",
+      "weight_lb": 24.0,
+      "capacity_source": "shop-solar-kits listing 2026-08-13, verbatim: \"100Ah Minimum Capacity: 100Ah Nominal Energy: 1280Wh Charging Voltage:\"",
+      "capacity_quotes": {
+        "shop-solar-kits": "100Ah Minimum Capacity: 100Ah Nominal Energy: 1280Wh Charging Voltage:"
+      }
+    },
+    "active": true,
+    "notes": "Carried at all THREE Shopify retailers on SKU RS-B12100 (ALPHA 1 LITE). shop-solar-kits sells ALPHA 1 / 1 LITE / 1 PRO trims under one handle - all 12.8V 100Ah = 1,280Wh, so a single capacity is safe here. rich-solar and wild-oak-trail state no Wh figure (audit will read ABSENT, a notice, not a contradiction)."
+  },
+  {
+    "id": "rich-solar-alpha-12v-200ah",
+    "name": "Rich Solar ALPHA 12V 200Ah LiFePO4",
+    "brand": "Rich Solar",
+    "category": "deep-cycle-battery",
+    "specs": {
+      "capacity_wh": null,
+      "output_w": null,
+      "chemistry": "LiFePO4",
+      "weight_lb": 48.5,
+      "capacity_source": null
+    },
+    "active": true,
+    "notes": "capacity_wh WITHHELD on a source conflict: shop-solar-kits' spec block states 'Nominal Energy: 25600Wh' for a 12.8V/200Ah pack (a 10x typo; the true figure is 2,560Wh, which is what Rich Solar's own listing states). Two mapped retailers disagree by an order of magnitude, so the honest state is unknown and $/Wh is withheld (PLAN 2b). Revisit if shop-solar-kits corrects the page."
+  },
+  {
+    "id": "rich-solar-alpha-24v-100ah",
+    "name": "Rich Solar ALPHA 4 LITE 24V 100Ah LiFePO4",
+    "brand": "Rich Solar",
+    "category": "deep-cycle-battery",
+    "specs": {
+      "capacity_wh": 2560,
+      "output_w": null,
+      "chemistry": "LiFePO4",
+      "weight_lb": 48.5,
+      "capacity_source": "rich-solar listing 2026-08-13, verbatim: \"with RICH SOLAR's quality materials and boasting 2560Wh, you won't have\"; shop-solar-kits listing 2026-08-13, verbatim: \"100Ah Minimum Capacity: 100Ah Nominal Energy: 2560Wh Charging Voltage:\"",
+      "capacity_quotes": {
+        "rich-solar": "with RICH SOLAR's quality materials and boasting 2560Wh, you won't have",
+        "shop-solar-kits": "100Ah Minimum Capacity: 100Ah Nominal Energy: 2560Wh Charging Voltage:"
+      }
+    },
+    "active": true,
+    "notes": "RE-POINTED 2026-08-13 (red team #5): rich-solar was mapped to its full ALPHA 4 handle (RS-B241S) while shop-solar-kits' combined handle prices the ALPHA 4 LITE (RS-B24100) cheapest, so the home row compared a self-heating/Bluetooth trim against a LITE and implied a 44% gap. rich-solar sells the LITE under its own handle, so both cells now resolve to the same SKU RS-B24100. This also matches the sibling 12V products, which were already LITE-anchored. shop-solar-kits' listing still carries the full ALPHA 4 trim as a second variant at the same 2,560Wh, visible on the product page."
+  },
+  {
+    "id": "rich-solar-alpha-5-pro",
+    "name": "Rich Solar ALPHA 5 PRO 51.2V 100Ah Server Rack",
+    "brand": "Rich Solar",
+    "category": "server-rack-battery",
+    "specs": {
+      "capacity_wh": null,
+      "output_w": null,
+      "chemistry": "LiFePO4",
+      "weight_lb": null,
+      "capacity_source": null
+    },
+    "active": true,
+    "notes": "capacity_wh null although the pack is 5.12kWh: Rich Solar's own listing text never states the per-unit figure (it only advertises '76.8kWh' for a 15-unit parallel stack), so a 5120 claim would read as CONTRADICTED against that retailer's live text. Withhold until a mapped listing states the per-unit capacity."
+  },
+  {
+    "id": "rich-solar-all-in-one-ess",
+    "name": "Rich Solar All-in-One Energy Storage System",
+    "brand": "Rich Solar",
+    "category": "energy-storage-system",
+    "specs": {
+      "capacity_wh": null,
+      "output_w": null,
+      "chemistry": "LiFePO4",
+      "weight_lb": null,
+      "capacity_source": null
+    },
+    "active": true,
+    "notes": "capacity_wh null on purpose (C15): the listing price buys an inverter + 5.12kWh battery, so dividing a system price by a battery capacity is wrong by construction. CARRIAGE WITHDRAWN 2026-08-13 (red team #5): rich-solar sells this ESS ($6,999.99, RS-A10) and a bare replacement battery ($1,999.99, RS-A10BT) under ONE handle, so the cheapest-variant home cell pitted a bare battery against wild-oak-trail's complete system ($5,599.99, RS-A10) and implied rich-solar was 64% cheaper when the same-SKU truth is that rich-solar is 25% DEARER. The two items cannot be split apart (one handle), so the rich-solar carriage is withdrawn rather than shown misleadingly."
+  },
+  {
+    "id": "rich-solar-mega-200",
+    "name": "Rich Solar MEGA 200 200W 12V Solar Panel",
+    "brand": "Rich Solar",
+    "category": "solar-panel",
+    "specs": {
+      "capacity_wh": null,
+      "output_w": 200,
+      "chemistry": null,
+      "weight_lb": null,
+      "capacity_source": null
+    },
+    "active": true,
+    "notes": "Solar panels are rated in watts, not watt-hours: capacity_wh is null by nature and $/Wh never renders. Carried at all three retailers on SKU RS-M200. shop-solar-kits' title carries no brand - identity confirmed by vendor 'Rich Solar' + SKU (C17)."
+  },
+  {
+    "id": "rich-solar-mega-250",
+    "name": "Rich Solar MEGA 250 250W 12V Solar Panel",
+    "brand": "Rich Solar",
+    "category": "solar-panel",
+    "specs": {
+      "capacity_wh": null,
+      "output_w": 250,
+      "chemistry": null,
+      "weight_lb": null,
+      "capacity_source": null
+    },
+    "active": true,
+    "notes": "Panel: capacity_wh null by nature. Three-retailer carriage on SKU RS-M250."
+  },
+  {
+    "id": "rich-solar-mega-400",
+    "name": "Rich Solar MEGA 400 400W 24V Solar Panel",
+    "brand": "Rich Solar",
+    "category": "solar-panel",
+    "specs": {
+      "capacity_wh": null,
+      "output_w": 400,
+      "chemistry": null,
+      "weight_lb": null,
+      "capacity_source": null
+    },
+    "active": true,
+    "notes": "Panel: capacity_wh null by nature. Sold only in multi-panel pallet quantities at all three retailers (SKUs RS-M400-8/-10/-12), so every variant classifies as a bundle."
+  },
+  {
+    "id": "rich-solar-mega-410",
+    "name": "Rich Solar MEGA 410 410W 24V Solar Panel",
+    "brand": "Rich Solar",
+    "category": "solar-panel",
+    "specs": {
+      "capacity_wh": null,
+      "output_w": 410,
+      "chemistry": null,
+      "weight_lb": null,
+      "capacity_source": null
+    },
+    "active": true,
+    "notes": "Panel: capacity_wh null by nature. Pallet-only variants (RS-M410-8/-10/-12) at all three. DATA-QUALITY WARNING (red team #5, 2026-08-13): wild-oak-trail's pack SKUs are shifted one step against their own labels - it lists RS-M410-9 labelled '10 Solar Panels' at $3,399.99 and RS-M410-10 labelled '12 Solar Panels' at $2,719.99, while shop-solar-kits and rich-solar both put RS-M410-10 on a 10-panel pack. A SKU-keyed cross-retailer comparison will therefore pair a wild-oak-trail 12-panel price against a 10-panel price elsewhere. Helios displays each retailer's OWN published label and price, which is truthful, and capacity_wh is null so no $/Wh is derived from the mismatch - but do not trust RS-M410-* as an identity key across retailers until wild-oak-trail is asked."
+  },
+  {
+    "id": "rich-solar-mega-200-briefcase",
+    "name": "Rich Solar MEGA 200 Briefcase 200W Portable Panel",
+    "brand": "Rich Solar",
+    "category": "solar-panel",
+    "specs": {
+      "capacity_wh": null,
+      "output_w": 200,
+      "chemistry": null,
+      "weight_lb": null,
+      "capacity_source": null
+    },
+    "active": true,
+    "notes": "Portable folding panel: capacity_wh null by nature. Three-retailer carriage on SKU RS-X200B."
+  },
+  {
+    "id": "rich-solar-mppt-40a",
+    "name": "Rich Solar 40A MPPT Solar Charge Controller",
+    "brand": "Rich Solar",
+    "category": "charge-controller",
+    "specs": {
+      "capacity_wh": null,
+      "output_w": null,
+      "chemistry": null,
+      "weight_lb": null,
+      "capacity_source": null
+    },
+    "active": true,
+    "notes": "Charge controller - no watt-hour capacity. Three-retailer carriage on SKU RS-MPPT40."
+  },
+  {
+    "id": "eg4-ll-s-48v-100ah",
+    "name": "EG4 LL-S 48V 100Ah Server Rack Battery",
+    "brand": "EG4",
+    "category": "server-rack-battery",
+    "specs": {
+      "capacity_wh": 5120,
+      "output_w": null,
+      "chemistry": "LiFePO4",
+      "weight_lb": null,
+      "capacity_source": "shop-solar-kits listing 2026-08-13, verbatim: \"EG4®-LL-S 48V / 100AH Lithium Battery | 5.12kWh Server Rack\"",
+      "capacity_quotes": {
+        "shop-solar-kits": "EG4®-LL-S 48V / 100AH Lithium Battery | 5.12kWh Server Rack"
+      },
+      "capacity_conversion": "quoted figure is expressed in kWh; 5120 Wh is the same value converted (1 kWh = 1,000 Wh)"
+    },
+    "active": true,
+    "notes": "capacity RESTORED 2026-08-13 (red team #5). It was briefly nulled as a data-side patch for a classifier hole: '2 Batteries Only' / '3 Batteries Only' read as `unit`, so the site showed $0.60/Wh and $0.90/Wh against a ONE-battery capacity. The hole is now fixed in the classifier (quantity forms), so the honest single-battery $0.30/Wh renders again and the multi-battery variants withhold. Nulling it had also left this product inconsistent with eg4-lifepower4, the same 5.12kWh server-rack class."
+  },
+  {
+    "id": "eg4-wallmount-indoor-16kwh",
+    "name": "EG4 Indoor WallMount Battery 48V 314Ah 16kWh",
+    "brand": "EG4",
+    "category": "home-battery",
+    "specs": {
+      "capacity_wh": 16000,
+      "output_w": null,
+      "chemistry": "LiFePO4",
+      "weight_lb": null,
+      "capacity_source": "shop-solar-kits listing 2026-08-13, verbatim: \"EG4 Indoor WallMount Battery | 314Ah / 16kWh | 48V Self-Heating\"",
+      "capacity_quotes": {
+        "shop-solar-kits": "EG4 Indoor WallMount Battery | 314Ah / 16kWh | 48V Self-Heating"
+      },
+      "capacity_conversion": "quoted figure is expressed in kWh; 16000 Wh is the same value converted (1 kWh = 1,000 Wh)"
+    },
+    "active": true,
+    "notes": null
+  },
+  {
+    "id": "eg4-6000xp",
+    "name": "EG4 6000XP Off-Grid Inverter 6kW 48V",
+    "brand": "EG4",
+    "category": "inverter",
+    "specs": {
+      "capacity_wh": null,
+      "output_w": 6000,
+      "chemistry": null,
+      "weight_lb": null,
+      "capacity_source": null
+    },
+    "active": true,
+    "notes": "Inverter - no storage capacity, so capacity_wh is null and $/Wh never renders."
+  },
+  {
+    "id": "enphase-iq-battery-5p",
+    "name": "Enphase IQ Battery 5P",
+    "brand": "Enphase",
+    "category": "home-battery",
+    "specs": {
+      "capacity_wh": 5000,
+      "output_w": null,
+      "chemistry": "LiFePO4",
+      "weight_lb": null,
+      "capacity_source": "shop-solar-kits listing 2026-08-13, verbatim: \"yet. It has a total usable energy capacity of 5.0 kWh, and features\"; alte-store listing 2026-08-13, verbatim: \"safe. It has a total usable energy capacity of 5.0 kWh and includes\"",
+      "capacity_quotes": {
+        "shop-solar-kits": "yet. It has a total usable energy capacity of 5.0 kWh, and features",
+        "alte-store": "safe. It has a total usable energy capacity of 5.0 kWh and includes"
+      },
+      "capacity_conversion": "quoted figure is expressed in kWh; 5000 Wh is the same value converted (1 kWh = 1,000 Wh)"
+    },
+    "active": true,
+    "notes": "capacity_source QUOTE CORRECTED 2026-08-13 (red team #5): it previously claimed the listing body said '5000Wh'. Neither merchant ever wrote that string - both write 'total usable energy capacity of 5.0 kWh'. The figure was right and the quotation was fabricated, which every numeric check passed straight through. The quote is now sliced verbatim from the merchant's own bytes, and 5.0 kWh = 5,000 Wh is a unit conversion, recorded in capacity_conversion. Cross-retailer on part number IQBATTERY-5P-1P-NA. NOTE: alte-store's title says 'Battery Kit Assembly', which trips the 2b bundle signal, so $/Wh renders for the shop-solar-kits cell and is withheld for alte-store's. Conservative by design - the classifier cannot know the 'Kit' is the same single battery."
+  },
+  {
+    "id": "enphase-iq-system-controller-3",
+    "name": "Enphase IQ System Controller 3",
+    "brand": "Enphase",
+    "category": "balance-of-system",
+    "specs": {
+      "capacity_wh": null,
+      "output_w": null,
+      "chemistry": null,
+      "weight_lb": null,
+      "capacity_source": null
+    },
+    "active": true,
+    "notes": "Microgrid interconnect controller - no capacity. Cross-retailer on part number SC200D111C240US01 (shop-solar-kits prefixes its SKU with 'EN-')."
+  },
+  {
+    "id": "midnite-mnbcb-2000-200",
+    "name": "MidNite Solar MNBCB 2000/200 Battery Combiner Box",
+    "brand": "MidNite Solar",
+    "category": "balance-of-system",
+    "specs": {
+      "capacity_wh": null,
+      "output_w": null,
+      "chemistry": null,
+      "weight_lb": null,
+      "capacity_source": null
+    },
+    "active": true,
+    "notes": "Combiner box - no capacity. Cross-retailer on SKU MNBCB 2000/200 (shop-solar-kits hyphenates it)."
+  },
+  {
+    "id": "midnite-mnpv12",
+    "name": "MidNite Solar MNPV12 Combiner Box",
+    "brand": "MidNite Solar",
+    "category": "balance-of-system",
+    "specs": {
+      "capacity_wh": null,
+      "output_w": null,
+      "chemistry": null,
+      "weight_lb": null,
+      "capacity_source": null
+    },
+    "active": true,
+    "notes": "12-string PV combiner - no capacity. Cross-retailer on SKU MNPV12."
+  },
+  {
+    "id": "midnite-mnpowerflo16",
+    "name": "MidNite Solar MNPowerFlo16 48V 16kWh LFP Battery",
+    "brand": "MidNite Solar",
+    "category": "home-battery",
+    "specs": {
+      "capacity_wh": 16000,
+      "output_w": null,
+      "chemistry": "LiFePO4",
+      "weight_lb": null,
+      "capacity_source": "alte-store listing 2026-08-13, verbatim: \"MidNite Solar MNPowerFlo16 16 Kwh 48Volt Wall/Floor\"",
+      "capacity_quotes": {
+        "alte-store": "MidNite Solar MNPowerFlo16 16 Kwh 48Volt Wall/Floor"
+      },
+      "capacity_conversion": "quoted figure is expressed in kWh; 16000 Wh is the same value converted (1 kWh = 1,000 Wh)"
+    },
+    "active": true,
+    "notes": "alte-store exclusive among the four active retailers - the trust-builder retailer's highest-value battery."
   }
 ]

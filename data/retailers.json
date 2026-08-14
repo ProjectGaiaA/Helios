@@ -43,9 +43,9 @@
       "link_template": "",
       "notes": "6% per 2026-08-13 research; network unverified."
     },
-    "active": false,
+    "active": true,
     "priority": 3,
-    "inactive_reason": "Phase B — open /products.json verified (C8), no handle mappings yet"
+    "notes": "Activated 2026-08-13 (catalog expansion). robots.txt re-verified same day with BOT_USER_AGENT: /products.json, /products/*.json and /products/*.js all allowed. Brand-direct store — its own MEGA/ALPHA line is the widest cross-retailer overlap in the catalog (carried by both original actives)."
   },
   {
     "id": "alte-store",
@@ -54,10 +54,9 @@
     "scraper_type": "shopify",
     "affiliate": null,
     "trust_builder": true,
-    "active": false,
+    "active": true,
     "priority": 4,
-    "inactive_reason": "Phase B — open /products.json verified (C8), no handle mappings yet",
-    "notes": "No affiliate program found. Include later for honest price comparison."
+    "notes": "Activated 2026-08-13 (catalog expansion). robots.txt re-verified same day with BOT_USER_AGENT: /products.json, /products/*.json and /products/*.js all allowed. No affiliate program found — kept as the trust-builder retailer. Its Shopify catalog is balance-of-system (MidNite Solar, Enphase, IronRidge), not power stations, so overlap with the others is via part numbers rather than brands."
   },
   {
     "id": "ecoflow",

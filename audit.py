@@ -30,6 +30,7 @@ Usage:
 """
 
 import argparse
+import html
 import json
 import logging
 import random
@@ -453,8 +454,25 @@ def check_freshness(variant_data: dict, live_variant: dict,
     # Freshness-hop was-price compares ONLY vs .json compare_at_price —
     # UCP has no was-price field (C21), so this comparison retires when
     # the arbiter switches unless .json stays a secondary source.
-    if stored_was != live_variant["compare_at_cents"]:
-        moved("was_price", stored_was, live_variant["compare_at_cents"])
+    #
+    # The live side must be normalized the SAME WAY the scraper normalizes
+    # the stored side, or the two are not comparable. shopify.py drops a
+    # compare_at that is not actually a discount (`if was_price <= price:
+    # was_price = None`); comparing that stored None against the RAW live
+    # compare_at reported a move that never happened, and no re-scrape
+    # could ever clear it because the stored row was already correct.
+    # Four triples across three retailers hit this in one expansion
+    # (DELTA Pro 3 @ shop-solar-kits: price $2,799.00 / compare_at
+    # $2,644.09; MEGA 410 @ rich-solar: compare_at exactly == price).
+    # This is a hop-implementation bug, not a taxonomy change: STALE still
+    # means "stored disagrees with live" — it just has to be true.
+    live_was = live_variant["compare_at_cents"]
+    live_price = live_variant["price_cents"]
+    if (live_was is not None and live_price is not None
+            and live_was <= live_price):
+        live_was = None
+    if stored_was != live_was:
+        moved("was_price", stored_was, live_was)
 
     stored_avail = variant_data.get("available")
     if isinstance(stored_avail, bool) and isinstance(live_available, bool) \
@@ -488,6 +506,41 @@ def check_capacity(product: dict, live_title: str, live_body: str) -> str | None
     if any(abs(f - capacity) <= capacity * 0.01 for f in figures):
         return "CONFIRMED"
     return "CONTRADICTED"
+
+
+def listing_plain_text(title: str, body_html: str) -> str:
+    """Listing text as a human reads it: tags stripped, entities decoded,
+    whitespace collapsed. The one normalizer used on BOTH sides of the
+    capacity-quote check, so a quote can be compared byte-for-byte."""
+    text = re.sub(r"<[^>]+>", " ", body_html or "")
+    text = html.unescape(text)
+    return re.sub(r"\s+", " ", f"{title or ''} {text}").strip()
+
+
+def check_capacity_quote(product: dict, retailer_id: str,
+                         live_title: str, live_body: str) -> str | None:
+    """Is the recorded capacity quote really IN this retailer's listing?
+
+    QUOTE_NOT_FOUND / FOUND / None (nothing claimed for this retailer).
+
+    check_capacity above only asks whether SOME Wh figure near the claimed
+    value exists. It cannot catch a `capacity_source` whose quotation marks
+    contain a string the merchant never wrote — and one did: an
+    `enphase-iq-battery-5p` source claimed listing-body '5000Wh' when both
+    listings say "total usable energy capacity of 5.0 kWh". The figure was
+    right and the quote was fabricated, so every numeric check passed.
+    Provenance is this project's premise, so the quote itself is now
+    evidence that gets verified.
+
+    A notice, not an alarm: a merchant rewording their copy is normal and
+    must not fail a run. It does mean the quote needs re-transcribing.
+    """
+    quotes = (product.get("specs") or {}).get("capacity_quotes") or {}
+    quote = quotes.get(retailer_id)
+    if not quote:
+        return None
+    return "FOUND" if quote in listing_plain_text(live_title, live_body) \
+        else "QUOTE_NOT_FOUND"
 
 
 # ---------------------------------------------------------------------------
@@ -673,6 +726,18 @@ def run_audit(data_dir: Path = DEFAULT_DATA_DIR, site_dir: Path = DEFAULT_SITE_D
                     notices.append(
                         f"capacity not confirmable from live text: "
                         f"{triple['product_id']} at {triple['retailer_id']}"
+                    )
+                # Separately: is the recorded quote actually in the listing?
+                # A right number with an invented quotation is still a
+                # provenance failure (red team #5).
+                if check_capacity_quote(
+                    triple["product"], triple["retailer_id"],
+                    live["title"], live["body_html"],
+                ) == "QUOTE_NOT_FOUND":
+                    notices.append(
+                        f"QUOTE_NOT_FOUND: {triple['product_id']} at "
+                        f"{triple['retailer_id']} - specs.capacity_quotes text "
+                        f"is not present in the live listing; re-transcribe it"
                     )
         live = live_by_pair[pair]
 

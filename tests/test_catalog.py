@@ -58,8 +58,17 @@ def test_retailer_ids_unique():
 
 
 def test_active_retailers_are_the_planned_seeds():
+    """The active set is a deliberate, robots-verified list — not a default.
+
+    Updated 2026-08-13 (catalog expansion): rich-solar and alte-store moved
+    from PLAN section 3's inactive seeds to active after their robots.txt was
+    re-verified with BOT_USER_AGENT and their /products.json returned real
+    JSON. The list stays hard-coded on purpose: activating a retailer spends
+    live requests against someone else's server, so it should never happen as
+    a side effect of an unrelated edit.
+    """
     active = sorted(r["id"] for r in _load("retailers.json") if r["active"])
-    assert active == ["shop-solar-kits", "wild-oak-trail"]
+    assert active == ["alte-store", "rich-solar", "shop-solar-kits", "wild-oak-trail"]
 
 
 # --- products.json ---
@@ -96,6 +105,39 @@ def test_products_required_fields_and_specs():
         assert source is None or (isinstance(source, str) and source)
         if cap is not None:
             assert source, f"{p['id']}: non-null capacity needs capacity_source"
+
+
+def test_non_null_capacity_carries_a_machine_checkable_quote():
+    """Provenance has to be evidence, not prose (red team #5).
+
+    `capacity_source` is free text, and free text let a product claim the
+    listing said '5000Wh' when both merchants wrote "total usable energy
+    capacity of 5.0 kWh" — the number was right, the quotation invented,
+    and every numeric check passed it straight through.
+    `specs.capacity_quotes` holds {retailer_id: verbatim listing
+    substring}, which audit.py re-verifies against the live listing on
+    every run (QUOTE_NOT_FOUND).
+    """
+    retailer_ids = {r["id"] for r in _load("retailers.json")}
+    maps = _load("handle_maps.json")
+    for p in _load("products.json"):
+        if p["specs"]["capacity_wh"] is None:
+            assert "capacity_quotes" not in p["specs"], (
+                f"{p['id']}: withheld capacity must not carry quotes"
+            )
+            continue
+        quotes = p["specs"].get("capacity_quotes")
+        assert isinstance(quotes, dict) and quotes, (
+            f"{p['id']}: non-null capacity needs specs.capacity_quotes"
+        )
+        for rid, quote in quotes.items():
+            assert rid in retailer_ids, f"{p['id']}: unknown retailer {rid}"
+            assert isinstance(quote, str) and quote.strip(), (
+                f"{p['id']}: empty quote for {rid}"
+            )
+            assert p["id"] in maps.get(rid, {}), (
+                f"{p['id']}: quotes {rid} but is not carried there"
+            )
 
 
 def test_product_ids_unique():

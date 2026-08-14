@@ -1,38 +1,634 @@
 {
-  "timestamp": "2026-08-13T21:51:14.086738+00:00",
+  "timestamp": "2026-08-14T03:35:30.950806+00:00",
   "retailers": [
     {
       "retailer_id": "shop-solar-kits",
       "status": "completed",
-      "products_expected": 2,
-      "products_found": 2,
+      "products_expected": 29,
+      "products_found": 29,
       "products_no_sizes": 0,
-      "products_priced": 2,
+      "products_priced": 29,
       "products_error": 0,
-      "prices_collected": 3,
+      "prices_collected": 82,
       "anomalies": [],
       "price_records": {
+        "ecoflow-delta-max:shop-solar-kits": {
+          "delta-max-eclipse-kit-1-x-200w-folding-panel": 1408.12,
+          "delta-max-double-kit-2-x-200w-rigid-panels": 1486.92,
+          "delta-max-nomad-kit-2-x-200w-folding-panels": 1687.81,
+          "delta-max-quad-kit-4-x-200w-rigid-panels": 1838.37,
+          "delta-max-hex-kit-6-x-100w-rigid-panels": 2155.94,
+          "delta-max-base-camp-kit-4-x-200w-panels-emp-bag": 2424.53,
+          "delta-max-double-quad-kit-8-x-200w-rigid-panels": 3647.92,
+          "delta-max-unit-only": 1049.0
+        },
         "ecoflow-river-2-pro:shop-solar-kits": {
           "ecoflow-river-2-pro-160w-solar-panel": 899.0,
           "ecoflow-river-2-pro-main-unit-only": 569.0
         },
+        "anker-solix-f2600:shop-solar-kits": {
+          "double-kit-2-x-200w-rigid-panels": 1618.49,
+          "nomad-kit-2-x-200w-folding-panels": 1853.65,
+          "basecamp-kit-1-x-200w-folding-panel-emp-bag": 1889.99,
+          "anker-solix-f2600-expansion-battery": 2749.0,
+          "anker-solix-f2600-main-unit-only": 1254.0
+        },
         "eg4-lifepower4:shop-solar-kits": {
           "default": 1470.99
+        },
+        "ecoflow-delta-pro-3:shop-solar-kits": {
+          "nomad-kit-2-x-200w-folding-panels": 2905.97,
+          "quad-kit-4-x-200w-rigid-panels": 3051.97,
+          "hex-kit-6-x-200w-rigid-panels": 3371.97,
+          "octo-kit-8-x-200w-rigid-panels": 3749.97,
+          "basecamp-kit-2-x-200w-folding-panels-emp-bag": 3455.97,
+          "delta-pro-3-main-unit-only": 2799.0
+        },
+        "ecoflow-delta-pro-3-extra-battery:shop-solar-kits": {
+          "default": 1899.0
+        },
+        "ecoflow-river-3:shop-solar-kits": {
+          "eclipse-kit-1-x-100w-rigid-panel": 342.94,
+          "nomad-kit-1-x-100w-folding-panel": 391.73,
+          "basecamp-kit-1-x-100w-folding-panel": 659.89,
+          "river-3-main-unit-only": 199.0
+        },
+        "ecoflow-delta-pro-ultra:shop-solar-kits": {
+          "delta-pro-ultra-inverter-1-x-6kwh-battery": 4199.0,
+          "delta-pro-ultra-inverter-2-x-battery-12kwh": 5999.0,
+          "delta-pro-ultra-inverter-3-x-battery-18kwh": 7999.0,
+          "delta-pro-ultra-inverter-4-x-battery-24kwh": 10099.0,
+          "delta-pro-ultra-inverter-5-x-battery-30kwh": 12199.0,
+          "delta-pro-ultra-inverter-1-x-6kwh-battery-smart-home-panel-2": 5499.0
+        },
+        "ecoflow-smart-generator-4000:shop-solar-kits": {
+          "default": 1799.0
+        },
+        "bluetti-ac240p:shop-solar-kits": {
+          "double-kit-2-x-200w-rigid-panels": 1709.0,
+          "nomad-kit-2-x-200w-folding-panels": 1909.0,
+          "basecamp-kit-2-x-200w-folding-panels-emp-bag": 2189.0,
+          "bluetti-ac240p-main-unit-only": 1539.0
+        },
+        "bluetti-b210-expansion:shop-solar-kits": {
+          "default": 1099.0
+        },
+        "lion-ut-1300:shop-solar-kits": {
+          "default": 899.0
+        },
+        "rich-solar-alpha-12v-100ah:shop-solar-kits": {
+          "alpha-1": 499.99,
+          "alpha-1-lite": 399.99,
+          "alpha-1-pro": 599.99
+        },
+        "rich-solar-alpha-12v-200ah:shop-solar-kits": {
+          "alpha-2": 999.99,
+          "alpha-2-lite": 799.99,
+          "alpha-2-pro": 1199.99
+        },
+        "rich-solar-alpha-24v-100ah:shop-solar-kits": {
+          "alpha-4-self-heating-and-bluetooth": 899.99,
+          "alpha-4-lite": 699.99
+        },
+        "rich-solar-alpha-5-pro:shop-solar-kits": {
+          "alpha-5-pro-standard-1-battery-only": 1439.0,
+          "alpha-5-pro-standard-2-batteries": 2878.0,
+          "alpha-5-pro-standard-3-batteries": 4317.0,
+          "alpha-5-pro-standard-4-batteries": 5756.0,
+          "alpha-5-pro-standard-5-batteries": 7195.0,
+          "alpha-5-pro-standard-6-batteries": 8634.0,
+          "alpha-5-pro-self-heating-1-battery-only": 1519.0,
+          "alpha-5-pro-self-heating-2-batteries": 3038.0,
+          "alpha-5-pro-self-heating-3-batteries": 4557.0,
+          "alpha-5-pro-self-heating-4-batteries": 6069.0,
+          "alpha-5-pro-self-heating-5-batteries": 7589.0,
+          "alpha-5-pro-self-heating-6-batteries": 8989.0
+        },
+        "rich-solar-mega-200:shop-solar-kits": {
+          "default": 199.0
+        },
+        "rich-solar-mega-250:shop-solar-kits": {
+          "default": 299.99
+        },
+        "rich-solar-mega-400:shop-solar-kits": {
+          "8-solar-panels": 2499.99,
+          "10-solar-panels": 3099.99,
+          "12-solar-panels": 3699.99
+        },
+        "rich-solar-mega-410:shop-solar-kits": {
+          "8-solar-panels": 2599.99,
+          "10-solar-panels": 3199.99,
+          "12-solar-panels": 3699.99
+        },
+        "rich-solar-mega-200-briefcase:shop-solar-kits": {
+          "default": 259.88
+        },
+        "rich-solar-mppt-40a:shop-solar-kits": {
+          "default": 159.99
+        },
+        "eg4-ll-s-48v-100ah:shop-solar-kits": {
+          "1-battery-only": 1536.99,
+          "2-batteries-only": 3072.0,
+          "3-batteries-only": 4608.0,
+          "4-batteries-6-slot-rack": 6873.0,
+          "5-batteries-6-slot-rack": 8409.0,
+          "6-batteries-6-slot-rack": 9945.0
+        },
+        "eg4-wallmount-indoor-16kwh:shop-solar-kits": {
+          "default": 3399.99
+        },
+        "eg4-6000xp:shop-solar-kits": {
+          "default": 1499.99
+        },
+        "enphase-iq-battery-5p:shop-solar-kits": {
+          "default": 3669.0
+        },
+        "enphase-iq-system-controller-3:shop-solar-kits": {
+          "default": 2099.0
+        },
+        "midnite-mnbcb-2000-200:shop-solar-kits": {
+          "default": 1249.0
+        },
+        "midnite-mnpv12:shop-solar-kits": {
+          "default": 279.97
+        }
+      },
+      "health": "healthy"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "status": "completed",
+      "products_expected": 21,
+      "products_found": 21,
+      "products_no_sizes": 0,
+      "products_priced": 21,
+      "products_error": 0,
+      "prices_collected": 84,
+      "anomalies": [],
+      "price_records": {
+        "ecoflow-delta-max:wild-oak-trail": {
+          "ecoflow-delta-max-portable-power-station-main-unit-only": 1599.0,
+          "ecoflow-delta-max-2000-1-extra-battery": 2699.0,
+          "ecoflow-delta-max-smart-generator-dual-fuel": 3099.0,
+          "ecoflow-delta-max-2000-1-110w-solar-panel": 1799.0,
+          "ecoflow-delta-max-2000-2-110w-solar-panel": 1999.0,
+          "ecoflow-delta-max-2000-3-110w-solar-panel": 2199.0,
+          "ecoflow-delta-max-2000-4-110w-solar-panel": 2399.0,
+          "ecoflow-delta-max-2000-1-160w-solar-panel": 1899.0,
+          "ecoflow-delta-max-2000-2-160w-solar-panel": 2199.0,
+          "ecoflow-delta-max-2000-3-160w-solar-panel": 2499.0,
+          "ecoflow-delta-max-2000-4-160w-solar-panel": 2799.0,
+          "ecoflow-delta-max-2000-1-220w-solar-panel": 1349.0,
+          "ecoflow-delta-max-2000-2-220w-solar-panel": 2699.0,
+          "ecoflow-delta-max-2000-3-220w-solar-panel": 3099.0,
+          "ecoflow-delta-max-2000-4-220w-solar-panel": 3399.0,
+          "ecoflow-delta-max-2000-1-400w-solar-panel": 1699.0,
+          "ecoflow-delta-max-2000-2-400w-solar-panel": 3199.0,
+          "ecoflow-delta-max-with-100w-12v-solar-panel-bundle": 2208.99,
+          "ecoflow-delta-max-with-2x-100w-12v-solar-panel-bundle": 2318.98,
+          "ecoflow-delta-max-with-300w-12v-solar-panel-bundle": 2428.97,
+          "ecoflow-delta-max-with-400w-12v-solar-panel-bundle": 2538.96
+        },
+        "ecoflow-river-2-pro:wild-oak-trail": {
+          "ecoflow-river-2-pro-portable-power-station-main-unit-only": 569.0,
+          "ecoflow-river-2-pro-1-110w-portable-solar-panel": 509.0,
+          "ecoflow-river-2-pro-1-160w-portable-solar-panel": 569.0,
+          "ecoflow-river-2-pro-1-220w-portable-solar-panel": 619.0
+        },
+        "bluetti-ac180:wild-oak-trail": {
+          "ac180-only": 699.0,
+          "ac180-sp100l-100w-solar-panel": 999.0,
+          "ac180-200w-solar-panel": 1299.0,
+          "ac180-2-200w-solar-panels": 1798.0,
+          "ac180-200w-solar-panel-charger-1": 1498.0,
+          "ac180-b80-battery-free-aviation-to-dc7909-cable": 1599.0,
+          "ac180-350w-solar-panel": 1499.0,
+          "ac180p-only": 699.0,
+          "ac180p-200w-solar-panel": 1498.0,
+          "ac180p-350w-solar-panel": 1848.0,
+          "ac180p-charger-1": 1398.0
+        },
+        "bluetti-ac200l:wild-oak-trail": {
+          "ac200l-only": 1599.0,
+          "ac200l-d40": 1699.0,
+          "ac200l-b300k-battery": 2999.0,
+          "ac200l-2-b300k-batteries-2-free-200w-panels": 4699.0,
+          "ac200l-2-b300k-batteries-d300s": 4999.0,
+          "ac200l-200w-solar-panel": 1899.0,
+          "ac200l-2-200w-solar-panels": 2499.0,
+          "ac200l-charger-1": 1999.0,
+          "ac200l-200w-solar-panel-charger-1": 2498.0,
+          "ac200l-350w-solar-panel": 1999.0
+        },
+        "ecoflow-delta-pro-3:wild-oak-trail": {
+          "ecoflow-delta-pro-3-main-unit-only": 2799.0,
+          "ecoflow-delta-pro-3-with-extra-battery": 3999.0,
+          "ecoflow-delta-pro-3-with-1-400w-solar-panel": 3099.0,
+          "ecoflow-delta-pro-3-with-2-400w-solar-panel": 3499.0
+        },
+        "ecoflow-delta-pro-3-extra-battery:wild-oak-trail": {
+          "default": 1899.0
+        },
+        "ecoflow-river-3:wild-oak-trail": {
+          "default": 199.0
+        },
+        "ecoflow-delta-pro-ultra:wild-oak-trail": {
+          "delta-pro-ultra-inverter-only": 2799.0,
+          "delta-pro-ultra-with-1-battery": 4199.0,
+          "delta-pro-ultra-with-2-batteries": 5999.0,
+          "delta-pro-ultra-with-3-batteries": 7999.0,
+          "delta-pro-ultra-with-4-batteries": 10099.0,
+          "delta-pro-ultra-with-5-batteries": 12199.0,
+          "delta-pro-ultra-with-1-battery-and-8-400w-panels": 8598.97,
+          "delta-pro-ultra-with-2-batteries-and-10-400w-panels": 12198.97,
+          "delta-pro-ultra-with-3-batteries-and-12-400w-panels": 15998.97
+        },
+        "ecoflow-smart-generator-4000:wild-oak-trail": {
+          "ecoflow-smart-generator-4000-dual-fuel-only": 1799.0,
+          "ecoflow-smart-generator-4000-dual-fuel-with-delta-pro-3": 4698.0
+        },
+        "bluetti-ac240p:wild-oak-trail": {
+          "bluetti-ac240p-only": 1799.0,
+          "ac240p-200w-solar": 2298.0,
+          "ac240p-350w-solar": 2598.0
+        },
+        "bluetti-b210-expansion:wild-oak-trail": {
+          "default": 1099.0
+        },
+        "lion-ut-1300:wild-oak-trail": {
+          "default": 899.0
+        },
+        "rich-solar-alpha-12v-100ah:wild-oak-trail": {
+          "default": 319.99
+        },
+        "rich-solar-alpha-12v-200ah:wild-oak-trail": {
+          "default": 639.99
+        },
+        "rich-solar-all-in-one-ess:wild-oak-trail": {
+          "all-in-one-energy-storage-system-no-panels": 5599.99,
+          "2-7kwh-48vdc-120vac-kit-8x-335w-panels": 8999.99
+        },
+        "rich-solar-mega-200:wild-oak-trail": {
+          "12v": 191.99,
+          "24v": 199.99
+        },
+        "rich-solar-mega-250:wild-oak-trail": {
+          "default": 239.99
+        },
+        "rich-solar-mega-400:wild-oak-trail": {
+          "8-solar-panels": 2159.99,
+          "10-solar-panels": 2639.99,
+          "12-solar-panels": 3119.99
+        },
+        "rich-solar-mega-410:wild-oak-trail": {
+          "8-solar-panels": 2239.99,
+          "10-solar-panels": 3399.99,
+          "12-solar-panels": 2719.99
+        },
+        "rich-solar-mega-200-briefcase:wild-oak-trail": {
+          "rich-solar-200-watt-12v-briefcase-panel-only": 319.99,
+          "rich-solar-200-watt-12v-briefcase-panel-with-controller": 359.99
+        },
+        "rich-solar-mppt-40a:wild-oak-trail": {
+          "default": 127.99
+        }
+      },
+      "health": "healthy"
+    },
+    {
+      "retailer_id": "alte-store",
+      "status": "completed",
+      "products_expected": 5,
+      "products_found": 5,
+      "products_no_sizes": 0,
+      "products_priced": 5,
+      "products_error": 0,
+      "prices_collected": 5,
+      "anomalies": [],
+      "price_records": {
+        "enphase-iq-battery-5p:alte-store": {
+          "default": 3846.15
+        },
+        "enphase-iq-system-controller-3:alte-store": {
+          "default": 2313.55
+        },
+        "midnite-mnbcb-2000-200:alte-store": {
+          "default": 1211.21
+        },
+        "midnite-mnpv12:alte-store": {
+          "default": 280.49
+        },
+        "midnite-mnpowerflo16:alte-store": {
+          "default": 6115.01
+        }
+      },
+      "health": "healthy"
+    },
+    {
+      "retailer_id": "rich-solar",
+      "status": "completed",
+      "products_expected": 1,
+      "products_found": 1,
+      "products_no_sizes": 0,
+      "products_priced": 1,
+      "products_error": 0,
+      "prices_collected": 1,
+      "anomalies": [],
+      "price_records": {
+        "rich-solar-alpha-24v-100ah:rich-solar": {
+          "default": 799.99
         }
       },
       "health": "healthy"
     }
   ],
-  "total_prices_collected": 3,
+  "total_prices_collected": 172,
   "total_anomalies": 0,
   "anomalies": [],
   "prices": {
+    "ecoflow-delta-max:shop-solar-kits": {
+      "delta-max-eclipse-kit-1-x-200w-folding-panel": 1408.12,
+      "delta-max-double-kit-2-x-200w-rigid-panels": 1486.92,
+      "delta-max-nomad-kit-2-x-200w-folding-panels": 1687.81,
+      "delta-max-quad-kit-4-x-200w-rigid-panels": 1838.37,
+      "delta-max-hex-kit-6-x-100w-rigid-panels": 2155.94,
+      "delta-max-base-camp-kit-4-x-200w-panels-emp-bag": 2424.53,
+      "delta-max-double-quad-kit-8-x-200w-rigid-panels": 3647.92,
+      "delta-max-unit-only": 1049.0
+    },
     "ecoflow-river-2-pro:shop-solar-kits": {
       "ecoflow-river-2-pro-160w-solar-panel": 899.0,
       "ecoflow-river-2-pro-main-unit-only": 569.0
     },
+    "anker-solix-f2600:shop-solar-kits": {
+      "double-kit-2-x-200w-rigid-panels": 1618.49,
+      "nomad-kit-2-x-200w-folding-panels": 1853.65,
+      "basecamp-kit-1-x-200w-folding-panel-emp-bag": 1889.99,
+      "anker-solix-f2600-expansion-battery": 2749.0,
+      "anker-solix-f2600-main-unit-only": 1254.0
+    },
     "eg4-lifepower4:shop-solar-kits": {
       "default": 1470.99
+    },
+    "ecoflow-delta-pro-3:shop-solar-kits": {
+      "nomad-kit-2-x-200w-folding-panels": 2905.97,
+      "quad-kit-4-x-200w-rigid-panels": 3051.97,
+      "hex-kit-6-x-200w-rigid-panels": 3371.97,
+      "octo-kit-8-x-200w-rigid-panels": 3749.97,
+      "basecamp-kit-2-x-200w-folding-panels-emp-bag": 3455.97,
+      "delta-pro-3-main-unit-only": 2799.0
+    },
+    "ecoflow-delta-pro-3-extra-battery:shop-solar-kits": {
+      "default": 1899.0
+    },
+    "ecoflow-river-3:shop-solar-kits": {
+      "eclipse-kit-1-x-100w-rigid-panel": 342.94,
+      "nomad-kit-1-x-100w-folding-panel": 391.73,
+      "basecamp-kit-1-x-100w-folding-panel": 659.89,
+      "river-3-main-unit-only": 199.0
+    },
+    "ecoflow-delta-pro-ultra:shop-solar-kits": {
+      "delta-pro-ultra-inverter-1-x-6kwh-battery": 4199.0,
+      "delta-pro-ultra-inverter-2-x-battery-12kwh": 5999.0,
+      "delta-pro-ultra-inverter-3-x-battery-18kwh": 7999.0,
+      "delta-pro-ultra-inverter-4-x-battery-24kwh": 10099.0,
+      "delta-pro-ultra-inverter-5-x-battery-30kwh": 12199.0,
+      "delta-pro-ultra-inverter-1-x-6kwh-battery-smart-home-panel-2": 5499.0
+    },
+    "ecoflow-smart-generator-4000:shop-solar-kits": {
+      "default": 1799.0
+    },
+    "bluetti-ac240p:shop-solar-kits": {
+      "double-kit-2-x-200w-rigid-panels": 1709.0,
+      "nomad-kit-2-x-200w-folding-panels": 1909.0,
+      "basecamp-kit-2-x-200w-folding-panels-emp-bag": 2189.0,
+      "bluetti-ac240p-main-unit-only": 1539.0
+    },
+    "bluetti-b210-expansion:shop-solar-kits": {
+      "default": 1099.0
+    },
+    "lion-ut-1300:shop-solar-kits": {
+      "default": 899.0
+    },
+    "rich-solar-alpha-12v-100ah:shop-solar-kits": {
+      "alpha-1": 499.99,
+      "alpha-1-lite": 399.99,
+      "alpha-1-pro": 599.99
+    },
+    "rich-solar-alpha-12v-200ah:shop-solar-kits": {
+      "alpha-2": 999.99,
+      "alpha-2-lite": 799.99,
+      "alpha-2-pro": 1199.99
+    },
+    "rich-solar-alpha-24v-100ah:shop-solar-kits": {
+      "alpha-4-self-heating-and-bluetooth": 899.99,
+      "alpha-4-lite": 699.99
+    },
+    "rich-solar-alpha-5-pro:shop-solar-kits": {
+      "alpha-5-pro-standard-1-battery-only": 1439.0,
+      "alpha-5-pro-standard-2-batteries": 2878.0,
+      "alpha-5-pro-standard-3-batteries": 4317.0,
+      "alpha-5-pro-standard-4-batteries": 5756.0,
+      "alpha-5-pro-standard-5-batteries": 7195.0,
+      "alpha-5-pro-standard-6-batteries": 8634.0,
+      "alpha-5-pro-self-heating-1-battery-only": 1519.0,
+      "alpha-5-pro-self-heating-2-batteries": 3038.0,
+      "alpha-5-pro-self-heating-3-batteries": 4557.0,
+      "alpha-5-pro-self-heating-4-batteries": 6069.0,
+      "alpha-5-pro-self-heating-5-batteries": 7589.0,
+      "alpha-5-pro-self-heating-6-batteries": 8989.0
+    },
+    "rich-solar-mega-200:shop-solar-kits": {
+      "default": 199.0
+    },
+    "rich-solar-mega-250:shop-solar-kits": {
+      "default": 299.99
+    },
+    "rich-solar-mega-400:shop-solar-kits": {
+      "8-solar-panels": 2499.99,
+      "10-solar-panels": 3099.99,
+      "12-solar-panels": 3699.99
+    },
+    "rich-solar-mega-410:shop-solar-kits": {
+      "8-solar-panels": 2599.99,
+      "10-solar-panels": 3199.99,
+      "12-solar-panels": 3699.99
+    },
+    "rich-solar-mega-200-briefcase:shop-solar-kits": {
+      "default": 259.88
+    },
+    "rich-solar-mppt-40a:shop-solar-kits": {
+      "default": 159.99
+    },
+    "eg4-ll-s-48v-100ah:shop-solar-kits": {
+      "1-battery-only": 1536.99,
+      "2-batteries-only": 3072.0,
+      "3-batteries-only": 4608.0,
+      "4-batteries-6-slot-rack": 6873.0,
+      "5-batteries-6-slot-rack": 8409.0,
+      "6-batteries-6-slot-rack": 9945.0
+    },
+    "eg4-wallmount-indoor-16kwh:shop-solar-kits": {
+      "default": 3399.99
+    },
+    "eg4-6000xp:shop-solar-kits": {
+      "default": 1499.99
+    },
+    "enphase-iq-battery-5p:shop-solar-kits": {
+      "default": 3669.0
+    },
+    "enphase-iq-system-controller-3:shop-solar-kits": {
+      "default": 2099.0
+    },
+    "midnite-mnbcb-2000-200:shop-solar-kits": {
+      "default": 1249.0
+    },
+    "midnite-mnpv12:shop-solar-kits": {
+      "default": 279.97
+    },
+    "ecoflow-delta-max:wild-oak-trail": {
+      "ecoflow-delta-max-portable-power-station-main-unit-only": 1599.0,
+      "ecoflow-delta-max-2000-1-extra-battery": 2699.0,
+      "ecoflow-delta-max-smart-generator-dual-fuel": 3099.0,
+      "ecoflow-delta-max-2000-1-110w-solar-panel": 1799.0,
+      "ecoflow-delta-max-2000-2-110w-solar-panel": 1999.0,
+      "ecoflow-delta-max-2000-3-110w-solar-panel": 2199.0,
+      "ecoflow-delta-max-2000-4-110w-solar-panel": 2399.0,
+      "ecoflow-delta-max-2000-1-160w-solar-panel": 1899.0,
+      "ecoflow-delta-max-2000-2-160w-solar-panel": 2199.0,
+      "ecoflow-delta-max-2000-3-160w-solar-panel": 2499.0,
+      "ecoflow-delta-max-2000-4-160w-solar-panel": 2799.0,
+      "ecoflow-delta-max-2000-1-220w-solar-panel": 1349.0,
+      "ecoflow-delta-max-2000-2-220w-solar-panel": 2699.0,
+      "ecoflow-delta-max-2000-3-220w-solar-panel": 3099.0,
+      "ecoflow-delta-max-2000-4-220w-solar-panel": 3399.0,
+      "ecoflow-delta-max-2000-1-400w-solar-panel": 1699.0,
+      "ecoflow-delta-max-2000-2-400w-solar-panel": 3199.0,
+      "ecoflow-delta-max-with-100w-12v-solar-panel-bundle": 2208.99,
+      "ecoflow-delta-max-with-2x-100w-12v-solar-panel-bundle": 2318.98,
+      "ecoflow-delta-max-with-300w-12v-solar-panel-bundle": 2428.97,
+      "ecoflow-delta-max-with-400w-12v-solar-panel-bundle": 2538.96
+    },
+    "ecoflow-river-2-pro:wild-oak-trail": {
+      "ecoflow-river-2-pro-portable-power-station-main-unit-only": 569.0,
+      "ecoflow-river-2-pro-1-110w-portable-solar-panel": 509.0,
+      "ecoflow-river-2-pro-1-160w-portable-solar-panel": 569.0,
+      "ecoflow-river-2-pro-1-220w-portable-solar-panel": 619.0
+    },
+    "bluetti-ac180:wild-oak-trail": {
+      "ac180-only": 699.0,
+      "ac180-sp100l-100w-solar-panel": 999.0,
+      "ac180-200w-solar-panel": 1299.0,
+      "ac180-2-200w-solar-panels": 1798.0,
+      "ac180-200w-solar-panel-charger-1": 1498.0,
+      "ac180-b80-battery-free-aviation-to-dc7909-cable": 1599.0,
+      "ac180-350w-solar-panel": 1499.0,
+      "ac180p-only": 699.0,
+      "ac180p-200w-solar-panel": 1498.0,
+      "ac180p-350w-solar-panel": 1848.0,
+      "ac180p-charger-1": 1398.0
+    },
+    "bluetti-ac200l:wild-oak-trail": {
+      "ac200l-only": 1599.0,
+      "ac200l-d40": 1699.0,
+      "ac200l-b300k-battery": 2999.0,
+      "ac200l-2-b300k-batteries-2-free-200w-panels": 4699.0,
+      "ac200l-2-b300k-batteries-d300s": 4999.0,
+      "ac200l-200w-solar-panel": 1899.0,
+      "ac200l-2-200w-solar-panels": 2499.0,
+      "ac200l-charger-1": 1999.0,
+      "ac200l-200w-solar-panel-charger-1": 2498.0,
+      "ac200l-350w-solar-panel": 1999.0
+    },
+    "ecoflow-delta-pro-3:wild-oak-trail": {
+      "ecoflow-delta-pro-3-main-unit-only": 2799.0,
+      "ecoflow-delta-pro-3-with-extra-battery": 3999.0,
+      "ecoflow-delta-pro-3-with-1-400w-solar-panel": 3099.0,
+      "ecoflow-delta-pro-3-with-2-400w-solar-panel": 3499.0
+    },
+    "ecoflow-delta-pro-3-extra-battery:wild-oak-trail": {
+      "default": 1899.0
+    },
+    "ecoflow-river-3:wild-oak-trail": {
+      "default": 199.0
+    },
+    "ecoflow-delta-pro-ultra:wild-oak-trail": {
+      "delta-pro-ultra-inverter-only": 2799.0,
+      "delta-pro-ultra-with-1-battery": 4199.0,
+      "delta-pro-ultra-with-2-batteries": 5999.0,
+      "delta-pro-ultra-with-3-batteries": 7999.0,
+      "delta-pro-ultra-with-4-batteries": 10099.0,
+      "delta-pro-ultra-with-5-batteries": 12199.0,
+      "delta-pro-ultra-with-1-battery-and-8-400w-panels": 8598.97,
+      "delta-pro-ultra-with-2-batteries-and-10-400w-panels": 12198.97,
+      "delta-pro-ultra-with-3-batteries-and-12-400w-panels": 15998.97
+    },
+    "ecoflow-smart-generator-4000:wild-oak-trail": {
+      "ecoflow-smart-generator-4000-dual-fuel-only": 1799.0,
+      "ecoflow-smart-generator-4000-dual-fuel-with-delta-pro-3": 4698.0
+    },
+    "bluetti-ac240p:wild-oak-trail": {
+      "bluetti-ac240p-only": 1799.0,
+      "ac240p-200w-solar": 2298.0,
+      "ac240p-350w-solar": 2598.0
+    },
+    "bluetti-b210-expansion:wild-oak-trail": {
+      "default": 1099.0
+    },
+    "lion-ut-1300:wild-oak-trail": {
+      "default": 899.0
+    },
+    "rich-solar-alpha-12v-100ah:wild-oak-trail": {
+      "default": 319.99
+    },
+    "rich-solar-alpha-12v-200ah:wild-oak-trail": {
+      "default": 639.99
+    },
+    "rich-solar-all-in-one-ess:wild-oak-trail": {
+      "all-in-one-energy-storage-system-no-panels": 5599.99,
+      "2-7kwh-48vdc-120vac-kit-8x-335w-panels": 8999.99
+    },
+    "rich-solar-mega-200:wild-oak-trail": {
+      "12v": 191.99,
+      "24v": 199.99
+    },
+    "rich-solar-mega-250:wild-oak-trail": {
+      "default": 239.99
+    },
+    "rich-solar-mega-400:wild-oak-trail": {
+      "8-solar-panels": 2159.99,
+      "10-solar-panels": 2639.99,
+      "12-solar-panels": 3119.99
+    },
+    "rich-solar-mega-410:wild-oak-trail": {
+      "8-solar-panels": 2239.99,
+      "10-solar-panels": 3399.99,
+      "12-solar-panels": 2719.99
+    },
+    "rich-solar-mega-200-briefcase:wild-oak-trail": {
+      "rich-solar-200-watt-12v-briefcase-panel-only": 319.99,
+      "rich-solar-200-watt-12v-briefcase-panel-with-controller": 359.99
+    },
+    "rich-solar-mppt-40a:wild-oak-trail": {
+      "default": 127.99
+    },
+    "enphase-iq-battery-5p:alte-store": {
+      "default": 3846.15
+    },
+    "enphase-iq-system-controller-3:alte-store": {
+      "default": 2313.55
+    },
+    "midnite-mnbcb-2000-200:alte-store": {
+      "default": 1211.21
+    },
+    "midnite-mnpv12:alte-store": {
+      "default": 280.49
+    },
+    "midnite-mnpowerflo16:alte-store": {
+      "default": 6115.01
+    },
+    "rich-solar-alpha-24v-100ah:rich-solar": {
+      "default": 799.99
     }
   },
   "degraded_retailers": [],
