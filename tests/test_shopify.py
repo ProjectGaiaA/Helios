@@ -32,6 +32,30 @@ def _add_product(handle, fixture_name, js_status=404, js_body=None):
     return fixture
 
 
+def test_sku_missing_or_blank_normalizes_to_none(no_sleep):
+    """Absent, empty, and whitespace-only SKUs must all store as None.
+
+    A "" SKU is indistinguishable from real data downstream; the drift
+    tripwire needs a clean None to know it has nothing to compare.
+    """
+    scraper = ShopifyScraper("shop-solar-kits", BASE)
+    parsed = scraper._parse_product(
+        {
+            "title": "Probe Product",
+            "handle": "probe-product",
+            "variants": [
+                {"id": 1, "title": "No Sku Key", "price": "100.00"},
+                {"id": 2, "title": "Empty Sku", "price": "100.00", "sku": ""},
+                {"id": 3, "title": "Padded Sku", "price": "100.00", "sku": " X-1 "},
+            ],
+        }
+    )
+    by_id = {v["variant_id"]: v for v in parsed["variants"].values()}
+    assert by_id[1]["sku"] is None
+    assert by_id[2]["sku"] is None
+    assert by_id[3]["sku"] == "X-1"
+
+
 # --- JSON parsing: structure, variant_id passthrough, deep link ---
 
 
@@ -57,10 +81,13 @@ def test_json_product_parsing_returns_correct_structure(no_sleep):
     assert unit["raw_variant"] == "Anker Solix F2600 [Main Unit Only]"
     # variant_id passthrough (C4): needed for ?variant= affiliate deep links
     assert unit["variant_id"] == 41836471582860
+    # sku passthrough: cross-retailer identity + the SKU-drift tripwire
+    assert unit["sku"] == "A1781111"
 
     bundle = result["variants"]["double-kit-2-x-200w-rigid-panels"]
     assert bundle["price"] == 1618.49
     assert bundle["variant_id"] == 41837963411596
+    assert bundle["sku"] == "ANKER-F2600-DOUBLE-KIT"
 
     # Deep link points at the cheapest variant (the bare unit here)
     assert result["url"] == f"{BASE}/products/anker-solix-f2600?variant=41836471582860"

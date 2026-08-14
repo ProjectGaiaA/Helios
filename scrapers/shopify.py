@@ -286,6 +286,13 @@ class ShopifyScraper:
 
             variant_id = variant.get("id", "")
 
+            # Manufacturer/retailer SKU. Kept for two reasons: cross-retailer
+            # identity (hard goods carry real part numbers, unlike plants) and
+            # the SKU-drift tripwire — if the SKU behind a mapped handle
+            # changes, the retailer swapped the product and every downstream
+            # number is confidently wrong. Empty string normalizes to None.
+            sku = (variant.get("sku") or "").strip() or None
+
             # Normalize the variant title to a tier key. On collision within
             # this product, suffix with the variant id instead of overwriting:
             # last-write-wins silently replaced an earlier variant's price
@@ -312,6 +319,7 @@ class ShopifyScraper:
                 "available": available,
                 "raw_variant": variant_title,
                 "variant_id": variant_id,
+                "sku": sku,
             }
 
         # Product URL — use variant ID of the cheapest variant for deep linking

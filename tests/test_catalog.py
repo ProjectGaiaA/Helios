@@ -83,12 +83,19 @@ def test_products_required_fields_and_specs():
         assert isinstance(p.get("active"), bool)
         specs = p.get("specs")
         assert isinstance(specs, dict)
-        for key in ("capacity_wh", "output_w", "chemistry", "weight_lb"):
+        for key in ("capacity_wh", "output_w", "chemistry", "weight_lb",
+                    "capacity_source"):
             assert key in specs, f"{p['id']}: specs.{key} missing"
         # capacity_wh is nullable (withhold-when-unknown, PLAN 2b) but
         # never a bogus zero/negative
         cap = specs["capacity_wh"]
         assert cap is None or (isinstance(cap, (int, float)) and cap > 0)
+        # capacity is hand-authored, so its provenance is contractual
+        # (PLAN 4c.2: the audit cross-checks it against live text)
+        source = specs["capacity_source"]
+        assert source is None or (isinstance(source, str) and source)
+        if cap is not None:
+            assert source, f"{p['id']}: non-null capacity needs capacity_source"
 
 
 def test_product_ids_unique():

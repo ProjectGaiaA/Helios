@@ -92,8 +92,11 @@ project_helios/
 ### 2b. Price-row schema and $/Wh rules (corrected per C4/C15)
 
 Row: `{retailer_id, retailer_name?, timestamp, url, variants: {tier_key:
-{price, was_price, available, raw_variant, variant_id}}, in_stock,
-price_anomaly?}` — `?` = optional; consumers must not KeyError.
+{price, was_price, available, raw_variant, variant_id, sku}}, in_stock,
+price_anomaly?}` — `?` = optional; consumers must not KeyError. `sku` is the
+retailer-reported variant SKU, None when absent/blank (v2.2): the
+cross-retailer identity key for hard goods and the input to the SKU-drift
+tripwire (§4b).
 
 $/Wh discipline (withhold-when-unknown, same as gaia's availability ethic):
 - computed ONLY when (a) product `specs.capacity_wh` is non-null AND (b) the
@@ -127,11 +130,185 @@ carriage at an active retailer; otherwise left out with a note in CHANGELOG.
 Acceptance-scrape product: chosen at build time from confirmed IN-STOCK
 products (C9: DELTA Max disqualified).
 
+## 4b. Phase A2 — the correctness loop (BEFORE any Phase B feature)
+
+Decision (Brandon, 2026-08-13): correctness verification is foundational, not
+deferrable — "if information can't be correct there is no point." Gaia's
+failure mode: every check was self-referential; errors at one hop were
+invisible at the next. Phase A2 closes the loop and GATES everything else —
+no new retailers, no deploy, no features until it runs green.
+
+1. **End-to-end audit job**: nightly + on-demand: sample N (product,
+   retailer, variant) triples; fetch the RENDERED site page and the
+   retailer's live `.json` + `.js` with a cache-buster; compare the actual
+   displayed numbers (price, was-price, availability, $/Wh arithmetic).
+   Mismatch = alarm. This is the pattern Google Merchant Center runs at
+   planetary scale (feed-vs-landing-page crawl; mismatched items delisted).
+2. **SKU-drift tripwire**: alarm when the SKU set behind a mapped handle
+   changes — the retailer swapped the product under the handle and every
+   downstream number becomes confidently wrong.
+3. **Provenance surfaced**: every displayed price shows scraped-at ("as of
+   N hours ago"); every rendered number traceable to (retailer, handle,
+   variant_id, sku, timestamp).
+4. **Withhold on doubt, everywhere**: mismatch or unknown → the number comes
+   OFF the page until re-verified (Google's delisting discipline; gaia's
+   availability ethic generalized).
+5. **UCP as the live-truth query (v2.3)**: every Shopify store exposes an
+   unauthenticated UCP/MCP endpoint at `/api/ucp/mcp` with `search_catalog`,
+   `lookup_catalog` (batch by identifier), `get_product` — the surface both
+   active seeds' robots.txt explicitly direct agents to. Verified live
+   2026-08-13: shop-solar-kits returns a full tools list; **bluetti returns
+   200** (reopens a retailer whose products.json is junk — revisit O1).
+   The audit should query it as the arbiter; Phase B should evaluate
+   `lookup_catalog` as the PRIMARY scrape path (batch variants + real
+   availability would replace the .json+.js request pair). TRAPS: UCP money
+   is integer MINOR UNITS ({"amount": 600} = $6.00) — a fresh cents/dollars
+   reading hazard, spec the conversion with tests; checkout/cart tools exist
+   on the same endpoint and are OFF-LIMITS (§0 checkout-is-for-humans).
+
+### 4c. Phase A2 build spec (v2.5 — corrected per red team #3: 5 CRITICAL / 14 MAJOR / 8 MINOR, all accepted)
+
+New claims (corrected):
+
+| # | Claim | Evidence |
+|---|---|---|
+| C18 | UCP endpoint live at `{store}/api/ucp/mcp` (13 tools; 10 are checkout/cart/order = off-limits). `tools/list` needs NO initialize/session/meta and returns plain JSON. **`tools/call` is GATED**: every catalog tool requires `meta.ucp-agent.profile` = a public HTTPS URL the MERCHANT fetches (no redirects, Cache-Control public max-age>=60, JSON `{"ucp":{"version":...,"capabilities":{...}}}`); without it → HTTP 422 with JSON-RPC error `invalid_profile_url`. tools/list success does NOT imply tools/call success. wild-oak-trail also advertises UCP via `/.well-known/ucp` (endpoint on `.myshopify.com` host). robots can_fetch true on both actives | red team #3 live probes 2026-08-13 |
+| C19 | UCP money: integer MINOR units + ISO 4217 currency; identical wording on all three CATALOG tools (not just checkout) | red team #3 captured schemas |
+| C20 | Live tool names confirmed: search_catalog, lookup_catalog (batch ≤10 ids, Product or ProductVariant gids, results grouped by product, per-variant `inputs[]` match exact/featured), get_product (Product ID only — **no handle lookup on any tool**) | red team #3 captured inputSchemas |
+| C21 | INPUT schemas resolved (envelope `{meta:{ucp-agent:{profile}}, catalog:{...}}`; `catalog.context{address_country,currency,...}`, `catalog.filters.available` **defaults true = sold-out items hidden**). OUTPUT shape known only from Shopify's published example (`result.structuredContent.products[].variants[]` with `price{amount,currency}`, `availability{available,status,running_low}`, `sku`, NO compare-at/was-price field, per-variant `checkout_url` which is never followed) — live confirmation blocked by the profile gate. **v2.5.1 amendment (gaia `UCP_API_RUNBOOK.md`, verified live on merchants):** (1) profile placement is EXACTLY `params.arguments.meta["ucp-agent"].profile` — eight other placements all fail "Missing profile uri"; (2) the HTTP header `UCP-Agent: profile="<url>"` is required IN ADDITION to the meta field — meta without header = bare HTTP 422 with NO diagnostic body (decoder: bare 422 -> suspect missing header first); (3) catalog payload in `params.arguments.catalog` (confirmed); (4) the agent-profile JSON needs a `services` block and store discovery docs carry `ucp.services["dev.ucp.shopping"]` as a LIST, not an object | red team #3 + gaia UCP_API_RUNBOOK.md |
+| C22 | Version pinning surfaces exist: response header `x-shopify-ucp-mcp-api-version` + `/.well-known/ucp` `supported_versions`; schema meaning is pinned to 2026-04-08 | red team #3 |
+
+**Verdict taxonomy (the core design — replaces "mismatch = alarm").** The
+audit computes TWO independent comparisons per triple: the **render hop**
+(site HTML vs latest JSONL row) and the **freshness hop** (latest JSONL row
+vs the retailer's LIVE source). Verdicts:
+- `RENDER_DEFECT` (render hop disagrees) — the only defect class: alarm,
+  quarantine, exit 3.
+- `STALE` (render agrees, freshness disagrees) — NOT a defect: a price
+  changing between scrape and audit is expected (flash sales). Notice +
+  re-scrape recommendation. NEVER quarantines.
+- `CLEAN`, plus non-verdicts: `NO_ROW` (mapped pair never scraped — coverage
+  gap, not mismatch), `NO_BASELINE` (no stored sku → drift not evaluable),
+  `UNRESOLVED` (variant absent from live source / non-USD / schema surprise),
+  `NOT_AUDITED` (budget exhausted). Console summary leads with
+  `verified N / attempted M`.
+- Exit codes: 0 clean; 3 = any RENDER_DEFECT; **4 = incomplete/unverified**
+  (any error, NOT_AUDITED, or M > N) — an audit that could not verify must
+  never read as success; 1 usage/config.
+
+Components:
+
+1. **Live source & arbiter**: primary TODAY = `.json` + `.js` (has
+   compare_at_price and availability; UCP has no was-price field, C21).
+   `scrapers/ucp.py` is built and fully tested against canned fixtures but
+   its live use is **gated on O5** (hosted agent profile). When activated,
+   `lookup_catalog` becomes the freshness-hop source: ONE request per
+   (product, retailer) pair (batch ≤10 variant gids covers the widest seeded
+   product), endpoint resolved from `/.well-known/ucp` (fallback
+   `{store}/api/ucp/mcp`), robots checked against the host actually called,
+   `context={"address_country":"US","currency":"USD"}` always sent,
+   `filters.available` explicitly probed both ways ONCE against the known
+   sold-out DELTA Max variant and the answer pinned in code (C21 default
+   hides sold-out items — absence must classify UNRESOLVED, never drift).
+   Money compared as integer cents (UCP minor units native; site/JSONL
+   dollars ×100), never float ==. Non-USD → UNRESOLVED + withheld. Version
+   headers recorded in the report; a version change raises SCHEMA_REVERIFY
+   notice. Client wraps CATALOG READS ONLY — checkout/cart/order tools are
+   never wrapped, and `checkout_url` in responses is never followed (§0).
+   Error taxonomy handled distinctly: transport error; non-200 WITH JSON-RPC
+   error body (the profile gate returns HTTP 422 + diagnostic — never
+   raise_for_status before parsing); 200 with result.isError; schema shape
+   violation.
+2. **`audit.py`** (repo root): samples triples from **latest JSONL rows**
+   (the only variant-bearing store) intersected with handle_maps; ALL
+   quarantined variants are always included, random sampling fills to N
+   (default 10, `--all` supported). Reads displayed numbers by parsing
+   `data-*` provenance attributes with stdlib html.parser (+html.unescape) —
+   never prose regex. Compares price, was-price (render hop always;
+   freshness hop only vs `.json` compare_at_price), availability (same
+   variant on both sides), $/Wh re-derived then compared via the SAME
+   formatter (string equality). SKU-drift: stored vs live, both non-null
+   only. capacity_wh cross-check: search live title/body for a Wh figure →
+   CONFIRMED / ABSENT / CONTRADICTED (CONTRADICTED = alarm) — closes the
+   loop's one blind spot (capacity is hand-authored; products.json gains
+   `specs.capacity_source`). All-available smell: NOTICE only when sample
+   ≥8 variants across ≥3 products at that retailer. Outputs parameterized:
+   `--data-dir --site-dir --report-out --quarantine-out` (defaults =
+   real paths); LF-only writers; ASCII-only console. Budget ≤25 live
+   requests; exhaustion → remaining triples NOT_AUDITED + exit 4.
+3. **Quarantine** (`data/quarantine.json`, committed): a keyed MAP
+   `{"{retailer_id}:{product_id}:{variant_id}": {sku, tier_last_seen,
+   reason, observed, expected, first_seen, last_seen,
+   consecutive_failures}}` — variant_id is the stable identity (tier is
+   regenerated per scrape and can orphan/mis-target). Entry lifecycle:
+   written only by RENDER_DEFECT; cleared when its (always-sampled) recheck
+   is CLEAN; TTL-expired with logged reason when unobservable for 5 audits;
+   removed when product goes inactive or unmapped. Build applies quarantine
+   BEFORE cheapest-variant selection: a quarantined cheapest variant
+   withholds the WHOLE cell with reason (never silently substitutes
+   next-cheapest under a "lowest price" heading).
+4. **`build.py` + templates — provenance & withhold**: every product row
+   gets `data-variant-id data-tier data-sku data-scraped-at`; every home
+   cell gets `data-variant-id data-scraped-at` (and home-cell availability
+   must come from the SAME cheapest variant, not row-level in_stock — fixes
+   the residual mixed-variant defect). Visible "as of <age>" on every price.
+   `build_site(..., now=None)` — staleness (STALE_MAX_HOURS=168) and ages
+   derive from the injected clock ONLY (no bare datetime.now(); existing
+   absolute-timestamp test fixtures convert to now-relative offsets;
+   boundary tests at 167h/169h). Distinct markers:
+   `data-withheld="stale"` vs `data-withheld="quarantine"`.
+5. **Wiring**: conftest autouse robots stub extended to `scrapers.ucp` +
+   `audit`; a test asserts the UCP client opens zero real sockets;
+   scrape.yml order becomes scrape → build → audit → rebuild-if-quarantine-
+   changed → commit, with `data/quarantine.json` + `data/audit_report.json`
+   added to the git add list and the audit step continue-on-error with its
+   exit code surfaced in the alarm step. CLAUDE.md documents the audit
+   command + verdict taxonomy.
+
+**O5 (BLOCKS UCP activation only, not the A2 build)**: host
+`helios-agent-profile.json` at a public HTTPS URL, no redirects,
+`Cache-Control: public, max-age>=60`. **v2.5.1 corrections (gaia
+`UCP_API_RUNBOOK.md`)**: the minimal capabilities-only JSON previously
+inlined here is `profile_malformed` — the profile ALSO needs a `services`
+block, and capability values must be arrays of version objects (reference
+shape: `tests/fixtures/ucp/helios_agent_profile.json`; authoritative
+example: shopify.dev `valid-with-capabilities.json`). Catalog-read
+capabilities ONLY — no cart/checkout/order/payment_handlers, ever.
+Resolution path: a HELIOS-hosted profile on the future helios GitHub
+Pages or its own domain — explicitly NOT gaia's plantpricetracker.com
+profile URL (reputation and merchant blocking attach to the profile; the
+projects must not share fate). URL lands in config as
+`UCP_AGENT_PROFILE`, which stays UNSET until then. Until resolved the
+freshness hop runs on `.json`+`.js` and ucp.py stays fixture-tested.
+
+Acceptance (§7-A2):
+1. ruff + pytest fully clean.
+2. Live: fresh scrape of the 2 priced products (rows gain `sku` — the store
+   currently predates the field), rebuild, then `python -X utf8 audit.py
+   --all` → report written; summary leads with verified/attempted; expected
+   verdicts: CLEAN or STALE for priced pairs, NO_ROW for never-scraped
+   pairs (6 of 8 today — never a mismatch).
+3. **Render-hop injection (3a)**: tamper a displayed price in a SCRATCH
+   copy of site/ → audit (all outputs → tmp) classifies RENDER_DEFECT,
+   exit 3, quarantines exactly that variant.
+   **Freshness-hop injection (3b)**: tamper a JSONL COPY + rebuild to
+   scratch → audit classifies STALE, does NOT quarantine, exits without
+   defect. A run that quarantines on 3b has the taxonomy bug.
+   SKU-drift: tamper stored sku in the scratch copy → drift alarm.
+   Afterward: `git status` clean (all outputs were parameterized to tmp).
+4. Quarantine flow with `now` pinned fresh: entry present → rebuild →
+   `data-withheld="quarantine"` marker on that variant and its price string
+   absent from BOTH index.html and the product page; CLEAN recheck →
+   entry removed → renders again. Assert on markers, not absence alone.
+
 ## 5. Explicit non-goals (Phase B+)
 
-As v1: Signature Solar/BigCommerce scraper; WhichWatts oracle; Keepa; Wayback
-backfill; alerts; deploy/domain; SEO content; audits/heartbeat; recovery
-system (stubs only); verify.py; promo UI surfacing; taxonomy. Plus explicitly:
+As v1: Signature Solar/BigCommerce scraper; WhichWatts oracle (complements,
+does not replace, the §4b source-of-truth audit); Keepa; Wayback
+backfill; alerts; deploy/domain; SEO content; heartbeat; recovery
+system (stubs only); promo UI surfacing; taxonomy. NOTE (v2.2):
+"audits"/"verify.py" REMOVED from this list — superseded by §4b Phase A2.
+Plus explicitly:
 HTML-fallback scraping (deleted, not deferred — a future retailer needing it
 gets its own scraper module); in-repo catalog discovery
 (`ShopifyScraper.discover_products` deleted v2.1 — discovery is an offline,
@@ -171,6 +348,84 @@ the gaia reference; must run tests itself and verify the §7.6 artifacts.
 
 ## CHANGELOG
 
+- v2.5.2 (2026-08-13): Red team #4 on the built A2: FAIL, 2 CRITICAL /
+  7 MAJOR / 6 MINOR, all probe-proven, all fixed same day. CRITICAL-1/2:
+  quarantine recheck ignored the home surface and read ABSENCE as a clean
+  recheck — now positive marker evidence is required on BOTH surfaces
+  (leak = RENDER_DEFECT + consecutive_failures++, absence = UNRESOLVED +
+  TTL counter++, and any not-clean recheck feeds the TTL). MAJOR-3:
+  clear-on-compliant-withhold let a persistent build defect oscillate
+  wrong-price/withheld — entries now clear only after a SHADOW REBUILD
+  with the entry suppressed renders correctly AND freshness is clean;
+  entries are mutated in place, never delete+recreated (6-cycle
+  oscillation regression added). MAJOR-4: verified 0 / attempted 0 now
+  exits 4 ("nothing audited"). MAJOR-5: workflow alarm step consumes
+  report alarms[] (SKU drift / capacity CONTRADICTED fail the run even
+  at audit exit 0). MAJOR-6: missing .js availability for a compared
+  variant is UNRESOLVED, never verified-CLEAN. MAJOR-7: empty variant_id
+  is non-joinable end to end (parser segregates, audit UNRESOLVED,
+  quarantine keys validated non-empty, build stamps no attr). MAJOR-8:
+  home-cell $/Wh now compared (same-formatter string equality). MAJOR-9:
+  ucp.py rate docstring corrected to the runbook's RETRACTED claim
+  (planting-tree 429 + 1933s lockout after ~93 calls); >=1.5s sequential
+  throttle; 429/503 = hard-stop UcpRateLimited carrying retry-after, no
+  retry; list_price extracted (4 of 6 retailers return it — restores a
+  was-price freshness comparison for UCP-arbiter mode). MINOR: data-sku /
+  data-scraped-at attrs audited as provenance (lies = RENDER_DEFECT) and
+  "as of" got a data-field; UCP well-known fetch now uses the bot UA +
+  robots + throttle; quarantine/audit_report must be tracked from first
+  commit (git-diff no-ops on untracked — documented); quarantine shape
+  validated before any live spend (exit 1); non-finite prices (JSON
+  Infinity) classify UNRESOLVED; home in-stock cells got visible text.
+- v2.5.1 (2026-08-13, mid-A2-build): C21/O5 amended from gaia's
+  UCP_API_RUNBOOK.md (proven live integration — supersedes red team #3
+  intel where they conflict): dual profile transport (meta field AND
+  UCP-Agent header) with the bare-422 decoder rule; exact profile
+  placement; agent-profile JSON needs `services` (the O5 inline example
+  was profile_malformed); discovery `ucp.services["dev.ucp.shopping"]`
+  is a list. O5 resolution = Helios-hosted profile, never gaia's URL.
+- v2.5 (2026-08-13): Red team #3 on the v2.4 spec: UNSOUND, 5 CRITICAL /
+  14 MAJOR / 8 MINOR, all accepted. Headline corrections: UCP tools/call is
+  profile-gated (v2.4's client was uncallable as specced) → dual-arbiter
+  design (.json+.js today, UCP gated on O5); single mismatch bucket →
+  render-hop/freshness-hop verdict taxonomy (v2.4 would have quarantined
+  every flash-sale price change and emptied the site); injected-error test
+  split 3a/3b (v2.4's version tested the innocent case); quarantine re-keyed
+  to variant_id map w/ lifecycle (tier keys orphan/mis-target); exit 4
+  incomplete≠success; provenance data-* attributes (site HTML lacked
+  auditable identity); was-price never compared vs UCP (field doesn't
+  exist); filters.available default-true trap pinned by probe; injected
+  clock (calendar-red tests); sku NO_BASELINE semantics (store predates
+  field); budget restated per-pair w/ exhaustion semantics; conftest
+  coverage for new modules; parameterized audit outputs (residue-free
+  acceptance); capacity_wh blind spot closed via title cross-check +
+  capacity_source. Full findings + captured UCP schemas in red team #3
+  transcript. C18-C22 rewritten/added.
+- v2.4 (2026-08-13): §4c Phase A2 build spec added (UCP client, audit.py
+  end-to-end loop, sku-drift, provenance/withhold in build, tests,
+  acceptance incl. injected-error catch). C18-C21 added; C21 records that
+  catalog-tool schemas are unverified until build. Queued for red team #3.
+- v2.3 (2026-08-13): UCP discovered as the sanctioned agent surface (Shopify
+  + Google open standard; per-store unauthenticated MCP at /api/ucp/mcp).
+  Verified live on shop-solar-kits (full tools list) and bluetti (200 —
+  candidate to reopen despite junk products.json). Added §4b item 5: UCP as
+  audit arbiter now, candidate primary scrape source in Phase B; minor-units
+  money trap and checkout-tools-off-limits recorded. Context: a parallel
+  gaia session measured FGT via UCP against gaia's published data — gaia
+  showed 121/121 in stock vs ~half sold out per UCP+live page, prices ~10%
+  stale-low — the two-source §4b argument confirmed on real data, with the
+  stale source being the tracker itself.
+- v2.2 (2026-08-13): Brandon's correctness decision. (a) `sku` added to the
+  variant schema (scraper + tests) — the v2/v2.1 schema stored only
+  variant_id, an orchestrator miss: hard-goods SKUs are the cross-retailer
+  identity key gaia never had. Existing JSONL rows predate the field and
+  lack it (consumers must .get()). (b) NEW §4b: the correctness loop
+  (end-to-end site-vs-source audit, SKU-drift tripwire, provenance display,
+  withhold-on-doubt) is Phase A2 and GATES Phase B — reversing v2's deferral
+  of audits/verify.py to non-goals. Rationale: gaia's recurring
+  wrong-on-site defects were never a matching problem alone; the loop that
+  catches all four error classes (identity, reading, render, delivery) was
+  the missing structure.
 - v2.1 (2026-08-13): Red team #2 (independent, read-only) audited the built
   skeleton: plan-conformant and green, but FAIL on 3 MAJOR + 6 MINOR
   evidenced defects. All fixed same day. MAJOR-1: home cell paired the

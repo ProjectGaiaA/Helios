@@ -1,0 +1,13 @@
+{
+  "_comment": "Profile gate failure shape captured live by red team #3 (C18): HTTP 422 WITH a JSON-RPC error body. Clients must parse the body before any status-based raise.",
+  "jsonrpc": "2.0",
+  "id": 1,
+  "error": {
+    "code": -32001,
+    "message": "UCP discovery failed",
+    "data": {
+      "code": "invalid_profile_url",
+      "detail": "The ucp-agent profile URL could not be fetched."
+    }
+  }
+}

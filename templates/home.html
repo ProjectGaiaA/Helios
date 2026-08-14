@@ -18,19 +18,25 @@ standalone unit's capacity is known.</p>
           {% if row.product.specs.capacity_wh %}<span class="muted">{{ row.product.specs.capacity_wh }} Wh</span>{% endif %}
       </td>
       {% for cell in row.cells %}
-      <td>
-        {% if cell %}
-          {{ cell.price_display }}
-          {# price and $/Wh describe the SAME variant; a cheapest-bundle
-             cell is badged instead of wearing the unit's $/Wh #}
-          {% if cell.is_bundle %}<span class="badge">bundle</span>{% endif %}
-          {% if cell.dollars_per_wh_display %}<div class="wh">{{ cell.dollars_per_wh_display }}</div>{% endif %}
-          {% if cell.in_stock is sameas false %}<div class="soldout">Sold out</div>
-          {% elif cell.in_stock is none %}<div class="unknown">Stock unknown</div>{% endif %}
+      {% if cell %}
+      <td{% if cell.variant_id is not none %} data-variant-id="{{ cell.variant_id }}"{% endif %} data-scraped-at="{{ cell.scraped_at }}"{% if cell.withheld %} data-withheld="{{ cell.withheld }}"{% endif %}>
+        {% if cell.withheld %}
+          <span class="muted">price withheld ({{ cell.withheld_reason }})</span>
         {% else %}
-          <span class="muted">—</span>
+          <span data-field="price">{{ cell.price_display }}</span>
+          {# price, $/Wh AND availability all describe the SAME cheapest
+             variant — never the row aggregate (PLAN 4c.4) #}
+          {% if cell.is_bundle %}<span class="badge">bundle</span>{% endif %}
+          {% if cell.dollars_per_wh_display %}<div class="wh" data-field="wh">{{ cell.dollars_per_wh_display }}</div>{% endif %}
+          {% if cell.available is sameas false %}<div class="soldout" data-field="availability" data-value="false">Sold out</div>
+          {% elif cell.available is sameas true %}<div class="instock" data-field="availability" data-value="true">In stock</div>
+          {% else %}<div class="unknown" data-field="availability" data-value="unknown">Stock unknown</div>{% endif %}
+          <div class="muted" data-field="asof">{{ cell.asof }}</div>
         {% endif %}
       </td>
+      {% else %}
+      <td><span class="muted">—</span></td>
+      {% endif %}
       {% endfor %}
     </tr>
     {% endfor %}

@@ -8,7 +8,8 @@
       "capacity_wh": 2016,
       "output_w": 2400,
       "chemistry": "NCM",
-      "weight_lb": 48.0
+      "weight_lb": 48.0,
+      "capacity_source": "listing-title: '2,400W / 2,016Wh' (shop-solar-kits, 2026-08-13)"
     },
     "active": true,
     "notes": "Every variant sold out at both retailers on 2026-08-13 (C9) — good sold-out edge case, disqualified as acceptance-scrape product."
@@ -22,7 +23,8 @@
       "capacity_wh": 768,
       "output_w": 800,
       "chemistry": "LiFePO4",
-      "weight_lb": 17.2
+      "weight_lb": 17.2,
+      "capacity_source": "listing-title: '768Wh / 800W' (shop-solar-kits, 2026-08-13)"
     },
     "active": true,
     "notes": "Confirmed in stock at shop-solar-kits on 2026-08-13; acceptance-scrape product."
@@ -36,7 +38,8 @@
       "capacity_wh": 2560,
       "output_w": 2400,
       "chemistry": "LiFePO4",
-      "weight_lb": 67.2
+      "weight_lb": 67.2,
+      "capacity_source": "listing-title: '2,560Wh / 2,400W' (shop-solar-kits, 2026-08-13)"
     },
     "active": true,
     "notes": null
@@ -50,7 +53,8 @@
       "capacity_wh": 5120,
       "output_w": 5120,
       "chemistry": "LiFePO4",
-      "weight_lb": null
+      "weight_lb": null,
+      "capacity_source": "listing-title: '5.12kWh Server Rack' (shop-solar-kits, 2026-08-13)"
     },
     "active": true,
     "notes": "Server-rack battery, not a power station. output_w is 100A continuous discharge at 51.2V nominal."
@@ -64,7 +68,8 @@
       "capacity_wh": null,
       "output_w": 1800,
       "chemistry": "LiFePO4",
-      "weight_lb": 35.3
+      "weight_lb": 35.3,
+      "capacity_source": null
     },
     "active": true,
     "notes": "capacity_wh deliberately null: the only carrying retailer (wild-oak-trail) lists AC180 (1152Wh) and AC180P (1440Wh) variants under ONE product, so a per-product capacity would compute a wrong $/Wh for half the rows. Withhold-when-unknown (PLAN 2b)."
@@ -78,7 +83,8 @@
       "capacity_wh": 2048,
       "output_w": 2400,
       "chemistry": "LiFePO4",
-      "weight_lb": 62.4
+      "weight_lb": 62.4,
+      "capacity_source": "vendor-spec: AC200L 2,048Wh (2026-08-13; wild-oak-trail title carries no Wh figure)"
     },
     "active": true,
     "notes": null

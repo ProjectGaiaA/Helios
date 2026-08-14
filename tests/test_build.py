@@ -1,15 +1,28 @@
-"""Tests for the minimal static site builder (build.py).
+"""Tests for the static site builder (build.py).
 
-Edge cases per PLAN section 2: missing capacity, missing retailer_name,
-sold-out product — plus empty-variant rows and the optional price_anomaly
-key, which consumers must tolerate (C4)."""
+Edge cases per PLAN section 2 (missing capacity, missing retailer_name,
+sold-out product, optional keys) plus the A2 provenance/withhold layer
+(PLAN 4c.4): injected clock, staleness boundaries, quarantine markers.
+
+All fixture timestamps are NOW-RELATIVE against a pinned clock — absolute
+timestamps made the suite calendar-red the day they aged past the
+staleness threshold.
+"""
 
 import json
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from build import build_site
+from build import STALE_MAX_HOURS, build_site
 
 TEMPLATES_DIR = Path(__file__).parent.parent / "templates"
+
+# The single injected clock for every test in this file.
+NOW = datetime(2026, 8, 14, 12, 0, 0, tzinfo=timezone.utc)
+
+
+def _ts(hours_ago: float) -> str:
+    return (NOW - timedelta(hours=hours_ago)).isoformat()
 
 
 def _write_json(path: Path, data):
@@ -32,7 +45,8 @@ def _seed_data(tmp_path: Path) -> Path:
             "id": "product-a", "name": "Test Station 1000", "brand": "TestCo",
             "category": "portable-power-station",
             "specs": {"capacity_wh": 1000, "output_w": 1200,
-                      "chemistry": "LiFePO4", "weight_lb": 25.0},
+                      "chemistry": "LiFePO4", "weight_lb": 25.0,
+                      "capacity_source": "vendor-spec (test)"},
             "active": True, "notes": None,
         },
         {
@@ -40,28 +54,32 @@ def _seed_data(tmp_path: Path) -> Path:
             "category": "portable-power-station",
             # capacity unknown -> every $/Wh withheld (PLAN 2b)
             "specs": {"capacity_wh": None, "output_w": 1800,
-                      "chemistry": "LiFePO4", "weight_lb": None},
+                      "chemistry": "LiFePO4", "weight_lb": None,
+                      "capacity_source": None},
             "active": True, "notes": None,
         },
         {
             "id": "product-c", "name": "Unreadable Station", "brand": "TestCo",
             "category": "portable-power-station",
             "specs": {"capacity_wh": 500, "output_w": 500,
-                      "chemistry": "LiFePO4", "weight_lb": 10.0},
+                      "chemistry": "LiFePO4", "weight_lb": 10.0,
+                      "capacity_source": "vendor-spec (test)"},
             "active": True, "notes": None,
         },
         {
             "id": "product-d", "name": "Never Scraped", "brand": "TestCo",
             "category": "portable-power-station",
             "specs": {"capacity_wh": 500, "output_w": 500,
-                      "chemistry": "LiFePO4", "weight_lb": 10.0},
+                      "chemistry": "LiFePO4", "weight_lb": 10.0,
+                      "capacity_source": "vendor-spec (test)"},
             "active": True, "notes": None,
         },
         {
             "id": "product-inactive", "name": "Retired Station", "brand": "TestCo",
             "category": "portable-power-station",
             "specs": {"capacity_wh": 500, "output_w": 500,
-                      "chemistry": "LiFePO4", "weight_lb": 10.0},
+                      "chemistry": "LiFePO4", "weight_lb": 10.0,
+                      "capacity_source": "vendor-spec (test)"},
             "active": False, "notes": None,
         },
     ])
@@ -75,22 +93,25 @@ def _seed_data(tmp_path: Path) -> Path:
     _write_jsonl(prices / "product-a.jsonl", [
         # older row: must lose to the later one
         {"retailer_id": "r1", "retailer_name": "Retailer One",
-         "timestamp": "2026-08-10T00:00:00+00:00",
+         "timestamp": _ts(72),
          "url": "https://r1.example/products/test-station",
          "variants": {"main-unit-only": {
              "price": 480.00, "was_price": None, "available": True,
-             "raw_variant": "Station [Main Unit Only]", "variant_id": 111}},
+             "raw_variant": "Station [Main Unit Only]", "variant_id": 111,
+             "sku": "TS-1000"}},
          "in_stock": True},
         {"retailer_id": "r1", "retailer_name": "Retailer One",
-         "timestamp": "2026-08-13T00:00:00+00:00",
+         "timestamp": _ts(2),
          "url": "https://r1.example/products/test-station?variant=111",
          "variants": {
              "main-unit-only": {
                  "price": 500.00, "was_price": 600.00, "available": True,
-                 "raw_variant": "Station [Main Unit Only]", "variant_id": 111},
+                 "raw_variant": "Station [Main Unit Only]", "variant_id": 111,
+                 "sku": "TS-1000"},
              "kit-1-x-200w-panel": {
                  "price": 800.00, "was_price": None, "available": False,
-                 "raw_variant": "Station Kit [1 x 200W Panel]", "variant_id": 222},
+                 "raw_variant": "Station Kit [1 x 200W Panel]", "variant_id": 222,
+                 "sku": "TS-1000-KIT"},
          },
          "in_stock": True,
          # optional key (C4): consumers must not choke on it
@@ -99,9 +120,9 @@ def _seed_data(tmp_path: Path) -> Path:
 
     _write_jsonl(prices / "product-b.jsonl", [
         # Hostile row: retailer_name missing (optional, C4), retailer id not
-        # in retailers.json, product sold out.
+        # in retailers.json, product sold out, sku predates the field.
         {"retailer_id": "mystery-solar",
-         "timestamp": "2026-08-13T00:00:00+00:00",
+         "timestamp": _ts(3),
          "url": "https://mystery.example/products/mystery-station",
          "variants": {"main-unit-only": {
              "price": 700.00, "was_price": None, "available": False,
@@ -111,7 +132,7 @@ def _seed_data(tmp_path: Path) -> Path:
 
     _write_jsonl(prices / "product-c.jsonl", [
         {"retailer_id": "r1", "retailer_name": "Retailer One",
-         "timestamp": "2026-08-13T00:00:00+00:00",
+         "timestamp": _ts(4),
          "url": "https://r1.example/products/unreadable-station",
          "variants": {}, "in_stock": None, "no_sizes_readable": True},
     ])
@@ -123,7 +144,7 @@ def _build(tmp_path):
     data_dir = _seed_data(tmp_path)
     site_dir = tmp_path / "site"
     summary = build_site(data_dir=data_dir, site_dir=site_dir,
-                         templates_dir=TEMPLATES_DIR)
+                         templates_dir=TEMPLATES_DIR, now=NOW)
     return site_dir, summary
 
 
@@ -143,14 +164,41 @@ def test_unit_variant_gets_dollars_per_wh_and_bundle_does_not(tmp_path):
     site_dir, _ = _build(tmp_path)
     html = (site_dir / "products" / "product-a.html").read_text(encoding="utf-8")
     # unit: $500 / 1000 Wh = $0.50/Wh, exactly one rated variant on the page
-    assert '<span class="wh">$0.50/Wh</span>' in html
-    assert html.count('<span class="wh">') == 1
+    assert '<span class="wh" data-field="wh">$0.50/Wh</span>' in html
+    assert html.count('<span class="wh"') == 1
     # bundle: badge shown, price shown, no $/Wh
     assert 'class="badge">bundle</span>' in html
     assert "$800.00" in html
     # money is two-decimal
     assert "$500.00" in html
     assert "$600.00" in html  # was_price
+
+
+def test_provenance_attributes_on_every_rendered_price(tmp_path):
+    """PLAN 4c.4: product rows carry variant_id/tier/sku/scraped-at; home
+    cells carry variant_id/scraped-at; ages are visible."""
+    site_dir, _ = _build(tmp_path)
+    page = (site_dir / "products" / "product-a.html").read_text(encoding="utf-8")
+    assert 'data-variant-id="111"' in page
+    assert 'data-tier="main-unit-only"' in page
+    assert 'data-sku="TS-1000"' in page
+    assert f'data-scraped-at="{_ts(2)}"' in page
+    assert 'data-field="price"' in page
+    assert 'data-field="availability" data-value="true"' in page
+    assert "as of 2h ago" in page
+
+    home = (site_dir / "index.html").read_text(encoding="utf-8")
+    assert 'data-variant-id="111"' in home
+    assert f'data-scraped-at="{_ts(2)}"' in home
+    assert "as of 2h ago" in home
+
+
+def test_missing_sku_renders_empty_data_sku(tmp_path):
+    """Rows predating the sku field (v2.2) must render, with an empty
+    attr, not KeyError."""
+    site_dir, _ = _build(tmp_path)
+    page = (site_dir / "products" / "product-b.html").read_text(encoding="utf-8")
+    assert 'data-sku=""' in page
 
 
 def test_affiliate_links_deep_link_each_variant(tmp_path):
@@ -170,7 +218,7 @@ def test_latest_row_wins(tmp_path):
 def test_missing_capacity_withholds_every_dollars_per_wh(tmp_path):
     site_dir, _ = _build(tmp_path)
     html = (site_dir / "products" / "product-b.html").read_text(encoding="utf-8")
-    assert '<span class="wh">' not in html
+    assert '<span class="wh"' not in html
     assert "withheld" in html
     assert "$700.00" in html  # price still shown
 
@@ -216,14 +264,15 @@ def test_home_table_shows_price_and_unit_dollars_per_wh(tmp_path):
 # --- "+ 110W Panel" bundle at $509 undercuts the $569 main unit; the old
 # --- code rendered $509.00 beside the unit's $0.74/Wh.
 
-def _seed_509_scenario(tmp_path):
+def _seed_509_scenario(tmp_path, bundle_available=True):
     data_dir = tmp_path / "data"
     (data_dir / "prices").mkdir(parents=True)
     _write_json(data_dir / "products.json", [{
         "id": "ecoflow-river-2-pro", "name": "EcoFlow RIVER 2 Pro",
         "brand": "EcoFlow", "category": "portable-power-station",
         "specs": {"capacity_wh": 768, "output_w": 800,
-                  "chemistry": "LiFePO4", "weight_lb": 17.2},
+                  "chemistry": "LiFePO4", "weight_lb": 17.2,
+                  "capacity_source": "listing-title (test)"},
         "active": True, "notes": None,
     }])
     _write_json(data_dir / "retailers.json", [
@@ -233,27 +282,34 @@ def _seed_509_scenario(tmp_path):
     ])
     _write_jsonl(data_dir / "prices" / "ecoflow-river-2-pro.jsonl", [{
         "retailer_id": "wild-oak-trail", "retailer_name": "Wild Oak Trail",
-        "timestamp": "2026-08-13T00:00:00+00:00",
+        "timestamp": _ts(5),
         "url": "https://www.wildoaktrail.com/products/ecoflow-river-2-pro-portable-power-station",
         "variants": {
             "ecoflow-river-2-pro-1-110w-portable-solar-panel": {
-                "price": 509.00, "was_price": 998.00, "available": True,
+                "price": 509.00, "was_price": 998.00,
+                "available": bundle_available,
                 "raw_variant": "EcoFlow RIVER 2 Pro + 1 110W Portable Solar Panel",
-                "variant_id": 44532078936300},
+                "variant_id": 44532078936300, "sku": "RIVER2PRO-110-1-US"},
             "ecoflow-river-2-pro-portable-power-station-main-unit-only": {
                 "price": 569.00, "was_price": 599.00, "available": True,
                 "raw_variant": "EcoFlow RIVER 2 Pro Portable Power Station(Main Unit Only)",
-                "variant_id": 44532078903532},
+                "variant_id": 44532078903532, "sku": "ZMR620-B-US-1"},
         },
         "in_stock": True,
     }])
     return data_dir
 
 
-def test_home_cell_price_and_dollars_per_wh_come_from_same_variant(tmp_path):
-    data_dir = _seed_509_scenario(tmp_path)
+def _build_509(tmp_path, data_dir=None):
+    data_dir = data_dir or _seed_509_scenario(tmp_path)
     site_dir = tmp_path / "site"
-    build_site(data_dir=data_dir, site_dir=site_dir, templates_dir=TEMPLATES_DIR)
+    build_site(data_dir=data_dir, site_dir=site_dir,
+               templates_dir=TEMPLATES_DIR, now=NOW)
+    return data_dir, site_dir
+
+
+def test_home_cell_price_and_dollars_per_wh_come_from_same_variant(tmp_path):
+    _, site_dir = _build_509(tmp_path)
     html = (site_dir / "index.html").read_text(encoding="utf-8")
 
     # Cheapest variant is the $509 bundle: its price shows...
@@ -261,7 +317,7 @@ def test_home_cell_price_and_dollars_per_wh_come_from_same_variant(tmp_path):
     # ...with a bundle badge, and NOT the $569 unit's $/Wh next to it.
     assert 'class="badge">bundle</span>' in html
     assert "$0.74/Wh" not in html
-    assert '<div class="wh">' not in html
+    assert '<div class="wh"' not in html
     # The unit's price must not be presented as the cell price either.
     assert "$569.00" not in html
 
@@ -270,7 +326,6 @@ def test_home_cell_shows_dollars_per_wh_when_cheapest_is_the_unit(tmp_path):
     """Counter-case: drop the discounted bundle and the unit's own $/Wh
     appears with the unit's own price."""
     data_dir = _seed_509_scenario(tmp_path)
-    # Rewrite the price file with only the main-unit variant
     price_file = data_dir / "prices" / "ecoflow-river-2-pro.jsonl"
     row = json.loads(price_file.read_text(encoding="utf-8").splitlines()[0])
     row["variants"] = {
@@ -279,12 +334,21 @@ def test_home_cell_shows_dollars_per_wh_when_cheapest_is_the_unit(tmp_path):
     }
     price_file.write_text(json.dumps(row) + "\n", encoding="utf-8", newline="\n")
 
-    site_dir = tmp_path / "site"
-    build_site(data_dir=data_dir, site_dir=site_dir, templates_dir=TEMPLATES_DIR)
+    _, site_dir = _build_509(tmp_path, data_dir)
     html = (site_dir / "index.html").read_text(encoding="utf-8")
 
     assert "$569.00" in html
     assert "$0.74/Wh" in html  # 569 / 768 = 0.7409
+
+
+def test_home_cell_availability_comes_from_the_same_cheapest_variant(tmp_path):
+    """PLAN 4c.4 residual fix: the cheapest variant is sold out while the
+    ROW aggregate in_stock is True — the cell must say sold out."""
+    data_dir = _seed_509_scenario(tmp_path, bundle_available=False)
+    _, site_dir = _build_509(tmp_path, data_dir)
+    html = (site_dir / "index.html").read_text(encoding="utf-8")
+    assert 'data-field="availability" data-value="false"' in html
+    assert "Sold out" in html
 
 
 # --- red team #2 MINOR-5: a malformed (string) price must not crash the build ---
@@ -301,7 +365,7 @@ def test_string_price_row_does_not_crash_build(tmp_path):
 
     site_dir = tmp_path / "site"
     summary = build_site(data_dir=data_dir, site_dir=site_dir,
-                         templates_dir=TEMPLATES_DIR)
+                         templates_dir=TEMPLATES_DIR, now=NOW)
     assert summary["pages_written"] == 2  # no TypeError from the sort key
 
     html = (site_dir / "products" / "ecoflow-river-2-pro.html").read_text(encoding="utf-8")
@@ -309,3 +373,102 @@ def test_string_price_row_does_not_crash_build(tmp_path):
     assert "Corrupt Variant" in html
     assert "$509.00" in html
     assert "$569.00" in html
+
+
+# --- staleness boundaries (PLAN 4c.4: STALE_MAX_HOURS=168, injected clock) ---
+
+def _reseed_timestamp(data_dir, hours_ago):
+    price_file = data_dir / "prices" / "ecoflow-river-2-pro.jsonl"
+    row = json.loads(price_file.read_text(encoding="utf-8").splitlines()[0])
+    row["timestamp"] = _ts(hours_ago)
+    price_file.write_text(json.dumps(row) + "\n", encoding="utf-8", newline="\n")
+
+
+def test_row_at_167h_still_renders_prices(tmp_path):
+    assert STALE_MAX_HOURS == 168
+    data_dir = _seed_509_scenario(tmp_path)
+    _reseed_timestamp(data_dir, 167)
+    _, site_dir = _build_509(tmp_path, data_dir)
+    home = (site_dir / "index.html").read_text(encoding="utf-8")
+    page = (site_dir / "products" / "ecoflow-river-2-pro.html").read_text(encoding="utf-8")
+    assert "$509.00" in home and "$509.00" in page
+    assert 'data-withheld="stale"' not in home
+    assert 'data-withheld="stale"' not in page
+
+
+def test_row_at_169h_withholds_with_stale_marker(tmp_path):
+    data_dir = _seed_509_scenario(tmp_path)
+    _reseed_timestamp(data_dir, 169)
+    _, site_dir = _build_509(tmp_path, data_dir)
+    home = (site_dir / "index.html").read_text(encoding="utf-8")
+    page = (site_dir / "products" / "ecoflow-river-2-pro.html").read_text(encoding="utf-8")
+    for html in (home, page):
+        assert 'data-withheld="stale"' in html
+        assert "$509.00" not in html
+        assert "$569.00" not in html
+    # the stale marker is distinct from quarantine (PLAN 4c.4)
+    assert 'data-withheld="quarantine"' not in home
+    assert 'data-withheld="quarantine"' not in page
+
+
+def test_unparseable_timestamp_withholds_as_stale(tmp_path):
+    """Withhold-on-doubt: a row whose timestamp cannot be parsed must not
+    render as fresh."""
+    data_dir = _seed_509_scenario(tmp_path)
+    price_file = data_dir / "prices" / "ecoflow-river-2-pro.jsonl"
+    row = json.loads(price_file.read_text(encoding="utf-8").splitlines()[0])
+    row["timestamp"] = "not-a-timestamp"
+    price_file.write_text(json.dumps(row) + "\n", encoding="utf-8", newline="\n")
+    _, site_dir = _build_509(tmp_path, data_dir)
+    page = (site_dir / "products" / "ecoflow-river-2-pro.html").read_text(encoding="utf-8")
+    assert 'data-withheld="stale"' in page
+    assert "$509.00" not in page
+
+
+# --- quarantine markers (PLAN 4c.3/4c.4 + acceptance 4) ---
+
+QKEY = "wild-oak-trail:ecoflow-river-2-pro:44532078936300"
+
+
+def _quarantine_entry():
+    return {QKEY: {
+        "sku": "RIVER2PRO-110-1-US",
+        "tier_last_seen": "ecoflow-river-2-pro-1-110w-portable-solar-panel",
+        "reason": "render_defect", "observed": "$555.00", "expected": "$509.00",
+        "first_seen": _ts(24), "last_seen": _ts(1),
+        "consecutive_failures": 1, "unobserved_audits": 0,
+    }}
+
+
+def test_quarantined_cheapest_variant_withholds_cell_and_row(tmp_path):
+    """Quarantine applies BEFORE cheapest selection: the $509 bundle is
+    quarantined, so the home cell withholds ENTIRELY — the $569 unit must
+    NOT be silently promoted to 'lowest price'. The product page keeps
+    the unit row but withholds the quarantined one, marker-distinct."""
+    data_dir = _seed_509_scenario(tmp_path)
+    _write_json(data_dir / "quarantine.json", _quarantine_entry())
+    _, site_dir = _build_509(tmp_path, data_dir)
+
+    home = (site_dir / "index.html").read_text(encoding="utf-8")
+    assert 'data-withheld="quarantine"' in home
+    assert "$509.00" not in home
+    assert "$569.00" not in home, "next-cheapest silently substituted"
+
+    page = (site_dir / "products" / "ecoflow-river-2-pro.html").read_text(encoding="utf-8")
+    assert 'data-withheld="quarantine"' in page
+    assert "$509.00" not in page
+    assert "$569.00" in page  # the healthy variant still renders
+    assert "under verification" in page
+
+
+def test_quarantine_removed_renders_again(tmp_path):
+    data_dir = _seed_509_scenario(tmp_path)
+    _write_json(data_dir / "quarantine.json", _quarantine_entry())
+    _, site_dir = _build_509(tmp_path, data_dir)
+    assert "$509.00" not in (site_dir / "index.html").read_text(encoding="utf-8")
+
+    _write_json(data_dir / "quarantine.json", {})
+    _, site_dir = _build_509(tmp_path, data_dir)
+    home = (site_dir / "index.html").read_text(encoding="utf-8")
+    assert "$509.00" in home
+    assert 'data-withheld="quarantine"' not in home

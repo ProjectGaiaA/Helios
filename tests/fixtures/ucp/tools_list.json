@@ -1,0 +1,22 @@
+{
+  "_comment": "13 tools per red team #3 live capture on shop-solar-kits (names of the 3 catalog tools confirmed live, C20; the 10 checkout/cart/order names here are placeholders for the off-limits set).",
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "tools": [
+      {"name": "search_catalog", "description": "Search the catalog"},
+      {"name": "lookup_catalog", "description": "Batch lookup by identifier"},
+      {"name": "get_product", "description": "Get one product by id"},
+      {"name": "cart_create", "description": "OFF-LIMITS"},
+      {"name": "cart_update", "description": "OFF-LIMITS"},
+      {"name": "cart_get", "description": "OFF-LIMITS"},
+      {"name": "checkout_create", "description": "OFF-LIMITS"},
+      {"name": "checkout_update", "description": "OFF-LIMITS"},
+      {"name": "checkout_complete", "description": "OFF-LIMITS"},
+      {"name": "checkout_get", "description": "OFF-LIMITS"},
+      {"name": "order_get", "description": "OFF-LIMITS"},
+      {"name": "order_list", "description": "OFF-LIMITS"},
+      {"name": "order_cancel", "description": "OFF-LIMITS"}
+    ]
+  }
+}

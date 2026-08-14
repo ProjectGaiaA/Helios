@@ -1,0 +1,73 @@
+{
+  "_comment": "EXAMPLE-DERIVED response shape (C21) populated with REAL data captured live 2026-08-13 from shop-solar-kits ecoflow-river-2-pro. Prices are integer MINOR UNITS (56900 = $569.00). Re-verify shape when O5 unblocks live tools/call.",
+  "jsonrpc": "2.0",
+  "id": 1,
+  "result": {
+    "structuredContent": {
+      "products": [
+        {
+          "id": "gid://shopify/Product/7296500433036",
+          "title": "EcoFlow RIVER 2 [PRO] 768Wh / 800W Portable Power Station + Choose Your Custom Bundle | Complete Solar Kit",
+          "price_range": {
+            "min": {
+              "amount": 56900,
+              "currency": "USD"
+            },
+            "max": {
+              "amount": 89900,
+              "currency": "USD"
+            }
+          },
+          "variants": [
+            {
+              "id": "gid://shopify/ProductVariant/41679254454412",
+              "sku": "ZMR620-B-US",
+              "title": "EcoFlow River 2 Pro [Main Unit Only]",
+              "price": {
+                "amount": 56900,
+                "currency": "USD"
+              },
+              "availability": {
+                "available": true,
+                "status": "in_stock",
+                "running_low": false
+              },
+              "checkout_url": "https://shopsolarkits.com/cart/41679254454412:1",
+              "requires": {},
+              "inputs": [
+                {
+                  "match": "exact"
+                }
+              ],
+              "list_price": {
+                "amount": 74800,
+                "currency": "USD"
+              }
+            },
+            {
+              "id": "gid://shopify/ProductVariant/41737132769420",
+              "sku": "RIVER2PRO-160-1-US",
+              "title": "EcoFlow River 2 Pro + 160W Solar Panel",
+              "price": {
+                "amount": 89900,
+                "currency": "USD"
+              },
+              "availability": {
+                "available": true,
+                "status": "in_stock",
+                "running_low": false
+              },
+              "checkout_url": "https://shopsolarkits.com/cart/41737132769420:1",
+              "requires": {},
+              "inputs": [
+                {
+                  "match": "featured"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -50,6 +50,8 @@ def stub_robots():
     with (
         patch("scrapers.shopify.is_allowed_by_robots", return_value=True),
         patch("scrapers.runner.is_allowed_by_robots", return_value=True),
+        patch("scrapers.ucp.is_allowed_by_robots", return_value=True),
+        patch("audit.is_allowed_by_robots", return_value=True),
     ):
         yield
 

@@ -17,24 +17,35 @@
   {% elif section.in_stock is sameas true %}<span class="instock">In stock</span>
   {% else %}<span class="unknown">Stock unknown</span>{% endif %}
 </h2>
-<p class="muted">Scraped {{ section.timestamp }}</p>
+<p class="muted">Scraped {{ section.timestamp }} ({{ section.asof }})</p>
 {% if section.variants %}
 <table>
   <thead>
     <tr><th>Variant</th><th>Price</th><th>$/Wh</th><th>Availability</th><th></th></tr>
   </thead>
   <tbody>
+    {# data-* attributes are the audit's provenance surface (PLAN 4c.4):
+       every displayed number traceable to (variant_id, tier, sku,
+       scraped-at). audit.py locates numbers by these attributes, never
+       by prose regex. #}
+    {# data-variant-id only when the id is REAL: a "" id collapses
+       identity and mis-joins the audit (MAJOR-7) #}
     {% for v in section.variants %}
-    <tr>
+    <tr{% if v.variant_id is not none %} data-variant-id="{{ v.variant_id }}"{% endif %} data-tier="{{ v.tier }}" data-sku="{{ v.sku or '' }}" data-scraped-at="{{ section.scraped_at }}"{% if v.withheld %} data-withheld="{{ v.withheld }}"{% endif %}>
       <td>{{ v.raw_variant or "Standard" }}
           {% if v.classification == "bundle" %}<span class="badge">bundle</span>{% endif %}</td>
-      <td>{{ v.price_display }}
-          {% if v.was_price_display %}<span class="was">{{ v.was_price_display }}</span>{% endif %}</td>
-      <td>{% if v.dollars_per_wh_display %}<span class="wh">{{ v.dollars_per_wh_display }}</span>
+      {% if v.withheld %}
+      <td colspan="3"><span class="muted">price withheld ({{ v.withheld_reason }})</span></td>
+      {% else %}
+      <td><span data-field="price">{{ v.price_display }}</span>
+          {% if v.was_price_display %}<span class="was" data-field="was-price">{{ v.was_price_display }}</span>{% endif %}
+          <div class="muted" data-field="asof">{{ v.asof }}</div></td>
+      <td>{% if v.dollars_per_wh_display %}<span class="wh" data-field="wh">{{ v.dollars_per_wh_display }}</span>
           {% else %}<span class="muted">—</span>{% endif %}</td>
-      <td>{% if v.available is sameas true %}<span class="instock">In stock</span>
-          {% elif v.available is sameas false %}<span class="soldout">Sold out</span>
-          {% else %}<span class="unknown">Check site</span>{% endif %}</td>
+      <td>{% if v.available is sameas true %}<span class="instock" data-field="availability" data-value="true">In stock</span>
+          {% elif v.available is sameas false %}<span class="soldout" data-field="availability" data-value="false">Sold out</span>
+          {% else %}<span class="unknown" data-field="availability" data-value="unknown">Check site</span>{% endif %}</td>
+      {% endif %}
       <td><a href="{{ v.buy_url }}" rel="nofollow sponsored">View at retailer</a></td>
     </tr>
     {% endfor %}

@@ -1,0 +1,94 @@
+{
+  "timestamp": "2026-08-13T22:38:35.646111+00:00",
+  "verified": 3,
+  "attempted": 3,
+  "verdict_counts": {
+    "CLEAN": 3,
+    "NO_ROW": 6
+  },
+  "results": [
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-river-2-pro",
+      "variant_id": "41737132769420",
+      "tier": "ecoflow-river-2-pro-160w-solar-panel",
+      "sku_stored": "RIVER2PRO-160-1-US",
+      "sku_drift": false,
+      "sku_live": "RIVER2PRO-160-1-US",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-river-2-pro",
+      "variant_id": "41679254454412",
+      "tier": "ecoflow-river-2-pro-main-unit-only",
+      "sku_stored": "ZMR620-B-US",
+      "sku_drift": false,
+      "sku_live": "ZMR620-B-US",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "eg4-lifepower4",
+      "variant_id": "43287020535948",
+      "tier": "default",
+      "sku_stored": "1511105",
+      "sku_drift": false,
+      "sku_live": "1511105",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "anker-solix-f2600",
+      "variant_id": null,
+      "verdict": "NO_ROW",
+      "detail": "mapped pair has no scraped row - coverage gap, not mismatch"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": null,
+      "verdict": "NO_ROW",
+      "detail": "mapped pair has no scraped row - coverage gap, not mismatch"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "bluetti-ac180",
+      "variant_id": null,
+      "verdict": "NO_ROW",
+      "detail": "mapped pair has no scraped row - coverage gap, not mismatch"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "bluetti-ac200l",
+      "variant_id": null,
+      "verdict": "NO_ROW",
+      "detail": "mapped pair has no scraped row - coverage gap, not mismatch"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": null,
+      "verdict": "NO_ROW",
+      "detail": "mapped pair has no scraped row - coverage gap, not mismatch"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-river-2-pro",
+      "variant_id": null,
+      "verdict": "NO_ROW",
+      "detail": "mapped pair has no scraped row - coverage gap, not mismatch"
+    }
+  ],
+  "alarms": [],
+  "notices": [],
+  "errors": [],
+  "live_requests_used": 4,
+  "budget": 25,
+  "params": {
+    "all": true,
+    "sample_n": 10,
+    "data_dir": "C:\\Users\\BrandonHall\\OneDrive - YA\\Documents\\CC\\project_helios\\data",
+    "site_dir": "C:\\Users\\BrandonHall\\OneDrive - YA\\Documents\\CC\\project_helios\\site"
+  }
+}

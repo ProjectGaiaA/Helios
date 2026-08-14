@@ -35,9 +35,42 @@ python -X utf8 -m scrapers.runner --dry-run
 python -X utf8 -m scrapers.runner --retailer shop-solar-kits --skip-promos
 python -X utf8 -m scrapers.runner --products ecoflow-river-2-pro --retailer shop-solar-kits --skip-promos
 python -X utf8 build.py
+python -X utf8 audit.py            # sample of 10 triples
+python -X utf8 audit.py --all      # every triple (still budget-capped)
 python -X utf8 -m pytest
 python -X utf8 -m ruff check .
 ```
+
+## Audit verdict taxonomy (PLAN 4b/4c — the correctness loop)
+
+`audit.py` compares each sampled (product, retailer, variant) triple on
+TWO independent hops. Render hop: site HTML (via `data-*` provenance
+attributes) vs the latest JSONL row. Freshness hop: that row vs the live
+retailer `.json`+`.js` (UCP once O5 resolves).
+
+- `RENDER_DEFECT` — site disagrees with its own store. The ONLY defect
+  class: alarm + quarantine + exit 3.
+- `STALE` — store disagrees with live. Expected (flash sales): notice +
+  re-scrape recommendation. NEVER quarantines.
+- `CLEAN`; non-verdicts `NO_ROW` (pair never scraped), `NO_BASELINE`
+  (row predates the sku field), `UNRESOLVED` (variant absent live /
+  fetch failed), `NOT_AUDITED` (budget exhausted).
+- Exits: 0 clean, 3 render defect, 4 incomplete/unverified (never let
+  an audit that could not verify read as success), 1 usage/config.
+- Quarantined variants (`data/quarantine.json`, keyed
+  `retailer:product:variant_id` — every part non-empty) are withheld from
+  BOTH pages with `data-withheld="quarantine"` and always re-sampled. A
+  recheck needs POSITIVE marker evidence on both surfaces plus a SHADOW
+  REBUILD (entry suppressed) that renders correctly, plus clean
+  freshness — only then does the entry clear. Leaks are RENDER_DEFECT;
+  absence is UNRESOLVED; any not-clean recheck feeds the 5-audit TTL.
+- SKU drift (stored vs live, both non-null) and capacity CONTRADICTED
+  are alarms surfaced in the report, not taxonomy verdicts — the
+  workflow's alarm step reads `alarms[]` out of data/audit_report.json
+  and fails the run on any, even when the audit exit is 0.
+- **data/quarantine.json and data/audit_report.json must be TRACKED from
+  the first commit**: the workflow's rebuild-if-changed uses `git diff`,
+  which silently no-ops on untracked files.
 
 ## Architecture
 
@@ -55,6 +88,16 @@ python -X utf8 -m ruff check .
   recovery stubs (full recovery system is Phase B).
 - `scrapers/polite.py` — Bot UA, browser UA rotation, robots.txt (fail-open
   with warning), 5-15s delays.
+- `scrapers/ucp.py` — UCP/MCP catalog client (search/lookup/get_product
+  ONLY — checkout tools are never wrapped). Fixture-tested; live use
+  gated on O5 (Helios-hosted agent profile; never gaia's). Money is
+  integer minor units; compare in cents, never float ==.
+- `audit.py` — the end-to-end correctness loop (see taxonomy above).
+  Outputs data/audit_report.json + data/quarantine.json.
+- `build.py` staleness: rows older than 168h render withheld
+  (`data-withheld="stale"`); every price shows "as of Nh/Nd ago"; the
+  clock is injected (`build_site(now=...)`) — never sprinkle
+  datetime.now() into view code.
 - `data/products.json` — Product catalog (LIST). `"active": false` = skipped
   by BOTH runner and build. `specs.capacity_wh` may be null — that means
   "withhold $/Wh", not "fill it in".

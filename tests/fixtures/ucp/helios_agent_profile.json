@@ -1,0 +1,17 @@
+{
+  "_comment": "Reference shape for the O5 Helios agent profile — modeled on gaia's UCP_API_RUNBOOK.md section 2/3, NOT on the minimal capabilities-only JSON in earlier plan text (that shape is profile_malformed: it lacks the services block). Read-only by construction: catalog capabilities only, no cart/checkout/order/payment_handlers, so capability intersection cannot grant anything that transacts. Hosted at a HELIOS URL when O5 resolves — never gaia's.",
+  "ucp": {
+    "version": "2026-04-08",
+    "services": {
+      "dev.ucp.shopping": [
+        {
+          "version": "2026-04-08"
+        }
+      ]
+    },
+    "capabilities": {
+      "dev.ucp.shopping.catalog.search": [{"version": "2026-04-08"}],
+      "dev.ucp.shopping.catalog.lookup": [{"version": "2026-04-08"}]
+    }
+  }
+}

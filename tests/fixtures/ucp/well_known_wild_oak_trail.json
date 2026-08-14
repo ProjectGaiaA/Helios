@@ -1,0 +1,14 @@
+{
+  "_comment": "Canonical-host advertisement: wild-oak-trail's UCP endpoint lives on its .myshopify.com host (storefronts can sit behind Cloudflare and not serve the API host). ucp.services['dev.ucp.shopping'] is a LIST, not an object — verified in gaia's UCP_API_RUNBOOK.md section 3.",
+  "ucp": {
+    "version": "2026-04-08",
+    "services": {
+      "dev.ucp.shopping": [
+        {
+          "endpoint": "https://wild-oak-trail.myshopify.com/api/ucp/mcp",
+          "supported_versions": ["2026-04-08"]
+        }
+      ]
+    }
+  }
+}

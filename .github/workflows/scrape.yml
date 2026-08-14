@@ -62,12 +62,40 @@ jobs:
       - name: Build site
         run: python -X utf8 build.py
 
+      # The correctness loop (PLAN 4b/4c): site-vs-store and store-vs-live.
+      # continue-on-error so a defect never blocks publishing GOOD data;
+      # the exit code is surfaced in the alarm step (0 clean, 3 render
+      # defect, 4 incomplete/unverified).
+      - name: Audit site vs sources
+        id: audit
+        continue-on-error: true
+        run: |
+          set +e
+          python -X utf8 audit.py --all
+          code=$?
+          set -e
+          echo "AUDIT_EXIT=$code" >> "$GITHUB_ENV"
+          exit $code
+
+      # A RENDER_DEFECT writes quarantine entries; the published site must
+      # reflect them (withheld markers), so rebuild before committing.
+      # NOTE: data/quarantine.json and data/audit_report.json MUST be
+      # TRACKED from the repo's first commit — `git diff` silently no-ops
+      # on untracked files, so an untracked quarantine map would never
+      # trigger this rebuild (red team #4, MINOR-12).
+      - name: Rebuild if quarantine changed
+        run: |
+          if ! git diff --quiet -- data/quarantine.json; then
+            echo "quarantine changed - rebuilding site with withheld markers"
+            python -X utf8 build.py
+          fi
+
       - name: Commit updated price data
         id: commit
         run: |
           git config user.name "HeliosPriceBot"
           git config user.email "brandon.william.hall@gmail.com"
-          git add data/prices/ data/last_manifest.json data/promos.json data/handle_maps.json site/
+          git add data/prices/ data/last_manifest.json data/promos.json data/handle_maps.json data/quarantine.json data/audit_report.json site/
           git diff --staged --quiet || git commit -m "Price update $(date +%Y-%m-%d_%H:%M)"
           git pull --rebase origin main && git push
 
@@ -88,6 +116,26 @@ jobs:
           if [ "${TESTS_FAILED:-0}" = "1" ]; then
             echo "::error::Test suite failed — code defect."
             PROBLEMS="$PROBLEMS tests"
+          fi
+          # Default 4, not 0: an audit that never wrote its exit code did
+          # not verify anything, and unverified must never read as clean.
+          case "${AUDIT_EXIT:-4}" in
+            0) echo "Audit: clean." ;;
+            3) echo "::error::Audit found RENDER_DEFECT(s) — site disagreed with its own price store; variants quarantined and withheld."
+               PROBLEMS="$PROBLEMS audit-render-defect" ;;
+            *) echo "::error::Audit incomplete/unverified (exit ${AUDIT_EXIT}) — an audit that could not verify is not a pass."
+               PROBLEMS="$PROBLEMS audit-incomplete" ;;
+          esac
+          # Report-level alarms (SKU drift, capacity CONTRADICTED, ...)
+          # are not taxonomy verdicts and can ride an AUDIT_EXIT of 0 —
+          # without this consumer they reached nobody (red team #4,
+          # MAJOR-5).
+          if [ -f data/audit_report.json ]; then
+            ALARM_COUNT=$(python -X utf8 -c "import json; print(len(json.load(open('data/audit_report.json', encoding='utf-8')).get('alarms', [])))")
+            if [ "$ALARM_COUNT" != "0" ]; then
+              python -X utf8 -c "import json; [print('::error::AUDIT ALARM: ' + a) for a in json.load(open('data/audit_report.json', encoding='utf-8')).get('alarms', [])]"
+              PROBLEMS="$PROBLEMS audit-alarms"
+            fi
           fi
           if [ "${{ steps.commit.outcome }}" != "success" ]; then
             echo "::error::Nothing was published this run (commit step: ${{ steps.commit.outcome }})."
