@@ -97,11 +97,11 @@ state in their own <code>robots.txt</code> that checkout is for humans, and that
 is treated here as a standing rule rather than a preference.</p>
 
 <h2>How often prices are checked</h2>
-<p><strong>Scrapes are run on demand, not on a fixed schedule.</strong> There is
-no nightly cron job; the collection workflow is triggered manually. Claiming a
-daily refresh that does not exist would be the easiest lie on the site to tell
-and the hardest for a reader to check, so the cadence is stated plainly
-instead.</p>
+<p><strong>Prices are collected on a schedule, twice daily</strong> (morning
+and evening UTC), with occasional extra manual runs. A claimed cadence is the
+easiest lie on the site to tell and the hardest for a reader to check, so
+every price also displays its own age — if the schedule ever silently stops,
+the ages on the page say so before we do.</p>
 
 <p>As of this build, the freshest price on the site was read
 9h ago and the oldest
