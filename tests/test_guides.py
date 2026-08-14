@@ -941,9 +941,11 @@ def test_ucp_profile_homepage_is_pinned_to_the_repo_url():
     URL that 404s (Pages serves the repo root, so the site lives under
     /Helios/site/), and an earlier test pinned build.py's SITE_BASE_URL to
     it — locking two wrong values together and reporting agreement as
-    correctness. The repo URL was checked by hand once; swap both copies
-    for the real domain after deploy."""
-    expected = "https://github.com/ProjectGaiaA/Helios"
+    correctness. Now pins the LIVE Vercel deployment (verified serving
+    HTTP 200 with the site content on 2026-08-14, the same origin that
+    passed the merchant-side UCP profile fetch). Swap for the custom
+    domain when one exists."""
+    expected = "https://helios-projectgaiaas-projects.vercel.app/"
     for rel in ("ucp-agent-profile.json", "site/.well-known/ucp-agent.json"):
         profile = json.loads((REPO_ROOT / rel).read_text(encoding="utf-8"))
         assert profile["homepage"] == expected, rel

@@ -31,7 +31,7 @@
   },
   "name": "Helios Price Tracker",
   "description": "Read-only solar and home-energy equipment price comparison. Reads catalog price and availability up to twice daily for a small set of tracked products, plus sample-based verification audits, and displays them side by side with a link back to the merchant. Does not resell, transact, or check out.",
-  "homepage": "https://github.com/ProjectGaiaA/Helios",
+  "homepage": "https://helios-projectgaiaas-projects.vercel.app/",
   "contact": "https://github.com/ProjectGaiaA/Helios",
   "signing_keys": [
     {
