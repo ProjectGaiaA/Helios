@@ -1,88 +1,47 @@
 {
-  "timestamp": "2026-08-16T11:39:11.618412+00:00",
+  "timestamp": "2026-08-16T22:03:06.031201+00:00",
   "verified": 10,
   "attempted": 10,
   "verdict_counts": {
-    "CLEAN": 8,
-    "NO_BASELINE": 2
+    "CLEAN": 9,
+    "NO_BASELINE": 1
   },
   "results": [
     {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532345209068",
-      "tier": "ecoflow-delta-max-2000-4-160w-solar-panel",
-      "sku_stored": "DELTAMax2000US164",
-      "sku_drift": false,
-      "sku_live": "DELTAMax2000US164",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-pro-3",
-      "variant_id": "45371860517100",
-      "tier": "ecoflow-delta-pro-3-with-extra-battery",
-      "sku_stored": "DP3-EB",
-      "sku_drift": false,
-      "sku_live": "DP3-EB",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532344979692",
-      "tier": "ecoflow-delta-max-2000-1-110w-solar-panel",
-      "sku_stored": "DELTAMax2000+110W",
-      "sku_drift": false,
-      "sku_live": "DELTAMax2000+110W",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac180",
-      "variant_id": "46537846063340",
-      "tier": "ac180-200w-solar-panel",
-      "sku_stored": null,
-      "sku_drift": false,
-      "sku_live": null,
-      "verdict": "NO_BASELINE",
-      "detail": "hops agree but stored row has no sku - drift not evaluable"
-    },
-    {
       "retailer_id": "shop-solar-kits",
-      "product_id": "lion-ut-1300",
-      "variant_id": "41700536483980",
-      "tier": "default",
-      "sku_stored": "50170171",
+      "product_id": "bluetti-ac240p",
+      "variant_id": "42792151253132",
+      "tier": "nomad-kit-2-x-200w-folding-panels",
+      "sku_stored": "BLUETTI-AC240P-NOMAD",
       "sku_drift": false,
-      "sku_live": "50170171",
+      "sku_live": "BLUETTI-AC240P-NOMAD",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-400",
-      "variant_id": "39871819382833",
-      "tier": "10-panels",
-      "sku_stored": "RS-M400-10",
+      "product_id": "rich-solar-mega-200-briefcase",
+      "variant_id": "32601401098289",
+      "tier": "default",
+      "sku_stored": "RS-X200B",
       "sku_drift": false,
-      "sku_live": "RS-M400-10",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-pro-3",
-      "variant_id": "43048314830988",
-      "tier": "nomad-kit-2-x-200w-folding-panels",
-      "sku_stored": "ECOFLOW-DELTA-PRO-3-NOMAD",
-      "sku_drift": false,
-      "sku_live": "ECOFLOW-DELTA-PRO-3-NOMAD",
+      "sku_live": "RS-X200B",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac180",
-      "variant_id": "46537846096108",
-      "tier": "ac180-2-200w-solar-panels",
+      "product_id": "rich-solar-alpha-12v-100ah",
+      "variant_id": "43677757047020",
+      "tier": "default",
+      "sku_stored": "RS-B12100",
+      "sku_drift": false,
+      "sku_live": "RS-B12100",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "bluetti-ac200l",
+      "variant_id": "46535814480108",
+      "tier": "ac200l-b300k-battery",
       "sku_stored": null,
       "sku_drift": false,
       "sku_live": null,
@@ -90,13 +49,23 @@
       "detail": "hops agree but stored row has no sku - drift not evaluable"
     },
     {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "eg4-lifepower4",
-      "variant_id": "43287020535948",
-      "tier": "default",
-      "sku_stored": "1511105",
+      "retailer_id": "wild-oak-trail",
+      "product_id": "rich-solar-mega-410",
+      "variant_id": "44039996244204",
+      "tier": "8-solar-panels",
+      "sku_stored": "RS-M410-8",
       "sku_drift": false,
-      "sku_live": "1511105",
+      "sku_live": "RS-M410-8",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-mppt-40a",
+      "variant_id": "7893399207993",
+      "tier": "default",
+      "sku_stored": "RS-MPPT40",
+      "sku_drift": false,
+      "sku_live": "RS-MPPT40",
       "verdict": "CLEAN"
     },
     {
@@ -108,12 +77,44 @@
       "sku_drift": false,
       "sku_live": "RS-M400-8",
       "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "alte-store",
+      "product_id": "midnite-mnpowerflo16",
+      "variant_id": "46166697574619",
+      "tier": "default",
+      "sku_stored": "MNPowerFlo16",
+      "sku_drift": false,
+      "sku_live": "MNPowerFlo16",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "eg4-ll-s-48v-100ah",
+      "variant_id": "41798635552908",
+      "tier": "3-batteries-only",
+      "sku_stored": "EG4-1511082-3",
+      "sku_drift": false,
+      "sku_live": "EG4-1511082-3",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "bluetti-b210-expansion",
+      "variant_id": "42791918633100",
+      "tier": "default",
+      "sku_stored": "P-B210P-US-GY-BL-010",
+      "sku_drift": false,
+      "sku_live": "P-B210P-US-GY-BL-010",
+      "verdict": "CLEAN"
     }
   ],
   "alarms": [],
-  "notices": [],
+  "notices": [
+    "capacity not confirmable from live text: rich-solar-alpha-12v-100ah at wild-oak-trail"
+  ],
   "errors": [],
-  "live_requests_used": 16,
+  "live_requests_used": 20,
   "budget": 25,
   "params": {
     "all": false,
