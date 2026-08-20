@@ -946,10 +946,40 @@ def test_end_to_end_on_an_empty_repository_alarms_offline(tmp_path):
 def test_the_git_helpers_read_this_repository():
     """The one test that touches real git: the commands must actually match
     this repo's layout. A typo in the pathspec would otherwise report 'no
-    data commit' forever, or -- worse -- never report at all."""
+    data commit' forever, or -- worse -- never report at all.
+
+    This test runs in two very different checkouts: complete local clones
+    and CI's fetch-depth-1 shallow checkout (scrape.yml). Asserting
+    `git_history_complete(...) is True` here asserted the SHAPE OF THE
+    CHECKOUT, not the correctness of the helper, and turned every CI run
+    red from the moment this file landed. Instead, verify the helper
+    against git's own ground truth -- the shallow marker in the real git
+    dir -- so CI exercises the shallow branch no local run ever reaches,
+    and local clones keep exercising the complete branch."""
     if heartbeat.git_first_commit(REPO_ROOT) is None:
         pytest.skip("not a git checkout")
-    assert heartbeat.git_history_complete(REPO_ROOT) is True
+    git_dir = subprocess.run(
+        # --git-common-dir, not --absolute-git-dir: in a linked worktree the
+        # shallow marker lives in the COMMON dir, and reading the per-worktree
+        # dir would fail a correct helper -- the same assert-the-topology
+        # defect this rewrite removes. Verified in all four topologies
+        # (complete/shallow x main/worktree) before commit.
+        ["git", "-C", str(REPO_ROOT), "rev-parse", "--path-format=absolute",
+         "--git-common-dir"],
+        capture_output=True, text=True, check=True,
+    ).stdout.strip()
+    actually_shallow = (Path(git_dir) / "shallow").exists()
+    assert heartbeat.git_history_complete(REPO_ROOT) is (not actually_shallow)
+    if actually_shallow:
+        # The pathspec questions are unanswerable on a shallow clone -- at
+        # the graft boundary git reports that commit as touching every
+        # path (see heartbeat.yml's checkout comment), which is exactly
+        # why heartbeat.py suppresses freshness verdicts as
+        # HISTORY_INCOMPLETE rather than trusting them. The test declines
+        # for the same reason; the pathspec is still proven by every
+        # complete-clone run.
+        assert heartbeat.git_last_commit(REPO_ROOT) is not None
+        return
     data_commit = heartbeat.git_last_commit(REPO_ROOT, heartbeat.DATA_PATH)
     assert data_commit is not None, (
         f"no commit touches {heartbeat.DATA_PATH} -- the pathspec is wrong "
