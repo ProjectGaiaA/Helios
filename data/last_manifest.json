@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-24T11:47:08.328517+00:00",
+  "timestamp": "2026-08-24T22:13:05.896033+00:00",
   "retailers": [
     {
       "retailer_id": "shop-solar-kits",
@@ -245,7 +245,7 @@
           "default": 1099.0
         },
         "lion-ut-1300:wild-oak-trail": {
-          "default": 899.0
+          "default": 799.0
         },
         "rich-solar-alpha-12v-100ah:wild-oak-trail": {
           "default": 319.99
@@ -592,7 +592,7 @@
       "default": 1099.0
     },
     "lion-ut-1300:wild-oak-trail": {
-      "default": 899.0
+      "default": 799.0
     },
     "rich-solar-alpha-12v-100ah:wild-oak-trail": {
       "default": 319.99
