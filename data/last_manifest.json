@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-27T01:15:34.555852+00:00",
+  "timestamp": "2026-08-27T21:14:40.338770+00:00",
   "retailers": [
     {
       "retailer_id": "shop-solar-kits",
@@ -343,11 +343,11 @@
       "retailer_id": "alte-store",
       "status": "completed",
       "products_expected": 5,
-      "products_found": 5,
+      "products_found": 2,
       "products_no_sizes": 0,
-      "products_priced": 5,
-      "products_error": 0,
-      "prices_collected": 5,
+      "products_priced": 2,
+      "products_error": 3,
+      "prices_collected": 2,
       "anomalies": [],
       "price_records": {
         "enphase-iq-battery-5p:alte-store": {
@@ -355,21 +355,12 @@
         },
         "enphase-iq-system-controller-3:alte-store": {
           "default": 2313.55
-        },
-        "midnite-mnbcb-2000-200:alte-store": {
-          "default": 1211.21
-        },
-        "midnite-mnpv12:alte-store": {
-          "default": 280.49
-        },
-        "midnite-mnpowerflo16:alte-store": {
-          "default": 6115.01
         }
       },
-      "health": "healthy"
+      "health": "degraded"
     }
   ],
-  "total_prices_collected": 183,
+  "total_prices_collected": 180,
   "total_anomalies": 0,
   "anomalies": [],
   "prices": {
@@ -674,17 +665,10 @@
     },
     "enphase-iq-system-controller-3:alte-store": {
       "default": 2313.55
-    },
-    "midnite-mnbcb-2000-200:alte-store": {
-      "default": 1211.21
-    },
-    "midnite-mnpv12:alte-store": {
-      "default": 280.49
-    },
-    "midnite-mnpowerflo16:alte-store": {
-      "default": 6115.01
     }
   },
-  "degraded_retailers": [],
-  "pipeline_status": "healthy"
+  "degraded_retailers": [
+    "alte-store"
+  ],
+  "pipeline_status": "degraded"
 }
