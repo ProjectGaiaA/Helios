@@ -1,88 +1,17 @@
 {
-  "timestamp": "2026-08-27T21:15:04.866311+00:00",
-  "verified": 9,
+  "timestamp": "2026-08-28T05:52:03.645545+00:00",
+  "verified": 10,
   "attempted": 10,
   "verdict_counts": {
-    "CLEAN": 8,
-    "UNRESOLVED": 1,
-    "NO_BASELINE": 1
+    "NO_BASELINE": 1,
+    "CLEAN": 9
   },
   "results": [
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "rich-solar-mega-400",
-      "variant_id": "43618484945132",
-      "tier": "12-solar-panels",
-      "sku_stored": "RS-M400-12",
-      "sku_drift": false,
-      "sku_live": "RS-M400-12",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-400",
-      "variant_id": "41033316794417",
-      "tier": "36-panels",
-      "sku_stored": "RS-M400-36",
-      "sku_drift": false,
-      "sku_live": "RS-M400-36",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "bluetti-ac240p",
-      "variant_id": "42792151187596",
-      "tier": "bluetti-ac240p-main-unit-only",
-      "sku_stored": "P-AC240P-US-GY-BL-010",
-      "sku_drift": false,
-      "sku_live": "P-AC240P-US-GY-BL-010",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-mega-410",
-      "variant_id": "46271524241548",
-      "tier": "8-solar-panels",
-      "sku_stored": "RS-M410-8",
-      "sku_drift": false,
-      "sku_live": "RS-M410-8",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-smart-generator-4000",
-      "variant_id": "43492014194828",
-      "tier": "default",
-      "sku_stored": "EFSG4000-US-EPA",
-      "sku_drift": false,
-      "sku_live": "EFSG4000-US-EPA",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "43171241394316",
-      "tier": "alpha-5-pro-standard-1-battery-only",
-      "sku_stored": "RS-B5121P",
-      "sku_drift": false,
-      "sku_live": "RS-B5121P",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "alte-store",
-      "product_id": "midnite-mnpowerflo16",
-      "variant_id": "46166697574619",
-      "tier": "default",
-      "sku_stored": "MNPowerFlo16",
-      "sku_drift": false,
-      "verdict": "UNRESOLVED",
-      "detail": "live source unavailable (see errors)"
-    },
-    {
-      "retailer_id": "alte-store",
-      "product_id": "enphase-iq-battery-5p",
-      "variant_id": "46166688301275",
-      "tier": "default",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "45092895228140",
+      "tier": "ecoflow-delta-max-with-100w-12v-solar-panel-bundle",
       "sku_stored": null,
       "sku_drift": false,
       "sku_live": null,
@@ -90,32 +19,100 @@
       "detail": "hops agree but stored row has no sku - drift not evaluable"
     },
     {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "44040562737292",
-      "tier": "alpha-5-pro-self-heating-5-batteries",
-      "sku_stored": "RS-B5121H-5",
+      "retailer_id": "wild-oak-trail",
+      "product_id": "rich-solar-all-in-one-ess",
+      "variant_id": "43905481048300",
+      "tier": "all-in-one-energy-storage-system-no-panels",
+      "sku_stored": "RS-A10",
       "sku_drift": false,
-      "sku_live": "RS-B5121H-5",
+      "sku_live": "RS-A10",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-mega-410",
+      "variant_id": "41033316073521",
+      "tier": "36-panels",
+      "sku_stored": "RS-M410-36",
+      "sku_drift": false,
+      "sku_live": "RS-M410-36",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-pro-3-extra-battery",
-      "variant_id": "45371880177900",
-      "tier": "default",
-      "sku_stored": "EFDELTAPRO3EB",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "44532345405676",
+      "tier": "ecoflow-delta-max-2000-2-400w-solar-panel",
+      "sku_stored": "DELTAMax2000-400W2-US",
       "sku_drift": false,
-      "sku_live": "EFDELTAPRO3EB",
+      "sku_live": "DELTAMax2000-400W2-US",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "rich-solar-mega-200-briefcase",
+      "variant_id": "45166261272812",
+      "tier": "rich-solar-200-watt-12v-briefcase-panel-with-controller",
+      "sku_stored": "RS-X200BC",
+      "sku_drift": false,
+      "sku_live": "RS-X200BC",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "44532345307372",
+      "tier": "ecoflow-delta-max-2000-3-220w-solar-panel",
+      "sku_stored": "TMR310-3MS430-US",
+      "sku_drift": false,
+      "sku_live": "TMR310-3MS430-US",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "rich-solar-mega-200",
+      "variant_id": "45167084962028",
+      "tier": "12v",
+      "sku_stored": "RS-M200",
+      "sku_drift": false,
+      "sku_live": "RS-M200",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-mega-250",
+      "variant_id": "40364378521649",
+      "tier": "default",
+      "sku_stored": "RS-M250",
+      "sku_drift": false,
+      "sku_live": "RS-M250",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "enphase-iq-system-controller-3",
+      "variant_id": "42622983635084",
+      "tier": "default",
+      "sku_stored": "EN-SC200D111C240US01",
+      "sku_drift": false,
+      "sku_live": "EN-SC200D111C240US01",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-alpha-12v-200ah",
+      "variant_id": "43258589872268",
+      "tier": "alpha-2",
+      "sku_stored": "RS-B122S",
+      "sku_drift": false,
+      "sku_live": "RS-B122S",
       "verdict": "CLEAN"
     }
   ],
   "alarms": [],
   "notices": [],
-  "errors": [
-    "HTTP 404 for https://www.altestore.com/products/midnite-solar-mnpowerflo16-16-kwh-48volt-wall-floor-mount-lfp-lithium-battery.json?_hb=1787865364369"
-  ],
-  "live_requests_used": 17,
+  "errors": [],
+  "live_requests_used": 16,
   "budget": 25,
   "params": {
     "all": false,
