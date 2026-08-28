@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-28T05:51:38.817323+00:00",
+  "timestamp": "2026-08-28T21:38:53.332127+00:00",
   "retailers": [
     {
       "retailer_id": "shop-solar-kits",
@@ -135,7 +135,7 @@
           "6-batteries-6-slot-rack": 9945.0
         },
         "eg4-wallmount-indoor-16kwh:shop-solar-kits": {
-          "default": 3399.99
+          "default": 3399.0
         },
         "eg4-6000xp:shop-solar-kits": {
           "default": 1499.99
@@ -487,7 +487,7 @@
       "6-batteries-6-slot-rack": 9945.0
     },
     "eg4-wallmount-indoor-16kwh:shop-solar-kits": {
-      "default": 3399.99
+      "default": 3399.0
     },
     "eg4-6000xp:shop-solar-kits": {
       "default": 1499.99
