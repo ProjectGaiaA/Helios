@@ -1,15 +1,15 @@
 {
-  "timestamp": "2026-08-30T23:58:29.488380+00:00",
+  "timestamp": "2026-08-31T18:12:58.213345+00:00",
   "retailers": [
     {
       "retailer_id": "shop-solar-kits",
       "status": "completed",
       "products_expected": 29,
-      "products_found": 28,
+      "products_found": 29,
       "products_no_sizes": 0,
-      "products_priced": 28,
-      "products_error": 1,
-      "prices_collected": 81,
+      "products_priced": 29,
+      "products_error": 0,
+      "prices_collected": 82,
       "anomalies": [],
       "price_records": {
         "ecoflow-delta-max:shop-solar-kits": {
@@ -133,6 +133,9 @@
           "4-batteries-6-slot-rack": 6873.0,
           "5-batteries-6-slot-rack": 8409.0,
           "6-batteries-6-slot-rack": 9945.0
+        },
+        "eg4-wallmount-indoor-16kwh:shop-solar-kits": {
+          "default": 3399.0
         },
         "eg4-6000xp:shop-solar-kits": {
           "default": 1499.99
@@ -357,7 +360,7 @@
       "health": "degraded"
     }
   ],
-  "total_prices_collected": 179,
+  "total_prices_collected": 180,
   "total_anomalies": 0,
   "anomalies": [],
   "prices": {
@@ -482,6 +485,9 @@
       "4-batteries-6-slot-rack": 6873.0,
       "5-batteries-6-slot-rack": 8409.0,
       "6-batteries-6-slot-rack": 9945.0
+    },
+    "eg4-wallmount-indoor-16kwh:shop-solar-kits": {
+      "default": 3399.0
     },
     "eg4-6000xp:shop-solar-kits": {
       "default": 1499.99

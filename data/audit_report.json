@@ -1,97 +1,28 @@
 {
-  "timestamp": "2026-08-30T23:58:47.314223+00:00",
-  "verified": 10,
+  "timestamp": "2026-08-31T18:13:24.409923+00:00",
+  "verified": 9,
   "attempted": 10,
   "verdict_counts": {
-    "CLEAN": 9,
-    "NO_BASELINE": 1
+    "CLEAN": 8,
+    "NO_BASELINE": 1,
+    "UNRESOLVED": 1
   },
   "results": [
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "lion-ut-1300",
-      "variant_id": "41700536483980",
-      "tier": "default",
-      "sku_stored": "50170171",
+      "product_id": "rich-solar-alpha-12v-200ah",
+      "variant_id": "43258589937804",
+      "tier": "alpha-2-pro",
+      "sku_stored": "RS-B122SP",
       "sku_drift": false,
-      "sku_live": "50170171",
+      "sku_live": "RS-B122SP",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "44040562606220",
-      "tier": "alpha-5-pro-self-heating-1-battery-only",
-      "sku_stored": "RS-B5121H",
-      "sku_drift": false,
-      "sku_live": "RS-B5121H",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-mega-200",
-      "variant_id": "41583364931724",
-      "tier": "default",
-      "sku_stored": "RS-M200",
-      "sku_drift": false,
-      "sku_live": "RS-M200",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-pro-3",
-      "variant_id": "43048314863756",
-      "tier": "quad-kit-4-x-200w-rigid-panels",
-      "sku_stored": "ECOFLOW-DELTA-PRO-3-QUAD",
-      "sku_drift": false,
-      "sku_live": "ECOFLOW-DELTA-PRO-3-QUAD",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "41674491035788",
-      "tier": "delta-max-double-kit-2-x-200w-rigid-panels",
-      "sku_stored": "DELTA-MAX-DOUBLE",
-      "sku_drift": false,
-      "sku_live": "DELTA-MAX-DOUBLE",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532345405676",
-      "tier": "ecoflow-delta-max-2000-2-400w-solar-panel",
-      "sku_stored": "DELTAMax2000-400W2-US",
-      "sku_drift": false,
-      "sku_live": "DELTAMax2000-400W2-US",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "eg4-ll-s-48v-100ah",
-      "variant_id": "41798635651212",
-      "tier": "5-batteries-6-slot-rack",
-      "sku_stored": "EG4-1511082-5",
-      "sku_drift": false,
-      "sku_live": "EG4-1511082-5",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-250",
-      "variant_id": "40364378521649",
-      "tier": "default",
-      "sku_stored": "RS-M250",
-      "sku_drift": false,
-      "sku_live": "RS-M250",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac180",
-      "variant_id": "46537846063340",
-      "tier": "ac180-200w-solar-panel",
+      "product_id": "rich-solar-mega-400",
+      "variant_id": "46271452610700",
+      "tier": "10-solar-panels",
       "sku_stored": null,
       "sku_drift": false,
       "sku_live": null,
@@ -100,19 +31,91 @@
     },
     {
       "retailer_id": "shop-solar-kits",
+      "product_id": "enphase-iq-system-controller-3",
+      "variant_id": "42622983635084",
+      "tier": "default",
+      "sku_stored": "EN-SC200D111C240US01",
+      "sku_drift": false,
+      "sku_live": "EN-SC200D111C240US01",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-mega-200-briefcase",
+      "variant_id": "32601401098289",
+      "tier": "default",
+      "sku_stored": "RS-X200B",
+      "sku_drift": false,
+      "sku_live": "RS-X200B",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-smart-generator-4000",
+      "variant_id": "45712425648364",
+      "tier": "ecoflow-smart-generator-4000-dual-fuel-only",
+      "sku_stored": "EFSG4000-US-EPA",
+      "sku_drift": false,
+      "sku_live": "EFSG4000-US-EPA",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "rich-solar-mega-410",
+      "variant_id": "44039996309740",
+      "tier": "12-solar-panels",
+      "sku_stored": "RS-M410-10",
+      "sku_drift": false,
+      "sku_live": "RS-M410-10",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "alte-store",
       "product_id": "midnite-mnpv12",
-      "variant_id": "31267132571788",
+      "variant_id": "46166701768923",
       "tier": "default",
       "sku_stored": "MNPV12",
       "sku_drift": false,
-      "sku_live": "MNPV12",
+      "verdict": "UNRESOLVED",
+      "detail": "live source unavailable (see errors)"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "44532345110764",
+      "tier": "ecoflow-delta-max-2000-1-160w-solar-panel",
+      "sku_stored": "DELTAMax2000+160W",
+      "sku_drift": false,
+      "sku_live": "DELTAMax2000+160W",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-alpha-12v-100ah",
+      "variant_id": "43258614939788",
+      "tier": "alpha-1-lite",
+      "sku_stored": "RS-B12100",
+      "sku_drift": false,
+      "sku_live": "RS-B12100",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-delta-pro-3-extra-battery",
+      "variant_id": "45371880177900",
+      "tier": "default",
+      "sku_stored": "EFDELTAPRO3EB",
+      "sku_drift": false,
+      "sku_live": "EFDELTAPRO3EB",
       "verdict": "CLEAN"
     }
   ],
   "alarms": [],
   "notices": [],
-  "errors": [],
-  "live_requests_used": 20,
+  "errors": [
+    "HTTP 404 for https://www.altestore.com/products/midnite-solar-mnpv12-solar-array-combiner.json?_hb=1788200063874"
+  ],
+  "live_requests_used": 19,
   "budget": 25,
   "params": {
     "all": false,
