@@ -1,89 +1,37 @@
 {
-  "timestamp": "2026-09-01T15:45:08.734076+00:00",
+  "timestamp": "2026-09-01T23:47:08.692007+00:00",
   "verified": 10,
   "attempted": 10,
   "verdict_counts": {
-    "CLEAN": 7,
-    "NO_BASELINE": 3
+    "CLEAN": 8,
+    "NO_BASELINE": 2
   },
   "results": [
     {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-400",
-      "variant_id": "39871819382833",
-      "tier": "10-panels",
-      "sku_stored": "RS-M400-10",
-      "sku_drift": false,
-      "sku_live": "RS-M400-10",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532345307372",
-      "tier": "ecoflow-delta-max-2000-3-220w-solar-panel",
-      "sku_stored": "TMR310-3MS430-US",
-      "sku_drift": false,
-      "sku_live": "TMR310-3MS430-US",
-      "verdict": "CLEAN"
-    },
-    {
       "retailer_id": "shop-solar-kits",
-      "product_id": "eg4-lifepower4",
-      "variant_id": "43287020535948",
-      "tier": "default",
-      "sku_stored": "1511105",
+      "product_id": "rich-solar-alpha-5-pro",
+      "variant_id": "44040562737292",
+      "tier": "alpha-5-pro-self-heating-5-batteries",
+      "sku_stored": "RS-B5121H-5",
       "sku_drift": false,
-      "sku_live": "1511105",
+      "sku_live": "RS-B5121H-5",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "lion-ut-1300",
-      "variant_id": "31599398584410",
-      "tier": "default",
-      "sku_stored": "50170171",
+      "product_id": "ecoflow-river-2-pro",
+      "variant_id": "44532078969068",
+      "tier": "ecoflow-river-2-pro-1-160w-portable-solar-panel",
+      "sku_stored": "RIVER2PRO-160-1-US",
       "sku_drift": false,
-      "sku_live": "50170171",
+      "sku_live": "RIVER2PRO-160-1-US",
       "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532344914156",
-      "tier": "ecoflow-delta-max-portable-power-station-main-unit-only",
-      "sku_stored": "DELTA2000-US",
-      "sku_drift": false,
-      "sku_live": "DELTA2000-US",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac180",
-      "variant_id": "46537846194412",
-      "tier": "ac180-350w-solar-panel",
-      "sku_stored": null,
-      "sku_drift": false,
-      "sku_live": null,
-      "verdict": "NO_BASELINE",
-      "detail": "hops agree but stored row has no sku - drift not evaluable"
     },
     {
       "retailer_id": "wild-oak-trail",
       "product_id": "bluetti-ac200l",
-      "variant_id": "46535814545644",
-      "tier": "ac200l-2-b300k-batteries-d300s",
-      "sku_stored": null,
-      "sku_drift": false,
-      "sku_live": null,
-      "verdict": "NO_BASELINE",
-      "detail": "hops agree but stored row has no sku - drift not evaluable"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac180",
-      "variant_id": "46537846030572",
-      "tier": "ac180-sp100l-100w-solar-panel",
+      "variant_id": "46535814447340",
+      "tier": "ac200l-only",
       "sku_stored": null,
       "sku_drift": false,
       "sku_live": null,
@@ -92,31 +40,80 @@
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-river-3",
-      "variant_id": "43432948203660",
-      "tier": "eclipse-kit-1-x-100w-rigid-panel",
-      "sku_stored": "RIVER-3-ECLIPSE",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "41677437632652",
+      "tier": "delta-max-hex-kit-6-x-100w-rigid-panels",
+      "sku_stored": "DELTA-MAX-HEX",
       "sku_drift": false,
-      "sku_live": "RIVER-3-ECLIPSE",
+      "sku_live": "DELTA-MAX-HEX",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532345274604",
-      "tier": "ecoflow-delta-max-2000-2-220w-solar-panel",
-      "sku_stored": "TMR310-2MS430-US",
+      "product_id": "ecoflow-river-2-pro",
+      "variant_id": "44532078903532",
+      "tier": "ecoflow-river-2-pro-portable-power-station-main-unit-only",
+      "sku_stored": "ZMR620-B-US-1",
       "sku_drift": false,
-      "sku_live": "TMR310-2MS430-US",
+      "sku_live": "ZMR620-B-US-1",
       "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-alpha-5-pro",
+      "variant_id": "40460680560689",
+      "tier": "6-batteries",
+      "sku_stored": "RS-B5121P-6",
+      "sku_drift": false,
+      "sku_live": "RS-B5121P-6",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-mega-410",
+      "variant_id": "40014992703537",
+      "tier": "8-panels",
+      "sku_stored": "RS-M410-8",
+      "sku_drift": false,
+      "sku_live": "RS-M410-8",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "bluetti-ac240p",
+      "variant_id": "42792151220364",
+      "tier": "double-kit-2-x-200w-rigid-panels",
+      "sku_stored": "BLUETTI-AC240P-DOUBLE",
+      "sku_drift": false,
+      "sku_live": "BLUETTI-AC240P-DOUBLE",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-river-3",
+      "variant_id": "43432948269196",
+      "tier": "nomad-kit-1-x-100w-folding-panel",
+      "sku_stored": "RIVER-3-NOMAD",
+      "sku_drift": false,
+      "sku_live": "RIVER-3-NOMAD",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "alte-store",
+      "product_id": "enphase-iq-battery-5p",
+      "variant_id": "46166688301275",
+      "tier": "default",
+      "sku_stored": null,
+      "sku_drift": false,
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
     }
   ],
   "alarms": [],
-  "notices": [
-    "QUOTE_NOT_FOUND: lion-ut-1300 at wild-oak-trail - specs.capacity_quotes text is not present in the live listing; re-transcribe it"
-  ],
+  "notices": [],
   "errors": [],
-  "live_requests_used": 14,
+  "live_requests_used": 18,
   "budget": 25,
   "params": {
     "all": false,

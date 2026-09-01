@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-01T15:44:46.270189+00:00",
+  "timestamp": "2026-09-01T23:46:45.952690+00:00",
   "retailers": [
     {
       "retailer_id": "shop-solar-kits",
@@ -233,7 +233,7 @@
           "default": 199.0
         },
         "ecoflow-smart-generator-4000:wild-oak-trail": {
-          "ecoflow-smart-generator-4000-dual-fuel-only": 1799.0,
+          "ecoflow-smart-generator-4000-dual-fuel-only": 1259.0,
           "ecoflow-smart-generator-4000-dual-fuel-with-delta-pro-3": 4698.0
         },
         "bluetti-ac240p:wild-oak-trail": {
@@ -571,7 +571,7 @@
       "default": 199.0
     },
     "ecoflow-smart-generator-4000:wild-oak-trail": {
-      "ecoflow-smart-generator-4000-dual-fuel-only": 1799.0,
+      "ecoflow-smart-generator-4000-dual-fuel-only": 1259.0,
       "ecoflow-smart-generator-4000-dual-fuel-with-delta-pro-3": 4698.0
     },
     "bluetti-ac240p:wild-oak-trail": {
