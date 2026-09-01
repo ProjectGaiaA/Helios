@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-01T01:03:12.256246+00:00",
+  "timestamp": "2026-09-01T15:45:08.734076+00:00",
   "verified": 10,
   "attempted": 10,
   "verdict_counts": {
@@ -8,97 +8,24 @@
   },
   "results": [
     {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-mega-200",
-      "variant_id": "41583364931724",
-      "tier": "default",
-      "sku_stored": "RS-M200",
-      "sku_drift": false,
-      "sku_live": "RS-M200",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "41674491560076",
-      "tier": "delta-max-base-camp-kit-4-x-200w-panels-emp-bag",
-      "sku_stored": "DELTA-MAX-BASECAMP",
-      "sku_drift": false,
-      "sku_live": "DELTA-MAX-BASECAMP",
-      "verdict": "CLEAN"
-    },
-    {
       "retailer_id": "rich-solar",
-      "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "40460663029809",
-      "tier": "3-batteries",
-      "sku_stored": "RS-B5121P-3",
+      "product_id": "rich-solar-mega-400",
+      "variant_id": "39871819382833",
+      "tier": "10-panels",
+      "sku_stored": "RS-M400-10",
       "sku_drift": false,
-      "sku_live": "RS-B5121P-3",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac180",
-      "variant_id": "46555231027436",
-      "tier": "ac180p-350w-solar-panel",
-      "sku_stored": null,
-      "sku_drift": false,
-      "sku_live": null,
-      "verdict": "NO_BASELINE",
-      "detail": "hops agree but stored row has no sku - drift not evaluable"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-pro-3",
-      "variant_id": "45371860517100",
-      "tier": "ecoflow-delta-pro-3-with-extra-battery",
-      "sku_stored": "DP3-EB",
-      "sku_drift": false,
-      "sku_live": "DP3-EB",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "eg4-ll-s-48v-100ah",
-      "variant_id": "41798635651212",
-      "tier": "5-batteries-6-slot-rack",
-      "sku_stored": "EG4-1511082-5",
-      "sku_drift": false,
-      "sku_live": "EG4-1511082-5",
+      "sku_live": "RS-M400-10",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
       "product_id": "ecoflow-delta-max",
-      "variant_id": "45092885299436",
-      "tier": "ecoflow-delta-max-with-2x-100w-12v-solar-panel-bundle",
-      "sku_stored": null,
+      "variant_id": "44532345307372",
+      "tier": "ecoflow-delta-max-2000-3-220w-solar-panel",
+      "sku_stored": "TMR310-3MS430-US",
       "sku_drift": false,
-      "sku_live": null,
-      "verdict": "NO_BASELINE",
-      "detail": "hops agree but stored row has no sku - drift not evaluable"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-alpha-12v-100ah",
-      "variant_id": "43258614939788",
-      "tier": "alpha-1-lite",
-      "sku_stored": "RS-B12100",
-      "sku_drift": false,
-      "sku_live": "RS-B12100",
+      "sku_live": "TMR310-3MS430-US",
       "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "alte-store",
-      "product_id": "enphase-iq-battery-5p",
-      "variant_id": "46166688301275",
-      "tier": "default",
-      "sku_stored": null,
-      "sku_drift": false,
-      "sku_live": null,
-      "verdict": "NO_BASELINE",
-      "detail": "hops agree but stored row has no sku - drift not evaluable"
     },
     {
       "retailer_id": "shop-solar-kits",
@@ -109,12 +36,87 @@
       "sku_drift": false,
       "sku_live": "1511105",
       "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "lion-ut-1300",
+      "variant_id": "31599398584410",
+      "tier": "default",
+      "sku_stored": "50170171",
+      "sku_drift": false,
+      "sku_live": "50170171",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "44532344914156",
+      "tier": "ecoflow-delta-max-portable-power-station-main-unit-only",
+      "sku_stored": "DELTA2000-US",
+      "sku_drift": false,
+      "sku_live": "DELTA2000-US",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "bluetti-ac180",
+      "variant_id": "46537846194412",
+      "tier": "ac180-350w-solar-panel",
+      "sku_stored": null,
+      "sku_drift": false,
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "bluetti-ac200l",
+      "variant_id": "46535814545644",
+      "tier": "ac200l-2-b300k-batteries-d300s",
+      "sku_stored": null,
+      "sku_drift": false,
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "bluetti-ac180",
+      "variant_id": "46537846030572",
+      "tier": "ac180-sp100l-100w-solar-panel",
+      "sku_stored": null,
+      "sku_drift": false,
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-river-3",
+      "variant_id": "43432948203660",
+      "tier": "eclipse-kit-1-x-100w-rigid-panel",
+      "sku_stored": "RIVER-3-ECLIPSE",
+      "sku_drift": false,
+      "sku_live": "RIVER-3-ECLIPSE",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "44532345274604",
+      "tier": "ecoflow-delta-max-2000-2-220w-solar-panel",
+      "sku_stored": "TMR310-2MS430-US",
+      "sku_drift": false,
+      "sku_live": "TMR310-2MS430-US",
+      "verdict": "CLEAN"
     }
   ],
   "alarms": [],
-  "notices": [],
+  "notices": [
+    "QUOTE_NOT_FOUND: lion-ut-1300 at wild-oak-trail - specs.capacity_quotes text is not present in the live listing; re-transcribe it"
+  ],
   "errors": [],
-  "live_requests_used": 20,
+  "live_requests_used": 14,
   "budget": 25,
   "params": {
     "all": false,
