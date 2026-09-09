@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-09T15:21:04.088591+00:00",
+  "timestamp": "2026-09-09T23:43:56.718993+00:00",
   "retailers": [
     {
       "retailer_id": "shop-solar-kits",
@@ -159,42 +159,13 @@
       "retailer_id": "wild-oak-trail",
       "status": "completed",
       "products_expected": 20,
-      "products_found": 20,
+      "products_found": 18,
       "products_no_sizes": 0,
-      "products_priced": 20,
-      "products_error": 0,
-      "prices_collected": 75,
+      "products_priced": 18,
+      "products_error": 2,
+      "prices_collected": 50,
       "anomalies": [],
       "price_records": {
-        "ecoflow-delta-max:wild-oak-trail": {
-          "ecoflow-delta-max-portable-power-station-main-unit-only": 1599.0,
-          "ecoflow-delta-max-2000-1-extra-battery": 2699.0,
-          "ecoflow-delta-max-smart-generator-dual-fuel": 3099.0,
-          "ecoflow-delta-max-2000-1-110w-solar-panel": 1799.0,
-          "ecoflow-delta-max-2000-2-110w-solar-panel": 1999.0,
-          "ecoflow-delta-max-2000-3-110w-solar-panel": 2199.0,
-          "ecoflow-delta-max-2000-4-110w-solar-panel": 2399.0,
-          "ecoflow-delta-max-2000-1-160w-solar-panel": 1899.0,
-          "ecoflow-delta-max-2000-2-160w-solar-panel": 2199.0,
-          "ecoflow-delta-max-2000-3-160w-solar-panel": 2499.0,
-          "ecoflow-delta-max-2000-4-160w-solar-panel": 2799.0,
-          "ecoflow-delta-max-2000-1-220w-solar-panel": 1349.0,
-          "ecoflow-delta-max-2000-2-220w-solar-panel": 2699.0,
-          "ecoflow-delta-max-2000-3-220w-solar-panel": 3099.0,
-          "ecoflow-delta-max-2000-4-220w-solar-panel": 3399.0,
-          "ecoflow-delta-max-2000-1-400w-solar-panel": 1699.0,
-          "ecoflow-delta-max-2000-2-400w-solar-panel": 3199.0,
-          "ecoflow-delta-max-with-100w-12v-solar-panel-bundle": 2208.99,
-          "ecoflow-delta-max-with-2x-100w-12v-solar-panel-bundle": 2318.98,
-          "ecoflow-delta-max-with-300w-12v-solar-panel-bundle": 2428.97,
-          "ecoflow-delta-max-with-400w-12v-solar-panel-bundle": 2538.96
-        },
-        "ecoflow-river-2-pro:wild-oak-trail": {
-          "ecoflow-river-2-pro-portable-power-station-main-unit-only": 569.0,
-          "ecoflow-river-2-pro-1-110w-portable-solar-panel": 509.0,
-          "ecoflow-river-2-pro-1-160w-portable-solar-panel": 569.0,
-          "ecoflow-river-2-pro-1-220w-portable-solar-panel": 619.0
-        },
         "bluetti-ac180:wild-oak-trail": {
           "ac180-only": 699.0,
           "ac180-sp100l-100w-solar-panel": 999.0,
@@ -360,7 +331,7 @@
       "health": "degraded"
     }
   ],
-  "total_prices_collected": 180,
+  "total_prices_collected": 155,
   "total_anomalies": 0,
   "anomalies": [],
   "prices": {
@@ -503,35 +474,6 @@
     },
     "midnite-mnpv12:shop-solar-kits": {
       "default": 279.97
-    },
-    "ecoflow-delta-max:wild-oak-trail": {
-      "ecoflow-delta-max-portable-power-station-main-unit-only": 1599.0,
-      "ecoflow-delta-max-2000-1-extra-battery": 2699.0,
-      "ecoflow-delta-max-smart-generator-dual-fuel": 3099.0,
-      "ecoflow-delta-max-2000-1-110w-solar-panel": 1799.0,
-      "ecoflow-delta-max-2000-2-110w-solar-panel": 1999.0,
-      "ecoflow-delta-max-2000-3-110w-solar-panel": 2199.0,
-      "ecoflow-delta-max-2000-4-110w-solar-panel": 2399.0,
-      "ecoflow-delta-max-2000-1-160w-solar-panel": 1899.0,
-      "ecoflow-delta-max-2000-2-160w-solar-panel": 2199.0,
-      "ecoflow-delta-max-2000-3-160w-solar-panel": 2499.0,
-      "ecoflow-delta-max-2000-4-160w-solar-panel": 2799.0,
-      "ecoflow-delta-max-2000-1-220w-solar-panel": 1349.0,
-      "ecoflow-delta-max-2000-2-220w-solar-panel": 2699.0,
-      "ecoflow-delta-max-2000-3-220w-solar-panel": 3099.0,
-      "ecoflow-delta-max-2000-4-220w-solar-panel": 3399.0,
-      "ecoflow-delta-max-2000-1-400w-solar-panel": 1699.0,
-      "ecoflow-delta-max-2000-2-400w-solar-panel": 3199.0,
-      "ecoflow-delta-max-with-100w-12v-solar-panel-bundle": 2208.99,
-      "ecoflow-delta-max-with-2x-100w-12v-solar-panel-bundle": 2318.98,
-      "ecoflow-delta-max-with-300w-12v-solar-panel-bundle": 2428.97,
-      "ecoflow-delta-max-with-400w-12v-solar-panel-bundle": 2538.96
-    },
-    "ecoflow-river-2-pro:wild-oak-trail": {
-      "ecoflow-river-2-pro-portable-power-station-main-unit-only": 569.0,
-      "ecoflow-river-2-pro-1-110w-portable-solar-panel": 509.0,
-      "ecoflow-river-2-pro-1-160w-portable-solar-panel": 569.0,
-      "ecoflow-river-2-pro-1-220w-portable-solar-panel": 619.0
     },
     "bluetti-ac180:wild-oak-trail": {
       "ac180-only": 699.0,
