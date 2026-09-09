@@ -1,17 +1,18 @@
 {
-  "timestamp": "2026-09-08T23:50:30.460054+00:00",
-  "verified": 10,
+  "timestamp": "2026-09-09T15:21:29.106360+00:00",
+  "verified": 8,
   "attempted": 10,
   "verdict_counts": {
-    "NO_BASELINE": 2,
-    "CLEAN": 8
+    "NO_BASELINE": 1,
+    "CLEAN": 7,
+    "UNRESOLVED": 2
   },
   "results": [
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac240p",
-      "variant_id": "46560101662956",
-      "tier": "ac240p-350w-solar",
+      "product_id": "bluetti-ac180",
+      "variant_id": "46555231060204",
+      "tier": "ac180p-charger-1",
       "sku_stored": null,
       "sku_drift": false,
       "sku_live": null,
@@ -19,100 +20,104 @@
       "detail": "hops agree but stored row has no sku - drift not evaluable"
     },
     {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-river-2-pro",
-      "variant_id": "41737132769420",
-      "tier": "ecoflow-river-2-pro-160w-solar-panel",
-      "sku_stored": "RIVER2PRO-160-1-US",
+      "retailer_id": "wild-oak-trail",
+      "product_id": "lion-ut-1300",
+      "variant_id": "31599398584410",
+      "tier": "default",
+      "sku_stored": "50170171",
       "sku_drift": false,
-      "sku_live": "RIVER2PRO-160-1-US",
+      "sku_live": "50170171",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "alte-store",
+      "product_id": "midnite-mnbcb-2000-200",
+      "variant_id": "46166709534939",
+      "tier": "default",
+      "sku_stored": "MNBCB 2000/200",
+      "sku_drift": false,
+      "verdict": "UNRESOLVED",
+      "detail": "live source unavailable (see errors)"
+    },
+    {
+      "retailer_id": "alte-store",
+      "product_id": "midnite-mnpowerflo16",
+      "variant_id": "46166697574619",
+      "tier": "default",
+      "sku_stored": "MNPowerFlo16",
+      "sku_drift": false,
+      "verdict": "UNRESOLVED",
+      "detail": "live source unavailable (see errors)"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "44532345176300",
+      "tier": "ecoflow-delta-max-2000-3-160w-solar-panel",
+      "sku_stored": "DELTAMax2000US163",
+      "sku_drift": false,
+      "sku_live": "DELTAMax2000US163",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "midnite-mnpv12",
+      "variant_id": "31267132571788",
+      "tier": "default",
+      "sku_stored": "MNPV12",
+      "sku_drift": false,
+      "sku_live": "MNPV12",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "anker-solix-f2600",
+      "variant_id": "41837963411596",
+      "tier": "double-kit-2-x-200w-rigid-panels",
+      "sku_stored": "ANKER-F2600-DOUBLE-KIT",
+      "sku_drift": false,
+      "sku_live": "ANKER-F2600-DOUBLE-KIT",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-mega-410",
+      "variant_id": "46271524241548",
+      "tier": "8-solar-panels",
+      "sku_stored": "RS-M410-8",
+      "sku_drift": false,
+      "sku_live": "RS-M410-8",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-mega-250",
+      "variant_id": "40364378521649",
+      "tier": "default",
+      "sku_stored": "RS-M250",
+      "sku_drift": false,
+      "sku_live": "RS-M250",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
       "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "44040562704524",
-      "tier": "alpha-5-pro-self-heating-4-batteries",
-      "sku_stored": "RS-B5121H-4",
+      "variant_id": "44040562606220",
+      "tier": "alpha-5-pro-self-heating-1-battery-only",
+      "sku_stored": "RS-B5121H",
       "sku_drift": false,
-      "sku_live": "RS-B5121H-4",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-river-3",
-      "variant_id": "43432948236428",
-      "tier": "basecamp-kit-1-x-100w-folding-panel",
-      "sku_stored": "RIVER-3-BASECAMP",
-      "sku_drift": false,
-      "sku_live": "RIVER-3-BASECAMP",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-river-3",
-      "variant_id": "43432948269196",
-      "tier": "nomad-kit-1-x-100w-folding-panel",
-      "sku_stored": "RIVER-3-NOMAD",
-      "sku_drift": false,
-      "sku_live": "RIVER-3-NOMAD",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-pro-3",
-      "variant_id": "46524781133964",
-      "tier": "hex-kit-6-x-200w-rigid-panels",
-      "sku_stored": "ECOFLOW-DELTA-PRO-3-HEX",
-      "sku_drift": false,
-      "sku_live": "ECOFLOW-DELTA-PRO-3-HEX",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-alpha-12v-200ah",
-      "variant_id": "39601356472369",
-      "tier": "default",
-      "sku_stored": "RS-B12200",
-      "sku_drift": false,
-      "sku_live": "RS-B12200",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-alpha-12v-100ah",
-      "variant_id": "39449053986865",
-      "tier": "default",
-      "sku_stored": "RS-B121SL",
-      "sku_drift": false,
-      "sku_live": "RS-B121SL",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac180",
-      "variant_id": "46537846096108",
-      "tier": "ac180-2-200w-solar-panels",
-      "sku_stored": null,
-      "sku_drift": false,
-      "sku_live": null,
-      "verdict": "NO_BASELINE",
-      "detail": "hops agree but stored row has no sku - drift not evaluable"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532345307372",
-      "tier": "ecoflow-delta-max-2000-3-220w-solar-panel",
-      "sku_stored": "TMR310-3MS430-US",
-      "sku_drift": false,
-      "sku_live": "TMR310-3MS430-US",
+      "sku_live": "RS-B5121H",
       "verdict": "CLEAN"
     }
   ],
   "alarms": [],
-  "notices": [],
-  "errors": [],
+  "notices": [
+    "QUOTE_NOT_FOUND: lion-ut-1300 at wild-oak-trail - specs.capacity_quotes text is not present in the live listing; re-transcribe it"
+  ],
+  "errors": [
+    "HTTP 404 for https://www.altestore.com/products/midnite-solar-mnbcb-2000-200-2000-amp-battery-combiner-box.json?_hb=1788967312319",
+    "HTTP 404 for https://www.altestore.com/products/midnite-solar-mnpowerflo16-16-kwh-48volt-wall-floor-mount-lfp-lithium-battery.json?_hb=1788967315936"
+  ],
   "live_requests_used": 18,
   "budget": 25,
   "params": {
