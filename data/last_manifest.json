@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-11T23:45:30.945710+00:00",
+  "timestamp": "2026-09-12T14:13:12.448275+00:00",
   "retailers": [
     {
       "retailer_id": "shop-solar-kits",
@@ -288,19 +288,13 @@
       "retailer_id": "rich-solar",
       "status": "completed",
       "products_expected": 10,
-      "products_found": 10,
+      "products_found": 8,
       "products_no_sizes": 0,
-      "products_priced": 10,
-      "products_error": 0,
-      "prices_collected": 21,
+      "products_priced": 8,
+      "products_error": 2,
+      "prices_collected": 19,
       "anomalies": [],
       "price_records": {
-        "rich-solar-alpha-12v-100ah:rich-solar": {
-          "default": 399.99
-        },
-        "rich-solar-alpha-12v-200ah:rich-solar": {
-          "default": 799.99
-        },
         "rich-solar-alpha-24v-100ah:rich-solar": {
           "default": 799.99
         },
@@ -360,7 +354,7 @@
       "health": "degraded"
     }
   ],
-  "total_prices_collected": 180,
+  "total_prices_collected": 178,
   "total_anomalies": 0,
   "anomalies": [],
   "prices": {
@@ -618,12 +612,6 @@
     },
     "rich-solar-mppt-40a:wild-oak-trail": {
       "default": 127.99
-    },
-    "rich-solar-alpha-12v-100ah:rich-solar": {
-      "default": 399.99
-    },
-    "rich-solar-alpha-12v-200ah:rich-solar": {
-      "default": 799.99
     },
     "rich-solar-alpha-24v-100ah:rich-solar": {
       "default": 799.99
