@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-12T23:27:44.691570+00:00",
+  "timestamp": "2026-09-13T15:08:40.851159+00:00",
   "verified": 10,
   "attempted": 10,
   "verdict_counts": {
@@ -8,111 +8,113 @@
   },
   "results": [
     {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532344979692",
-      "tier": "ecoflow-delta-max-2000-1-110w-solar-panel",
-      "sku_stored": "DELTAMax2000+110W",
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-alpha-5-pro",
+      "variant_id": "40460680560689",
+      "tier": "6-batteries",
+      "sku_stored": "RS-B5121P-6",
       "sku_drift": false,
-      "sku_live": "DELTAMax2000+110W",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "rich-solar-mega-410",
-      "variant_id": "44039996276972",
-      "tier": "10-solar-panels",
-      "sku_stored": "RS-M410-9",
-      "sku_drift": false,
-      "sku_live": "RS-M410-9",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "enphase-iq-battery-5p",
-      "variant_id": "42621468999820",
-      "tier": "default",
-      "sku_stored": "IQBATTERY-5P-1P-NA",
-      "sku_drift": false,
-      "sku_live": "IQBATTERY-5P-1P-NA",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "anker-solix-f2600",
-      "variant_id": "41837963444364",
-      "tier": "nomad-kit-2-x-200w-folding-panels",
-      "sku_stored": "ANKER-F2600-NOMAD-KIT",
-      "sku_drift": false,
-      "sku_live": "ANKER-F2600-NOMAD-KIT",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "eg4-6000xp",
-      "variant_id": "41788288532620",
-      "tier": "default",
-      "sku_stored": "1511090",
-      "sku_drift": false,
-      "sku_live": "1511090",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532344914156",
-      "tier": "ecoflow-delta-max-portable-power-station-main-unit-only",
-      "sku_stored": "DELTA2000-US",
-      "sku_drift": false,
-      "sku_live": "DELTA2000-US",
+      "sku_live": "RS-B5121P-6",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-200-briefcase",
-      "variant_id": "32601401098289",
+      "product_id": "rich-solar-alpha-12v-100ah",
+      "variant_id": "39449053986865",
       "tier": "default",
-      "sku_stored": "RS-X200B",
+      "sku_stored": "RS-B121SL",
       "sku_drift": false,
-      "sku_live": "RS-X200B",
+      "sku_live": "RS-B121SL",
       "verdict": "CLEAN"
     },
     {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "41677437632652",
-      "tier": "delta-max-hex-kit-6-x-100w-rigid-panels",
-      "sku_stored": "DELTA-MAX-HEX",
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-alpha-24v-100ah",
+      "variant_id": "39956821114929",
+      "tier": "default",
+      "sku_stored": "RS-B24100",
       "sku_drift": false,
-      "sku_live": "DELTA-MAX-HEX",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-river-2-pro",
-      "variant_id": "41737132769420",
-      "tier": "ecoflow-river-2-pro-160w-solar-panel",
-      "sku_stored": "RIVER2PRO-160-1-US",
-      "sku_drift": false,
-      "sku_live": "RIVER2PRO-160-1-US",
+      "sku_live": "RS-B24100",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac180",
-      "variant_id": "46537845997804",
-      "tier": "ac180-only",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "44532345077996",
+      "tier": "ecoflow-delta-max-2000-4-110w-solar-panel",
+      "sku_stored": "DELTAMax2000US114",
+      "sku_drift": false,
+      "sku_live": "DELTAMax2000US114",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-alpha-12v-100ah",
+      "variant_id": "43258614972556",
+      "tier": "alpha-1-pro",
+      "sku_stored": "RS-B121SP",
+      "sku_drift": false,
+      "sku_live": "RS-B121SP",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-delta-pro-ultra",
+      "variant_id": "42007015882892",
+      "tier": "delta-pro-ultra-inverter-1-x-6kwh-battery",
+      "sku_stored": "EFDPUPCS-BP",
+      "sku_drift": false,
+      "sku_live": "EFDPUPCS-BP",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-smart-generator-4000",
+      "variant_id": "45712425681132",
+      "tier": "ecoflow-smart-generator-4000-dual-fuel-with-delta-pro-3",
       "sku_stored": null,
       "sku_drift": false,
       "sku_live": null,
       "verdict": "NO_BASELINE",
       "detail": "hops agree but stored row has no sku - drift not evaluable"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "rich-solar-mega-200",
+      "variant_id": "45167084962028",
+      "tier": "12v",
+      "sku_stored": "RS-M200",
+      "sku_drift": false,
+      "sku_live": "RS-M200",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "44532345209068",
+      "tier": "ecoflow-delta-max-2000-4-160w-solar-panel",
+      "sku_stored": "DELTAMax2000US164",
+      "sku_drift": false,
+      "sku_live": "DELTAMax2000US164",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-alpha-5-pro",
+      "variant_id": "40459924799537",
+      "tier": "1-battery",
+      "sku_stored": "RS-B5121P",
+      "sku_drift": false,
+      "sku_live": "RS-B5121P",
+      "verdict": "CLEAN"
     }
   ],
   "alarms": [],
-  "notices": [],
+  "notices": [
+    "QUOTE_NOT_FOUND: rich-solar-alpha-24v-100ah at rich-solar - specs.capacity_quotes text is not present in the live listing; re-transcribe it"
+  ],
   "errors": [],
-  "live_requests_used": 18,
+  "live_requests_used": 16,
   "budget": 25,
   "params": {
     "all": false,
