@@ -1,116 +1,120 @@
 {
-  "timestamp": "2026-09-15T15:47:52.840885+00:00",
+  "timestamp": "2026-09-15T23:55:30.906714+00:00",
   "verified": 10,
   "attempted": 10,
   "verdict_counts": {
-    "CLEAN": 10
+    "NO_BASELINE": 3,
+    "CLEAN": 7
   },
   "results": [
     {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "41674491560076",
-      "tier": "delta-max-base-camp-kit-4-x-200w-panels-emp-bag",
-      "sku_stored": "DELTA-MAX-BASECAMP",
+      "retailer_id": "alte-store",
+      "product_id": "enphase-iq-battery-5p",
+      "variant_id": "46166688301275",
+      "tier": "default",
+      "sku_stored": null,
       "sku_drift": false,
-      "sku_live": "DELTA-MAX-BASECAMP",
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "enphase-iq-system-controller-3",
+      "variant_id": "42622983635084",
+      "tier": "default",
+      "sku_stored": "EN-SC200D111C240US01",
+      "sku_drift": false,
+      "sku_live": "EN-SC200D111C240US01",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "44532345012460",
+      "tier": "ecoflow-delta-max-2000-2-110w-solar-panel",
+      "sku_stored": "DELTAMax2000US112",
+      "sku_drift": false,
+      "sku_live": "DELTAMax2000US112",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-200",
-      "variant_id": "40539735916593",
+      "product_id": "rich-solar-alpha-5-pro",
+      "variant_id": "40460662997041",
+      "tier": "2-batteries",
+      "sku_stored": "RS-B5121P-2",
+      "sku_drift": false,
+      "sku_live": "RS-B5121P-2",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "bluetti-ac180",
+      "variant_id": "46555230961900",
+      "tier": "ac180p-only",
+      "sku_stored": "P-AC180P-US-GY-BL-010",
+      "sku_drift": false,
+      "sku_live": "P-AC180P-US-GY-BL-010",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-mppt-40a",
+      "variant_id": "7893399207993",
       "tier": "default",
+      "sku_stored": "RS-MPPT40",
+      "sku_drift": false,
+      "sku_live": "RS-MPPT40",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "rich-solar-mega-200",
+      "variant_id": "45167084962028",
+      "tier": "12v",
       "sku_stored": "RS-M200",
       "sku_drift": false,
       "sku_live": "RS-M200",
       "verdict": "CLEAN"
     },
     {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-mega-410",
-      "variant_id": "46271524274316",
-      "tier": "10-solar-panels",
-      "sku_stored": "RS-M410-10",
+      "retailer_id": "wild-oak-trail",
+      "product_id": "bluetti-ac180",
+      "variant_id": "46537846161644",
+      "tier": "ac180-b80-battery-free-aviation-to-dc7909-cable",
+      "sku_stored": null,
       "sku_drift": false,
-      "sku_live": "RS-M410-10",
-      "verdict": "CLEAN"
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-alpha-12v-100ah",
-      "variant_id": "43258614939788",
-      "tier": "alpha-1-lite",
-      "sku_stored": "RS-B12100",
+      "product_id": "rich-solar-alpha-12v-200ah",
+      "variant_id": "43258589937804",
+      "tier": "alpha-2-pro",
+      "sku_stored": "RS-B122SP",
       "sku_drift": false,
-      "sku_live": "RS-B12100",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "40460663029809",
-      "tier": "3-batteries",
-      "sku_stored": "RS-B5121P-3",
-      "sku_drift": false,
-      "sku_live": "RS-B5121P-3",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-river-2-pro",
-      "variant_id": "41737132769420",
-      "tier": "ecoflow-river-2-pro-160w-solar-panel",
-      "sku_stored": "RIVER2PRO-160-1-US",
-      "sku_drift": false,
-      "sku_live": "RIVER2PRO-160-1-US",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-pro-ultra",
-      "variant_id": "42007016046732",
-      "tier": "delta-pro-ultra-inverter-1-x-6kwh-battery-smart-home-panel-2",
-      "sku_stored": "EFDPU-BP-SHP2-US",
-      "sku_drift": false,
-      "sku_live": "EFDPU-BP-SHP2-US",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-mega-400",
-      "variant_id": "46271452643468",
-      "tier": "12-solar-panels",
-      "sku_stored": "RS-M400-12",
-      "sku_drift": false,
-      "sku_live": "RS-M400-12",
+      "sku_live": "RS-B122SP",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532345110764",
-      "tier": "ecoflow-delta-max-2000-1-160w-solar-panel",
-      "sku_stored": "DELTAMax2000+160W",
+      "product_id": "bluetti-ac200l",
+      "variant_id": "46535814611180",
+      "tier": "ac200l-2-200w-solar-panels",
+      "sku_stored": null,
       "sku_drift": false,
-      "sku_live": "DELTAMax2000+160W",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac240p",
-      "variant_id": "46560101597420",
-      "tier": "bluetti-ac240p-only",
-      "sku_stored": "P-AC240P-US-GY-BL-010",
-      "sku_drift": false,
-      "sku_live": "P-AC240P-US-GY-BL-010",
-      "verdict": "CLEAN"
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
     }
   ],
   "alarms": [],
   "notices": [],
   "errors": [],
-  "live_requests_used": 20,
+  "live_requests_used": 18,
   "budget": 25,
   "params": {
     "all": false,
