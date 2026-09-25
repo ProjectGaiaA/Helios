@@ -1,120 +1,121 @@
 {
-  "timestamp": "2026-09-25T00:17:53.227092+00:00",
+  "timestamp": "2026-09-25T16:04:51.416747+00:00",
   "verified": 10,
   "attempted": 10,
   "verdict_counts": {
-    "CLEAN": 7,
-    "NO_BASELINE": 3
+    "CLEAN": 8,
+    "NO_BASELINE": 2
   },
   "results": [
     {
-      "retailer_id": "rich-solar",
+      "retailer_id": "wild-oak-trail",
+      "product_id": "rich-solar-alpha-12v-100ah",
+      "variant_id": "43677757047020",
+      "tier": "default",
+      "sku_stored": "RS-B12100",
+      "sku_drift": false,
+      "sku_live": "RS-B12100",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "bluetti-ac180",
+      "variant_id": "46537846161644",
+      "tier": "ac180-b80-battery-free-aviation-to-dc7909-cable",
+      "sku_stored": null,
+      "sku_drift": false,
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
       "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "40460680560689",
-      "tier": "6-batteries",
+      "variant_id": "43171241558156",
+      "tier": "alpha-5-pro-standard-6-batteries",
       "sku_stored": "RS-B5121P-6",
       "sku_drift": false,
       "sku_live": "RS-B5121P-6",
       "verdict": "CLEAN"
     },
     {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-delta-pro-ultra",
+      "variant_id": "42007015948428",
+      "tier": "delta-pro-ultra-inverter-3-x-battery-18kwh",
+      "sku_stored": "EFDPUPCS-3-BP",
+      "sku_drift": false,
+      "sku_live": "EFDPUPCS-3-BP",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-alpha-12v-100ah",
+      "variant_id": "43258614939788",
+      "tier": "alpha-1-lite",
+      "sku_stored": "RS-B12100",
+      "sku_drift": false,
+      "sku_live": "RS-B12100",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-mega-200-briefcase",
+      "variant_id": "32601401098289",
+      "tier": "default",
+      "sku_stored": "RS-X200B",
+      "sku_drift": false,
+      "sku_live": "RS-X200B",
+      "verdict": "CLEAN"
+    },
+    {
       "retailer_id": "wild-oak-trail",
       "product_id": "bluetti-ac200l",
-      "variant_id": "46535814611180",
-      "tier": "ac200l-2-200w-solar-panels",
+      "variant_id": "46535814447340",
+      "tier": "ac200l-only",
       "sku_stored": null,
       "sku_drift": false,
       "sku_live": null,
       "verdict": "NO_BASELINE",
       "detail": "hops agree but stored row has no sku - drift not evaluable"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "43171241459852",
-      "tier": "alpha-5-pro-standard-3-batteries",
-      "sku_stored": "RS-B5121P-3",
-      "sku_drift": false,
-      "sku_live": "RS-B5121P-3",
-      "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac180",
-      "variant_id": "46537845997804",
-      "tier": "ac180-only",
-      "sku_stored": null,
+      "product_id": "rich-solar-all-in-one-ess",
+      "variant_id": "43905481048300",
+      "tier": "all-in-one-energy-storage-system-no-panels",
+      "sku_stored": "RS-A10",
       "sku_drift": false,
-      "sku_live": null,
-      "verdict": "NO_BASELINE",
-      "detail": "hops agree but stored row has no sku - drift not evaluable"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-alpha-12v-200ah",
-      "variant_id": "43258589905036",
-      "tier": "alpha-2-lite",
-      "sku_stored": "RS-B12200",
-      "sku_drift": false,
-      "sku_live": "RS-B12200",
+      "sku_live": "RS-A10",
       "verdict": "CLEAN"
     },
     {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-pro-3-extra-battery",
-      "variant_id": "43056443293836",
-      "tier": "default",
-      "sku_stored": "EFDELTAPRO3EB",
-      "sku_drift": false,
-      "sku_live": "EFDELTAPRO3EB",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
+      "retailer_id": "rich-solar",
       "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "44040562770060",
-      "tier": "alpha-5-pro-self-heating-6-batteries",
-      "sku_stored": "RS-B5121H-6",
+      "variant_id": "40459924799537",
+      "tier": "1-battery",
+      "sku_stored": "RS-B5121P",
       "sku_drift": false,
-      "sku_live": "RS-B5121H-6",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac180",
-      "variant_id": "46537846030572",
-      "tier": "ac180-sp100l-100w-solar-panel",
-      "sku_stored": null,
-      "sku_drift": false,
-      "sku_live": null,
-      "verdict": "NO_BASELINE",
-      "detail": "hops agree but stored row has no sku - drift not evaluable"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "41674484908172",
-      "tier": "delta-max-eclipse-kit-1-x-200w-folding-panel",
-      "sku_stored": "DELTA-MAX-ECLIPSE",
-      "sku_drift": false,
-      "sku_live": "DELTA-MAX-ECLIPSE",
+      "sku_live": "RS-B5121P",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-pro-3",
-      "variant_id": "43004281094284",
-      "tier": "delta-pro-3-main-unit-only",
-      "sku_stored": "EFDELTAPRO3-US",
+      "product_id": "rich-solar-alpha-12v-100ah",
+      "variant_id": "43258614972556",
+      "tier": "alpha-1-pro",
+      "sku_stored": "RS-B121SP",
       "sku_drift": false,
-      "sku_live": "EFDELTAPRO3-US",
+      "sku_live": "RS-B121SP",
       "verdict": "CLEAN"
     }
   ],
   "alarms": [],
-  "notices": [],
+  "notices": [
+    "capacity not confirmable from live text: rich-solar-alpha-12v-100ah at wild-oak-trail"
+  ],
   "errors": [],
-  "live_requests_used": 16,
+  "live_requests_used": 18,
   "budget": 25,
   "params": {
     "all": false,
