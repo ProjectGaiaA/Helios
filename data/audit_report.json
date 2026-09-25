@@ -1,58 +1,27 @@
 {
-  "timestamp": "2026-09-24T16:03:37.261228+00:00",
-  "verified": 9,
+  "timestamp": "2026-09-25T00:17:53.227092+00:00",
+  "verified": 10,
   "attempted": 10,
   "verdict_counts": {
-    "CLEAN": 8,
-    "NO_BASELINE": 1,
-    "UNRESOLVED": 1
+    "CLEAN": 7,
+    "NO_BASELINE": 3
   },
   "results": [
     {
       "retailer_id": "rich-solar",
       "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "40460663062577",
-      "tier": "4-batteries",
-      "sku_stored": "RS-B5121P-4",
+      "variant_id": "40460680560689",
+      "tier": "6-batteries",
+      "sku_stored": "RS-B5121P-6",
       "sku_drift": false,
-      "sku_live": "RS-B5121P-4",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-alpha-12v-200ah",
-      "variant_id": "43258589937804",
-      "tier": "alpha-2-pro",
-      "sku_stored": "RS-B122SP",
-      "sku_drift": false,
-      "sku_live": "RS-B122SP",
+      "sku_live": "RS-B5121P-6",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-pro-3-extra-battery",
-      "variant_id": "45371880177900",
-      "tier": "default",
-      "sku_stored": "EFDELTAPRO3EB",
-      "sku_drift": false,
-      "sku_live": "EFDELTAPRO3EB",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-river-3",
-      "variant_id": "46868877508844",
-      "tier": "default",
-      "sku_stored": "EFRIVER3-US",
-      "sku_drift": false,
-      "sku_live": "EFRIVER3-US",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac180",
-      "variant_id": "46555231060204",
-      "tier": "ac180p-charger-1",
+      "product_id": "bluetti-ac200l",
+      "variant_id": "46535814611180",
+      "tier": "ac200l-2-200w-solar-panels",
       "sku_stored": null,
       "sku_drift": false,
       "sku_live": null,
@@ -61,43 +30,65 @@
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "bluetti-ac240p",
-      "variant_id": "42792151220364",
-      "tier": "double-kit-2-x-200w-rigid-panels",
-      "sku_stored": "BLUETTI-AC240P-DOUBLE",
+      "product_id": "rich-solar-alpha-5-pro",
+      "variant_id": "43171241459852",
+      "tier": "alpha-5-pro-standard-3-batteries",
+      "sku_stored": "RS-B5121P-3",
       "sku_drift": false,
-      "sku_live": "BLUETTI-AC240P-DOUBLE",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "eg4-ll-s-48v-100ah",
-      "variant_id": "41798635520140",
-      "tier": "2-batteries-only",
-      "sku_stored": "EG4-1511082-2",
-      "sku_drift": false,
-      "sku_live": "EG4-1511082-2",
+      "sku_live": "RS-B5121P-3",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
       "product_id": "bluetti-ac180",
-      "variant_id": "46555230961900",
-      "tier": "ac180p-only",
-      "sku_stored": "P-AC180P-US-GY-BL-010",
+      "variant_id": "46537845997804",
+      "tier": "ac180-only",
+      "sku_stored": null,
       "sku_drift": false,
-      "sku_live": "P-AC180P-US-GY-BL-010",
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-alpha-12v-200ah",
+      "variant_id": "43258589905036",
+      "tier": "alpha-2-lite",
+      "sku_stored": "RS-B12200",
+      "sku_drift": false,
+      "sku_live": "RS-B12200",
       "verdict": "CLEAN"
     },
     {
-      "retailer_id": "alte-store",
-      "product_id": "midnite-mnpowerflo16",
-      "variant_id": "46166697574619",
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-delta-pro-3-extra-battery",
+      "variant_id": "43056443293836",
       "tier": "default",
-      "sku_stored": "MNPowerFlo16",
+      "sku_stored": "EFDELTAPRO3EB",
       "sku_drift": false,
-      "verdict": "UNRESOLVED",
-      "detail": "live source unavailable (see errors)"
+      "sku_live": "EFDELTAPRO3EB",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-alpha-5-pro",
+      "variant_id": "44040562770060",
+      "tier": "alpha-5-pro-self-heating-6-batteries",
+      "sku_stored": "RS-B5121H-6",
+      "sku_drift": false,
+      "sku_live": "RS-B5121H-6",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "bluetti-ac180",
+      "variant_id": "46537846030572",
+      "tier": "ac180-sp100l-100w-solar-panel",
+      "sku_stored": null,
+      "sku_drift": false,
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
     },
     {
       "retailer_id": "shop-solar-kits",
@@ -108,14 +99,22 @@
       "sku_drift": false,
       "sku_live": "DELTA-MAX-ECLIPSE",
       "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-delta-pro-3",
+      "variant_id": "43004281094284",
+      "tier": "delta-pro-3-main-unit-only",
+      "sku_stored": "EFDELTAPRO3-US",
+      "sku_drift": false,
+      "sku_live": "EFDELTAPRO3-US",
+      "verdict": "CLEAN"
     }
   ],
   "alarms": [],
   "notices": [],
-  "errors": [
-    "HTTP 404 for https://www.altestore.com/products/midnite-solar-mnpowerflo16-16-kwh-48volt-wall-floor-mount-lfp-lithium-battery.json?_hb=1790265892145"
-  ],
-  "live_requests_used": 17,
+  "errors": [],
+  "live_requests_used": 16,
   "budget": 25,
   "params": {
     "all": false,
