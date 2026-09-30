@@ -1,47 +1,87 @@
 {
-  "timestamp": "2026-09-30T00:58:42.525929+00:00",
-  "verified": 9,
+  "timestamp": "2026-09-30T16:59:57.951533+00:00",
+  "verified": 10,
   "attempted": 10,
   "verdict_counts": {
-    "CLEAN": 9,
-    "UNRESOLVED": 1
+    "CLEAN": 8,
+    "NO_BASELINE": 2
   },
   "results": [
     {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "anker-solix-f2600",
-      "variant_id": "41837963411596",
-      "tier": "double-kit-2-x-200w-rigid-panels",
-      "sku_stored": "ANKER-F2600-DOUBLE-KIT",
+      "retailer_id": "wild-oak-trail",
+      "product_id": "rich-solar-mega-200-briefcase",
+      "variant_id": "45166261272812",
+      "tier": "rich-solar-200-watt-12v-briefcase-panel-with-controller",
+      "sku_stored": "RS-X200BC",
       "sku_drift": false,
-      "sku_live": "ANKER-F2600-DOUBLE-KIT",
+      "sku_live": "RS-X200BC",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-mega-400",
+      "variant_id": "39871819350065",
+      "tier": "8-panels",
+      "sku_stored": "RS-M400-8",
+      "sku_drift": false,
+      "sku_live": "RS-M400-8",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-alpha-12v-100ah",
-      "variant_id": "43258614907020",
-      "tier": "alpha-1",
-      "sku_stored": "RS-B121S",
+      "product_id": "eg4-6000xp",
+      "variant_id": "41788288532620",
+      "tier": "default",
+      "sku_stored": "1511090",
       "sku_drift": false,
-      "sku_live": "RS-B121S",
+      "sku_live": "1511090",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "bluetti-b210-expansion",
+      "variant_id": "46592606634220",
+      "tier": "default",
+      "sku_stored": "P-B210P-US-GY-BL-010",
+      "sku_drift": false,
+      "sku_live": "P-B210P-US-GY-BL-010",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "44532345405676",
+      "tier": "ecoflow-delta-max-2000-2-400w-solar-panel",
+      "sku_stored": "DELTAMax2000-400W2-US",
+      "sku_drift": false,
+      "sku_live": "DELTAMax2000-400W2-US",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "lion-ut-1300",
+      "variant_id": "31599398584410",
+      "tier": "default",
+      "sku_stored": "50170171",
+      "sku_drift": false,
+      "sku_live": "50170171",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "bluetti-ac240p",
-      "variant_id": "42792151220364",
-      "tier": "double-kit-2-x-200w-rigid-panels",
-      "sku_stored": "BLUETTI-AC240P-DOUBLE",
+      "product_id": "enphase-iq-system-controller-3",
+      "variant_id": "42622983635084",
+      "tier": "default",
+      "sku_stored": "EN-SC200D111C240US01",
       "sku_drift": false,
-      "sku_live": "BLUETTI-AC240P-DOUBLE",
+      "sku_live": "EN-SC200D111C240US01",
       "verdict": "CLEAN"
     },
     {
-      "retailer_id": "shop-solar-kits",
+      "retailer_id": "wild-oak-trail",
       "product_id": "ecoflow-river-2-pro",
-      "variant_id": "41737132769420",
-      "tier": "ecoflow-river-2-pro-160w-solar-panel",
+      "variant_id": "44532078969068",
+      "tier": "ecoflow-river-2-pro-1-160w-portable-solar-panel",
       "sku_stored": "RIVER2PRO-160-1-US",
       "sku_drift": false,
       "sku_live": "RIVER2PRO-160-1-US",
@@ -49,71 +89,33 @@
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532345143532",
-      "tier": "ecoflow-delta-max-2000-2-160w-solar-panel",
-      "sku_stored": "DELTAMax2000US162",
+      "product_id": "bluetti-ac200l",
+      "variant_id": "46535814447340",
+      "tier": "ac200l-only",
+      "sku_stored": null,
       "sku_drift": false,
-      "sku_live": "DELTAMax2000US162",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-410",
-      "variant_id": "40014992736305",
-      "tier": "10-panels",
-      "sku_stored": "RS-M410-10",
-      "sku_drift": false,
-      "sku_live": "RS-M410-10",
-      "verdict": "CLEAN"
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-smart-generator-4000",
-      "variant_id": "45712425648364",
-      "tier": "ecoflow-smart-generator-4000-dual-fuel-only",
-      "sku_stored": "EFSG4000-US-EPA",
+      "product_id": "bluetti-ac200l",
+      "variant_id": "46535814742252",
+      "tier": "ac200l-d40",
+      "sku_stored": null,
       "sku_drift": false,
-      "sku_live": "EFSG4000-US-EPA",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-mega-410",
-      "variant_id": "46271524274316",
-      "tier": "10-solar-panels",
-      "sku_stored": "RS-M410-10",
-      "sku_drift": false,
-      "sku_live": "RS-M410-10",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-alpha-12v-100ah",
-      "variant_id": "39449053986865",
-      "tier": "default",
-      "sku_stored": "RS-B121SL",
-      "sku_drift": false,
-      "sku_live": "RS-B121SL",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "rich-solar-mega-250",
-      "variant_id": "44130227847404",
-      "tier": "default",
-      "sku_stored": "RS-M250",
-      "sku_drift": false,
-      "verdict": "UNRESOLVED",
-      "detail": "live source unavailable (see errors)"
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
     }
   ],
   "alarms": [],
-  "notices": [],
-  "errors": [
-    "HTTP 503 for https://www.wildoaktrail.com/products/rich-solar-mega-250-watt-monocrystalline-solar-panel.json?_hb=1790730028298"
+  "notices": [
+    "QUOTE_NOT_FOUND: lion-ut-1300 at wild-oak-trail - specs.capacity_quotes text is not present in the live listing; re-transcribe it"
   ],
-  "live_requests_used": 19,
+  "errors": [],
+  "live_requests_used": 18,
   "budget": 25,
   "params": {
     "all": false,
