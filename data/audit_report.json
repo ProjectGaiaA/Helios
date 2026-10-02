@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-02T01:18:28.138854+00:00",
+  "timestamp": "2026-10-02T16:49:19.626604+00:00",
   "verified": 10,
   "attempted": 10,
   "verdict_counts": {
@@ -8,70 +8,19 @@
   },
   "results": [
     {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-pro-3",
-      "variant_id": "45371860549868",
-      "tier": "ecoflow-delta-pro-3-with-1-400w-solar-panel",
-      "sku_stored": "DP3-400W",
-      "sku_drift": false,
-      "sku_live": "DP3-400W",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532345077996",
-      "tier": "ecoflow-delta-max-2000-4-110w-solar-panel",
-      "sku_stored": "DELTAMax2000US114",
-      "sku_drift": false,
-      "sku_live": "DELTAMax2000US114",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac180",
-      "variant_id": "46555230994668",
-      "tier": "ac180p-200w-solar-panel",
-      "sku_stored": null,
-      "sku_drift": false,
-      "sku_live": null,
-      "verdict": "NO_BASELINE",
-      "detail": "hops agree but stored row has no sku - drift not evaluable"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532345274604",
-      "tier": "ecoflow-delta-max-2000-2-220w-solar-panel",
-      "sku_stored": "TMR310-2MS430-US",
-      "sku_drift": false,
-      "sku_live": "TMR310-2MS430-US",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-400",
-      "variant_id": "39871819382833",
-      "tier": "10-panels",
-      "sku_stored": "RS-M400-10",
-      "sku_drift": false,
-      "sku_live": "RS-M400-10",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-200-briefcase",
-      "variant_id": "32601401098289",
-      "tier": "default",
-      "sku_stored": "RS-X200B",
-      "sku_drift": false,
-      "sku_live": "RS-X200B",
-      "verdict": "CLEAN"
-    },
-    {
       "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-river-2-pro",
+      "variant_id": "41737132769420",
+      "tier": "ecoflow-river-2-pro-160w-solar-panel",
+      "sku_stored": "RIVER2PRO-160-1-US",
+      "sku_drift": false,
+      "sku_live": "RIVER2PRO-160-1-US",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
       "product_id": "ecoflow-delta-pro-3-extra-battery",
-      "variant_id": "43056443293836",
+      "variant_id": "45371880177900",
       "tier": "default",
       "sku_stored": "EFDELTAPRO3EB",
       "sku_drift": false,
@@ -79,40 +28,91 @@
       "verdict": "CLEAN"
     },
     {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532344914156",
-      "tier": "ecoflow-delta-max-portable-power-station-main-unit-only",
-      "sku_stored": "DELTA2000-US",
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-alpha-12v-100ah",
+      "variant_id": "43258614939788",
+      "tier": "alpha-1-lite",
+      "sku_stored": "RS-B12100",
       "sku_drift": false,
-      "sku_live": "DELTA2000-US",
+      "sku_live": "RS-B12100",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-river-3",
-      "variant_id": "46868877508844",
-      "tier": "default",
-      "sku_stored": "EFRIVER3-US",
+      "product_id": "bluetti-ac180",
+      "variant_id": "46537846030572",
+      "tier": "ac180-sp100l-100w-solar-panel",
+      "sku_stored": null,
       "sku_drift": false,
-      "sku_live": "EFRIVER3-US",
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
+    },
+    {
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-mega-400",
+      "variant_id": "39871819415601",
+      "tier": "12-panels",
+      "sku_stored": "RS-M400-12",
+      "sku_drift": false,
+      "sku_live": "RS-M400-12",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-alpha-5-pro",
+      "variant_id": "40460663095345",
+      "tier": "5-batteries",
+      "sku_stored": "RS-B5121P-5",
+      "sku_drift": false,
+      "sku_live": "RS-B5121P-5",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
       "product_id": "bluetti-ac240p",
-      "variant_id": "42792151285900",
-      "tier": "basecamp-kit-2-x-200w-folding-panels-emp-bag",
-      "sku_stored": "BLUETTI-AC240P-BASECAMP",
+      "variant_id": "42792151220364",
+      "tier": "double-kit-2-x-200w-rigid-panels",
+      "sku_stored": "BLUETTI-AC240P-DOUBLE",
       "sku_drift": false,
-      "sku_live": "BLUETTI-AC240P-BASECAMP",
+      "sku_live": "BLUETTI-AC240P-DOUBLE",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "rich-solar-all-in-one-ess",
+      "variant_id": "43905481081068",
+      "tier": "2-7kwh-48vdc-120vac-kit-8x-335w-panels",
+      "sku_stored": "RS-A10-2KW",
+      "sku_drift": false,
+      "sku_live": "RS-A10-2KW",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "anker-solix-f2600",
+      "variant_id": "41837963411596",
+      "tier": "double-kit-2-x-200w-rigid-panels",
+      "sku_stored": "ANKER-F2600-DOUBLE-KIT",
+      "sku_drift": false,
+      "sku_live": "ANKER-F2600-DOUBLE-KIT",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "41674491560076",
+      "tier": "delta-max-base-camp-kit-4-x-200w-panels-emp-bag",
+      "sku_stored": "DELTA-MAX-BASECAMP",
+      "sku_drift": false,
+      "sku_live": "DELTA-MAX-BASECAMP",
       "verdict": "CLEAN"
     }
   ],
   "alarms": [],
   "notices": [],
   "errors": [],
-  "live_requests_used": 16,
+  "live_requests_used": 20,
   "budget": 25,
   "params": {
     "all": false,
