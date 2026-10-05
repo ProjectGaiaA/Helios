@@ -1,27 +1,48 @@
 {
-  "timestamp": "2026-10-05T00:23:05.090024+00:00",
-  "verified": 10,
+  "timestamp": "2026-10-05T19:50:20.832045+00:00",
+  "verified": 9,
   "attempted": 10,
   "verdict_counts": {
     "CLEAN": 8,
-    "NO_BASELINE": 2
+    "NO_BASELINE": 1,
+    "UNRESOLVED": 1
   },
   "results": [
     {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "rich-solar-mega-200",
-      "variant_id": "45167084994796",
-      "tier": "24v",
-      "sku_stored": "RS-M200D",
+      "retailer_id": "shop-solar-kits",
+      "product_id": "eg4-ll-s-48v-100ah",
+      "variant_id": "41798635716748",
+      "tier": "6-batteries-6-slot-rack",
+      "sku_stored": "EG4-1511082-6",
       "sku_drift": false,
-      "sku_live": "RS-M200D",
+      "sku_live": "EG4-1511082-6",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "eg4-ll-s-48v-100ah",
+      "variant_id": "41798635651212",
+      "tier": "5-batteries-6-slot-rack",
+      "sku_stored": "EG4-1511082-5",
+      "sku_drift": false,
+      "sku_live": "EG4-1511082-5",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-smart-generator-4000",
+      "variant_id": "45712425648364",
+      "tier": "ecoflow-smart-generator-4000-dual-fuel-only",
+      "sku_stored": "EFSG4000-US-EPA",
+      "sku_drift": false,
+      "sku_live": "EFSG4000-US-EPA",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
       "product_id": "bluetti-ac200l",
-      "variant_id": "46535814447340",
-      "tier": "ac200l-only",
+      "variant_id": "46535814742252",
+      "tier": "ac200l-d40",
       "sku_stored": null,
       "sku_drift": false,
       "sku_live": null,
@@ -29,91 +50,72 @@
       "detail": "hops agree but stored row has no sku - drift not evaluable"
     },
     {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-pro-3",
-      "variant_id": "43004281094284",
-      "tier": "delta-pro-3-main-unit-only",
-      "sku_stored": "EFDELTAPRO3-US",
+      "retailer_id": "alte-store",
+      "product_id": "midnite-mnbcb-2000-200",
+      "variant_id": "46166709534939",
+      "tier": "default",
+      "sku_stored": "MNBCB 2000/200",
       "sku_drift": false,
-      "sku_live": "EFDELTAPRO3-US",
+      "verdict": "UNRESOLVED",
+      "detail": "live source unavailable (see errors)"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-mega-410",
+      "variant_id": "46271524307084",
+      "tier": "12-solar-panels",
+      "sku_stored": "RS-M410-12",
+      "sku_drift": false,
+      "sku_live": "RS-M410-12",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "45092900864236",
+      "tier": "ecoflow-delta-max-smart-generator-dual-fuel",
+      "sku_stored": "DM2000-DG200",
+      "sku_drift": false,
+      "sku_live": "DM2000-DG200",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "rich-solar",
       "product_id": "rich-solar-mega-410",
-      "variant_id": "41033316073521",
-      "tier": "36-panels",
-      "sku_stored": "RS-M410-36",
+      "variant_id": "40014992736305",
+      "tier": "10-panels",
+      "sku_stored": "RS-M410-10",
       "sku_drift": false,
-      "sku_live": "RS-M410-36",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-river-2-pro",
-      "variant_id": "44532078936300",
-      "tier": "ecoflow-river-2-pro-1-110w-portable-solar-panel",
-      "sku_stored": "RIVER2PRO-110-1-US",
-      "sku_drift": false,
-      "sku_live": "RIVER2PRO-110-1-US",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-pro-ultra",
-      "variant_id": "42007016013964",
-      "tier": "delta-pro-ultra-inverter-5-x-battery-30kwh",
-      "sku_stored": "EFDPUPCS-5-BP",
-      "sku_drift": false,
-      "sku_live": "EFDPUPCS-5-BP",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "40460662997041",
-      "tier": "2-batteries",
-      "sku_stored": "RS-B5121P-2",
-      "sku_drift": false,
-      "sku_live": "RS-B5121P-2",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "eg4-lifepower4",
-      "variant_id": "43287020535948",
-      "tier": "default",
-      "sku_stored": "1511105",
-      "sku_drift": false,
-      "sku_live": "1511105",
+      "sku_live": "RS-M410-10",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
       "product_id": "ecoflow-delta-max",
-      "variant_id": "45092885299436",
-      "tier": "ecoflow-delta-max-with-2x-100w-12v-solar-panel-bundle",
-      "sku_stored": null,
+      "variant_id": "44532344914156",
+      "tier": "ecoflow-delta-max-portable-power-station-main-unit-only",
+      "sku_stored": "DELTA2000-US",
       "sku_drift": false,
-      "sku_live": null,
-      "verdict": "NO_BASELINE",
-      "detail": "hops agree but stored row has no sku - drift not evaluable"
+      "sku_live": "DELTA2000-US",
+      "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "41674491560076",
-      "tier": "delta-max-base-camp-kit-4-x-200w-panels-emp-bag",
-      "sku_stored": "DELTA-MAX-BASECAMP",
+      "product_id": "rich-solar-mega-410",
+      "variant_id": "46271524241548",
+      "tier": "8-solar-panels",
+      "sku_stored": "RS-M410-8",
       "sku_drift": false,
-      "sku_live": "DELTA-MAX-BASECAMP",
+      "sku_live": "RS-M410-8",
       "verdict": "CLEAN"
     }
   ],
   "alarms": [],
   "notices": [],
-  "errors": [],
-  "live_requests_used": 20,
+  "errors": [
+    "HTTP 404 for https://www.altestore.com/products/midnite-solar-mnbcb-2000-200-2000-amp-battery-combiner-box.json?_hb=1791229852596"
+  ],
+  "live_requests_used": 13,
   "budget": 25,
   "params": {
     "all": false,
