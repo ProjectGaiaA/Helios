@@ -1,31 +1,22 @@
 {
-  "timestamp": "2026-10-07T01:13:51.050390+00:00",
-  "verified": 10,
+  "timestamp": "2026-10-07T18:01:21.141404+00:00",
+  "verified": 9,
   "attempted": 10,
   "verdict_counts": {
-    "CLEAN": 8,
+    "UNRESOLVED": 1,
+    "CLEAN": 7,
     "NO_BASELINE": 2
   },
   "results": [
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-alpha-12v-100ah",
-      "variant_id": "43258614972556",
-      "tier": "alpha-1-pro",
-      "sku_stored": "RS-B121SP",
+      "product_id": "rich-solar-alpha-12v-200ah",
+      "variant_id": "43258589872268",
+      "tier": "alpha-2",
+      "sku_stored": "RS-B122S",
       "sku_drift": false,
-      "sku_live": "RS-B121SP",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "eg4-ll-s-48v-100ah",
-      "variant_id": "41798635651212",
-      "tier": "5-batteries-6-slot-rack",
-      "sku_stored": "EG4-1511082-5",
-      "sku_drift": false,
-      "sku_live": "EG4-1511082-5",
-      "verdict": "CLEAN"
+      "verdict": "UNRESOLVED",
+      "detail": "live source unavailable (see errors)"
     },
     {
       "retailer_id": "shop-solar-kits",
@@ -38,44 +29,25 @@
       "verdict": "CLEAN"
     },
     {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "anker-solix-f2600",
-      "variant_id": "43775623004300",
-      "tier": "anker-solix-f2600-expansion-battery",
-      "sku_stored": "B178111L",
+      "retailer_id": "wild-oak-trail",
+      "product_id": "rich-solar-mega-400",
+      "variant_id": "43618484879596",
+      "tier": "8-solar-panels",
+      "sku_stored": "RS-M400-8",
       "sku_drift": false,
-      "sku_live": "B178111L",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "enphase-iq-system-controller-3",
-      "variant_id": "42622983635084",
-      "tier": "default",
-      "sku_stored": "EN-SC200D111C240US01",
-      "sku_drift": false,
-      "sku_live": "EN-SC200D111C240US01",
+      "sku_live": "RS-M400-8",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532345209068",
-      "tier": "ecoflow-delta-max-2000-4-160w-solar-panel",
-      "sku_stored": "DELTAMax2000US164",
+      "product_id": "bluetti-ac180",
+      "variant_id": "46537846128876",
+      "tier": "ac180-200w-solar-panel-charger-1",
+      "sku_stored": null,
       "sku_drift": false,
-      "sku_live": "DELTAMax2000US164",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "rich-solar-mega-410",
-      "variant_id": "44039996309740",
-      "tier": "12-solar-panels",
-      "sku_stored": "RS-M410-10",
-      "sku_drift": false,
-      "sku_live": "RS-M410-10",
-      "verdict": "CLEAN"
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
     },
     {
       "retailer_id": "shop-solar-kits",
@@ -88,10 +60,20 @@
       "verdict": "CLEAN"
     },
     {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-alpha-5-pro",
+      "variant_id": "43171241394316",
+      "tier": "alpha-5-pro-standard-1-battery-only",
+      "sku_stored": "RS-B5121P",
+      "sku_drift": false,
+      "sku_live": "RS-B5121P",
+      "verdict": "CLEAN"
+    },
+    {
       "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac200l",
-      "variant_id": "46535814611180",
-      "tier": "ac200l-2-200w-solar-panels",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "45092907909356",
+      "tier": "ecoflow-delta-max-with-300w-12v-solar-panel-bundle",
       "sku_stored": null,
       "sku_drift": false,
       "sku_live": null,
@@ -100,20 +82,41 @@
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-mega-400",
-      "variant_id": "46271452610700",
-      "tier": "10-solar-panels",
-      "sku_stored": null,
+      "product_id": "ecoflow-delta-pro-ultra",
+      "variant_id": "42007015915660",
+      "tier": "delta-pro-ultra-inverter-2-x-battery-12kwh",
+      "sku_stored": "EFDPUPCS-2-BP",
       "sku_drift": false,
-      "sku_live": null,
-      "verdict": "NO_BASELINE",
-      "detail": "hops agree but stored row has no sku - drift not evaluable"
+      "sku_live": "EFDPUPCS-2-BP",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "midnite-mnbcb-2000-200",
+      "variant_id": "41637025906828",
+      "tier": "default",
+      "sku_stored": "MNBCB-2000/200",
+      "sku_drift": false,
+      "sku_live": "MNBCB-2000/200",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "anker-solix-f2600",
+      "variant_id": "41836471582860",
+      "tier": "anker-solix-f2600-main-unit-only",
+      "sku_stored": "A1781111",
+      "sku_drift": false,
+      "sku_live": "A1781111",
+      "verdict": "CLEAN"
     }
   ],
   "alarms": [],
   "notices": [],
-  "errors": [],
-  "live_requests_used": 18,
+  "errors": [
+    "HTTP 503 for https://shopsolarkits.com/products/rich-solar-12v-200ah-lifepo4.json?_hb=1791396081286"
+  ],
+  "live_requests_used": 17,
   "budget": 25,
   "params": {
     "all": false,
