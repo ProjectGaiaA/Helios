@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-07T18:00:58.208332+00:00",
+  "timestamp": "2026-10-08T01:28:25.252763+00:00",
   "retailers": [
     {
       "retailer_id": "shop-solar-kits",
@@ -141,7 +141,7 @@
           "default": 1499.99
         },
         "enphase-iq-battery-5p:shop-solar-kits": {
-          "default": 3669.0
+          "default": 3555.15
         },
         "enphase-iq-system-controller-3:shop-solar-kits": {
           "default": 2099.0
@@ -493,7 +493,7 @@
       "default": 1499.99
     },
     "enphase-iq-battery-5p:shop-solar-kits": {
-      "default": 3669.0
+      "default": 3555.15
     },
     "enphase-iq-system-controller-3:shop-solar-kits": {
       "default": 2099.0
