@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-08T01:28:25.252763+00:00",
+  "timestamp": "2026-10-08T18:03:21.157362+00:00",
   "retailers": [
     {
       "retailer_id": "shop-solar-kits",
@@ -27,11 +27,11 @@
           "ecoflow-river-2-pro-main-unit-only": 569.0
         },
         "anker-solix-f2600:shop-solar-kits": {
-          "double-kit-2-x-200w-rigid-panels": 1618.49,
-          "nomad-kit-2-x-200w-folding-panels": 1853.65,
+          "double-kit-2-x-200w-rigid-panels": 1398.49,
+          "nomad-kit-2-x-200w-folding-panels": 1509.65,
           "basecamp-kit-1-x-200w-folding-panel-emp-bag": 1889.99,
-          "anker-solix-f2600-expansion-battery": 2749.0,
-          "anker-solix-f2600-main-unit-only": 1254.0
+          "anker-solix-f2600-expansion-battery": 1899.0,
+          "anker-solix-f2600-main-unit-only": 999.0
         },
         "eg4-lifepower4:shop-solar-kits": {
           "default": 1470.99
@@ -351,7 +351,7 @@
       "anomalies": [],
       "price_records": {
         "enphase-iq-battery-5p:alte-store": {
-          "default": 3846.15
+          "default": 4206.05
         },
         "enphase-iq-system-controller-3:alte-store": {
           "default": 2313.55
@@ -379,11 +379,11 @@
       "ecoflow-river-2-pro-main-unit-only": 569.0
     },
     "anker-solix-f2600:shop-solar-kits": {
-      "double-kit-2-x-200w-rigid-panels": 1618.49,
-      "nomad-kit-2-x-200w-folding-panels": 1853.65,
+      "double-kit-2-x-200w-rigid-panels": 1398.49,
+      "nomad-kit-2-x-200w-folding-panels": 1509.65,
       "basecamp-kit-1-x-200w-folding-panel-emp-bag": 1889.99,
-      "anker-solix-f2600-expansion-battery": 2749.0,
-      "anker-solix-f2600-main-unit-only": 1254.0
+      "anker-solix-f2600-expansion-battery": 1899.0,
+      "anker-solix-f2600-main-unit-only": 999.0
     },
     "eg4-lifepower4:shop-solar-kits": {
       "default": 1470.99
@@ -661,7 +661,7 @@
       "default": 159.99
     },
     "enphase-iq-battery-5p:alte-store": {
-      "default": 3846.15
+      "default": 4206.05
     },
     "enphase-iq-system-controller-3:alte-store": {
       "default": 2313.55
