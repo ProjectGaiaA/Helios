@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-09T01:37:43.605313+00:00",
+  "timestamp": "2026-10-09T17:38:29.315129+00:00",
   "retailers": [
     {
       "retailer_id": "shop-solar-kits",
@@ -91,12 +91,12 @@
           "alpha-4-lite": 699.99
         },
         "rich-solar-alpha-5-pro:shop-solar-kits": {
-          "alpha-5-pro-standard-1-battery-only": 1439.0,
-          "alpha-5-pro-standard-2-batteries": 2878.0,
-          "alpha-5-pro-standard-3-batteries": 4317.0,
-          "alpha-5-pro-standard-4-batteries": 5756.0,
-          "alpha-5-pro-standard-5-batteries": 7195.0,
-          "alpha-5-pro-standard-6-batteries": 8634.0,
+          "alpha-5-pro-standard-1-battery-only": 1249.0,
+          "alpha-5-pro-standard-2-batteries": 2498.0,
+          "alpha-5-pro-standard-3-batteries": 3774.0,
+          "alpha-5-pro-standard-4-batteries": 4996.0,
+          "alpha-5-pro-standard-5-batteries": 6245.0,
+          "alpha-5-pro-standard-6-batteries": 7494.0,
           "alpha-5-pro-self-heating-1-battery-only": 1519.0,
           "alpha-5-pro-self-heating-2-batteries": 3038.0,
           "alpha-5-pro-self-heating-3-batteries": 4557.0,
@@ -443,12 +443,12 @@
       "alpha-4-lite": 699.99
     },
     "rich-solar-alpha-5-pro:shop-solar-kits": {
-      "alpha-5-pro-standard-1-battery-only": 1439.0,
-      "alpha-5-pro-standard-2-batteries": 2878.0,
-      "alpha-5-pro-standard-3-batteries": 4317.0,
-      "alpha-5-pro-standard-4-batteries": 5756.0,
-      "alpha-5-pro-standard-5-batteries": 7195.0,
-      "alpha-5-pro-standard-6-batteries": 8634.0,
+      "alpha-5-pro-standard-1-battery-only": 1249.0,
+      "alpha-5-pro-standard-2-batteries": 2498.0,
+      "alpha-5-pro-standard-3-batteries": 3774.0,
+      "alpha-5-pro-standard-4-batteries": 4996.0,
+      "alpha-5-pro-standard-5-batteries": 6245.0,
+      "alpha-5-pro-standard-6-batteries": 7494.0,
       "alpha-5-pro-self-heating-1-battery-only": 1519.0,
       "alpha-5-pro-self-heating-2-batteries": 3038.0,
       "alpha-5-pro-self-heating-3-batteries": 4557.0,
