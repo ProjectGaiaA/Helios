@@ -1,17 +1,57 @@
 {
-  "timestamp": "2026-10-11T16:54:03.740413+00:00",
+  "timestamp": "2026-10-12T01:00:19.346275+00:00",
   "verified": 10,
   "attempted": 10,
   "verdict_counts": {
-    "NO_BASELINE": 1,
-    "CLEAN": 9
+    "CLEAN": 9,
+    "NO_BASELINE": 1
   },
   "results": [
     {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "eg4-wallmount-indoor-16kwh",
+      "variant_id": "45192132460684",
+      "tier": "default",
+      "sku_stored": "1510984",
+      "sku_drift": false,
+      "sku_live": "1510984",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-mega-410",
+      "variant_id": "46271524241548",
+      "tier": "8-solar-panels",
+      "sku_stored": "RS-M410-8",
+      "sku_drift": false,
+      "sku_live": "RS-M410-8",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-alpha-5-pro",
+      "variant_id": "44040562606220",
+      "tier": "alpha-5-pro-self-heating-1-battery-only",
+      "sku_stored": "RS-B5121H",
+      "sku_drift": false,
+      "sku_live": "RS-B5121H",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-alpha-5-pro",
+      "variant_id": "44040562704524",
+      "tier": "alpha-5-pro-self-heating-4-batteries",
+      "sku_stored": "RS-B5121H-4",
+      "sku_drift": false,
+      "sku_live": "RS-B5121H-4",
+      "verdict": "CLEAN"
+    },
+    {
       "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac240p",
-      "variant_id": "46560101630188",
-      "tier": "ac240p-200w-solar",
+      "product_id": "bluetti-ac180",
+      "variant_id": "46555231027436",
+      "tier": "ac180p-350w-solar-panel",
       "sku_stored": null,
       "sku_drift": false,
       "sku_live": null,
@@ -20,99 +60,61 @@
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "enphase-iq-system-controller-3",
-      "variant_id": "42622983635084",
-      "tier": "default",
-      "sku_stored": "EN-SC200D111C240US01",
+      "product_id": "rich-solar-alpha-5-pro",
+      "variant_id": "44040562770060",
+      "tier": "alpha-5-pro-self-heating-6-batteries",
+      "sku_stored": "RS-B5121H-6",
       "sku_drift": false,
-      "sku_live": "EN-SC200D111C240US01",
+      "sku_live": "RS-B5121H-6",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-mega-400",
-      "variant_id": "46271452643468",
-      "tier": "12-solar-panels",
-      "sku_stored": "RS-M400-12",
+      "product_id": "bluetti-ac240p",
+      "variant_id": "42792151187596",
+      "tier": "bluetti-ac240p-main-unit-only",
+      "sku_stored": "P-AC240P-US-GY-BL-010",
       "sku_drift": false,
-      "sku_live": "RS-M400-12",
+      "sku_live": "P-AC240P-US-GY-BL-010",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-mega-200",
-      "variant_id": "41583364931724",
-      "tier": "default",
-      "sku_stored": "RS-M200",
+      "product_id": "rich-solar-alpha-5-pro",
+      "variant_id": "43171241525388",
+      "tier": "alpha-5-pro-standard-5-batteries",
+      "sku_stored": "RS-B5121P-5",
       "sku_drift": false,
-      "sku_live": "RS-M200",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-pro-3",
-      "variant_id": "45371860517100",
-      "tier": "ecoflow-delta-pro-3-with-extra-battery",
-      "sku_stored": "DP3-EB",
-      "sku_drift": false,
-      "sku_live": "DP3-EB",
+      "sku_live": "RS-B5121P-5",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-200-briefcase",
-      "variant_id": "32601401098289",
-      "tier": "default",
-      "sku_stored": "RS-X200B",
+      "product_id": "rich-solar-mega-410",
+      "variant_id": "40014992736305",
+      "tier": "10-panels",
+      "sku_stored": "RS-M410-10",
       "sku_drift": false,
-      "sku_live": "RS-X200B",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "rich-solar-mega-400",
-      "variant_id": "43618484945132",
-      "tier": "12-solar-panels",
-      "sku_stored": "RS-M400-12",
-      "sku_drift": false,
-      "sku_live": "RS-M400-12",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-alpha-12v-200ah",
-      "variant_id": "39601356472369",
-      "tier": "default",
-      "sku_stored": "RS-B12200",
-      "sku_drift": false,
-      "sku_live": "RS-B12200",
+      "sku_live": "RS-M410-10",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "lion-ut-1300",
-      "variant_id": "41700536483980",
-      "tier": "default",
-      "sku_stored": "50170171",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "41677437730956",
+      "tier": "delta-max-quad-kit-4-x-200w-rigid-panels",
+      "sku_stored": "DELTA-MAX-QUAD",
       "sku_drift": false,
-      "sku_live": "50170171",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-alpha-12v-200ah",
-      "variant_id": "43258589905036",
-      "tier": "alpha-2-lite",
-      "sku_stored": "RS-B12200",
-      "sku_drift": false,
-      "sku_live": "RS-B12200",
+      "sku_live": "DELTA-MAX-QUAD",
       "verdict": "CLEAN"
     }
   ],
   "alarms": [],
-  "notices": [],
+  "notices": [
+    "QUOTE_NOT_FOUND: eg4-wallmount-indoor-16kwh at shop-solar-kits - specs.capacity_quotes text is not present in the live listing; re-transcribe it"
+  ],
   "errors": [],
-  "live_requests_used": 20,
+  "live_requests_used": 14,
   "budget": 25,
   "params": {
     "all": false,
