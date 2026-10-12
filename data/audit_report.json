@@ -1,57 +1,27 @@
 {
-  "timestamp": "2026-10-12T01:00:19.346275+00:00",
+  "timestamp": "2026-10-12T20:27:59.000417+00:00",
   "verified": 10,
   "attempted": 10,
   "verdict_counts": {
-    "CLEAN": 9,
-    "NO_BASELINE": 1
+    "CLEAN": 8,
+    "NO_BASELINE": 2
   },
   "results": [
     {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "eg4-wallmount-indoor-16kwh",
-      "variant_id": "45192132460684",
+      "retailer_id": "wild-oak-trail",
+      "product_id": "rich-solar-mppt-40a",
+      "variant_id": "38151483326613",
       "tier": "default",
-      "sku_stored": "1510984",
+      "sku_stored": "RS-MPPT40",
       "sku_drift": false,
-      "sku_live": "1510984",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-mega-410",
-      "variant_id": "46271524241548",
-      "tier": "8-solar-panels",
-      "sku_stored": "RS-M410-8",
-      "sku_drift": false,
-      "sku_live": "RS-M410-8",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "44040562606220",
-      "tier": "alpha-5-pro-self-heating-1-battery-only",
-      "sku_stored": "RS-B5121H",
-      "sku_drift": false,
-      "sku_live": "RS-B5121H",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "44040562704524",
-      "tier": "alpha-5-pro-self-heating-4-batteries",
-      "sku_stored": "RS-B5121H-4",
-      "sku_drift": false,
-      "sku_live": "RS-B5121H-4",
+      "sku_live": "RS-MPPT40",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac180",
-      "variant_id": "46555231027436",
-      "tier": "ac180p-350w-solar-panel",
+      "product_id": "bluetti-ac200l",
+      "variant_id": "46535814545644",
+      "tier": "ac200l-2-b300k-batteries-d300s",
       "sku_stored": null,
       "sku_drift": false,
       "sku_live": null,
@@ -59,62 +29,93 @@
       "detail": "hops agree but stored row has no sku - drift not evaluable"
     },
     {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "44040562770060",
-      "tier": "alpha-5-pro-self-heating-6-batteries",
-      "sku_stored": "RS-B5121H-6",
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "44532345405676",
+      "tier": "ecoflow-delta-max-2000-2-400w-solar-panel",
+      "sku_stored": "DELTAMax2000-400W2-US",
       "sku_drift": false,
-      "sku_live": "RS-B5121H-6",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "bluetti-ac240p",
-      "variant_id": "42792151187596",
-      "tier": "bluetti-ac240p-main-unit-only",
-      "sku_stored": "P-AC240P-US-GY-BL-010",
-      "sku_drift": false,
-      "sku_live": "P-AC240P-US-GY-BL-010",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "43171241525388",
-      "tier": "alpha-5-pro-standard-5-batteries",
-      "sku_stored": "RS-B5121P-5",
-      "sku_drift": false,
-      "sku_live": "RS-B5121P-5",
+      "sku_live": "DELTAMax2000-400W2-US",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-410",
-      "variant_id": "40014992736305",
-      "tier": "10-panels",
-      "sku_stored": "RS-M410-10",
+      "product_id": "rich-solar-alpha-5-pro",
+      "variant_id": "40460662997041",
+      "tier": "2-batteries",
+      "sku_stored": "RS-B5121P-2",
       "sku_drift": false,
-      "sku_live": "RS-M410-10",
+      "sku_live": "RS-B5121P-2",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "41677437730956",
-      "tier": "delta-max-quad-kit-4-x-200w-rigid-panels",
-      "sku_stored": "DELTA-MAX-QUAD",
+      "product_id": "rich-solar-alpha-5-pro",
+      "variant_id": "43171241459852",
+      "tier": "alpha-5-pro-standard-3-batteries",
+      "sku_stored": "RS-B5121P-3",
       "sku_drift": false,
-      "sku_live": "DELTA-MAX-QUAD",
+      "sku_live": "RS-B5121P-3",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "bluetti-ac200l",
+      "variant_id": "46535814676716",
+      "tier": "ac200l-200w-solar-panel-charger-1",
+      "sku_stored": null,
+      "sku_drift": false,
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-delta-pro-3",
+      "variant_id": "47170201092332",
+      "tier": "ecoflow-delta-pro-3-with-2-400w-solar-panel",
+      "sku_stored": "DP3-400W2",
+      "sku_drift": false,
+      "sku_live": "DP3-400W2",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-delta-pro-ultra",
+      "variant_id": "42007015948428",
+      "tier": "delta-pro-ultra-inverter-3-x-battery-18kwh",
+      "sku_stored": "EFDPUPCS-3-BP",
+      "sku_drift": false,
+      "sku_live": "EFDPUPCS-3-BP",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "rich-solar-alpha-12v-100ah",
+      "variant_id": "43677757047020",
+      "tier": "default",
+      "sku_stored": "RS-B12100",
+      "sku_drift": false,
+      "sku_live": "RS-B12100",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "bluetti-ac240p",
+      "variant_id": "46560101597420",
+      "tier": "bluetti-ac240p-only",
+      "sku_stored": "P-AC240P-US-GY-BL-010",
+      "sku_drift": false,
+      "sku_live": "P-AC240P-US-GY-BL-010",
       "verdict": "CLEAN"
     }
   ],
   "alarms": [],
   "notices": [
-    "QUOTE_NOT_FOUND: eg4-wallmount-indoor-16kwh at shop-solar-kits - specs.capacity_quotes text is not present in the live listing; re-transcribe it"
+    "capacity not confirmable from live text: rich-solar-alpha-12v-100ah at wild-oak-trail"
   ],
   "errors": [],
-  "live_requests_used": 14,
+  "live_requests_used": 18,
   "budget": 25,
   "params": {
     "all": false,
