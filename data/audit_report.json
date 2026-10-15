@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-15T00:20:35.521934+00:00",
+  "timestamp": "2026-10-15T15:50:12.568569+00:00",
   "verified": 10,
   "attempted": 10,
   "verdict_counts": {
@@ -8,13 +8,13 @@
   },
   "results": [
     {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532344914156",
-      "tier": "ecoflow-delta-max-portable-power-station-main-unit-only",
-      "sku_stored": "DELTA2000-US",
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-delta-pro-3",
+      "variant_id": "43048314863756",
+      "tier": "quad-kit-4-x-200w-rigid-panels",
+      "sku_stored": "ECOFLOW-DELTA-PRO-3-QUAD",
       "sku_drift": false,
-      "sku_live": "DELTA2000-US",
+      "sku_live": "ECOFLOW-DELTA-PRO-3-QUAD",
       "verdict": "CLEAN"
     },
     {
@@ -29,39 +29,29 @@
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532345077996",
-      "tier": "ecoflow-delta-max-2000-4-110w-solar-panel",
-      "sku_stored": "DELTAMax2000US114",
+      "product_id": "ecoflow-river-2-pro",
+      "variant_id": "44532078936300",
+      "tier": "ecoflow-river-2-pro-1-110w-portable-solar-panel",
+      "sku_stored": "RIVER2PRO-110-1-US",
       "sku_drift": false,
-      "sku_live": "DELTAMax2000US114",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-pro-3",
-      "variant_id": "45371860484332",
-      "tier": "ecoflow-delta-pro-3-main-unit-only",
-      "sku_stored": "EFDELTAPRO3-US",
-      "sku_drift": false,
-      "sku_live": "EFDELTAPRO3-US",
+      "sku_live": "RIVER2PRO-110-1-US",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
       "product_id": "rich-solar-mega-400",
-      "variant_id": "43618484945132",
-      "tier": "12-solar-panels",
-      "sku_stored": "RS-M400-12",
+      "variant_id": "43618484912364",
+      "tier": "10-solar-panels",
+      "sku_stored": "RS-M400-10",
       "sku_drift": false,
-      "sku_live": "RS-M400-12",
+      "sku_live": "RS-M400-10",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
       "product_id": "bluetti-ac180",
-      "variant_id": "46537846128876",
-      "tier": "ac180-200w-solar-panel-charger-1",
+      "variant_id": "46537846194412",
+      "tier": "ac180-350w-solar-panel",
       "sku_stored": null,
       "sku_drift": false,
       "sku_live": null,
@@ -70,29 +60,19 @@
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-alpha-12v-100ah",
-      "variant_id": "43258614907020",
-      "tier": "alpha-1",
-      "sku_stored": "RS-B121S",
+      "product_id": "rich-solar-mega-410",
+      "variant_id": "46271524274316",
+      "tier": "10-solar-panels",
+      "sku_stored": "RS-M410-10",
       "sku_drift": false,
-      "sku_live": "RS-B121S",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "40460663029809",
-      "tier": "3-batteries",
-      "sku_stored": "RS-B5121P-3",
-      "sku_drift": false,
-      "sku_live": "RS-B5121P-3",
+      "sku_live": "RS-M410-10",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac200l",
-      "variant_id": "46535814512876",
-      "tier": "ac200l-2-b300k-batteries-2-free-200w-panels",
+      "product_id": "bluetti-ac240p",
+      "variant_id": "46560101662956",
+      "tier": "ac240p-350w-solar",
       "sku_stored": null,
       "sku_drift": false,
       "sku_live": null,
@@ -100,18 +80,40 @@
       "detail": "hops agree but stored row has no sku - drift not evaluable"
     },
     {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "bluetti-b210-expansion",
-      "variant_id": "42791918633100",
+      "retailer_id": "alte-store",
+      "product_id": "enphase-iq-battery-5p",
+      "variant_id": "46166688301275",
       "tier": "default",
-      "sku_stored": "P-B210P-US-GY-BL-010",
+      "sku_stored": "IQBATTERY-5P-1P-NA",
       "sku_drift": false,
-      "sku_live": "P-B210P-US-GY-BL-010",
+      "sku_live": "IQBATTERY-5P-1P-NA",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "anker-solix-f2600",
+      "variant_id": "41837963411596",
+      "tier": "double-kit-2-x-200w-rigid-panels",
+      "sku_stored": "ANKER-F2600-DOUBLE-KIT",
+      "sku_drift": false,
+      "sku_live": "ANKER-F2600-DOUBLE-KIT",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "anker-solix-f2600",
+      "variant_id": "43775623004300",
+      "tier": "anker-solix-f2600-expansion-battery",
+      "sku_stored": "B178111L",
+      "sku_drift": false,
+      "sku_live": "B178111L",
       "verdict": "CLEAN"
     }
   ],
   "alarms": [],
-  "notices": [],
+  "notices": [
+    "QUOTE_NOT_FOUND: enphase-iq-battery-5p at alte-store - specs.capacity_quotes text is not present in the live listing; re-transcribe it"
+  ],
   "errors": [],
   "live_requests_used": 18,
   "budget": 25,
