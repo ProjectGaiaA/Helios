@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-14T16:02:59.027471+00:00",
+  "timestamp": "2026-10-15T00:20:09.312817+00:00",
   "retailers": [
     {
       "retailer_id": "shop-solar-kits",
@@ -74,7 +74,7 @@
           "default": 1099.0
         },
         "lion-ut-1300:shop-solar-kits": {
-          "default": 899.0
+          "default": 799.0
         },
         "rich-solar-alpha-12v-100ah:shop-solar-kits": {
           "alpha-1": 499.99,
@@ -426,7 +426,7 @@
       "default": 1099.0
     },
     "lion-ut-1300:shop-solar-kits": {
-      "default": 899.0
+      "default": 799.0
     },
     "rich-solar-alpha-12v-100ah:shop-solar-kits": {
       "alpha-1": 499.99,
