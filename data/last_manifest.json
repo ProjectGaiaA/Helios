@@ -1,17 +1,27 @@
 {
-  "timestamp": "2026-10-15T15:49:47.877183+00:00",
+  "timestamp": "2026-10-16T00:04:16.255417+00:00",
   "retailers": [
     {
       "retailer_id": "shop-solar-kits",
       "status": "completed",
       "products_expected": 29,
-      "products_found": 28,
+      "products_found": 29,
       "products_no_sizes": 0,
-      "products_priced": 28,
-      "products_error": 1,
-      "prices_collected": 74,
+      "products_priced": 29,
+      "products_error": 0,
+      "prices_collected": 82,
       "anomalies": [],
       "price_records": {
+        "ecoflow-delta-max:shop-solar-kits": {
+          "delta-max-eclipse-kit-1-x-200w-folding-panel": 1408.12,
+          "delta-max-double-kit-2-x-200w-rigid-panels": 1486.92,
+          "delta-max-nomad-kit-2-x-200w-folding-panels": 1687.81,
+          "delta-max-quad-kit-4-x-200w-rigid-panels": 1838.37,
+          "delta-max-hex-kit-6-x-100w-rigid-panels": 2155.94,
+          "delta-max-base-camp-kit-4-x-200w-panels-emp-bag": 2424.53,
+          "delta-max-double-quad-kit-8-x-200w-rigid-panels": 3647.92,
+          "delta-max-unit-only": 1049.0
+        },
         "ecoflow-river-2-pro:shop-solar-kits": {
           "ecoflow-river-2-pro-160w-solar-panel": 899.0,
           "ecoflow-river-2-pro-main-unit-only": 569.0
@@ -350,10 +360,20 @@
       "health": "degraded"
     }
   ],
-  "total_prices_collected": 172,
+  "total_prices_collected": 180,
   "total_anomalies": 0,
   "anomalies": [],
   "prices": {
+    "ecoflow-delta-max:shop-solar-kits": {
+      "delta-max-eclipse-kit-1-x-200w-folding-panel": 1408.12,
+      "delta-max-double-kit-2-x-200w-rigid-panels": 1486.92,
+      "delta-max-nomad-kit-2-x-200w-folding-panels": 1687.81,
+      "delta-max-quad-kit-4-x-200w-rigid-panels": 1838.37,
+      "delta-max-hex-kit-6-x-100w-rigid-panels": 2155.94,
+      "delta-max-base-camp-kit-4-x-200w-panels-emp-bag": 2424.53,
+      "delta-max-double-quad-kit-8-x-200w-rigid-panels": 3647.92,
+      "delta-max-unit-only": 1049.0
+    },
     "ecoflow-river-2-pro:shop-solar-kits": {
       "ecoflow-river-2-pro-160w-solar-panel": 899.0,
       "ecoflow-river-2-pro-main-unit-only": 569.0
