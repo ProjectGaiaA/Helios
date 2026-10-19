@@ -1,21 +1,30 @@
 {
-  "timestamp": "2026-10-18T23:46:17.354692+00:00",
-  "verified": 9,
+  "timestamp": "2026-10-19T17:39:48.365466+00:00",
+  "verified": 10,
   "attempted": 10,
   "verdict_counts": {
     "CLEAN": 8,
-    "NO_BASELINE": 1,
-    "UNRESOLVED": 1
+    "NO_BASELINE": 2
   },
   "results": [
     {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532344914156",
-      "tier": "ecoflow-delta-max-portable-power-station-main-unit-only",
-      "sku_stored": "DELTA2000-US",
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-alpha-12v-100ah",
+      "variant_id": "43258614939788",
+      "tier": "alpha-1-lite",
+      "sku_stored": "RS-B12100",
       "sku_drift": false,
-      "sku_live": "DELTA2000-US",
+      "sku_live": "RS-B12100",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-alpha-24v-100ah",
+      "variant_id": "43258631815308",
+      "tier": "alpha-4-self-heating-and-bluetooth",
+      "sku_stored": "RS-B241S",
+      "sku_drift": false,
+      "sku_live": "RS-B241S",
       "verdict": "CLEAN"
     },
     {
@@ -29,10 +38,40 @@
       "verdict": "CLEAN"
     },
     {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "rich-solar-all-in-one-ess",
+      "variant_id": "43905481081068",
+      "tier": "2-7kwh-48vdc-120vac-kit-8x-335w-panels",
+      "sku_stored": "RS-A10-2KW",
+      "sku_drift": false,
+      "sku_live": "RS-A10-2KW",
+      "verdict": "CLEAN"
+    },
+    {
       "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-smart-generator-4000",
-      "variant_id": "43492014194828",
+      "product_id": "ecoflow-delta-pro-ultra",
+      "variant_id": "42007015882892",
+      "tier": "delta-pro-ultra-inverter-1-x-6kwh-battery",
+      "sku_stored": "EFDPUPCS-BP",
+      "sku_drift": false,
+      "sku_live": "EFDPUPCS-BP",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-mega-200-briefcase",
+      "variant_id": "32601401098289",
       "tier": "default",
+      "sku_stored": "RS-X200B",
+      "sku_drift": false,
+      "sku_live": "RS-X200B",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-smart-generator-4000",
+      "variant_id": "45712425648364",
+      "tier": "ecoflow-smart-generator-4000-dual-fuel-only",
       "sku_stored": "EFSG4000-US-EPA",
       "sku_drift": false,
       "sku_live": "EFSG4000-US-EPA",
@@ -40,9 +79,9 @@
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac180",
-      "variant_id": "46537846194412",
-      "tier": "ac180-350w-solar-panel",
+      "product_id": "bluetti-ac200l",
+      "variant_id": "46535814447340",
+      "tier": "ac200l-only",
       "sku_stored": null,
       "sku_drift": false,
       "sku_live": null,
@@ -50,74 +89,31 @@
       "detail": "hops agree but stored row has no sku - drift not evaluable"
     },
     {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "eg4-wallmount-indoor-16kwh",
-      "variant_id": "45192132460684",
-      "tier": "default",
-      "sku_stored": "1510984",
-      "sku_drift": false,
-      "sku_live": "1510984",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "alte-store",
-      "product_id": "midnite-mnpv12",
-      "variant_id": "46166701768923",
-      "tier": "default",
-      "sku_stored": "MNPV12",
-      "sku_drift": false,
-      "verdict": "UNRESOLVED",
-      "detail": "live source unavailable (see errors)"
-    },
-    {
       "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "45092900864236",
-      "tier": "ecoflow-delta-max-smart-generator-dual-fuel",
-      "sku_stored": "DM2000-DG200",
+      "product_id": "bluetti-ac180",
+      "variant_id": "46555231027436",
+      "tier": "ac180p-350w-solar-panel",
+      "sku_stored": null,
       "sku_drift": false,
-      "sku_live": "DM2000-DG200",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-pro-3",
-      "variant_id": "43048314863756",
-      "tier": "quad-kit-4-x-200w-rigid-panels",
-      "sku_stored": "ECOFLOW-DELTA-PRO-3-QUAD",
-      "sku_drift": false,
-      "sku_live": "ECOFLOW-DELTA-PRO-3-QUAD",
-      "verdict": "CLEAN"
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
     },
     {
       "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-400",
-      "variant_id": "39871819350065",
-      "tier": "8-panels",
-      "sku_stored": "RS-M400-8",
+      "product_id": "rich-solar-alpha-5-pro",
+      "variant_id": "40460663029809",
+      "tier": "3-batteries",
+      "sku_stored": "RS-B5121P-3",
       "sku_drift": false,
-      "sku_live": "RS-M400-8",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-410",
-      "variant_id": "40014992769073",
-      "tier": "12-panels",
-      "sku_stored": "RS-M410-12",
-      "sku_drift": false,
-      "sku_live": "RS-M410-12",
+      "sku_live": "RS-B5121P-3",
       "verdict": "CLEAN"
     }
   ],
   "alarms": [],
-  "notices": [
-    "QUOTE_NOT_FOUND: eg4-wallmount-indoor-16kwh at shop-solar-kits - specs.capacity_quotes text is not present in the live listing; re-transcribe it"
-  ],
-  "errors": [
-    "HTTP 404 for https://www.altestore.com/products/midnite-solar-mnpv12-solar-array-combiner.json?_hb=1792367231829"
-  ],
-  "live_requests_used": 17,
+  "notices": [],
+  "errors": [],
+  "live_requests_used": 20,
   "budget": 25,
   "params": {
     "all": false,
