@@ -1,116 +1,118 @@
 {
-  "timestamp": "2026-10-23T00:23:27.903586+00:00",
+  "timestamp": "2026-10-23T15:58:45.896275+00:00",
   "verified": 10,
   "attempted": 10,
   "verdict_counts": {
-    "CLEAN": 10
+    "CLEAN": 9,
+    "NO_BASELINE": 1
   },
   "results": [
     {
       "retailer_id": "wild-oak-trail",
       "product_id": "ecoflow-delta-max",
-      "variant_id": "44532345110764",
-      "tier": "ecoflow-delta-max-2000-1-160w-solar-panel",
-      "sku_stored": "DELTAMax2000+160W",
+      "variant_id": "44532345241836",
+      "tier": "ecoflow-delta-max-2000-1-220w-solar-panel",
+      "sku_stored": "TMR310-MS430-US",
       "sku_drift": false,
-      "sku_live": "DELTAMax2000+160W",
+      "sku_live": "TMR310-MS430-US",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-mega-410",
+      "variant_id": "40014992703537",
+      "tier": "8-panels",
+      "sku_stored": "RS-M410-8",
+      "sku_drift": false,
+      "sku_live": "RS-M410-8",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "bluetti-ac180",
+      "variant_id": "46537846161644",
+      "tier": "ac180-b80-battery-free-aviation-to-dc7909-cable",
+      "sku_stored": null,
+      "sku_drift": false,
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "bluetti-ac240p",
+      "variant_id": "42792151285900",
+      "tier": "basecamp-kit-2-x-200w-folding-panels-emp-bag",
+      "sku_stored": "BLUETTI-AC240P-BASECAMP",
+      "sku_drift": false,
+      "sku_live": "BLUETTI-AC240P-BASECAMP",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-river-2-pro",
+      "variant_id": "44532078969068",
+      "tier": "ecoflow-river-2-pro-1-160w-portable-solar-panel",
+      "sku_stored": "RIVER2PRO-160-1-US",
+      "sku_drift": false,
+      "sku_live": "RIVER2PRO-160-1-US",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-mega-410",
+      "variant_id": "46271524274316",
+      "tier": "10-solar-panels",
+      "sku_stored": "RS-M410-10",
+      "sku_drift": false,
+      "sku_live": "RS-M410-10",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "44532345274604",
+      "tier": "ecoflow-delta-max-2000-2-220w-solar-panel",
+      "sku_stored": "TMR310-2MS430-US",
+      "sku_drift": false,
+      "sku_live": "TMR310-2MS430-US",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "rich-solar-all-in-one-ess",
+      "variant_id": "43905481081068",
+      "tier": "2-7kwh-48vdc-120vac-kit-8x-335w-panels",
+      "sku_stored": "RS-A10-2KW",
+      "sku_drift": false,
+      "sku_live": "RS-A10-2KW",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
       "product_id": "bluetti-ac240p",
-      "variant_id": "42792151220364",
-      "tier": "double-kit-2-x-200w-rigid-panels",
-      "sku_stored": "BLUETTI-AC240P-DOUBLE",
+      "variant_id": "42792151253132",
+      "tier": "nomad-kit-2-x-200w-folding-panels",
+      "sku_stored": "BLUETTI-AC240P-NOMAD",
       "sku_drift": false,
-      "sku_live": "BLUETTI-AC240P-DOUBLE",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-400",
-      "variant_id": "41033316794417",
-      "tier": "36-panels",
-      "sku_stored": "RS-M400-36",
-      "sku_drift": false,
-      "sku_live": "RS-M400-36",
+      "sku_live": "BLUETTI-AC240P-NOMAD",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-river-3",
-      "variant_id": "46868877508844",
-      "tier": "default",
-      "sku_stored": "EFRIVER3-US",
+      "product_id": "rich-solar-all-in-one-ess",
+      "variant_id": "43905481048300",
+      "tier": "all-in-one-energy-storage-system-no-panels",
+      "sku_stored": "RS-A10",
       "sku_drift": false,
-      "sku_live": "EFRIVER3-US",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-alpha-12v-200ah",
-      "variant_id": "43258589905036",
-      "tier": "alpha-2-lite",
-      "sku_stored": "RS-B12200",
-      "sku_drift": false,
-      "sku_live": "RS-B12200",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-mega-200",
-      "variant_id": "41583364931724",
-      "tier": "default",
-      "sku_stored": "RS-M200",
-      "sku_drift": false,
-      "sku_live": "RS-M200",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "rich-solar-mega-400",
-      "variant_id": "43618484945132",
-      "tier": "12-solar-panels",
-      "sku_stored": "RS-M400-12",
-      "sku_drift": false,
-      "sku_live": "RS-M400-12",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "41677437632652",
-      "tier": "delta-max-hex-kit-6-x-100w-rigid-panels",
-      "sku_stored": "DELTA-MAX-HEX",
-      "sku_drift": false,
-      "sku_live": "DELTA-MAX-HEX",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-pro-ultra",
-      "variant_id": "42007016046732",
-      "tier": "delta-pro-ultra-inverter-1-x-6kwh-battery-smart-home-panel-2",
-      "sku_stored": "EFDPU-BP-SHP2-US",
-      "sku_drift": false,
-      "sku_live": "EFDPU-BP-SHP2-US",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-b210-expansion",
-      "variant_id": "46592606634220",
-      "tier": "default",
-      "sku_stored": "P-B210P-US-GY-BL-010",
-      "sku_drift": false,
-      "sku_live": "P-B210P-US-GY-BL-010",
+      "sku_live": "RS-A10",
       "verdict": "CLEAN"
     }
   ],
   "alarms": [],
   "notices": [],
   "errors": [],
-  "live_requests_used": 20,
+  "live_requests_used": 14,
   "budget": 25,
   "params": {
     "all": false,
