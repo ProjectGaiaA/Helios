@@ -1,80 +1,39 @@
 {
-  "timestamp": "2026-10-22T16:08:24.909449+00:00",
-  "verified": 9,
+  "timestamp": "2026-10-23T00:23:27.903586+00:00",
+  "verified": 10,
   "attempted": 10,
   "verdict_counts": {
-    "CLEAN": 9,
-    "UNRESOLVED": 1
+    "CLEAN": 10
   },
   "results": [
     {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "44532345110764",
+      "tier": "ecoflow-delta-max-2000-1-160w-solar-panel",
+      "sku_stored": "DELTAMax2000+160W",
+      "sku_drift": false,
+      "sku_live": "DELTAMax2000+160W",
+      "verdict": "CLEAN"
+    },
+    {
       "retailer_id": "shop-solar-kits",
-      "product_id": "anker-solix-f2600",
-      "variant_id": "41837963411596",
+      "product_id": "bluetti-ac240p",
+      "variant_id": "42792151220364",
       "tier": "double-kit-2-x-200w-rigid-panels",
-      "sku_stored": "ANKER-F2600-DOUBLE-KIT",
+      "sku_stored": "BLUETTI-AC240P-DOUBLE",
       "sku_drift": false,
-      "sku_live": "ANKER-F2600-DOUBLE-KIT",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "rich-solar-mppt-40a",
-      "variant_id": "38151483326613",
-      "tier": "default",
-      "sku_stored": "RS-MPPT40",
-      "sku_drift": false,
-      "sku_live": "RS-MPPT40",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-river-2-pro",
-      "variant_id": "44532079001836",
-      "tier": "ecoflow-river-2-pro-1-220w-portable-solar-panel",
-      "sku_stored": "RIVER2PRO-220-1-US",
-      "sku_drift": false,
-      "sku_live": "RIVER2PRO-220-1-US",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "alte-store",
-      "product_id": "midnite-mnpowerflo16",
-      "variant_id": "46166697574619",
-      "tier": "default",
-      "sku_stored": "MNPowerFlo16",
-      "sku_drift": false,
-      "verdict": "UNRESOLVED",
-      "detail": "live source unavailable (see errors)"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-pro-ultra",
-      "variant_id": "42007016013964",
-      "tier": "delta-pro-ultra-inverter-5-x-battery-30kwh",
-      "sku_stored": "EFDPUPCS-5-BP",
-      "sku_drift": false,
-      "sku_live": "EFDPUPCS-5-BP",
+      "sku_live": "BLUETTI-AC240P-DOUBLE",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "rich-solar",
-      "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "40460662997041",
-      "tier": "2-batteries",
-      "sku_stored": "RS-B5121P-2",
+      "product_id": "rich-solar-mega-400",
+      "variant_id": "41033316794417",
+      "tier": "36-panels",
+      "sku_stored": "RS-M400-36",
       "sku_drift": false,
-      "sku_live": "RS-B5121P-2",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-alpha-12v-200ah",
-      "variant_id": "39601356472369",
-      "tier": "default",
-      "sku_stored": "RS-B12200",
-      "sku_drift": false,
-      "sku_live": "RS-B12200",
+      "sku_live": "RS-M400-36",
       "verdict": "CLEAN"
     },
     {
@@ -89,12 +48,22 @@
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-alpha-12v-100ah",
-      "variant_id": "43258614907020",
-      "tier": "alpha-1",
-      "sku_stored": "RS-B121S",
+      "product_id": "rich-solar-alpha-12v-200ah",
+      "variant_id": "43258589905036",
+      "tier": "alpha-2-lite",
+      "sku_stored": "RS-B12200",
       "sku_drift": false,
-      "sku_live": "RS-B121S",
+      "sku_live": "RS-B12200",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-mega-200",
+      "variant_id": "41583364931724",
+      "tier": "default",
+      "sku_stored": "RS-M200",
+      "sku_drift": false,
+      "sku_live": "RS-M200",
       "verdict": "CLEAN"
     },
     {
@@ -106,14 +75,42 @@
       "sku_drift": false,
       "sku_live": "RS-M400-12",
       "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "41677437632652",
+      "tier": "delta-max-hex-kit-6-x-100w-rigid-panels",
+      "sku_stored": "DELTA-MAX-HEX",
+      "sku_drift": false,
+      "sku_live": "DELTA-MAX-HEX",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-delta-pro-ultra",
+      "variant_id": "42007016046732",
+      "tier": "delta-pro-ultra-inverter-1-x-6kwh-battery-smart-home-panel-2",
+      "sku_stored": "EFDPU-BP-SHP2-US",
+      "sku_drift": false,
+      "sku_live": "EFDPU-BP-SHP2-US",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "bluetti-b210-expansion",
+      "variant_id": "46592606634220",
+      "tier": "default",
+      "sku_stored": "P-B210P-US-GY-BL-010",
+      "sku_drift": false,
+      "sku_live": "P-B210P-US-GY-BL-010",
+      "verdict": "CLEAN"
     }
   ],
   "alarms": [],
   "notices": [],
-  "errors": [
-    "HTTP 404 for https://www.altestore.com/products/midnite-solar-mnpowerflo16-16-kwh-48volt-wall-floor-mount-lfp-lithium-battery.json?_hb=1792685331086"
-  ],
-  "live_requests_used": 19,
+  "errors": [],
+  "live_requests_used": 20,
   "budget": 25,
   "params": {
     "all": false,
