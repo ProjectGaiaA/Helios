@@ -1,11 +1,102 @@
 {
-  "timestamp": "2026-10-24T00:14:58.233620+00:00",
-  "verified": 10,
+  "timestamp": "2026-10-24T14:35:29.233379+00:00",
+  "verified": 9,
   "attempted": 10,
   "verdict_counts": {
-    "CLEAN": 10
+    "CLEAN": 9,
+    "UNRESOLVED": 1
   },
   "results": [
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-alpha-5-pro",
+      "variant_id": "44040562770060",
+      "tier": "alpha-5-pro-self-heating-6-batteries",
+      "sku_stored": "RS-B5121H-6",
+      "sku_drift": false,
+      "sku_live": "RS-B5121H-6",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "41674491035788",
+      "tier": "delta-max-double-kit-2-x-200w-rigid-panels",
+      "sku_stored": "DELTA-MAX-DOUBLE",
+      "sku_drift": false,
+      "sku_live": "DELTA-MAX-DOUBLE",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "alte-store",
+      "product_id": "midnite-mnpv12",
+      "variant_id": "46166701768923",
+      "tier": "default",
+      "sku_stored": "MNPV12",
+      "sku_drift": false,
+      "verdict": "UNRESOLVED",
+      "detail": "live source unavailable (see errors)"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-mppt-40a",
+      "variant_id": "34387832930444",
+      "tier": "default",
+      "sku_stored": "RS-MPPT40",
+      "sku_drift": false,
+      "sku_live": "RS-MPPT40",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-mega-410",
+      "variant_id": "40014992769073",
+      "tier": "12-panels",
+      "sku_stored": "RS-M410-12",
+      "sku_drift": false,
+      "sku_live": "RS-M410-12",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "44532344946924",
+      "tier": "ecoflow-delta-max-2000-1-extra-battery",
+      "sku_stored": "DELTAMax2000-DELTAMaxEB-US",
+      "sku_drift": false,
+      "sku_live": "DELTAMax2000-DELTAMaxEB-US",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-delta-pro-3-extra-battery",
+      "variant_id": "45371880177900",
+      "tier": "default",
+      "sku_stored": "EFDELTAPRO3EB",
+      "sku_drift": false,
+      "sku_live": "EFDELTAPRO3EB",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "lion-ut-1300",
+      "variant_id": "41700536483980",
+      "tier": "default",
+      "sku_stored": "50170171",
+      "sku_drift": false,
+      "sku_live": "50170171",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-delta-pro-ultra",
+      "variant_id": "42007015981196",
+      "tier": "delta-pro-ultra-inverter-4-x-battery-24kwh",
+      "sku_stored": "EFDPUPCS-4-BP",
+      "sku_drift": false,
+      "sku_live": "EFDPUPCS-4-BP",
+      "verdict": "CLEAN"
+    },
     {
       "retailer_id": "wild-oak-trail",
       "product_id": "ecoflow-delta-max",
@@ -15,102 +106,14 @@
       "sku_drift": false,
       "sku_live": "DELTAMax2000US164",
       "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-mega-410",
-      "variant_id": "46271524274316",
-      "tier": "10-solar-panels",
-      "sku_stored": "RS-M410-10",
-      "sku_drift": false,
-      "sku_live": "RS-M410-10",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-pro-3-extra-battery",
-      "variant_id": "43056443293836",
-      "tier": "default",
-      "sku_stored": "EFDELTAPRO3EB",
-      "sku_drift": false,
-      "sku_live": "EFDELTAPRO3EB",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-410",
-      "variant_id": "41033316073521",
-      "tier": "36-panels",
-      "sku_stored": "RS-M410-36",
-      "sku_drift": false,
-      "sku_live": "RS-M410-36",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-410",
-      "variant_id": "40014992703537",
-      "tier": "8-panels",
-      "sku_stored": "RS-M410-8",
-      "sku_drift": false,
-      "sku_live": "RS-M410-8",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "bluetti-ac240p",
-      "variant_id": "42792151220364",
-      "tier": "double-kit-2-x-200w-rigid-panels",
-      "sku_stored": "BLUETTI-AC240P-DOUBLE",
-      "sku_drift": false,
-      "sku_live": "BLUETTI-AC240P-DOUBLE",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "bluetti-ac240p",
-      "variant_id": "42792151187596",
-      "tier": "bluetti-ac240p-main-unit-only",
-      "sku_stored": "P-AC240P-US-GY-BL-010",
-      "sku_drift": false,
-      "sku_live": "P-AC240P-US-GY-BL-010",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "40460663095345",
-      "tier": "5-batteries",
-      "sku_stored": "RS-B5121P-5",
-      "sku_drift": false,
-      "sku_live": "RS-B5121P-5",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-200-briefcase",
-      "variant_id": "32601401098289",
-      "tier": "default",
-      "sku_stored": "RS-X200B",
-      "sku_drift": false,
-      "sku_live": "RS-X200B",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-pro-3",
-      "variant_id": "45371860549868",
-      "tier": "ecoflow-delta-pro-3-with-1-400w-solar-panel",
-      "sku_stored": "DP3-400W",
-      "sku_drift": false,
-      "sku_live": "DP3-400W",
-      "verdict": "CLEAN"
     }
   ],
   "alarms": [],
   "notices": [],
-  "errors": [],
-  "live_requests_used": 16,
+  "errors": [
+    "HTTP 404 for https://www.altestore.com/products/midnite-solar-mnpv12-solar-array-combiner.json?_hb=1792852548336"
+  ],
+  "live_requests_used": 17,
   "budget": 25,
   "params": {
     "all": false,
