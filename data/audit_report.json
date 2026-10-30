@@ -1,119 +1,121 @@
 {
-  "timestamp": "2026-10-30T01:31:42.056530+00:00",
-  "verified": 10,
+  "timestamp": "2026-10-30T17:16:33.137054+00:00",
+  "verified": 9,
   "attempted": 10,
   "verdict_counts": {
-    "CLEAN": 8,
-    "NO_BASELINE": 2
+    "CLEAN": 9,
+    "UNRESOLVED": 1
   },
   "results": [
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-river-2-pro",
-      "variant_id": "41737132769420",
-      "tier": "ecoflow-river-2-pro-160w-solar-panel",
-      "sku_stored": "RIVER2PRO-160-1-US",
+      "product_id": "ecoflow-river-3",
+      "variant_id": "43432948269196",
+      "tier": "nomad-kit-1-x-100w-folding-panel",
+      "sku_stored": "RIVER-3-NOMAD",
       "sku_drift": false,
-      "sku_live": "RIVER2PRO-160-1-US",
+      "sku_live": "RIVER-3-NOMAD",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-alpha-12v-200ah",
-      "variant_id": "43258589872268",
-      "tier": "alpha-2",
-      "sku_stored": "RS-B122S",
+      "product_id": "anker-solix-f2600",
+      "variant_id": "41837963509900",
+      "tier": "basecamp-kit-1-x-200w-folding-panel-emp-bag",
+      "sku_stored": "ANKER-F2600-BASECAMP-KIT",
       "sku_drift": false,
-      "sku_live": "RS-B122S",
+      "sku_live": "ANKER-F2600-BASECAMP-KIT",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "rich-solar-mega-410",
+      "variant_id": "44039996244204",
+      "tier": "8-solar-panels",
+      "sku_stored": "RS-M410-8",
+      "sku_drift": false,
+      "sku_live": "RS-M410-8",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-400",
-      "variant_id": "39871819415601",
-      "tier": "12-panels",
-      "sku_stored": "RS-M400-12",
+      "product_id": "rich-solar-alpha-5-pro",
+      "variant_id": "40460680560689",
+      "tier": "6-batteries",
+      "sku_stored": "RS-B5121P-6",
       "sku_drift": false,
-      "sku_live": "RS-M400-12",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532345372908",
-      "tier": "ecoflow-delta-max-2000-1-400w-solar-panel",
-      "sku_stored": "DELTAMax2000-400W-US",
-      "sku_drift": false,
-      "sku_live": "DELTAMax2000-400W-US",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532345209068",
-      "tier": "ecoflow-delta-max-2000-4-160w-solar-panel",
-      "sku_stored": "DELTAMax2000US164",
-      "sku_drift": false,
-      "sku_live": "DELTAMax2000US164",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-alpha-12v-100ah",
-      "variant_id": "43258614907020",
-      "tier": "alpha-1",
-      "sku_stored": "RS-B121S",
-      "sku_drift": false,
-      "sku_live": "RS-B121S",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "45092914725100",
-      "tier": "ecoflow-delta-max-with-400w-12v-solar-panel-bundle",
-      "sku_stored": null,
-      "sku_drift": false,
-      "sku_live": null,
-      "verdict": "NO_BASELINE",
-      "detail": "hops agree but stored row has no sku - drift not evaluable"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac200l",
-      "variant_id": "46535814480108",
-      "tier": "ac200l-b300k-battery",
-      "sku_stored": null,
-      "sku_drift": false,
-      "sku_live": null,
-      "verdict": "NO_BASELINE",
-      "detail": "hops agree but stored row has no sku - drift not evaluable"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-pro-ultra",
-      "variant_id": "42007015981196",
-      "tier": "delta-pro-ultra-inverter-4-x-battery-24kwh",
-      "sku_stored": "EFDPUPCS-4-BP",
-      "sku_drift": false,
-      "sku_live": "EFDPUPCS-4-BP",
+      "sku_live": "RS-B5121P-6",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-400",
-      "variant_id": "39871819382833",
-      "tier": "10-panels",
-      "sku_stored": "RS-M400-10",
+      "product_id": "rich-solar-alpha-24v-100ah",
+      "variant_id": "39956821114929",
+      "tier": "default",
+      "sku_stored": "RS-B24100",
       "sku_drift": false,
-      "sku_live": "RS-M400-10",
+      "sku_live": "RS-B24100",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-alpha-5-pro",
+      "variant_id": "44040562671756",
+      "tier": "alpha-5-pro-self-heating-3-batteries",
+      "sku_stored": "RS-B5121H-3",
+      "sku_drift": false,
+      "sku_live": "RS-B5121H-3",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "enphase-iq-system-controller-3",
+      "variant_id": "42622983635084",
+      "tier": "default",
+      "sku_stored": "EN-SC200D111C240US01",
+      "sku_drift": false,
+      "sku_live": "EN-SC200D111C240US01",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "anker-solix-f2600",
+      "variant_id": "41837963411596",
+      "tier": "double-kit-2-x-200w-rigid-panels",
+      "sku_stored": "ANKER-F2600-DOUBLE-KIT",
+      "sku_drift": false,
+      "sku_live": "ANKER-F2600-DOUBLE-KIT",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "alte-store",
+      "product_id": "midnite-mnpowerflo16",
+      "variant_id": "46166697574619",
+      "tier": "default",
+      "sku_stored": "MNPowerFlo16",
+      "sku_drift": false,
+      "verdict": "UNRESOLVED",
+      "detail": "live source unavailable (see errors)"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "rich-solar-mega-200",
+      "variant_id": "45167084962028",
+      "tier": "12v",
+      "sku_stored": "RS-M200",
+      "sku_drift": false,
+      "sku_live": "RS-M200",
       "verdict": "CLEAN"
     }
   ],
   "alarms": [],
-  "notices": [],
-  "errors": [],
-  "live_requests_used": 14,
+  "notices": [
+    "QUOTE_NOT_FOUND: rich-solar-alpha-24v-100ah at rich-solar - specs.capacity_quotes text is not present in the live listing; re-transcribe it"
+  ],
+  "errors": [
+    "HTTP 404 for https://www.altestore.com/products/midnite-solar-mnpowerflo16-16-kwh-48volt-wall-floor-mount-lfp-lithium-battery.json?_hb=1793380672132"
+  ],
+  "live_requests_used": 17,
   "budget": 25,
   "params": {
     "all": false,
