@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-02T01:16:12.857497+00:00",
+  "timestamp": "2026-11-02T20:58:49.662982+00:00",
   "retailers": [
     {
       "retailer_id": "shop-solar-kits",
@@ -55,14 +55,14 @@
         },
         "ecoflow-delta-pro-ultra:shop-solar-kits": {
           "delta-pro-ultra-inverter-1-x-6kwh-battery": 4199.0,
-          "delta-pro-ultra-inverter-2-x-battery-12kwh": 5999.0,
-          "delta-pro-ultra-inverter-3-x-battery-18kwh": 7999.0,
-          "delta-pro-ultra-inverter-4-x-battery-24kwh": 10099.0,
+          "delta-pro-ultra-inverter-2-x-battery-12kwh": 6199.0,
+          "delta-pro-ultra-inverter-3-x-battery-18kwh": 8199.0,
+          "delta-pro-ultra-inverter-4-x-battery-24kwh": 10199.0,
           "delta-pro-ultra-inverter-5-x-battery-30kwh": 12199.0,
-          "delta-pro-ultra-inverter-1-x-6kwh-battery-smart-home-panel-2": 5499.0
+          "delta-pro-ultra-inverter-1-x-6kwh-battery-smart-home-panel-2": 5599.0
         },
         "ecoflow-smart-generator-4000:shop-solar-kits": {
-          "default": 1799.0
+          "default": 1259.0
         },
         "bluetti-ac240p:shop-solar-kits": {
           "double-kit-2-x-200w-rigid-panels": 1709.0,
@@ -407,14 +407,14 @@
     },
     "ecoflow-delta-pro-ultra:shop-solar-kits": {
       "delta-pro-ultra-inverter-1-x-6kwh-battery": 4199.0,
-      "delta-pro-ultra-inverter-2-x-battery-12kwh": 5999.0,
-      "delta-pro-ultra-inverter-3-x-battery-18kwh": 7999.0,
-      "delta-pro-ultra-inverter-4-x-battery-24kwh": 10099.0,
+      "delta-pro-ultra-inverter-2-x-battery-12kwh": 6199.0,
+      "delta-pro-ultra-inverter-3-x-battery-18kwh": 8199.0,
+      "delta-pro-ultra-inverter-4-x-battery-24kwh": 10199.0,
       "delta-pro-ultra-inverter-5-x-battery-30kwh": 12199.0,
-      "delta-pro-ultra-inverter-1-x-6kwh-battery-smart-home-panel-2": 5499.0
+      "delta-pro-ultra-inverter-1-x-6kwh-battery-smart-home-panel-2": 5599.0
     },
     "ecoflow-smart-generator-4000:shop-solar-kits": {
-      "default": 1799.0
+      "default": 1259.0
     },
     "bluetti-ac240p:shop-solar-kits": {
       "double-kit-2-x-200w-rigid-panels": 1709.0,

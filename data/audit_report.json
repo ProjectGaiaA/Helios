@@ -1,116 +1,121 @@
 {
-  "timestamp": "2026-11-02T01:16:37.972771+00:00",
+  "timestamp": "2026-11-02T20:59:08.089629+00:00",
   "verified": 10,
   "attempted": 10,
   "verdict_counts": {
-    "CLEAN": 10
+    "CLEAN": 8,
+    "NO_BASELINE": 2
   },
   "results": [
     {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532345307372",
-      "tier": "ecoflow-delta-max-2000-3-220w-solar-panel",
-      "sku_stored": "TMR310-3MS430-US",
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-alpha-12v-100ah",
+      "variant_id": "43258614907020",
+      "tier": "alpha-1",
+      "sku_stored": "RS-B121S",
       "sku_drift": false,
-      "sku_live": "TMR310-3MS430-US",
+      "sku_live": "RS-B121S",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-river-3",
+      "variant_id": "43432948301964",
+      "tier": "river-3-main-unit-only",
+      "sku_stored": "EFRIVER3-US",
+      "sku_drift": false,
+      "sku_live": "EFRIVER3-US",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "rich-solar",
-      "product_id": "rich-solar-alpha-12v-100ah",
-      "variant_id": "39449053986865",
-      "tier": "default",
-      "sku_stored": "RS-B121SL",
-      "sku_drift": false,
-      "sku_live": "RS-B121SL",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-river-2-pro",
-      "variant_id": "44532078936300",
-      "tier": "ecoflow-river-2-pro-1-110w-portable-solar-panel",
-      "sku_stored": "RIVER2PRO-110-1-US",
-      "sku_drift": false,
-      "sku_live": "RIVER2PRO-110-1-US",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
       "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "43171241394316",
-      "tier": "alpha-5-pro-standard-1-battery-only",
-      "sku_stored": "RS-B5121P",
+      "variant_id": "40460662997041",
+      "tier": "2-batteries",
+      "sku_stored": "RS-B5121P-2",
       "sku_drift": false,
-      "sku_live": "RS-B5121P",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532344979692",
-      "tier": "ecoflow-delta-max-2000-1-110w-solar-panel",
-      "sku_stored": "DELTAMax2000+110W",
-      "sku_drift": false,
-      "sku_live": "DELTAMax2000+110W",
+      "sku_live": "RS-B5121P-2",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "eg4-ll-s-48v-100ah",
-      "variant_id": "41798635716748",
-      "tier": "6-batteries-6-slot-rack",
-      "sku_stored": "EG4-1511082-6",
+      "product_id": "rich-solar-alpha-24v-100ah",
+      "variant_id": "43258631815308",
+      "tier": "alpha-4-self-heating-and-bluetooth",
+      "sku_stored": "RS-B241S",
       "sku_drift": false,
-      "sku_live": "EG4-1511082-6",
+      "sku_live": "RS-B241S",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "rich-solar-mega-400",
-      "variant_id": "43618484879596",
-      "tier": "8-solar-panels",
-      "sku_stored": "RS-M400-8",
+      "product_id": "bluetti-ac200l",
+      "variant_id": "46535814676716",
+      "tier": "ac200l-200w-solar-panel-charger-1",
+      "sku_stored": null,
       "sku_drift": false,
-      "sku_live": "RS-M400-8",
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
+    },
+    {
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-mega-410",
+      "variant_id": "40014992736305",
+      "tier": "10-panels",
+      "sku_stored": "RS-M410-10",
+      "sku_drift": false,
+      "sku_live": "RS-M410-10",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-pro-3",
-      "variant_id": "43048314830988",
+      "product_id": "ecoflow-river-2-pro",
+      "variant_id": "41679254454412",
+      "tier": "ecoflow-river-2-pro-main-unit-only",
+      "sku_stored": "ZMR620-B-US",
+      "sku_drift": false,
+      "sku_live": "ZMR620-B-US",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "bluetti-ac180",
+      "variant_id": "46537846128876",
+      "tier": "ac180-200w-solar-panel-charger-1",
+      "sku_stored": null,
+      "sku_drift": false,
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "eg4-wallmount-indoor-16kwh",
+      "variant_id": "45192132460684",
+      "tier": "default",
+      "sku_stored": "1510984",
+      "sku_drift": false,
+      "sku_live": "1510984",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "anker-solix-f2600",
+      "variant_id": "41837963444364",
       "tier": "nomad-kit-2-x-200w-folding-panels",
-      "sku_stored": "ECOFLOW-DELTA-PRO-3-NOMAD",
+      "sku_stored": "ANKER-F2600-NOMAD-KIT",
       "sku_drift": false,
-      "sku_live": "ECOFLOW-DELTA-PRO-3-NOMAD",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "rich-solar-mega-200-briefcase",
-      "variant_id": "45166261272812",
-      "tier": "rich-solar-200-watt-12v-briefcase-panel-with-controller",
-      "sku_stored": "RS-X200BC",
-      "sku_drift": false,
-      "sku_live": "RS-X200BC",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-pro-3",
-      "variant_id": "46631132037260",
-      "tier": "octo-kit-8-x-200w-rigid-panels",
-      "sku_stored": "ECOFLOW-DELTA-PRO-3-OCTO",
-      "sku_drift": false,
-      "sku_live": "ECOFLOW-DELTA-PRO-3-OCTO",
+      "sku_live": "ANKER-F2600-NOMAD-KIT",
       "verdict": "CLEAN"
     }
   ],
   "alarms": [],
-  "notices": [],
+  "notices": [
+    "QUOTE_NOT_FOUND: eg4-wallmount-indoor-16kwh at shop-solar-kits - specs.capacity_quotes text is not present in the live listing; re-transcribe it"
+  ],
   "errors": [],
-  "live_requests_used": 16,
+  "live_requests_used": 20,
   "budget": 25,
   "params": {
     "all": false,
