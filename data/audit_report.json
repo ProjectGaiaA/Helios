@@ -1,22 +1,12 @@
 {
-  "timestamp": "2026-11-03T03:19:47.433971+00:00",
-  "verified": 9,
+  "timestamp": "2026-11-03T18:34:44.949958+00:00",
+  "verified": 10,
   "attempted": 10,
   "verdict_counts": {
-    "CLEAN": 9,
-    "UNRESOLVED": 1
+    "CLEAN": 8,
+    "NO_BASELINE": 2
   },
   "results": [
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "anker-solix-f2600",
-      "variant_id": "41836471582860",
-      "tier": "anker-solix-f2600-main-unit-only",
-      "sku_stored": "A1781111",
-      "sku_drift": false,
-      "sku_live": "A1781111",
-      "verdict": "CLEAN"
-    },
     {
       "retailer_id": "wild-oak-trail",
       "product_id": "ecoflow-delta-max",
@@ -28,92 +18,102 @@
       "verdict": "CLEAN"
     },
     {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-river-2-pro",
-      "variant_id": "41737132769420",
-      "tier": "ecoflow-river-2-pro-160w-solar-panel",
-      "sku_stored": "RIVER2PRO-160-1-US",
-      "sku_drift": false,
-      "sku_live": "RIVER2PRO-160-1-US",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "41677437665420",
-      "tier": "delta-max-nomad-kit-2-x-200w-folding-panels",
-      "sku_stored": "DELTA-MAX-NOMAD",
-      "sku_drift": false,
-      "sku_live": "DELTA-MAX-NOMAD",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "alte-store",
-      "product_id": "midnite-mnbcb-2000-200",
-      "variant_id": "46166709534939",
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-alpha-12v-200ah",
+      "variant_id": "39601356472369",
       "tier": "default",
-      "sku_stored": "MNBCB 2000/200",
+      "sku_stored": "RS-B12200",
       "sku_drift": false,
-      "verdict": "UNRESOLVED",
-      "detail": "live source unavailable (see errors)"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "41674491035788",
-      "tier": "delta-max-double-kit-2-x-200w-rigid-panels",
-      "sku_stored": "DELTA-MAX-DOUBLE",
-      "sku_drift": false,
-      "sku_live": "DELTA-MAX-DOUBLE",
+      "sku_live": "RS-B12200",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac240p",
-      "variant_id": "46560101597420",
-      "tier": "bluetti-ac240p-only",
-      "sku_stored": "P-AC240P-US-GY-BL-010",
+      "product_id": "bluetti-ac200l",
+      "variant_id": "46535814578412",
+      "tier": "ac200l-200w-solar-panel",
+      "sku_stored": null,
       "sku_drift": false,
-      "sku_live": "P-AC240P-US-GY-BL-010",
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
+    },
+    {
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-alpha-5-pro",
+      "variant_id": "40460663029809",
+      "tier": "3-batteries",
+      "sku_stored": "RS-B5121P-3",
+      "sku_drift": false,
+      "sku_live": "RS-B5121P-3",
       "verdict": "CLEAN"
     },
     {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "41674484908172",
-      "tier": "delta-max-eclipse-kit-1-x-200w-folding-panel",
-      "sku_stored": "DELTA-MAX-ECLIPSE",
+      "retailer_id": "wild-oak-trail",
+      "product_id": "bluetti-ac180",
+      "variant_id": "46537846194412",
+      "tier": "ac180-350w-solar-panel",
+      "sku_stored": null,
       "sku_drift": false,
-      "sku_live": "DELTA-MAX-ECLIPSE",
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-delta-pro-3",
+      "variant_id": "43048314863756",
+      "tier": "quad-kit-4-x-200w-rigid-panels",
+      "sku_stored": "ECOFLOW-DELTA-PRO-3-QUAD",
+      "sku_drift": false,
+      "sku_live": "ECOFLOW-DELTA-PRO-3-QUAD",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "44532345340140",
+      "tier": "ecoflow-delta-max-2000-4-220w-solar-panel",
+      "sku_stored": "TMR310-4MS430-US",
+      "sku_drift": false,
+      "sku_live": "TMR310-4MS430-US",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-400",
-      "variant_id": "39871819350065",
-      "tier": "8-panels",
-      "sku_stored": "RS-M400-8",
+      "product_id": "rich-solar-mega-410",
+      "variant_id": "41033316073521",
+      "tier": "36-panels",
+      "sku_stored": "RS-M410-36",
       "sku_drift": false,
-      "sku_live": "RS-M400-8",
+      "sku_live": "RS-M410-36",
       "verdict": "CLEAN"
     },
     {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "rich-solar-mega-400",
-      "variant_id": "43618484912364",
-      "tier": "10-solar-panels",
-      "sku_stored": "RS-M400-10",
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-delta-pro-3-extra-battery",
+      "variant_id": "43056443293836",
+      "tier": "default",
+      "sku_stored": "EFDELTAPRO3EB",
       "sku_drift": false,
-      "sku_live": "RS-M400-10",
+      "sku_live": "EFDELTAPRO3EB",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "alte-store",
+      "product_id": "enphase-iq-system-controller-3",
+      "variant_id": "46166688661723",
+      "tier": "default",
+      "sku_stored": "SC200D111C240US01",
+      "sku_drift": false,
+      "sku_live": "SC200D111C240US01",
       "verdict": "CLEAN"
     }
   ],
   "alarms": [],
   "notices": [],
-  "errors": [
-    "HTTP 404 for https://www.altestore.com/products/midnite-solar-mnbcb-2000-200-2000-amp-battery-combiner-box.json?_hb=1793676019395"
-  ],
-  "live_requests_used": 15,
+  "errors": [],
+  "live_requests_used": 18,
   "budget": 25,
   "params": {
     "all": false,
