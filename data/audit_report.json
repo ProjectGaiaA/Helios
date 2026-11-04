@@ -1,42 +1,81 @@
 {
-  "timestamp": "2026-11-03T18:34:44.949958+00:00",
+  "timestamp": "2026-11-04T01:52:38.203506+00:00",
   "verified": 10,
   "attempted": 10,
   "verdict_counts": {
-    "CLEAN": 8,
-    "NO_BASELINE": 2
+    "CLEAN": 9,
+    "NO_BASELINE": 1
   },
   "results": [
     {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532344914156",
-      "tier": "ecoflow-delta-max-portable-power-station-main-unit-only",
-      "sku_stored": "DELTA2000-US",
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-mega-400",
+      "variant_id": "46271452643468",
+      "tier": "12-solar-panels",
+      "sku_stored": "RS-M400-12",
       "sku_drift": false,
-      "sku_live": "DELTA2000-US",
+      "sku_live": "RS-M400-12",
       "verdict": "CLEAN"
     },
     {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-alpha-12v-200ah",
-      "variant_id": "39601356472369",
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-mega-250",
+      "variant_id": "41919754109068",
       "tier": "default",
-      "sku_stored": "RS-B12200",
+      "sku_stored": "RS-M250",
       "sku_drift": false,
-      "sku_live": "RS-B12200",
+      "sku_live": "RS-M250",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-river-3",
+      "variant_id": "43432948203660",
+      "tier": "eclipse-kit-1-x-100w-rigid-panel",
+      "sku_stored": "RIVER-3-ECLIPSE",
+      "sku_drift": false,
+      "sku_live": "RIVER-3-ECLIPSE",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac200l",
-      "variant_id": "46535814578412",
-      "tier": "ac200l-200w-solar-panel",
-      "sku_stored": null,
+      "product_id": "ecoflow-delta-pro-3",
+      "variant_id": "45371860484332",
+      "tier": "ecoflow-delta-pro-3-main-unit-only",
+      "sku_stored": "EFDELTAPRO3-US",
       "sku_drift": false,
-      "sku_live": null,
-      "verdict": "NO_BASELINE",
-      "detail": "hops agree but stored row has no sku - drift not evaluable"
+      "sku_live": "EFDELTAPRO3-US",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-alpha-5-pro",
+      "variant_id": "44040562638988",
+      "tier": "alpha-5-pro-self-heating-2-batteries",
+      "sku_stored": "RS-B5121H-2",
+      "sku_drift": false,
+      "sku_live": "RS-B5121H-2",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "rich-solar-mega-410",
+      "variant_id": "44039996244204",
+      "tier": "8-solar-panels",
+      "sku_stored": "RS-M410-8",
+      "sku_drift": false,
+      "sku_live": "RS-M410-8",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-delta-pro-3",
+      "variant_id": "46524781133964",
+      "tier": "hex-kit-6-x-200w-rigid-panels",
+      "sku_stored": "ECOFLOW-DELTA-PRO-3-HEX",
+      "sku_drift": false,
+      "sku_live": "ECOFLOW-DELTA-PRO-3-HEX",
+      "verdict": "CLEAN"
     },
     {
       "retailer_id": "rich-solar",
@@ -50,9 +89,9 @@
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac180",
-      "variant_id": "46537846194412",
-      "tier": "ac180-350w-solar-panel",
+      "product_id": "bluetti-ac200l",
+      "variant_id": "46535814512876",
+      "tier": "ac200l-2-b300k-batteries-2-free-200w-panels",
       "sku_stored": null,
       "sku_drift": false,
       "sku_live": null,
@@ -61,59 +100,19 @@
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-pro-3",
-      "variant_id": "43048314863756",
-      "tier": "quad-kit-4-x-200w-rigid-panels",
-      "sku_stored": "ECOFLOW-DELTA-PRO-3-QUAD",
+      "product_id": "rich-solar-alpha-24v-100ah",
+      "variant_id": "43258631815308",
+      "tier": "alpha-4-self-heating-and-bluetooth",
+      "sku_stored": "RS-B241S",
       "sku_drift": false,
-      "sku_live": "ECOFLOW-DELTA-PRO-3-QUAD",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532345340140",
-      "tier": "ecoflow-delta-max-2000-4-220w-solar-panel",
-      "sku_stored": "TMR310-4MS430-US",
-      "sku_drift": false,
-      "sku_live": "TMR310-4MS430-US",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-410",
-      "variant_id": "41033316073521",
-      "tier": "36-panels",
-      "sku_stored": "RS-M410-36",
-      "sku_drift": false,
-      "sku_live": "RS-M410-36",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-pro-3-extra-battery",
-      "variant_id": "43056443293836",
-      "tier": "default",
-      "sku_stored": "EFDELTAPRO3EB",
-      "sku_drift": false,
-      "sku_live": "EFDELTAPRO3EB",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "alte-store",
-      "product_id": "enphase-iq-system-controller-3",
-      "variant_id": "46166688661723",
-      "tier": "default",
-      "sku_stored": "SC200D111C240US01",
-      "sku_drift": false,
-      "sku_live": "SC200D111C240US01",
+      "sku_live": "RS-B241S",
       "verdict": "CLEAN"
     }
   ],
   "alarms": [],
   "notices": [],
   "errors": [],
-  "live_requests_used": 18,
+  "live_requests_used": 20,
   "budget": 25,
   "params": {
     "all": false,
