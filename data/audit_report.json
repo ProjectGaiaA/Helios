@@ -1,42 +1,72 @@
 {
-  "timestamp": "2026-11-06T18:09:50.250120+00:00",
+  "timestamp": "2026-11-07T01:20:49.373706+00:00",
   "verified": 10,
   "attempted": 10,
   "verdict_counts": {
-    "CLEAN": 7,
-    "NO_BASELINE": 3
+    "CLEAN": 8,
+    "NO_BASELINE": 2
   },
   "results": [
     {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "rich-solar-mega-410",
-      "variant_id": "44039996276972",
-      "tier": "10-solar-panels",
-      "sku_stored": "RS-M410-9",
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-mega-200",
+      "variant_id": "40539735916593",
+      "tier": "default",
+      "sku_stored": "RS-M200",
       "sku_drift": false,
-      "sku_live": "RS-M410-9",
+      "sku_live": "RS-M200",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac200l",
-      "variant_id": "46535814643948",
-      "tier": "ac200l-charger-1",
+      "product_id": "ecoflow-smart-generator-4000",
+      "variant_id": "45712425648364",
+      "tier": "ecoflow-smart-generator-4000-dual-fuel-only",
+      "sku_stored": "EFSG4000-US-EPA",
+      "sku_drift": false,
+      "sku_live": "EFSG4000-US-EPA",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-mega-400",
+      "variant_id": "46271452577932",
+      "tier": "8-solar-panels",
+      "sku_stored": "RS-M400-8",
+      "sku_drift": false,
+      "sku_live": "RS-M400-8",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-river-2-pro",
+      "variant_id": "44532079001836",
+      "tier": "ecoflow-river-2-pro-1-220w-portable-solar-panel",
+      "sku_stored": "RIVER2PRO-220-1-US",
+      "sku_drift": false,
+      "sku_live": "RIVER2PRO-220-1-US",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-alpha-12v-100ah",
+      "variant_id": "43258614907020",
+      "tier": "alpha-1",
+      "sku_stored": "RS-B121S",
+      "sku_drift": false,
+      "sku_live": "RS-B121S",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "bluetti-ac240p",
+      "variant_id": "46560101662956",
+      "tier": "ac240p-350w-solar",
       "sku_stored": null,
       "sku_drift": false,
       "sku_live": null,
       "verdict": "NO_BASELINE",
       "detail": "hops agree but stored row has no sku - drift not evaluable"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "eg4-wallmount-indoor-16kwh",
-      "variant_id": "45192132460684",
-      "tier": "default",
-      "sku_stored": "1510984",
-      "sku_drift": false,
-      "sku_live": "1510984",
-      "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
@@ -52,69 +82,36 @@
     {
       "retailer_id": "shop-solar-kits",
       "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "44040562770060",
-      "tier": "alpha-5-pro-self-heating-6-batteries",
-      "sku_stored": "RS-B5121H-6",
+      "variant_id": "43171241394316",
+      "tier": "alpha-5-pro-standard-1-battery-only",
+      "sku_stored": "RS-B5121P",
       "sku_drift": false,
-      "sku_live": "RS-B5121H-6",
+      "sku_live": "RS-B5121P",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-smart-generator-4000",
-      "variant_id": "45712425681132",
-      "tier": "ecoflow-smart-generator-4000-dual-fuel-with-delta-pro-3",
-      "sku_stored": null,
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "44532345012460",
+      "tier": "ecoflow-delta-max-2000-2-110w-solar-panel",
+      "sku_stored": "DELTAMax2000US112",
       "sku_drift": false,
-      "sku_live": null,
-      "verdict": "NO_BASELINE",
-      "detail": "hops agree but stored row has no sku - drift not evaluable"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-pro-ultra",
-      "variant_id": "42007015981196",
-      "tier": "delta-pro-ultra-inverter-4-x-battery-24kwh",
-      "sku_stored": "EFDPUPCS-4-BP",
-      "sku_drift": false,
-      "sku_live": "EFDPUPCS-4-BP",
+      "sku_live": "DELTAMax2000US112",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-mega-200",
-      "variant_id": "41583364931724",
+      "product_id": "midnite-mnpv12",
+      "variant_id": "31267132571788",
       "tier": "default",
-      "sku_stored": "RS-M200",
+      "sku_stored": "MNPV12",
       "sku_drift": false,
-      "sku_live": "RS-M200",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-river-2-pro",
-      "variant_id": "44532078969068",
-      "tier": "ecoflow-river-2-pro-1-160w-portable-solar-panel",
-      "sku_stored": "RIVER2PRO-160-1-US",
-      "sku_drift": false,
-      "sku_live": "RIVER2PRO-160-1-US",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "rich-solar-mega-200",
-      "variant_id": "45167084994796",
-      "tier": "24v",
-      "sku_stored": "RS-M200D",
-      "sku_drift": false,
-      "sku_live": "RS-M200D",
+      "sku_live": "MNPV12",
       "verdict": "CLEAN"
     }
   ],
   "alarms": [],
-  "notices": [
-    "QUOTE_NOT_FOUND: eg4-wallmount-indoor-16kwh at shop-solar-kits - specs.capacity_quotes text is not present in the live listing; re-transcribe it"
-  ],
+  "notices": [],
   "errors": [],
   "live_requests_used": 20,
   "budget": 25,
