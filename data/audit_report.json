@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-11T01:41:30.873682+00:00",
+  "timestamp": "2026-11-11T18:43:15.393153+00:00",
   "verified": 10,
   "attempted": 10,
   "verdict_counts": {
@@ -9,32 +9,94 @@
   "results": [
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-smart-generator-4000",
-      "variant_id": "43492014194828",
-      "tier": "default",
-      "sku_stored": "EFSG4000-US-EPA",
+      "product_id": "bluetti-ac240p",
+      "variant_id": "42792151253132",
+      "tier": "nomad-kit-2-x-200w-folding-panels",
+      "sku_stored": "BLUETTI-AC240P-NOMAD",
       "sku_drift": false,
-      "sku_live": "EFSG4000-US-EPA",
+      "sku_live": "BLUETTI-AC240P-NOMAD",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "rich-solar-alpha-12v-200ah",
+      "variant_id": "43676366307564",
+      "tier": "default",
+      "sku_stored": "RS-B12200",
+      "sku_drift": false,
+      "sku_live": "RS-B12200",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "bluetti-ac200l",
+      "variant_id": "46535814447340",
+      "tier": "ac200l-only",
+      "sku_stored": null,
+      "sku_drift": false,
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-alpha-5-pro",
+      "variant_id": "43171241459852",
+      "tier": "alpha-5-pro-standard-3-batteries",
+      "sku_stored": "RS-B5121P-3",
+      "sku_drift": false,
+      "sku_live": "RS-B5121P-3",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-delta-pro-ultra",
+      "variant_id": "42007015981196",
+      "tier": "delta-pro-ultra-inverter-4-x-battery-24kwh",
+      "sku_stored": "EFDPUPCS-4-BP",
+      "sku_drift": false,
+      "sku_live": "EFDPUPCS-4-BP",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
       "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "43171241492620",
-      "tier": "alpha-5-pro-standard-4-batteries",
-      "sku_stored": "RS-B5121P-4",
+      "variant_id": "44040562737292",
+      "tier": "alpha-5-pro-self-heating-5-batteries",
+      "sku_stored": "RS-B5121H-5",
       "sku_drift": false,
-      "sku_live": "RS-B5121P-4",
+      "sku_live": "RS-B5121H-5",
       "verdict": "CLEAN"
     },
     {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "anker-solix-f2600",
-      "variant_id": "41837963411596",
-      "tier": "double-kit-2-x-200w-rigid-panels",
-      "sku_stored": "ANKER-F2600-DOUBLE-KIT",
+      "retailer_id": "wild-oak-trail",
+      "product_id": "bluetti-ac200l",
+      "variant_id": "46535814512876",
+      "tier": "ac200l-2-b300k-batteries-2-free-200w-panels",
+      "sku_stored": null,
       "sku_drift": false,
-      "sku_live": "ANKER-F2600-DOUBLE-KIT",
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-alpha-5-pro",
+      "variant_id": "43171241558156",
+      "tier": "alpha-5-pro-standard-6-batteries",
+      "sku_stored": "RS-B5121P-6",
+      "sku_drift": false,
+      "sku_live": "RS-B5121P-6",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "rich-solar-mega-400",
+      "variant_id": "43618484945132",
+      "tier": "12-solar-panels",
+      "sku_stored": "RS-M400-12",
+      "sku_drift": false,
+      "sku_live": "RS-M400-12",
       "verdict": "CLEAN"
     },
     {
@@ -46,68 +108,6 @@
       "sku_drift": false,
       "sku_live": "50170171",
       "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "45092895228140",
-      "tier": "ecoflow-delta-max-with-100w-12v-solar-panel-bundle",
-      "sku_stored": null,
-      "sku_drift": false,
-      "sku_live": null,
-      "verdict": "NO_BASELINE",
-      "detail": "hops agree but stored row has no sku - drift not evaluable"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "40460663062577",
-      "tier": "4-batteries",
-      "sku_stored": "RS-B5121P-4",
-      "sku_drift": false,
-      "sku_live": "RS-B5121P-4",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-river-3",
-      "variant_id": "46868877508844",
-      "tier": "default",
-      "sku_stored": "EFRIVER3-US",
-      "sku_drift": false,
-      "sku_live": "EFRIVER3-US",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "eg4-ll-s-48v-100ah",
-      "variant_id": "41798635716748",
-      "tier": "6-batteries-6-slot-rack",
-      "sku_stored": "EG4-1511082-6",
-      "sku_drift": false,
-      "sku_live": "EG4-1511082-6",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac240p",
-      "variant_id": "46560101662956",
-      "tier": "ac240p-350w-solar",
-      "sku_stored": null,
-      "sku_drift": false,
-      "sku_live": null,
-      "verdict": "NO_BASELINE",
-      "detail": "hops agree but stored row has no sku - drift not evaluable"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "45092900864236",
-      "tier": "ecoflow-delta-max-smart-generator-dual-fuel",
-      "sku_stored": "DM2000-DG200",
-      "sku_drift": false,
-      "sku_live": "DM2000-DG200",
-      "verdict": "CLEAN"
     }
   ],
   "alarms": [],
@@ -115,7 +115,7 @@
     "QUOTE_NOT_FOUND: lion-ut-1300 at wild-oak-trail - specs.capacity_quotes text is not present in the live listing; re-transcribe it"
   ],
   "errors": [],
-  "live_requests_used": 18,
+  "live_requests_used": 14,
   "budget": 25,
   "params": {
     "all": false,
