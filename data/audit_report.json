@@ -1,121 +1,121 @@
 {
-  "timestamp": "2026-11-11T18:43:15.393153+00:00",
-  "verified": 10,
+  "timestamp": "2026-11-12T02:42:22.595234+00:00",
+  "verified": 9,
   "attempted": 10,
   "verdict_counts": {
-    "CLEAN": 8,
-    "NO_BASELINE": 2
+    "CLEAN": 9,
+    "UNRESOLVED": 1
   },
   "results": [
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "bluetti-ac240p",
-      "variant_id": "42792151253132",
-      "tier": "nomad-kit-2-x-200w-folding-panels",
-      "sku_stored": "BLUETTI-AC240P-NOMAD",
+      "product_id": "eg4-ll-s-48v-100ah",
+      "variant_id": "41798635716748",
+      "tier": "6-batteries-6-slot-rack",
+      "sku_stored": "EG4-1511082-6",
       "sku_drift": false,
-      "sku_live": "BLUETTI-AC240P-NOMAD",
+      "sku_live": "EG4-1511082-6",
       "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "rich-solar-alpha-12v-200ah",
-      "variant_id": "43676366307564",
-      "tier": "default",
-      "sku_stored": "RS-B12200",
-      "sku_drift": false,
-      "sku_live": "RS-B12200",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac200l",
-      "variant_id": "46535814447340",
-      "tier": "ac200l-only",
-      "sku_stored": null,
-      "sku_drift": false,
-      "sku_live": null,
-      "verdict": "NO_BASELINE",
-      "detail": "hops agree but stored row has no sku - drift not evaluable"
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "43171241459852",
-      "tier": "alpha-5-pro-standard-3-batteries",
-      "sku_stored": "RS-B5121P-3",
+      "product_id": "eg4-ll-s-48v-100ah",
+      "variant_id": "41798635520140",
+      "tier": "2-batteries-only",
+      "sku_stored": "EG4-1511082-2",
       "sku_drift": false,
-      "sku_live": "RS-B5121P-3",
+      "sku_live": "EG4-1511082-2",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
       "product_id": "ecoflow-delta-pro-ultra",
-      "variant_id": "42007015981196",
-      "tier": "delta-pro-ultra-inverter-4-x-battery-24kwh",
-      "sku_stored": "EFDPUPCS-4-BP",
+      "variant_id": "42007015882892",
+      "tier": "delta-pro-ultra-inverter-1-x-6kwh-battery",
+      "sku_stored": "EFDPUPCS-BP",
       "sku_drift": false,
-      "sku_live": "EFDPUPCS-4-BP",
+      "sku_live": "EFDPUPCS-BP",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "rich-solar-mega-200-briefcase",
+      "variant_id": "45166261272812",
+      "tier": "rich-solar-200-watt-12v-briefcase-panel-with-controller",
+      "sku_stored": "RS-X200BC",
+      "sku_drift": false,
+      "sku_live": "RS-X200BC",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "44040562737292",
-      "tier": "alpha-5-pro-self-heating-5-batteries",
-      "sku_stored": "RS-B5121H-5",
+      "product_id": "eg4-ll-s-48v-100ah",
+      "variant_id": "41798635487372",
+      "tier": "1-battery-only",
+      "sku_stored": "EG4-1511082",
       "sku_drift": false,
-      "sku_live": "RS-B5121H-5",
+      "sku_live": "EG4-1511082",
       "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac200l",
-      "variant_id": "46535814512876",
-      "tier": "ac200l-2-b300k-batteries-2-free-200w-panels",
-      "sku_stored": null,
-      "sku_drift": false,
-      "sku_live": null,
-      "verdict": "NO_BASELINE",
-      "detail": "hops agree but stored row has no sku - drift not evaluable"
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "43171241558156",
-      "tier": "alpha-5-pro-standard-6-batteries",
-      "sku_stored": "RS-B5121P-6",
+      "product_id": "anker-solix-f2600",
+      "variant_id": "41837963444364",
+      "tier": "nomad-kit-2-x-200w-folding-panels",
+      "sku_stored": "ANKER-F2600-NOMAD-KIT",
       "sku_drift": false,
-      "sku_live": "RS-B5121P-6",
+      "sku_live": "ANKER-F2600-NOMAD-KIT",
       "verdict": "CLEAN"
     },
     {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "rich-solar-mega-400",
-      "variant_id": "43618484945132",
-      "tier": "12-solar-panels",
-      "sku_stored": "RS-M400-12",
-      "sku_drift": false,
-      "sku_live": "RS-M400-12",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "lion-ut-1300",
-      "variant_id": "31599398584410",
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-alpha-24v-100ah",
+      "variant_id": "39956821114929",
       "tier": "default",
-      "sku_stored": "50170171",
+      "sku_stored": "RS-B24100",
       "sku_drift": false,
-      "sku_live": "50170171",
+      "sku_live": "RS-B24100",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "rich-solar-mega-250",
+      "variant_id": "41919754109068",
+      "tier": "default",
+      "sku_stored": "RS-M250",
+      "sku_drift": false,
+      "sku_live": "RS-M250",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "alte-store",
+      "product_id": "midnite-mnbcb-2000-200",
+      "variant_id": "46166709534939",
+      "tier": "default",
+      "sku_stored": "MNBCB 2000/200",
+      "sku_drift": false,
+      "verdict": "UNRESOLVED",
+      "detail": "live source unavailable (see errors)"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "44532345209068",
+      "tier": "ecoflow-delta-max-2000-4-160w-solar-panel",
+      "sku_stored": "DELTAMax2000US164",
+      "sku_drift": false,
+      "sku_live": "DELTAMax2000US164",
       "verdict": "CLEAN"
     }
   ],
   "alarms": [],
   "notices": [
-    "QUOTE_NOT_FOUND: lion-ut-1300 at wild-oak-trail - specs.capacity_quotes text is not present in the live listing; re-transcribe it"
+    "QUOTE_NOT_FOUND: rich-solar-alpha-24v-100ah at rich-solar - specs.capacity_quotes text is not present in the live listing; re-transcribe it"
   ],
-  "errors": [],
-  "live_requests_used": 14,
+  "errors": [
+    "HTTP 404 for https://www.altestore.com/products/midnite-solar-mnbcb-2000-200-2000-amp-battery-combiner-box.json?_hb=1794451407254"
+  ],
+  "live_requests_used": 15,
   "budget": 25,
   "params": {
     "all": false,
