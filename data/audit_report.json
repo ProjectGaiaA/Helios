@@ -1,121 +1,118 @@
 {
-  "timestamp": "2026-11-12T02:42:22.595234+00:00",
-  "verified": 9,
+  "timestamp": "2026-11-12T19:02:47.605560+00:00",
+  "verified": 10,
   "attempted": 10,
   "verdict_counts": {
-    "CLEAN": 9,
-    "UNRESOLVED": 1
+    "NO_BASELINE": 1,
+    "CLEAN": 9
   },
   "results": [
     {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "eg4-ll-s-48v-100ah",
-      "variant_id": "41798635716748",
-      "tier": "6-batteries-6-slot-rack",
-      "sku_stored": "EG4-1511082-6",
+      "retailer_id": "wild-oak-trail",
+      "product_id": "bluetti-ac180",
+      "variant_id": "46537845997804",
+      "tier": "ac180-only",
+      "sku_stored": null,
       "sku_drift": false,
-      "sku_live": "EG4-1511082-6",
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
+    },
+    {
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-mega-410",
+      "variant_id": "40014992736305",
+      "tier": "10-panels",
+      "sku_stored": "RS-M410-10",
+      "sku_drift": false,
+      "sku_live": "RS-M410-10",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "eg4-ll-s-48v-100ah",
-      "variant_id": "41798635520140",
-      "tier": "2-batteries-only",
-      "sku_stored": "EG4-1511082-2",
+      "product_id": "eg4-6000xp",
+      "variant_id": "41788288532620",
+      "tier": "default",
+      "sku_stored": "1511090",
       "sku_drift": false,
-      "sku_live": "EG4-1511082-2",
+      "sku_live": "1511090",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-mega-400",
+      "variant_id": "39871819415601",
+      "tier": "12-panels",
+      "sku_stored": "RS-M400-12",
+      "sku_drift": false,
+      "sku_live": "RS-M400-12",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "44532345077996",
+      "tier": "ecoflow-delta-max-2000-4-110w-solar-panel",
+      "sku_stored": "DELTAMax2000US114",
+      "sku_drift": false,
+      "sku_live": "DELTAMax2000US114",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "bluetti-ac240p",
+      "variant_id": "46560101597420",
+      "tier": "bluetti-ac240p-only",
+      "sku_stored": "P-AC240P-US-GY-BL-010",
+      "sku_drift": false,
+      "sku_live": "P-AC240P-US-GY-BL-010",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
       "product_id": "ecoflow-delta-pro-ultra",
-      "variant_id": "42007015882892",
-      "tier": "delta-pro-ultra-inverter-1-x-6kwh-battery",
-      "sku_stored": "EFDPUPCS-BP",
+      "variant_id": "42007015948428",
+      "tier": "delta-pro-ultra-inverter-3-x-battery-18kwh",
+      "sku_stored": "EFDPUPCS-3-BP",
       "sku_drift": false,
-      "sku_live": "EFDPUPCS-BP",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "rich-solar-mega-200-briefcase",
-      "variant_id": "45166261272812",
-      "tier": "rich-solar-200-watt-12v-briefcase-panel-with-controller",
-      "sku_stored": "RS-X200BC",
-      "sku_drift": false,
-      "sku_live": "RS-X200BC",
+      "sku_live": "EFDPUPCS-3-BP",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "eg4-ll-s-48v-100ah",
-      "variant_id": "41798635487372",
-      "tier": "1-battery-only",
-      "sku_stored": "EG4-1511082",
+      "product_id": "ecoflow-delta-pro-3-extra-battery",
+      "variant_id": "43056443293836",
+      "tier": "default",
+      "sku_stored": "EFDELTAPRO3EB",
       "sku_drift": false,
-      "sku_live": "EG4-1511082",
+      "sku_live": "EFDELTAPRO3EB",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "anker-solix-f2600",
-      "variant_id": "41837963444364",
-      "tier": "nomad-kit-2-x-200w-folding-panels",
-      "sku_stored": "ANKER-F2600-NOMAD-KIT",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "41677437632652",
+      "tier": "delta-max-hex-kit-6-x-100w-rigid-panels",
+      "sku_stored": "DELTA-MAX-HEX",
       "sku_drift": false,
-      "sku_live": "ANKER-F2600-NOMAD-KIT",
+      "sku_live": "DELTA-MAX-HEX",
       "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-alpha-24v-100ah",
-      "variant_id": "39956821114929",
-      "tier": "default",
-      "sku_stored": "RS-B24100",
-      "sku_drift": false,
-      "sku_live": "RS-B24100",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-mega-250",
-      "variant_id": "41919754109068",
-      "tier": "default",
-      "sku_stored": "RS-M250",
-      "sku_drift": false,
-      "sku_live": "RS-M250",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "alte-store",
-      "product_id": "midnite-mnbcb-2000-200",
-      "variant_id": "46166709534939",
-      "tier": "default",
-      "sku_stored": "MNBCB 2000/200",
-      "sku_drift": false,
-      "verdict": "UNRESOLVED",
-      "detail": "live source unavailable (see errors)"
     },
     {
       "retailer_id": "wild-oak-trail",
       "product_id": "ecoflow-delta-max",
-      "variant_id": "44532345209068",
-      "tier": "ecoflow-delta-max-2000-4-160w-solar-panel",
-      "sku_stored": "DELTAMax2000US164",
+      "variant_id": "44532345045228",
+      "tier": "ecoflow-delta-max-2000-3-110w-solar-panel",
+      "sku_stored": "DELTAMax2000US113",
       "sku_drift": false,
-      "sku_live": "DELTAMax2000US164",
+      "sku_live": "DELTAMax2000US113",
       "verdict": "CLEAN"
     }
   ],
   "alarms": [],
-  "notices": [
-    "QUOTE_NOT_FOUND: rich-solar-alpha-24v-100ah at rich-solar - specs.capacity_quotes text is not present in the live listing; re-transcribe it"
-  ],
-  "errors": [
-    "HTTP 404 for https://www.altestore.com/products/midnite-solar-mnbcb-2000-200-2000-amp-battery-combiner-box.json?_hb=1794451407254"
-  ],
-  "live_requests_used": 15,
+  "notices": [],
+  "errors": [],
+  "live_requests_used": 18,
   "budget": 25,
   "params": {
     "all": false,
