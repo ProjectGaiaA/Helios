@@ -1,78 +1,37 @@
 {
-  "timestamp": "2026-11-18T03:18:55.806975+00:00",
-  "verified": 9,
+  "timestamp": "2026-11-18T19:35:43.653153+00:00",
+  "verified": 10,
   "attempted": 10,
   "verdict_counts": {
     "CLEAN": 8,
-    "UNRESOLVED": 1,
-    "NO_BASELINE": 1
+    "NO_BASELINE": 2
   },
   "results": [
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-pro-ultra",
-      "variant_id": "42007016046732",
-      "tier": "delta-pro-ultra-inverter-1-x-6kwh-battery-smart-home-panel-2",
-      "sku_stored": "EFDPU-BP-SHP2-US",
+      "product_id": "ecoflow-delta-pro-3",
+      "variant_id": "46524781133964",
+      "tier": "hex-kit-6-x-200w-rigid-panels",
+      "sku_stored": "ECOFLOW-DELTA-PRO-3-HEX",
       "sku_drift": false,
-      "sku_live": "EFDPU-BP-SHP2-US",
+      "sku_live": "ECOFLOW-DELTA-PRO-3-HEX",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "rich-solar",
-      "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "40460663095345",
-      "tier": "5-batteries",
-      "sku_stored": "RS-B5121P-5",
+      "product_id": "rich-solar-mega-400",
+      "variant_id": "39871819350065",
+      "tier": "8-panels",
+      "sku_stored": "RS-M400-8",
       "sku_drift": false,
-      "sku_live": "RS-B5121P-5",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "lion-ut-1300",
-      "variant_id": "31599398584410",
-      "tier": "default",
-      "sku_stored": "50170171",
-      "sku_drift": false,
-      "sku_live": "50170171",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-river-3",
-      "variant_id": "43432948203660",
-      "tier": "eclipse-kit-1-x-100w-rigid-panel",
-      "sku_stored": "RIVER-3-ECLIPSE",
-      "sku_drift": false,
-      "sku_live": "RIVER-3-ECLIPSE",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "alte-store",
-      "product_id": "enphase-iq-battery-5p",
-      "variant_id": "46166688301275",
-      "tier": "default",
-      "sku_stored": "IQBATTERY-5P-1P-NA",
-      "sku_drift": false,
-      "verdict": "UNRESOLVED",
-      "detail": "live source unavailable (see errors)"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532345143532",
-      "tier": "ecoflow-delta-max-2000-2-160w-solar-panel",
-      "sku_stored": "DELTAMax2000US162",
-      "sku_drift": false,
-      "sku_live": "DELTAMax2000US162",
+      "sku_live": "RS-M400-8",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
       "product_id": "bluetti-ac180",
-      "variant_id": "46555231060204",
-      "tier": "ac180p-charger-1",
+      "variant_id": "46537846063340",
+      "tier": "ac180-200w-solar-panel",
       "sku_stored": null,
       "sku_drift": false,
       "sku_live": null,
@@ -82,42 +41,79 @@
     {
       "retailer_id": "wild-oak-trail",
       "product_id": "ecoflow-delta-max",
-      "variant_id": "44532345045228",
-      "tier": "ecoflow-delta-max-2000-3-110w-solar-panel",
-      "sku_stored": "DELTAMax2000US113",
+      "variant_id": "44532345012460",
+      "tier": "ecoflow-delta-max-2000-2-110w-solar-panel",
+      "sku_stored": "DELTAMax2000US112",
       "sku_drift": false,
-      "sku_live": "DELTAMax2000US113",
+      "sku_live": "DELTAMax2000US112",
       "verdict": "CLEAN"
     },
     {
-      "retailer_id": "shop-solar-kits",
+      "retailer_id": "wild-oak-trail",
+      "product_id": "bluetti-ac200l",
+      "variant_id": "46535814742252",
+      "tier": "ac200l-d40",
+      "sku_stored": null,
+      "sku_drift": false,
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
+    },
+    {
+      "retailer_id": "rich-solar",
       "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "43171241459852",
-      "tier": "alpha-5-pro-standard-3-batteries",
-      "sku_stored": "RS-B5121P-3",
+      "variant_id": "40460680560689",
+      "tier": "6-batteries",
+      "sku_stored": "RS-B5121P-6",
       "sku_drift": false,
-      "sku_live": "RS-B5121P-3",
+      "sku_live": "RS-B5121P-6",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-river-3",
-      "variant_id": "43432948301964",
-      "tier": "river-3-main-unit-only",
-      "sku_stored": "EFRIVER3-US",
+      "product_id": "ecoflow-delta-pro-3-extra-battery",
+      "variant_id": "43056443293836",
+      "tier": "default",
+      "sku_stored": "EFDELTAPRO3EB",
       "sku_drift": false,
-      "sku_live": "EFRIVER3-US",
+      "sku_live": "EFDELTAPRO3EB",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "41677437730956",
+      "tier": "delta-max-quad-kit-4-x-200w-rigid-panels",
+      "sku_stored": "DELTA-MAX-QUAD",
+      "sku_drift": false,
+      "sku_live": "DELTA-MAX-QUAD",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "midnite-mnpv12",
+      "variant_id": "31267132571788",
+      "tier": "default",
+      "sku_stored": "MNPV12",
+      "sku_drift": false,
+      "sku_live": "MNPV12",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "midnite-mnbcb-2000-200",
+      "variant_id": "41637025906828",
+      "tier": "default",
+      "sku_stored": "MNBCB-2000/200",
+      "sku_drift": false,
+      "sku_live": "MNBCB-2000/200",
       "verdict": "CLEAN"
     }
   ],
   "alarms": [],
-  "notices": [
-    "QUOTE_NOT_FOUND: lion-ut-1300 at wild-oak-trail - specs.capacity_quotes text is not present in the live listing; re-transcribe it"
-  ],
-  "errors": [
-    "HTTP 404 for https://www.altestore.com/products/enphase-iqbattery-5p-1p-na-battery-kit-assembly.json?_hb=1794971983685"
-  ],
-  "live_requests_used": 15,
+  "notices": [],
+  "errors": [],
+  "live_requests_used": 20,
   "budget": 25,
   "params": {
     "all": false,
