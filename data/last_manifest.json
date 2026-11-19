@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-19T03:02:50.244635+00:00",
+  "timestamp": "2026-11-19T19:39:58.714320+00:00",
   "retailers": [
     {
       "retailer_id": "shop-solar-kits",
@@ -31,7 +31,7 @@
           "nomad-kit-2-x-200w-folding-panels": 1509.65,
           "basecamp-kit-1-x-200w-folding-panel-emp-bag": 1889.99,
           "anker-solix-f2600-expansion-battery": 1899.0,
-          "anker-solix-f2600-main-unit-only": 999.0
+          "anker-solix-f2600-main-unit-only": 1299.0
         },
         "eg4-lifepower4:shop-solar-kits": {
           "default": 1470.99
@@ -233,7 +233,7 @@
           "default": 199.0
         },
         "ecoflow-smart-generator-4000:wild-oak-trail": {
-          "ecoflow-smart-generator-4000-dual-fuel-only": 1259.0,
+          "ecoflow-smart-generator-4000-dual-fuel-only": 1196.0,
           "ecoflow-smart-generator-4000-dual-fuel-with-delta-pro-3": 4698.0
         },
         "bluetti-ac240p:wild-oak-trail": {
@@ -376,7 +376,7 @@
       "nomad-kit-2-x-200w-folding-panels": 1509.65,
       "basecamp-kit-1-x-200w-folding-panel-emp-bag": 1889.99,
       "anker-solix-f2600-expansion-battery": 1899.0,
-      "anker-solix-f2600-main-unit-only": 999.0
+      "anker-solix-f2600-main-unit-only": 1299.0
     },
     "eg4-lifepower4:shop-solar-kits": {
       "default": 1470.99
@@ -564,7 +564,7 @@
       "default": 199.0
     },
     "ecoflow-smart-generator-4000:wild-oak-trail": {
-      "ecoflow-smart-generator-4000-dual-fuel-only": 1259.0,
+      "ecoflow-smart-generator-4000-dual-fuel-only": 1196.0,
       "ecoflow-smart-generator-4000-dual-fuel-with-delta-pro-3": 4698.0
     },
     "bluetti-ac240p:wild-oak-trail": {
