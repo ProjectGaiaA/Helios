@@ -1,19 +1,32 @@
 {
-  "timestamp": "2026-11-21T18:13:03.724104+00:00",
-  "verified": 10,
+  "timestamp": "2026-11-22T01:48:00.250076+00:00",
+  "verified": 9,
   "attempted": 10,
   "verdict_counts": {
-    "CLEAN": 10
+    "NO_BASELINE": 2,
+    "CLEAN": 7,
+    "UNRESOLVED": 1
   },
   "results": [
     {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-410",
-      "variant_id": "40014992769073",
-      "tier": "12-panels",
-      "sku_stored": "RS-M410-12",
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-smart-generator-4000",
+      "variant_id": "45712425681132",
+      "tier": "ecoflow-smart-generator-4000-dual-fuel-with-delta-pro-3",
+      "sku_stored": null,
       "sku_drift": false,
-      "sku_live": "RS-M410-12",
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
+    },
+    {
+      "retailer_id": "rich-solar",
+      "product_id": "rich-solar-mega-200",
+      "variant_id": "40539735916593",
+      "tier": "default",
+      "sku_stored": "RS-M200",
+      "sku_drift": false,
+      "sku_live": "RS-M200",
       "verdict": "CLEAN"
     },
     {
@@ -28,82 +41,73 @@
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "midnite-mnbcb-2000-200",
-      "variant_id": "41637025906828",
-      "tier": "default",
-      "sku_stored": "MNBCB-2000/200",
+      "product_id": "ecoflow-delta-pro-ultra",
+      "variant_id": "42007015948428",
+      "tier": "delta-pro-ultra-inverter-3-x-battery-18kwh",
+      "sku_stored": "EFDPUPCS-3-BP",
       "sku_drift": false,
-      "sku_live": "MNBCB-2000/200",
+      "sku_live": "EFDPUPCS-3-BP",
       "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-delta-pro-3",
+      "variant_id": "47170201092332",
+      "tier": "ecoflow-delta-pro-3-with-2-400w-solar-panel",
+      "sku_stored": "DP3-400W2",
+      "sku_drift": false,
+      "sku_live": "DP3-400W2",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "anker-solix-f2600",
+      "variant_id": "41837963411596",
+      "tier": "double-kit-2-x-200w-rigid-panels",
+      "sku_stored": "ANKER-F2600-DOUBLE-KIT",
+      "sku_drift": false,
+      "sku_live": "ANKER-F2600-DOUBLE-KIT",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "bluetti-ac200l",
+      "variant_id": "46535814447340",
+      "tier": "ac200l-only",
+      "sku_stored": null,
+      "sku_drift": false,
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-river-2-pro",
+      "variant_id": "44532078969068",
+      "tier": "ecoflow-river-2-pro-1-160w-portable-solar-panel",
+      "sku_stored": "RIVER2PRO-160-1-US",
+      "sku_drift": false,
+      "sku_live": "RIVER2PRO-160-1-US",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "alte-store",
+      "product_id": "enphase-iq-system-controller-3",
+      "variant_id": "46166688661723",
+      "tier": "default",
+      "sku_stored": "SC200D111C240US01",
+      "sku_drift": false,
+      "verdict": "UNRESOLVED",
+      "detail": "live source unavailable (see errors)"
     },
     {
       "retailer_id": "shop-solar-kits",
       "product_id": "rich-solar-mega-400",
-      "variant_id": "46271452643468",
-      "tier": "12-solar-panels",
-      "sku_stored": "RS-M400-12",
+      "variant_id": "46271452577932",
+      "tier": "8-solar-panels",
+      "sku_stored": "RS-M400-8",
       "sku_drift": false,
-      "sku_live": "RS-M400-12",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-mppt-40a",
-      "variant_id": "34387832930444",
-      "tier": "default",
-      "sku_stored": "RS-MPPT40",
-      "sku_drift": false,
-      "sku_live": "RS-MPPT40",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "41677437632652",
-      "tier": "delta-max-hex-kit-6-x-100w-rigid-panels",
-      "sku_stored": "DELTA-MAX-HEX",
-      "sku_drift": false,
-      "sku_live": "DELTA-MAX-HEX",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-200",
-      "variant_id": "40539735916593",
-      "tier": "default",
-      "sku_stored": "RS-M200",
-      "sku_drift": false,
-      "sku_live": "RS-M200",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532345143532",
-      "tier": "ecoflow-delta-max-2000-2-160w-solar-panel",
-      "sku_stored": "DELTAMax2000US162",
-      "sku_drift": false,
-      "sku_live": "DELTAMax2000US162",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "rich-solar-alpha-5-pro",
-      "variant_id": "43171241459852",
-      "tier": "alpha-5-pro-standard-3-batteries",
-      "sku_stored": "RS-B5121P-3",
-      "sku_drift": false,
-      "sku_live": "RS-B5121P-3",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532345045228",
-      "tier": "ecoflow-delta-max-2000-3-110w-solar-panel",
-      "sku_stored": "DELTAMax2000US113",
-      "sku_drift": false,
-      "sku_live": "DELTAMax2000US113",
+      "sku_live": "RS-M400-8",
       "verdict": "CLEAN"
     }
   ],
@@ -111,8 +115,10 @@
   "notices": [
     "QUOTE_NOT_FOUND: lion-ut-1300 at wild-oak-trail - specs.capacity_quotes text is not present in the live listing; re-transcribe it"
   ],
-  "errors": [],
-  "live_requests_used": 18,
+  "errors": [
+    "HTTP 404 for https://www.altestore.com/products/enphase-sc200d111c240us01-iq-system-controller-3.json?_hb=1795312175518"
+  ],
+  "live_requests_used": 19,
   "budget": 25,
   "params": {
     "all": false,
