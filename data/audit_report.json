@@ -1,68 +1,58 @@
 {
-  "timestamp": "2026-11-22T18:32:33.684946+00:00",
+  "timestamp": "2026-11-23T02:12:36.688394+00:00",
   "verified": 10,
   "attempted": 10,
   "verdict_counts": {
-    "CLEAN": 7,
-    "NO_BASELINE": 3
+    "CLEAN": 8,
+    "NO_BASELINE": 2
   },
   "results": [
     {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-250",
-      "variant_id": "40364378521649",
-      "tier": "default",
-      "sku_stored": "RS-M250",
-      "sku_drift": false,
-      "sku_live": "RS-M250",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "rich-solar",
-      "product_id": "rich-solar-mega-410",
-      "variant_id": "41033316073521",
-      "tier": "36-panels",
-      "sku_stored": "RS-M410-36",
-      "sku_drift": false,
-      "sku_live": "RS-M410-36",
-      "verdict": "CLEAN"
-    },
-    {
       "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-b210-expansion",
-      "variant_id": "46592606634220",
-      "tier": "default",
-      "sku_stored": "P-B210P-US-GY-BL-010",
+      "product_id": "rich-solar-mega-200-briefcase",
+      "variant_id": "45166261240044",
+      "tier": "rich-solar-200-watt-12v-briefcase-panel-only",
+      "sku_stored": "RS-X200B",
       "sku_drift": false,
-      "sku_live": "P-B210P-US-GY-BL-010",
+      "sku_live": "RS-X200B",
       "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-pro-3",
-      "variant_id": "46524781133964",
-      "tier": "hex-kit-6-x-200w-rigid-panels",
-      "sku_stored": "ECOFLOW-DELTA-PRO-3-HEX",
-      "sku_drift": false,
-      "sku_live": "ECOFLOW-DELTA-PRO-3-HEX",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac180",
-      "variant_id": "46537846096108",
-      "tier": "ac180-2-200w-solar-panels",
-      "sku_stored": null,
-      "sku_drift": false,
-      "sku_live": null,
-      "verdict": "NO_BASELINE",
-      "detail": "hops agree but stored row has no sku - drift not evaluable"
     },
     {
       "retailer_id": "wild-oak-trail",
       "product_id": "ecoflow-delta-max",
-      "variant_id": "45092914725100",
-      "tier": "ecoflow-delta-max-with-400w-12v-solar-panel-bundle",
+      "variant_id": "44532345209068",
+      "tier": "ecoflow-delta-max-2000-4-160w-solar-panel",
+      "sku_stored": "DELTAMax2000US164",
+      "sku_drift": false,
+      "sku_live": "DELTAMax2000US164",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "45092907909356",
+      "tier": "ecoflow-delta-max-with-300w-12v-solar-panel-bundle",
+      "sku_stored": null,
+      "sku_drift": false,
+      "sku_live": null,
+      "verdict": "NO_BASELINE",
+      "detail": "hops agree but stored row has no sku - drift not evaluable"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "bluetti-ac240p",
+      "variant_id": "42792151187596",
+      "tier": "bluetti-ac240p-main-unit-only",
+      "sku_stored": "P-AC240P-US-GY-BL-010",
+      "sku_drift": false,
+      "sku_live": "P-AC240P-US-GY-BL-010",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "45092895228140",
+      "tier": "ecoflow-delta-max-with-100w-12v-solar-panel-bundle",
       "sku_stored": null,
       "sku_drift": false,
       "sku_live": null,
@@ -71,52 +61,59 @@
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-pro-3",
-      "variant_id": "47170201092332",
-      "tier": "ecoflow-delta-pro-3-with-2-400w-solar-panel",
-      "sku_stored": "DP3-400W2",
+      "product_id": "rich-solar-mega-410",
+      "variant_id": "44039996276972",
+      "tier": "10-solar-panels",
+      "sku_stored": "RS-M410-9",
       "sku_drift": false,
-      "sku_live": "DP3-400W2",
+      "sku_live": "RS-M410-9",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "lion-ut-1300",
-      "variant_id": "31599398584410",
-      "tier": "default",
-      "sku_stored": "50170171",
+      "product_id": "rich-solar-all-in-one-ess",
+      "variant_id": "43905481048300",
+      "tier": "all-in-one-energy-storage-system-no-panels",
+      "sku_stored": "RS-A10",
       "sku_drift": false,
-      "sku_live": "50170171",
+      "sku_live": "RS-A10",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "44532344979692",
+      "tier": "ecoflow-delta-max-2000-1-110w-solar-panel",
+      "sku_stored": "DELTAMax2000+110W",
+      "sku_drift": false,
+      "sku_live": "DELTAMax2000+110W",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "midnite-mnpv12",
-      "variant_id": "31267132571788",
-      "tier": "default",
-      "sku_stored": "MNPV12",
+      "product_id": "anker-solix-f2600",
+      "variant_id": "41837963444364",
+      "tier": "nomad-kit-2-x-200w-folding-panels",
+      "sku_stored": "ANKER-F2600-NOMAD-KIT",
       "sku_drift": false,
-      "sku_live": "MNPV12",
+      "sku_live": "ANKER-F2600-NOMAD-KIT",
       "verdict": "CLEAN"
     },
     {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac240p",
-      "variant_id": "46560101662956",
-      "tier": "ac240p-350w-solar",
-      "sku_stored": null,
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-river-3",
+      "variant_id": "43432948236428",
+      "tier": "basecamp-kit-1-x-100w-folding-panel",
+      "sku_stored": "RIVER-3-BASECAMP",
       "sku_drift": false,
-      "sku_live": null,
-      "verdict": "NO_BASELINE",
-      "detail": "hops agree but stored row has no sku - drift not evaluable"
+      "sku_live": "RIVER-3-BASECAMP",
+      "verdict": "CLEAN"
     }
   ],
   "alarms": [],
-  "notices": [
-    "QUOTE_NOT_FOUND: lion-ut-1300 at wild-oak-trail - specs.capacity_quotes text is not present in the live listing; re-transcribe it"
-  ],
+  "notices": [],
   "errors": [],
-  "live_requests_used": 20,
+  "live_requests_used": 14,
   "budget": 25,
   "params": {
     "all": false,
