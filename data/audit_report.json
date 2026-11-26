@@ -1,27 +1,67 @@
 {
-  "timestamp": "2026-11-26T04:01:15.107061+00:00",
+  "timestamp": "2026-11-26T20:18:44.772344+00:00",
   "verified": 10,
   "attempted": 10,
   "verdict_counts": {
-    "CLEAN": 6,
-    "NO_BASELINE": 4
+    "CLEAN": 7,
+    "NO_BASELINE": 3
   },
   "results": [
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "midnite-mnpv12",
-      "variant_id": "31267132571788",
-      "tier": "default",
-      "sku_stored": "MNPV12",
+      "product_id": "rich-solar-alpha-24v-100ah",
+      "variant_id": "43258631815308",
+      "tier": "alpha-4-self-heating-and-bluetooth",
+      "sku_stored": "RS-B241S",
       "sku_drift": false,
-      "sku_live": "MNPV12",
+      "sku_live": "RS-B241S",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-delta-pro-3",
+      "variant_id": "46524781133964",
+      "tier": "hex-kit-6-x-200w-rigid-panels",
+      "sku_stored": "ECOFLOW-DELTA-PRO-3-HEX",
+      "sku_drift": false,
+      "sku_live": "ECOFLOW-DELTA-PRO-3-HEX",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-river-2-pro",
+      "variant_id": "44532078903532",
+      "tier": "ecoflow-river-2-pro-portable-power-station-main-unit-only",
+      "sku_stored": "ZMR620-B-US-1",
+      "sku_drift": false,
+      "sku_live": "ZMR620-B-US-1",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "wild-oak-trail",
+      "product_id": "ecoflow-smart-generator-4000",
+      "variant_id": "45712425648364",
+      "tier": "ecoflow-smart-generator-4000-dual-fuel-only",
+      "sku_stored": "EFSG4000-US-EPA",
+      "sku_drift": false,
+      "sku_live": "EFSG4000-US-EPA",
+      "verdict": "CLEAN"
+    },
+    {
+      "retailer_id": "shop-solar-kits",
+      "product_id": "ecoflow-delta-max",
+      "variant_id": "41677437665420",
+      "tier": "delta-max-nomad-kit-2-x-200w-folding-panels",
+      "sku_stored": "DELTA-MAX-NOMAD",
+      "sku_drift": false,
+      "sku_live": "DELTA-MAX-NOMAD",
       "verdict": "CLEAN"
     },
     {
       "retailer_id": "wild-oak-trail",
       "product_id": "bluetti-ac200l",
-      "variant_id": "46535814480108",
-      "tier": "ac200l-b300k-battery",
+      "variant_id": "46535814545644",
+      "tier": "ac200l-2-b300k-batteries-d300s",
       "sku_stored": null,
       "sku_drift": false,
       "sku_live": null,
@@ -30,9 +70,9 @@
     },
     {
       "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "45092907909356",
-      "tier": "ecoflow-delta-max-with-300w-12v-solar-panel-bundle",
+      "product_id": "bluetti-ac200l",
+      "variant_id": "46535814611180",
+      "tier": "ac200l-2-200w-solar-panels",
       "sku_stored": null,
       "sku_drift": false,
       "sku_live": null,
@@ -41,30 +81,19 @@
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-delta-pro-3-extra-battery",
-      "variant_id": "43056443293836",
-      "tier": "default",
-      "sku_stored": "EFDELTAPRO3EB",
+      "product_id": "ecoflow-delta-pro-3",
+      "variant_id": "46631132037260",
+      "tier": "octo-kit-8-x-200w-rigid-panels",
+      "sku_stored": "ECOFLOW-DELTA-PRO-3-OCTO",
       "sku_drift": false,
-      "sku_live": "EFDELTAPRO3EB",
+      "sku_live": "ECOFLOW-DELTA-PRO-3-OCTO",
       "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "bluetti-ac200l",
-      "variant_id": "46535814742252",
-      "tier": "ac200l-d40",
-      "sku_stored": null,
-      "sku_drift": false,
-      "sku_live": null,
-      "verdict": "NO_BASELINE",
-      "detail": "hops agree but stored row has no sku - drift not evaluable"
     },
     {
       "retailer_id": "wild-oak-trail",
       "product_id": "bluetti-ac240p",
-      "variant_id": "46560101662956",
-      "tier": "ac240p-350w-solar",
+      "variant_id": "46560101630188",
+      "tier": "ac240p-200w-solar",
       "sku_stored": null,
       "sku_drift": false,
       "sku_live": null,
@@ -73,49 +102,17 @@
     },
     {
       "retailer_id": "shop-solar-kits",
-      "product_id": "eg4-wallmount-indoor-16kwh",
-      "variant_id": "45192132460684",
-      "tier": "default",
-      "sku_stored": "1510984",
+      "product_id": "ecoflow-delta-pro-ultra",
+      "variant_id": "42007015981196",
+      "tier": "delta-pro-ultra-inverter-4-x-battery-24kwh",
+      "sku_stored": "EFDPUPCS-4-BP",
       "sku_drift": false,
-      "sku_live": "1510984",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "wild-oak-trail",
-      "product_id": "ecoflow-delta-max",
-      "variant_id": "44532345405676",
-      "tier": "ecoflow-delta-max-2000-2-400w-solar-panel",
-      "sku_stored": "DELTAMax2000-400W2-US",
-      "sku_drift": false,
-      "sku_live": "DELTAMax2000-400W2-US",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "ecoflow-river-3",
-      "variant_id": "43432948301964",
-      "tier": "river-3-main-unit-only",
-      "sku_stored": "EFRIVER3-US",
-      "sku_drift": false,
-      "sku_live": "EFRIVER3-US",
-      "verdict": "CLEAN"
-    },
-    {
-      "retailer_id": "shop-solar-kits",
-      "product_id": "eg4-6000xp",
-      "variant_id": "41788288532620",
-      "tier": "default",
-      "sku_stored": "1511090",
-      "sku_drift": false,
-      "sku_live": "1511090",
+      "sku_live": "EFDPUPCS-4-BP",
       "verdict": "CLEAN"
     }
   ],
   "alarms": [],
-  "notices": [
-    "QUOTE_NOT_FOUND: eg4-wallmount-indoor-16kwh at shop-solar-kits - specs.capacity_quotes text is not present in the live listing; re-transcribe it"
-  ],
+  "notices": [],
   "errors": [],
   "live_requests_used": 16,
   "budget": 25,
